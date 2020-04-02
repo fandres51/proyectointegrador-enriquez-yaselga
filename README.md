@@ -1,1 +1,4 @@
-# proyectointegrador-enriquez-yaselga
+# Proyecto Integrador Enriquez-Yaselga
+
+## DESARROLLO DE UN SISTEMA WEB PARA LA GESTIÓN ADMINISTRATIVA DE ASOCIACIONES ESTUDIANTILES
+
