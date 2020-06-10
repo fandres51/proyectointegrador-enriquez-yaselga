@@ -9,8 +9,8 @@
                 <img class="imgAvatar" src="assets/images/Avatar.png" alt="Avatar">
                 <!-- TODO Cambiar la imagen para que no sea estática sino importada de la base de datos de acuerdo a la persona -->
             </div>
-            <div fxLayout="column" fxLayoutAlign="start ">
-                <div class="nombre" fxLayoutAlign=" center">
+            <div fxLayout="column" fxLayoutAlign="center start">
+                <div class="nombre" fxLayoutAlign=" end">
                     Ernesto Yaselga
                     <button class="minibutton" fxLayoutAlign=" center" [matMenuTriggerFor]="minibutton">
                         <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_drop_down</mat-icon>
@@ -21,7 +21,7 @@
                     </mat-menu>
                 </div>
                 <!-- TODO Cambiar el texto para traerlo de la base de datos -->
-                <div class="cargo" >Presidente</div>
+                <div class="cargo" fxLayoutAlign=" start">Presidente</div>
                 <!-- TODO Cambiar el texto para traerlo de la base de datos -->
             </div>
         </div>
