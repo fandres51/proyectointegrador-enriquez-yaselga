@@ -1,0 +1,75 @@
+.header {
+    height: 50px;
+    background-color: #294fd7;
+
+    .logo-user {
+        div {
+            .imgLogo {
+                width: 100px;
+                margin: 0 15px 0 50px;
+            }
+            div {
+                .imgAvatar {
+                    margin: 0 20px 0 50px;
+                    width: 40px;
+                }
+                .nombre {
+                    color: white;
+                }
+                .cargo {
+                    color: white;
+                    font-size: 80%;
+                    top: -60px;
+                }
+            }
+        }
+    }
+
+    .menu {
+        div {
+            a {
+                color: white;
+                margin: 0 5px;
+                border-radius: 50px;
+                padding: 7px 15px;
+            }
+            button {
+                background: none;
+                border: none;
+                color: white;
+                border-radius: 50px;
+                padding: 7px 15px;
+            }
+
+            button:hover,
+            a:hover {
+                background-color: #0d288a;
+                text-decoration: none;
+            }
+
+            button:focus {
+                outline: 0px;
+            }
+        }
+    }
+}
+
+.minibutton {
+    padding: 1px;
+    background: none;
+    border: none;
+    color: white;
+    border-radius: 50px;
+}
+
+.minibutton:hover {
+    background-color: #0d288a;
+}
+
+.menu-item:focus, .minibutton {
+    outline: 0px;
+}
+
+a:hover {
+    text-decoration: none;
+}

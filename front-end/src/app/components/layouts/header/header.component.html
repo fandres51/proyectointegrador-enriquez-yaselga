@@ -1,6 +1,52 @@
-<div fxLayout="row" fxLayoutAlign="space-evenly center">
-    <a routerLink="/main/estudiantes">Estudiantes</a>
-    <a routerLink="/main/autoridades">Autoridades</a>
-    <a routerLink="/main/recursos">Recursos</a>
-    <a routerLink="/">Salir</a>
+<div class="header" fxLayout="row">
+    <div class="logo-user" fxFlex="40" fxLayoutAlign="start center" fxLayout="Row">
+        <div>
+            <img class="imgLogo" src="assets/images/LogoAEIS-Vertical.png" alt="Logo AEIS">
+            <!-- TODO Cambiar la imagen para que no sea estática sino importada de la base de datos de acuerdo a la asociación -->
+        </div>
+        <div fxLayout="row" fxLayoutAlign=" center">
+            <div>
+                <img class="imgAvatar" src="assets/images/Avatar.png" alt="Avatar">
+                <!-- TODO Cambiar la imagen para que no sea estática sino importada de la base de datos de acuerdo a la persona -->
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center start">
+                <div class="nombre" fxLayoutAlign=" end">
+                    Ernesto Yaselga
+                    <button class="minibutton" fxLayoutAlign=" center" [matMenuTriggerFor]="minibutton">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_drop_down</mat-icon>
+                    </button>
+                    <mat-menu #minibutton="matMenu">
+                        <a routerLink="/main/autoridades"><button mat-menu-item class="menu-item">Configuración</button></a>
+                        <a routerLink="/main/recursos"><button mat-menu-item class="menu-item">Cerrar Sesión</button></a>
+                    </mat-menu>
+                </div>
+                <!-- TODO Cambiar el texto para traerlo de la base de datos -->
+                <div class="cargo" fxLayoutAlign=" start">Presidente</div>
+                <!-- TODO Cambiar el texto para traerlo de la base de datos -->
+            </div>
+        </div>
+    </div>
+    <div class="menu" fxFlex="60" fxLayoutAlign="end center">
+        <div>
+            <button fxLayoutAlign=" center" [matMenuTriggerFor]="menuAso">
+                Asociaciones
+                <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_drop_down</mat-icon>
+            </button>
+            <mat-menu #menuAso="matMenu">
+                <a routerLink="/main/autoridades"><button mat-menu-item class="menu-item">Autoridades</button></a>
+                <a routerLink="/main/recursos"><button mat-menu-item class="menu-item">Recursos</button></a>
+                <a routerLink="/main/elecciones"><button mat-menu-item class="menu-item">Elecciones</button></a>
+                <a routerLink="/main/contratos"><button mat-menu-item class="menu-item">Contratos</button></a>
+            </mat-menu>
+        </div>
+        <div><a fxLayoutAlign=" center" routerLink="/main/estudiantes">Estudiantes</a></div>
+        <div><a fxLayoutAlign=" center" routerLink="/main/filiales">Filiales</a></div>
+        <div><a fxLayoutAlign=" center" routerLink="/main/financiero">Financiero</a></div>
+        <div><a fxLayoutAlign=" center" routerLink="/main/eventos">Eventos</a></div>
+        <div>
+            <a fxLayoutAlign=" center" routerLink="/main/notificaciones">
+                <mat-icon aria-hidden="false" aria-label="Example home icon">notifications</mat-icon>
+            </a>
+        </div>
+    </div>
 </div>
