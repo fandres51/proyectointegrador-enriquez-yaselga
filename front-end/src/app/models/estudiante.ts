@@ -1,0 +1,19 @@
+export interface Estudiante {
+    id:string;
+    Apellido?:string;
+    Carrera?:string;
+    CorreoInstitucional?:string;
+    CorreoPersonal?:string;
+    Deuda?:number;
+    Deudor?:boolean;
+    EsAutoridad:boolean;
+    EsEstudiante:boolean;
+    EstadoAfiliacion?:boolean;
+    FechaNacimiento?:Date;
+    Genero?:string;
+    NoUnico?:string;
+    Nombre:string;
+    SemestreReferencial?:string;
+    Sexo?:string;
+    Telefono?:string;
+}

@@ -14,6 +14,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCardModule } from '@angular/material/card';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,7 @@ import { MatIconModule } from '@angular/material/icon';
     LoginComponent,
     RegisterComponent,
     HeaderComponent,
-    MainScreenComponent
+    MainScreenComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,12 @@ import { MatIconModule } from '@angular/material/icon';
     FlexLayoutModule,
     BrowserAnimationsModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatExpansionModule,
+    MatCardModule,
+    AngularFireModule.initializeApp(environment.firabase),
+    AngularFirestoreModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
