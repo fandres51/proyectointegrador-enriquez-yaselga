@@ -19,6 +19,11 @@ import { MatCardModule } from '@angular/material/card';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogComponent } from './components/estudiantes/dialog/dialog.component';
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -30,6 +35,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     RegisterComponent,
     HeaderComponent,
     MainScreenComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -41,8 +47,11 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     MatExpansionModule,
     MatCardModule,
     AngularFireModule.initializeApp(environment.firabase),
-    AngularFirestoreModule
-
+    AngularFirestoreModule,
+    MatDialogModule,
+    MatButtonModule,
+    FormsModule,
+    MatButtonToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,33 +7,41 @@
 .div-estudiantes {
     padding: 40px 10%;
     width: 100%;
-    .card {
-        margin: 10px 0;
-        mat-card {
-            padding: 20px 40px;
-            .nombre {
-                font-size: 120%;
-                font-weight: 500;
+    .but-cargar-estudiantes {
+        background-color: #294FD7;
+        color: white;
+        margin-bottom: 30px;
+    }
+    .students-area {
+        max-height: 90vh;
+        .card {
+            margin: 10px 0;
+            mat-card {
+                padding: 20px 40px;
+                .nombre {
+                    font-size: 120%;
+                    font-weight: 500;
+                }
+                .add-circle-icon{
+                    margin-left: 5px;
+                }
+                .button-add-icon {
+                    border: none;
+                    background-color: white;
+                    border-radius: 50px;
+                    padding: 0;
+                }
+                .button-add-icon:focus {
+                    outline: 0px;
+                }
+                .button-add-icon:hover {
+                    background-color: #f6f6f6;
+                }
+                .button-add-icon:active {
+                    background-color: #adadad;
+                }
+                
             }
-            .add-circle-icon{
-                margin-left: 5px;
-            }
-            .button-add-icon {
-                border: none;
-                background-color: white;
-                border-radius: 50px;
-                padding: 0;
-            }
-            .button-add-icon:focus {
-                outline: 0px;
-            }
-            .button-add-icon:hover {
-                background-color: #f6f6f6;
-            }
-            .button-add-icon:active {
-                background-color: #adadad;
-            }
-            
         }
     }
 }

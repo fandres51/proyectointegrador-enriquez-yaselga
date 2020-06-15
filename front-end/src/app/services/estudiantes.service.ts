@@ -15,7 +15,14 @@ export class EstudiantesService {
 
   constructor(public afs: AngularFirestore) {
     this.estudiantesCollection = afs.collection<Estudiante>('Asociacion/AEIS/Persona');
-    this.estudiantes = this.estudiantesCollection.valueChanges();
+    // this.estudiantes = this.estudiantesCollection.valueChanges();
+    this.estudiantes = this.estudiantesCollection.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Estudiante;
+        data.id = a.payload.doc.id;
+        return data;
+      }))
+    );
   }
 
   getEstudiante() {

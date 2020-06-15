@@ -1,6 +1,6 @@
 export interface Estudiante {
     id:string;
-    Apellido?:string;
+    Apellido:string;
     Carrera?:string;
     CorreoInstitucional?:string;
     CorreoPersonal?:string;
@@ -13,6 +13,7 @@ export interface Estudiante {
     Genero?:string;
     NoUnico?:string;
     Nombre:string;
+    SectorDomiciliario?:string;
     SemestreReferencial?:string;
     Sexo?:string;
     Telefono?:string;
