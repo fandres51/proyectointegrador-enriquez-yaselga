@@ -1,59 +1,54 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EstudiantesComponent } from './components/estudiantes/estudiantes.component';
 import { AutoridadesComponent } from './components/autoridades/autoridades.component';
-import { RecursosComponent } from './components/recursos/recursos.component';
 import { LoginComponent } from './components/Auth/login/login.component';
 import { RegisterComponent } from './components/Auth/register/register.component';
 import { HeaderComponent } from './components/layouts/header/header.component';
 import { MainScreenComponent } from './components/layouts/main-screen/main-screen.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatCardModule } from '@angular/material/card';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from './components/estudiantes/dialog/dialog.component';
-import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { ListaDeAutoridadesComponent } from './components/autoridades/lista-de-autoridades/lista-de-autoridades.component';
+import { DetalleDeAutoridadesComponent } from './components/autoridades/detalle-de-autoridades/detalle-de-autoridades.component';
+import { MaterialComponentsModule } from './material';
+import { ListarEstudiantesComponent } from './components/estudiantes/listar-estudiantes/listar-estudiantes.component';
+import { FiltrosEstudiantesComponent } from './components/estudiantes/filtros-estudiantes/filtros-estudiantes.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EstudiantesComponent,
     AutoridadesComponent,
-    RecursosComponent,
     LoginComponent,
     RegisterComponent,
     HeaderComponent,
     MainScreenComponent,
-    DialogComponent
+    DialogComponent,
+    ListaDeAutoridadesComponent,
+    DetalleDeAutoridadesComponent,
+    ListarEstudiantesComponent,
+    FiltrosEstudiantesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
-    MatMenuModule,
-    MatIconModule,
-    MatExpansionModule,
-    MatCardModule,
     AngularFireModule.initializeApp(environment.firabase),
     AngularFirestoreModule,
-    MatDialogModule,
-    MatButtonModule,
     FormsModule,
-    MatButtonToggleModule
+    MaterialComponentsModule
+    
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

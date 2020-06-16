@@ -14,9 +14,7 @@ export class DialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public estudiante: Estudiante
   ) {}
 
-  ngOnInit() { 
-    
-  }
+  ngOnInit() {}
 
   onNoClick(): void {
     this.dialogRef.close();

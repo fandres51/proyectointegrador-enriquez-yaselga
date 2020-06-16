@@ -1,0 +1,61 @@
+<div>
+    <div>
+        Registros mostrados: {{estudiantesMostrados.length}}
+    </div>
+    <div>
+        <form (ngSubmit)="buscarPorNombre()">
+            <label for="porNombreInput"> Buscar </label>
+            <input id="porNombreInput" name="porNombreInput" type="text" [(ngModel)]="porNombreInput">
+            <button>
+                <mat-icon aria-hidden="false" aria-label="Example home icon">search</mat-icon>
+            </button>
+        </form>
+    </div>
+    <div>
+        <form (ngSubmit)="buscarPorCedula()">
+            <label for="porCedulaInput"> Buscar </label>
+            <input id="porCedulaInput" name="porCedulaInput" type="text" [(ngModel)]="porCedulaInput">
+            <button>
+                <mat-icon aria-hidden="false" aria-label="Example home icon">search</mat-icon>
+            </button>
+        </form>
+    </div>
+    <div>
+        <mat-button-toggle-group name="filtroAfiliado" aria-label="Font Style">
+            <mat-button-toggle #filtroAfiliadoTrue value="true" (click)="filtroAfiliadoFun(filtroAfiliadoTrue.value)">Afiliados</mat-button-toggle>
+            <mat-button-toggle #filtroAfiliadoFalse value="false" (click)="filtroAfiliadoFun(filtroAfiliadoFalse.value)">Todos</mat-button-toggle>
+        </mat-button-toggle-group>
+        <mat-button-toggle-group name="filtroGenero" aria-label="Font Style">
+            <mat-button-toggle #filtroGeneroM value="M" (click)="filtroGeneroFun(filtroGeneroM.value)">H</mat-button-toggle>
+            <mat-button-toggle #filtroGeneroF value="F" (click)="filtroGeneroFun(filtroGeneroF.value)">M</mat-button-toggle>
+            <mat-button-toggle #filtroGeneroO value="O" (click)="filtroGeneroFun(filtroGeneroO.value)">O</mat-button-toggle>
+            <mat-button-toggle #filtroGeneroT value="" (click)="filtroGeneroFun(filtroGeneroT.value)">Todos</mat-button-toggle>
+        </mat-button-toggle-group>
+        <mat-button-toggle-group name="filtroCarrera" aria-label="Font Style">
+            <mat-button-toggle #filtroCarreraSistemas value="Sistemas" (click)="filtroCarreraFun(filtroCarreraSistemas.value)">Sistemas</mat-button-toggle>
+            <mat-button-toggle #filtroCarreraComputacion value="Computación" (click)="filtroCarreraFun(filtroCarreraComputacion.value)">Computación</mat-button-toggle>
+            <mat-button-toggle #filtroCarreraSoftware value="Software" (click)="filtroCarreraFun(filtroCarreraSoftware.value)">Software</mat-button-toggle>
+            <mat-button-toggle #filtroCarreraT value="" (click)="filtroCarreraFun(filtroCarreraT.value)">Todos</mat-button-toggle>
+        </mat-button-toggle-group>
+        <mat-button-toggle-group name="filtroSmestre" aria-label="Font Style">
+            <mat-button-toggle #filtroSmestre1 value="1" (click)="filtroSmestreFun(filtroSmestre1.value)">1</mat-button-toggle>
+            <mat-button-toggle #filtroSmestre2 value="2" (click)="filtroSmestreFun(filtroSmestre2.value)">2</mat-button-toggle>
+            <mat-button-toggle #filtroSmestre3 value="3" (click)="filtroSmestreFun(filtroSmestre3.value)">3</mat-button-toggle>
+            <mat-button-toggle #filtroSmestre4 value="4" (click)="filtroSmestreFun(filtroSmestre4.value)">4</mat-button-toggle>
+            <mat-button-toggle #filtroSmestre5 value="5" (click)="filtroSmestreFun(filtroSmestre5.value)">5</mat-button-toggle>
+            <mat-button-toggle #filtroSmestre6 value="6" (click)="filtroSmestreFun(filtroSmestre6.value)">6</mat-button-toggle>
+            <mat-button-toggle #filtroSmestre7 value="7" (click)="filtroSmestreFun(filtroSmestre7.value)">7</mat-button-toggle>
+            <mat-button-toggle #filtroSmestre8 value="8" (click)="filtroSmestreFun(filtroSmestre8.value)">8</mat-button-toggle>
+            <mat-button-toggle #filtroSmestreEgresado value="Egresado" (click)="filtroSmestreFun(filtroSmestreEgresado.value)">Egresado</mat-button-toggle>
+            <mat-button-toggle #filtroSmestreGraduado value="Graduado" (click)="filtroSmestreFun(filtroSmestreGraduado.value)">Graduado</mat-button-toggle>
+            <mat-button-toggle #filtroSmestreRetirado value="Retirado" (click)="filtroSmestreFun(filtroSmestreRetirado.value)">Retirado</mat-button-toggle>
+            <mat-button-toggle #filtroSmestreTodos value="" (click)="filtroSmestreFun(filtroSmestreTodos.value)">Todos</mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+    <div>
+        Ordenar por
+        <button (click)="ordenar('apellido')">Nombre</button>
+        <button (click)="ordenar('numero')">Carrera</button>
+        <button (click)="ordenar('semestre')">Semestre</button>
+    </div>
+</div>
