@@ -1,0 +1,21 @@
+.filtrosButton {
+    border: 2px solid #0d288a;
+    color: #0d288a;
+    background-color: white;
+    margin: 1px;
+    border-radius: 0;
+    padding: 0;
+}
+
+.selected {
+    border: 2px solid #0d288a;
+    color: white;
+    background-color: #0d288a;
+    margin: 1px;
+    border-radius: 0;
+    padding: 0;
+}
+
+.filtrosButton:focus, .selected:focus {
+    outline: none;
+}
