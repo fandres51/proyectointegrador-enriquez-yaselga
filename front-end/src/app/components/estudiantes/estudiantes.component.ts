@@ -36,6 +36,15 @@ export class EstudiantesComponent implements OnInit {
     })
   } 
 
-  
-
+  public getEstudianteById(id: string): Estudiante {
+    const estudiante: Estudiante = this.estudiantes.find( n => {
+      return n.id == id;
+    })
+    if(!estudiante) {
+      console.log('Error, no hay estudiante :V');
+      return null;
+    } else {
+      return estudiante;
+    }
+  }
 }
