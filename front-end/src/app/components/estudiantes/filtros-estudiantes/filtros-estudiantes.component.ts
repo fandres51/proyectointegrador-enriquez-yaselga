@@ -8,12 +8,8 @@ import { Estudiante } from 'src/app/models/estudiante';
 })
 export class FiltrosEstudiantesComponent implements OnInit {
 
-  @Input()
-  public estudiantes: Estudiante[] = [];
-
-  @Output()
-  public eventEmitter = new EventEmitter();
-
+  @Input() public estudiantes: Estudiante[] = [];
+  @Output() public eventEmitter = new EventEmitter();
   public estudiantesMostrados: Estudiante[] = [];
 
   public porNombreInput: string = "";
@@ -23,6 +19,7 @@ export class FiltrosEstudiantesComponent implements OnInit {
   public filtroSemestre: string = "";
   public filtroGenero: string = "";
   public filtroCarrera: string = "";
+
   public tipoOrdenamiento: string = "";
 
   constructor() { }

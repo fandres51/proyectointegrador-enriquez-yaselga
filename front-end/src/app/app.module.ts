@@ -20,6 +20,7 @@ import { DetalleDeAutoridadesComponent } from './components/autoridades/detalle-
 import { MaterialComponentsModule } from './material';
 import { ListarEstudiantesComponent } from './components/estudiantes/listar-estudiantes/listar-estudiantes.component';
 import { FiltrosEstudiantesComponent } from './components/estudiantes/filtros-estudiantes/filtros-estudiantes.component';
+import { FormularioActualizacionComponent } from './components/estudiantes/formulario-actualizacion/formulario-actualizacion.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FiltrosEstudiantesComponent } from './components/estudiantes/filtros-es
     ListaDeAutoridadesComponent,
     DetalleDeAutoridadesComponent,
     ListarEstudiantesComponent,
-    FiltrosEstudiantesComponent
+    FiltrosEstudiantesComponent,
+    FormularioActualizacionComponent
   ],
   imports: [
     BrowserModule,

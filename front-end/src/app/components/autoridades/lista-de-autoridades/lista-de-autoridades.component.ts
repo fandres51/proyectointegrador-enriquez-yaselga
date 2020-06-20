@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Estudiante } from 'src/app/models/estudiante';
 
 @Component({
   selector: 'app-lista-de-autoridades',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaDeAutoridadesComponent implements OnInit {
 
+  @Input() public autoridades: Estudiante[] = [];
+  @Output() public autoridadSeleccionada = new EventEmitter();
+  public autoridadSeleccionadaEst: Estudiante;
+  
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  devolverAutoridad(idAutoridad:String) {
+    this.autoridadSeleccionadaEst = this.autoridades.find( n => {
+      return idAutoridad == n.id;
+    })
+    this.autoridadSeleccionada.emit(this.autoridadSeleccionadaEst);
   }
 
 }
