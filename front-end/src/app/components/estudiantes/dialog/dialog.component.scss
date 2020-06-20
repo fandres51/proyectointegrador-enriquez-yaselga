@@ -1,0 +1,16 @@
+.dato {
+    margin: 10px 10px 10px 0;
+    .titulo {
+        font-weight: 500;
+    }
+}
+
+.button {
+    border: none;
+    background-color: white;
+    color: #294fd7;
+}
+
+.button:focus {
+    outline: 0px;
+}

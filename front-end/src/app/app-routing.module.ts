@@ -4,7 +4,6 @@ import { LoginComponent } from './components/Auth/login/login.component';
 import { MainScreenComponent } from './components/layouts/main-screen/main-screen.component';
 import { EstudiantesComponent } from './components/estudiantes/estudiantes.component';
 import { AutoridadesComponent } from './components/autoridades/autoridades.component';
-import { RecursosComponent } from './components/recursos/recursos.component';
 
 
 const routes: Routes = [
@@ -13,7 +12,6 @@ const routes: Routes = [
   { path: 'main', component: MainScreenComponent, children: [
     { path: 'estudiantes', component: EstudiantesComponent },
     { path: 'autoridades', component: AutoridadesComponent },
-    { path: 'recursos', component: RecursosComponent },
   ]},
 ];
 
