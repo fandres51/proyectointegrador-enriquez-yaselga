@@ -8,9 +8,6 @@ import { Estudiante } from 'src/app/models/estudiante';
 })
 export class ListarEstudiantesComponent implements OnInit {
 
-
-
-
   constructor() { }
 
   ngOnInit(): void {
