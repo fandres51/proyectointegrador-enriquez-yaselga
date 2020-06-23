@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EstudiantesService } from '../../services/estudiantes.service'
-import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from './dialog/dialog.component';
+import { EstudiantesService } from '../../services/estudiantes.service';
 import { Estudiante } from 'src/app/models/estudiante';
 
 @Component({
@@ -15,8 +13,7 @@ export class EstudiantesComponent implements OnInit {
   public estudiantesMostrados: Estudiante[] = [];
 
   constructor(
-    public EstudiantesService:EstudiantesService,
-    public dialog: MatDialog
+    public EstudiantesService:EstudiantesService
   ) { }
 
   ngOnInit() {
@@ -24,27 +21,5 @@ export class EstudiantesComponent implements OnInit {
       this.estudiantes = estudiante;
       this.estudiantesMostrados = estudiante;
     })
-  }
-
-  public openDialog(index:number):void {
-    const dialogRef = this.dialog.open(DialogComponent, {
-      width: '500px',
-      data: this.estudiantes[index]
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    })
-  } 
-
-  public getEstudianteById(id: string): Estudiante {
-    const estudiante: Estudiante = this.estudiantes.find( n => {
-      return n.id == id;
-    })
-    if(!estudiante) {
-      console.log('Error, no hay estudiante :V');
-      return null;
-    } else {
-      return estudiante;
-    }
   }
 }

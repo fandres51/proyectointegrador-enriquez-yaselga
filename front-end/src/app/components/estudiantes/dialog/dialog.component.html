@@ -68,7 +68,7 @@
 
 </div>
 <div mat-dialog-actions>
-    <button class="button" mat-button>
+    <button class="button" (click)="afiliarEstudiante()" mat-button [disabled] = "estudiante.EstadoAfiliacion">
         <mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>
     </button>
     <button class="button" (click)="actualizarEstudiante()" mat-button>
