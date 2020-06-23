@@ -12,6 +12,7 @@ export class DialogComponent implements OnInit {
 
   @Output() public estudianteAEditarEmitter = new EventEmitter();
   public estudianteAEditar: Estudiante;
+  public estudianteAAfiliar: Estudiante;
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
@@ -31,6 +32,12 @@ export class DialogComponent implements OnInit {
     this.estudianteAEditar = Object.assign([],this.estudiante);
     this.dialogRef.close();
     this.router.navigateByUrl('/main/actualizar', { state: this.estudianteAEditar });
+  }
+
+  afiliarEstudiante() {
+    this.estudianteAAfiliar = Object.assign([],this.estudiante);
+    this.dialogRef.close();
+    this.router.navigateByUrl('/main/afiliar', { state: this.estudianteAEditar });
   }
 
 }

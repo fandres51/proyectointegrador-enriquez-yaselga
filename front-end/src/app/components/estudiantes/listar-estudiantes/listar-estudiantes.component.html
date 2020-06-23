@@ -1,5 +1,5 @@
-<!-- <div>
-    <div *ngFor="let estudiante of estudiantesMostrados; let i = index" class="card">
+<div class="students-area">
+    <div *ngFor="let estudiante of estudiantes; let i = index" class="card">
         <mat-card fxLayout="row" fxLayoutAlign=" center">
             <div fxLayout="column" fxLayoutAlign="center start" fxFlex="30">
                 <div class="nombre">{{estudiante.Nombre}} {{estudiante.Apellido}}</div>
@@ -21,7 +21,7 @@
                         aria-label="Example home icon">check_circle</mat-icon>
                 </div>
                 <ng-template #noafiliado>
-                    <a href="">
+                    <a routerLink="afiliacion">
                         <div style="color: #294FD7;">No afiliado</div>
                         <mat-icon style="color: #294FD7;" class="add-circle-icon" aria-hidden="false"
                             aria-label="Example home icon">add_circle</mat-icon>
@@ -36,4 +36,4 @@
             </div>
         </mat-card>
     </div>
-</div> -->
+</div>

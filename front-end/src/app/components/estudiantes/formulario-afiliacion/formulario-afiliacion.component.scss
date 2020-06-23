@@ -1,4 +1,4 @@
-.update-title {
+.afiliar-title {
     background-color: #0d288a;
     width: 100%;
     text-align: center;
@@ -11,6 +11,7 @@
 
 .form{
     width: 100vw;
+    height: 100vh;
     .form-row{
         width: 60vw;
         .form-item{
@@ -30,6 +31,7 @@
                 border: none;
                 color: white;
                 background-color: #0d288a;
+                
             }
             button:focus{
                 outline: none;
