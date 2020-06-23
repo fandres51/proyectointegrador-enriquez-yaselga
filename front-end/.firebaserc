@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "asociaciones-5b17b": {
+      "hosting": {
+        "front-end": [
+          "asociaciones-5b17b"
+        ]
+      }
+    }
+  }
+}
