@@ -66,9 +66,10 @@
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateFechaNacimiento">Fecha de Nacimiento: </label>
                     <div>
-                        <!-- <input matInput [matDatepicker]="picker" [value]="date.value">
+                        <input matInput [matDatepicker]="picker" [value]="date.value"
+                        (dateChange)="agregarFechaAEsudiante($event)">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker> -->
+                        <mat-datepicker #picker></mat-datepicker>
                     </div>
                 </div>
                 <div fxLayout="column" fxFlex=50 class="form-item">

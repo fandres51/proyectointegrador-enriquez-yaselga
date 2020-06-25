@@ -3,6 +3,7 @@ import { Estudiante } from 'src/app/models/estudiante';
 import { EstudiantesService } from 'src/app/services/estudiantes.service';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-formulario-actualizacion',
@@ -19,6 +20,7 @@ export class FormularioActualizacionComponent implements OnInit {
 
   public estudiante: Estudiante = window.history.state;
   public estudianteAActualizar: Estudiante = this.estudiante;
+  date = new FormControl(this.estudiante.FechaNacimiento);
 
   constructor(
     public estudiantesService: EstudiantesService,
@@ -29,7 +31,12 @@ export class FormularioActualizacionComponent implements OnInit {
   ngOnInit(): void { 
   }
 
+  agregarFechaAEsudiante(event: MatDatepickerInputEvent<Date>) {
+    this.estudianteAActualizar.FechaNacimiento = event.value
+  }
+
   editEstudiante(Estudiante){
+
     this.estudiantesService.updateEstudiante(Estudiante);
     this.router.navigateByUrl('/main/estudiantes');
   }

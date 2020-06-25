@@ -1,5 +1,3 @@
-import { Timestamp } from '@firebase/firestore-types';
-
 export interface Estudiante {
     id:string;
     Apellido:string;
@@ -13,7 +11,7 @@ export interface Estudiante {
     EsAutoridad:boolean;
     EsEstudiante:boolean;
     EstadoAfiliacion?:boolean;
-    FechaNacimiento?: Timestamp;
+    FechaNacimiento?: firebase.firestore.Timestamp | Date;
     Genero?:string;
     NoUnico?:string;
     Nombre:string;

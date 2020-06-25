@@ -23,8 +23,7 @@ export class DialogComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    let date:Date = this.estudiante.FechaNacimiento.toDate();
-    this.dateString = date.getDate()  + "-" + (date.getMonth()+1) + "-" + date.getFullYear()
+    
   }
 
   onNoClick(): void {
