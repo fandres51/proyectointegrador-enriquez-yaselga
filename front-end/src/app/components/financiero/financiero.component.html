@@ -1,0 +1,29 @@
+<div fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="end center" class="top-bar">
+        <button class="but-cargar-financiero" mat-button fxLayoutAlign="center center">
+            Nueva Transaccion
+        </button>
+        <button class="but-cargar-financiero" mat-button fxLayoutAlign="center center">
+            Carga Masiva
+        </button>
+        <button class="but-cargar-financiero" mat-button fxLayoutAlign="center center">
+            Generar Reporte
+        </button>
+    </div>
+
+    <div fxLayout="row" fxLayout.lt-md="column">
+        <div fxFlex="20" fxFlex.md="30" fxFlex.lt-md="auto" fxLayout="column">
+            <app-filtros-financiero></app-filtros-financiero>
+            <!-- (eventEmitter)="transaccionesMostradas=$event" [transaccion]="transaccion" -->
+        </div>
+        
+        <div class="line" fxHide.lt-md></div>
+    
+        <div fxFlex="80" fxFlex.md="70" fxFlex.lt-md="auto" fxLayout="column" class="div-financiero" >
+        
+            <div fxLayout="column">
+                <app-listar-financiero [transacciones]="transaccionesMostradas"></app-listar-financiero>
+            </div>
+        </div>
+    </div>
+</div>

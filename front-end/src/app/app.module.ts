@@ -22,6 +22,9 @@ import { ListarEstudiantesComponent } from './components/estudiantes/listar-estu
 import { FiltrosEstudiantesComponent } from './components/estudiantes/filtros-estudiantes/filtros-estudiantes.component';
 import { FormularioActualizacionComponent } from './components/estudiantes/formulario-actualizacion/formulario-actualizacion.component';
 import { FormularioAfiliacionComponent } from './components/estudiantes/formulario-afiliacion/formulario-afiliacion.component';
+import { FinancieroComponent } from './components/financiero/financiero.component';
+import { FiltrosFinancieroComponent } from './components/financiero/filtros-financiero/filtros-financiero.component';
+import { ListarFinancieroComponent } from './components/financiero/listar-financiero/listar-financiero.component';
 
 
 @NgModule({
@@ -39,7 +42,10 @@ import { FormularioAfiliacionComponent } from './components/estudiantes/formular
     ListarEstudiantesComponent,
     FiltrosEstudiantesComponent,
     FormularioActualizacionComponent,
-    FormularioAfiliacionComponent
+    FormularioAfiliacionComponent,
+    FinancieroComponent,
+    FiltrosFinancieroComponent,
+    ListarFinancieroComponent
   ],
   imports: [
     BrowserModule,

@@ -15,6 +15,7 @@
     margin: 1px;
     border-radius: 0;
     padding: 0 10px;
+    width: 70px;
 }
 
 .selected {
@@ -24,6 +25,7 @@
     margin: 1px;
     border-radius: 0;
     padding: 0 10px;
+    width: 70px;
 }
 
 .filtrosButton:focus, .selected:focus {
@@ -37,17 +39,20 @@
 
 .search-space{
     margin: 15px 0;
-    .button-search {
-        background-color: #0d288a;
-        color: white;
-        height: 40px;
-        border-radius: 0;
-    }
-    
-    .input-search {
-        height: 40px;
-        width: 78%;
-        padding-left: 15px;
-        border: none;
+    width: 100%;
+    form{
+        width: 100%;
+        .button-search {
+            background-color: #0d288a;
+            color: white;
+            height: 40px;
+            border-radius: 0;
+        }
+        
+        .input-search {
+            height: 40px;
+            padding-left: 15px;
+            border: none;
+        }
     }
 }

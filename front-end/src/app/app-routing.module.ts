@@ -6,6 +6,7 @@ import { EstudiantesComponent } from './components/estudiantes/estudiantes.compo
 import { AutoridadesComponent } from './components/autoridades/autoridades.component';
 import { FormularioActualizacionComponent } from './components/estudiantes/formulario-actualizacion/formulario-actualizacion.component';
 import { FormularioAfiliacionComponent } from './components/estudiantes/formulario-afiliacion/formulario-afiliacion.component';
+import { FinancieroComponent } from './components/financiero/financiero.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
     { path: 'actualizar', component: FormularioActualizacionComponent },
     { path: 'afiliar', component: FormularioAfiliacionComponent },
     { path: 'autoridades', component: AutoridadesComponent },
+    { path: 'financiero', component: FinancieroComponent },
   ]},
 ];
 
