@@ -1,8 +1,11 @@
 <div>
     <div *ngFor="let autoridad of autoridades">
         <button mat-button class="button" (click)="devolverAutoridad(autoridad.id)">
-            <div fxLayout="row" fxLayoutAlign="start center">
-                <div>{{autoridad.Nombre}} {{autoridad.Apellido}}</div>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div fxLayout="row" fxLayout.lt-lg="column">
+                    <div>{{autoridad.Nombre}}</div>
+                    <div class="apellido">{{autoridad.Apellido}}</div>
+                </div>
                 <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_right</mat-icon>
             </div>
         </button>

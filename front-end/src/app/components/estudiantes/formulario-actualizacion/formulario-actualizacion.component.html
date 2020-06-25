@@ -1,5 +1,8 @@
 <div fxLayout="column" fxLayoutAlign=" center">
-    <div class="update-title">
+    <div class="update-title" fxLayout="row">
+        <button (click)="regresar()" class="button-white" mat-button>
+            <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_back</mat-icon>
+        </button>
         <h1>Actualizar Información</h1>
     </div>
     <div>
@@ -7,79 +10,92 @@
             <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateNombre">Nombre: </label>
-                    <input type="text" name="updateNombre" id="updateNombre" value={{estudiante.Nombre}} [(ngModel)]="estudianteAActualizar.Nombre">
+                    <input type="text" name="updateNombre" id="updateNombre" value={{estudiante.Nombre}}
+                        [(ngModel)]="estudianteAActualizar.Nombre">
                 </div>
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateApellido">Apellido: </label>
-                    <input type="text" name="updateApellido" id="updateApellido" value={{estudiante.Apellido}} [(ngModel)]="estudianteAActualizar.Apellido">
+                    <input type="text" name="updateApellido" id="updateApellido" value={{estudiante.Apellido}}
+                        [(ngModel)]="estudianteAActualizar.Apellido">
                 </div>
             </div>
             <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateCarrera">Carrera: </label>
-                    <input type="text" name="updateCarrera" id="updateCarrera" value={{estudiante.Carrera}} [(ngModel)]="estudianteAActualizar.Carrera">
+                    <mat-select [(value)]="estudiante.Carrera">
+                        <mat-option *ngFor="let carrera of carreras" [value]="carrera">
+                            {{carrera}}
+                        </mat-option>
+                    </mat-select>
                 </div>
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateCorreoPersonal">Correo Personal: </label>
-                    <input type="text" name="updateCorreoPersonal" id="updateCorreoPersonal" value={{estudiante.CorreoPersonal}} [(ngModel)]="estudianteAActualizar.CorreoPersonal">
+                    <input type="text" name="updateCorreoPersonal" id="updateCorreoPersonal"
+                        value={{estudiante.CorreoPersonal}} [(ngModel)]="estudianteAActualizar.CorreoPersonal">
                 </div>
             </div>
             <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateCorreoInstitucional">Correo Institucional: </label>
-                    <input type="text" name="updateCorreoInstitucional" id="updateCorreoInstitucional" value={{estudiante.CorreoInstitucional}} [(ngModel)]="estudianteAActualizar.CorreoInstitucional">
+                    <input type="text" name="updateCorreoInstitucional" id="updateCorreoInstitucional"
+                        value={{estudiante.CorreoInstitucional}}
+                        [(ngModel)]="estudianteAActualizar.CorreoInstitucional">
                 </div>
                 <div fxLayout="column" fxFlex=50 class="form-item">
-                    <label for="updateEsAutoridad">Es Autoridad: </label>
-                    <input type="text" name="updateEsAutoridad" id="updateEsAutoridad" value={{estudiante.EsAutoridad}} [(ngModel)]="estudianteAActualizar.EsAutoridad">
-                </div>
-            </div>
-            <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
-                <div fxLayout="column" fxFlex=50 class="form-item">
-                    <label for="updateEstadoAfiliacion">Estado de Afiliacion: </label>
-                    <input type="text" name="updateEstadoAfiliacion" id="updateEstadoAfiliacion" value={{estudiante.EstadoAfiliacion}} [(ngModel)]="estudianteAActualizar.EstadoAfiliacion">
-                </div>
-                <div fxLayout="column" fxFlex=50 class="form-item">
-                    <label for="updateFechaNacimiento">Fecha de Nacimiento: </label>
-                    <input type="text" name="updateFechaNacimiento" id="updateFechaNacimiento" value={{estudiante.FechaNacimiento}} [(ngModel)]="estudianteAActualizar.FechaNacimiento">
+                    <label for="updateTelefono">Teléfono: </label>
+                    <input type="text" name="updateTelefono" id="updateTelefono" value={{estudiante.Telefono}}
+                        [(ngModel)]="estudianteAActualizar.Telefono">
                 </div>
             </div>
             <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateGenero">Género: </label>
-                    <input type="text" name="updateGenero" id="updateGenero" value={{estudiante.Genero}} [(ngModel)]="estudianteAActualizar.Genero">
+                    <mat-select [(value)]="estudiante.Genero">
+                        <mat-option *ngFor="let genero of generos" [value]="genero">
+                            {{genero}}
+                        </mat-option>
+                    </mat-select>
                 </div>
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateNoUnico">Número único: </label>
-                    <input type="text" name="updateNoUnico" id="updateNoUnico" value={{estudiante.NoUnico}} [(ngModel)]="estudianteAActualizar.NoUnico">
+                    <input type="text" name="updateNoUnico" id="updateNoUnico" value={{estudiante.NoUnico}}
+                        [(ngModel)]="estudianteAActualizar.NoUnico">
                 </div>
             </div>
             <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
                 <div fxLayout="column" fxFlex=50 class="form-item">
-                    <label for="updateid">Cédula: </label>
-                    <input type="text" name="updateid" id="updateid" value={{estudiante.id}} [(ngModel)]="estudianteAActualizar.id">
+                    <label for="updateFechaNacimiento">Fecha de Nacimiento: </label>
+                    <div>
+                        <!-- <input matInput [matDatepicker]="picker" [value]="date.value">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker> -->
+                    </div>
                 </div>
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateSectorDomiciliario">Sector Domiciliario: </label>
-                    <input type="text" name="updateSectorDomiciliario" id="updateSectorDomiciliario" value={{estudiante.SectorDomiciliario}} [(ngModel)]="estudianteAActualizar.SectorDomiciliario">
+                    <input type="text" name="updateSectorDomiciliario" id="updateSectorDomiciliario"
+                        value={{estudiante.SectorDomiciliario}} [(ngModel)]="estudianteAActualizar.SectorDomiciliario">
                 </div>
             </div>
             <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateSemestreReferencial">Semestre Referencial: </label>
-                    <input type="text" name="updateSemestreReferencial" id="updateSemestreReferencial" value={{estudiante.SemestreReferencial}} [(ngModel)]="estudianteAActualizar.SemestreReferencial">
+                    <mat-select [(value)]="estudiante.SemestreReferencial">
+                        <mat-option *ngFor="let semestre of semestres" [value]="semestre">
+                            {{semestre}}
+                        </mat-option>
+                    </mat-select>
                 </div>
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateSexo">Sexo: </label>
-                    <input type="text" name="updateSexo" id="updateSexo" value={{estudiante.Sexo}} [(ngModel)]="estudianteAActualizar.Sexo">
+                    <mat-select [(value)]="estudiante.Sexo">
+                        <mat-option *ngFor="let sexo of sexos" [value]="sexo">
+                            {{sexo}}
+                        </mat-option>
+                    </mat-select>
                 </div>
             </div>
-            <div class="form-row" fxLayout.lt-md="column">
-                <div fxLayout="column" fxFlex=50 class="form-item">
-                    <label for="updateTelefono">Teléfono: </label>
-                    <input type="text" name="updateTelefono" id="updateTelefono" value={{estudiante.Telefono}} [(ngModel)]="estudianteAActualizar.Telefono">
-                </div>
-            </div>
+
             <div class="form-row" fxLayout.lt-md="column">
                 <div fxLayout="column" fxFlex=100 class="form-item">
                     <button mat-button>
@@ -90,4 +106,3 @@
         </form>
     </div>
 </div>
-

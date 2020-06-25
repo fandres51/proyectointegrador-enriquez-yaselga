@@ -22,49 +22,51 @@ export class FiltrosEstudiantesComponent implements OnInit {
 
   public tipoOrdenamiento: string = "";
 
-  constructor() { }
+  constructor() {
+  }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
   /***Búsqueda****************************************** */
-  
+
   public buscarPorNombre() {
     this.estudiantesMostrados = this.estudiantes.filter(n => {
       return n.Nombre.search(this.porNombreInput) != -1 || n.Apellido.search(this.porNombreInput) != -1;
     })
     this.enviarEstudiantes();
   }
-  
+
   public buscarPorCedula() {
     this.estudiantesMostrados = this.estudiantes.filter(n => {
       return n.id.search(this.porCedulaInput) != -1;
     })
     this.enviarEstudiantes();
   }
-  
+
   /***Filtros****************************************** */
-  
+
   public filtroGeneroFun(valor: string) {
     this.filtroGenero = valor;
     this.filtrar();
   }
-  
+
   public filtroCarreraFun(valor: string) {
     this.filtroCarrera = valor;
     console.log(this.filtroCarrera);
     this.filtrar();
   }
-  
+
   public filtroSmestreFun(valor: string) {
     this.filtroSemestre = valor;
     this.filtrar();
   }
-  
+
   public filtroAfiliadoFun(valor: string) {
     this.filtroAfiliado = valor;
     this.filtrar();
   }
-  
+
   public filtrar() {
     this.estudiantesMostrados = this.estudiantes.filter(n => {
       if (this.filtroAfiliado == '') {
@@ -75,9 +77,9 @@ export class FiltrosEstudiantesComponent implements OnInit {
     })
     this.enviarEstudiantes();
   }
-  
+
   /***Ordenamiento*******************************************/
-  
+
   compararPorApellido(a, b) {
     if (a.Apellido < b.Apellido) {
       return -1;
@@ -87,7 +89,7 @@ export class FiltrosEstudiantesComponent implements OnInit {
     }
     return 0;
   }
-  
+
   compararPorSemestre(a, b) {
     if (a.SemestreReferencial < b.SemestreReferencial) {
       return -1;
@@ -97,7 +99,7 @@ export class FiltrosEstudiantesComponent implements OnInit {
     }
     return 0;
   }
-  
+
   compararPorCarrera(a, b) {
     if (a.Carrera < b.Carrera) {
       return -1;
@@ -107,7 +109,7 @@ export class FiltrosEstudiantesComponent implements OnInit {
     }
     return 0;
   }
-  
+
   ordenar(tipo: string) {
     this.tipoOrdenamiento = tipo;
     if (this.estudiantesMostrados != []) {
@@ -129,9 +131,9 @@ export class FiltrosEstudiantesComponent implements OnInit {
     }
     this.enviarEstudiantes;
   }
-  
+
   /***Enviar****************************************** */
-  
+
   public enviarEstudiantes() {
     this.eventEmitter.emit(this.estudiantesMostrados);
   }

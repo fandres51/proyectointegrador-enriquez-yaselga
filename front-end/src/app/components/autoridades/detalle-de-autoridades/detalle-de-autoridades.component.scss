@@ -1,9 +1,21 @@
-.data {
-    margin: 20px;
-    .data-detalle {
-        
+.detalle-de-autoridades {
+    margin: 3% 2%;
+    .data {
+        margin: 15px 30px;
+        h1,h2,h3 {
+            color: #0d288a;
+        }
+        h2 {
+            margin-top: 25px;
+        }
+        h3 {
+            font-weight: 500;
+        }
     }
-    .data-h2 {
+}
 
-    }
+.line {
+    height: 94vh;
+    border-right: 1px solid #606060;
+    margin: 0 60px;
 }

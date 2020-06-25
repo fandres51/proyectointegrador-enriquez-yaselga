@@ -1,32 +1,30 @@
-<div>
-    <div>
+<div class="filters">
+    <div class="text">
         Registros mostrados: {{estudiantesMostrados.length}}
     </div>
     <hr>
-    <div>
-        <div>Búsqueda: </div>
+    <div class="search-space">
+        <h2 class="title">Búsqueda: </h2>
         <form (ngSubmit)="buscarPorNombre()">
-            <label for="porNombreInput"> Buscar </label>
-            <input id="porNombreInput" name="porNombreInput" type="text" [(ngModel)]="porNombreInput">
-            <button>
+            <input class="input-search" id="porNombreInput" name="porNombreInput" type="text" [(ngModel)]="porNombreInput" placeholder="Por nombre">
+            <button class="button-search" mat-button>
                 <mat-icon aria-hidden="false" aria-label="Example home icon">search</mat-icon>
             </button>
         </form>
     </div>
-    <div>
+    <div class="search-space">
         <form (ngSubmit)="buscarPorCedula()">
-            <label for="porCedulaInput"> Buscar </label>
-            <input id="porCedulaInput" name="porCedulaInput" type="text" [(ngModel)]="porCedulaInput">
-            <button>
+            <input class="input-search" id="porCedulaInput" name="porCedulaInput" type="text" [(ngModel)]="porCedulaInput" placeholder="Por cédula">
+            <button class="button-search" mat-button>
                 <mat-icon aria-hidden="false" aria-label="Example home icon">search</mat-icon>
             </button>
         </form>
     </div>
     <hr>
-    <div>
-        <div>Filtros:</div>
+    <div fxHide.lt-md>
+        <h2 class="title">Filtros:</h2>
         <div>
-            <div>Por estado de la afiliación</div>
+            <h3 class="title">Por estado de la afiliación</h3>
             <button [ngClass]="{
                                     'filtrosButton': filtroAfiliado != 'true', 
                                     'selected': filtroAfiliado == 'true'
@@ -41,7 +39,7 @@
                                 }" mat-button (click)="filtroAfiliadoFun('')">Todos</button>
         </div>
         <div>
-            <div>Por Género</div>
+            <h3 class="title">Por Género</h3>
             <button [ngClass]="{
                                     'filtrosButton': filtroGenero != 'F', 
                                     'selected': filtroGenero == 'F'
@@ -60,7 +58,7 @@
                                 }" mat-button (click)="filtroGeneroFun('')">Todos</button>
         </div>
         <div>
-            <div>Por Carrera</div>
+            <h3 class="title">Por Carrera</h3>
             <button [ngClass]="{
                                     'filtrosButton': filtroCarrera != 'Sistemas', 
                                     'selected': filtroCarrera == 'Sistemas'
@@ -79,7 +77,7 @@
                                 }" mat-button (click)="filtroCarreraFun('')">Todos</button>
         </div>
         <div>
-            <div>Por semestre</div>
+            <h3 class="title">Por semestre</h3>
             <div>
                 <button [ngClass]="{
                                     'filtrosButton': filtroSemestre != '1', 
@@ -136,9 +134,9 @@
             </div>
         </div>
     </div>
-    <hr>
-    <div>
-        <div>Ordenar por:</div>
+    <hr fxHide.lt-md>
+    <div fxHide.lt-md>
+        <h2 class="title">Ordenar por:</h2>
         <!-- <div fxLayout="row"> -->
         <button mat-button [ngClass]="{
                                         'filtrosButton': tipoOrdenamiento != 'apellido', 

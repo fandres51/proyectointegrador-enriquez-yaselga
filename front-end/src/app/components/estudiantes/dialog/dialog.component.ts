@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Estudiante } from 'src/app/models/estudiante';
 import { Router } from '@angular/router';
+import { Timestamp } from '@firebase/firestore-types';
 
 @Component({
   selector: 'app-dialog',
@@ -13,6 +14,7 @@ export class DialogComponent implements OnInit {
   @Output() public estudianteAEditarEmitter = new EventEmitter();
   public estudianteAEditar: Estudiante;
   public estudianteAAfiliar: Estudiante;
+  public dateString:String = "";
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
@@ -21,7 +23,8 @@ export class DialogComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    
+    let date:Date = this.estudiante.FechaNacimiento.toDate();
+    this.dateString = date.getDate()  + "-" + (date.getMonth()+1) + "-" + date.getFullYear()
   }
 
   onNoClick(): void {

@@ -36,3 +36,6 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
     background-color: #f6f6f6;
 }
+button:focus {
+    outline: none;
+}

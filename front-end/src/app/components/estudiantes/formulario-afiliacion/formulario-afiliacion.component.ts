@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Estudiante } from 'src/app/models/estudiante';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-formulario-afiliacion',
@@ -8,11 +9,17 @@ import { Estudiante } from 'src/app/models/estudiante';
 })
 export class FormularioAfiliacionComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   estudiante: Estudiante = window.history.state;
 
   ngOnInit(): void {
+  }
+
+  regresar() {
+    this.router.navigateByUrl('/main/estudiantes');
   }
 
 }

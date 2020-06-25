@@ -7,6 +7,9 @@
         margin: 25px;
         color: white;
     }
+    .button-white{
+        color: white;
+    }
 }
 
 .form{
@@ -19,10 +22,21 @@
                 font-size: 120%;
                 color: #0d288a;
             }
-            input{
+            input, mat-select {
+                background-color: white;
                 padding: 10px;
                 border-radius: 5px;
                 border: 1px solid #606060;
+            }
+            div{
+                background-color: white;
+                border-radius: 5px;
+                border: 1px solid #606060;
+                width: fit-content;
+                input{
+                    margin:0;
+                    border: none;
+                }
             }
             button{
                 padding: 10px;

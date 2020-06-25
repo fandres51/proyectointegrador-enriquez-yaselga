@@ -14,7 +14,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { DialogComponent } from './components/estudiantes/dialog/dialog.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { ListaDeAutoridadesComponent } from './components/autoridades/lista-de-autoridades/lista-de-autoridades.component';
 import { DetalleDeAutoridadesComponent } from './components/autoridades/detalle-de-autoridades/detalle-de-autoridades.component';
 import { MaterialComponentsModule } from './material';
@@ -22,6 +22,7 @@ import { ListarEstudiantesComponent } from './components/estudiantes/listar-estu
 import { FiltrosEstudiantesComponent } from './components/estudiantes/filtros-estudiantes/filtros-estudiantes.component';
 import { FormularioActualizacionComponent } from './components/estudiantes/formulario-actualizacion/formulario-actualizacion.component';
 import { FormularioAfiliacionComponent } from './components/estudiantes/formulario-afiliacion/formulario-afiliacion.component';
+
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { FormularioAfiliacionComponent } from './components/estudiantes/formular
     AngularFireModule.initializeApp(environment.firabase),
     AngularFirestoreModule,
     FormsModule,
-    MaterialComponentsModule
+    MaterialComponentsModule,
+    ReactiveFormsModule
     
   ],
   providers: [

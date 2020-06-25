@@ -10,7 +10,7 @@ import { EstudiantesService } from 'src/app/services/estudiantes.service';
 export class AutoridadesComponent implements OnInit {
 
   public autoridades:Estudiante[];
-  public autoridadMostrada: Estudiante;
+  public autoridadMostrada: Estudiante = null;
 
   constructor(
     public EstudiantesService: EstudiantesService

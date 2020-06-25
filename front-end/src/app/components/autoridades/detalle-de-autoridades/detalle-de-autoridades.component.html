@@ -1,39 +1,90 @@
-<div>
+<div class="detalle-de-autoridades">
     <div *ngIf="autoridadMostrada != undefined">
-        
+
         <div class="data">
-            <h2 class="data-h2">Nombres:</h2>
-            <div class="data-detalle">{{autoridadMostrada.Nombre}} {{autoridadMostrada.Apellido}}</div>
+            <div class="data-detalle" fxLayout="row" fxLayoutAlign="start start">
+                <button mat-button fxHide.gt-sm (click)="devolverAutoridad()" fxLayoutAlign="center center">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_back</mat-icon>
+                </button>
+                <h1>
+                    {{autoridadMostrada.Nombre}} {{autoridadMostrada.Apellido}}
+                </h1>
+            </div>
         </div>
-        
-        <div class="data">
-            <h2 class="data-h2">No. Único:</h2>
-            <div class="data-detalle">{{autoridadMostrada.NoUnico}}</div>
-        </div>
-        
-        <div class="data">
-            <h2 class="data-h2">Cédula:</h2>
-            <div class="data-detalle">{{autoridadMostrada.id}}</div>
-        </div>
-        
-        <div class="data">
-            <h2 class="data-h2">Semestre Referencial:</h2>
-            <div class="data-detalle">{{autoridadMostrada.SemestreReferencial}}</div>
-        </div>
-        
-        <div class="data">
-            <h2 class="data-h2">Carrera:</h2>
-            <div class="data-detalle">{{autoridadMostrada.Carrera}}</div>
-        </div>
-        
-        <div class="data">
-            <h2 class="data-h2">Teléfono:</h2>
-            <div class="data-detalle">{{autoridadMostrada.Telefono}}</div>
-        </div>
-        
-        <div class="data">
-            <h2 class="data-h2">Sector Domiciliario:</h2>
-            <div class="data-detalle">{{autoridadMostrada.SectorDomiciliario}}</div>
+
+        <div fxLayout="row" fxLayout.lt-lg="column">
+            <div fxLayout="column">
+                <div fxLayout="row">
+                    <div class="data">
+                        <h3>No. Único:</h3>
+                        <div class="data-detalle">{{autoridadMostrada.NoUnico}}</div>
+                    </div>
+    
+                    <div class="data">
+                        <h3>Cédula:</h3>
+                        <div class="data-detalle">{{autoridadMostrada.id}}</div>
+                    </div>
+    
+                    <div class="data">
+                        <h3>Semestre Referencial:</h3>
+                        <div class="data-detalle">{{autoridadMostrada.SemestreReferencial}}</div>
+                    </div>
+    
+                    <div class="data">
+                        <h3>Carrera:</h3>
+                        <div class="data-detalle">{{autoridadMostrada.Carrera}}</div>
+                    </div>
+                </div>
+    
+                <div class="data">
+                    <h2>Datos de Contacto: </h2>
+                </div>
+    
+                <div class="data">
+                    <h3>Teléfono:</h3>
+                    <div class="data-detalle">{{autoridadMostrada.Telefono}}</div>
+                </div>
+    
+                <div class="data">
+                    <h3>Sector Domiciliario:</h3>
+                    <div class="data-detalle">{{autoridadMostrada.SectorDomiciliario}}</div>
+                </div>
+    
+                <div class="data">
+                    <h3>Correo Personal:</h3>
+                    <div class="data-detalle">{{autoridadMostrada.CorreoPersonal}}</div>
+                </div>
+    
+                <div class="data">
+                    <h3>Correo Institucional:</h3>
+                    <div class="data-detalle">{{autoridadMostrada.CorreoInstitucional}}</div>
+                </div>
+    
+                <div class="data">
+                    <h2>Detalles de la Autoridad: </h2>
+                </div>
+    
+                <div class="data">
+                    <h3>Cargo:</h3>
+                    <div class="data-detalle">{{autoridadMostrada.Cargo}}</div>
+                </div>
+    
+                <div class="data">
+                    <h3>Descripción</h3>
+                    <div class="data-detalle">{{autoridadMostrada.Descripcion}}</div>
+                </div>
+            </div>
+
+            <div class="line" fxHide.lt-lg></div>
+            
+            <div>
+                <div class="data">
+                    <h2>Horario: </h2>
+                </div>
+                <div>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
