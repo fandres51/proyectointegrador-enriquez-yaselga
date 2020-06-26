@@ -25,7 +25,14 @@ import { FormularioAfiliacionComponent } from './components/estudiantes/formular
 import { FinancieroComponent } from './components/financiero/financiero.component';
 import { FiltrosFinancieroComponent } from './components/financiero/filtros-financiero/filtros-financiero.component';
 import { ListarFinancieroComponent } from './components/financiero/listar-financiero/listar-financiero.component';
-
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import * as moment from 'moment';
+import { HorarioAutoridadComponent } from './components/autoridades/horario-autoridad/horario-autoridad.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -45,7 +52,8 @@ import { ListarFinancieroComponent } from './components/financiero/listar-financ
     FormularioAfiliacionComponent,
     FinancieroComponent,
     FiltrosFinancieroComponent,
-    ListarFinancieroComponent
+    ListarFinancieroComponent,
+    HorarioAutoridadComponent
   ],
   imports: [
     BrowserModule,
@@ -56,8 +64,13 @@ import { ListarFinancieroComponent } from './components/financiero/listar-financ
     AngularFirestoreModule,
     FormsModule,
     MaterialComponentsModule,
-    ReactiveFormsModule
-    
+    ReactiveFormsModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    NgbModule,
+    CommonModule,
+    FormsModule,
+    NgbModalModule,
+    FlatpickrModule.forRoot(),
   ],
   providers: [
   ],

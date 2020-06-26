@@ -27,6 +27,9 @@ $front-end-theme: mat-light-theme($front-end-primary, $front-end-accent, $front-
 
 /* You can add global styles to this file, and also import other style files */
 
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
 html,
 body {
     height: 100%;
@@ -39,3 +42,4 @@ body {
 button:focus {
     outline: none;
 }
+

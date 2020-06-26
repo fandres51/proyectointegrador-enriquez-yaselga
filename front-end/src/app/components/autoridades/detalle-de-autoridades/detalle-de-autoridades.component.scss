@@ -12,6 +12,15 @@
             font-weight: 500;
         }
     }
+    .calendario {
+        width: 100%;
+        .data {
+            margin-left: 0;
+            h2 {
+                margin-top: 0;
+            }
+        }
+    }
 }
 
 .line {

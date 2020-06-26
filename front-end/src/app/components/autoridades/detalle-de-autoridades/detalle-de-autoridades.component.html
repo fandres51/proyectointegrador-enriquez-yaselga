@@ -14,75 +14,68 @@
 
         <div fxLayout="row" fxLayout.lt-lg="column">
             <div fxLayout="column">
-                <div fxLayout="row">
+                <div fxLayout="row" fxLayout.lt-xl="column">
                     <div class="data">
                         <h3>No. Único:</h3>
                         <div class="data-detalle">{{autoridadMostrada.NoUnico}}</div>
                     </div>
-    
+
                     <div class="data">
                         <h3>Cédula:</h3>
                         <div class="data-detalle">{{autoridadMostrada.id}}</div>
                     </div>
-    
+                    
                     <div class="data">
                         <h3>Semestre Referencial:</h3>
                         <div class="data-detalle">{{autoridadMostrada.SemestreReferencial}}</div>
                     </div>
-    
+
                     <div class="data">
                         <h3>Carrera:</h3>
                         <div class="data-detalle">{{autoridadMostrada.Carrera}}</div>
                     </div>
                 </div>
-    
-                <div class="data">
-                    <h2>Datos de Contacto: </h2>
-                </div>
-    
-                <div class="data">
-                    <h3>Teléfono:</h3>
-                    <div class="data-detalle">{{autoridadMostrada.Telefono}}</div>
-                </div>
-    
-                <div class="data">
-                    <h3>Sector Domiciliario:</h3>
-                    <div class="data-detalle">{{autoridadMostrada.SectorDomiciliario}}</div>
-                </div>
-    
-                <div class="data">
-                    <h3>Correo Personal:</h3>
-                    <div class="data-detalle">{{autoridadMostrada.CorreoPersonal}}</div>
-                </div>
-    
-                <div class="data">
-                    <h3>Correo Institucional:</h3>
-                    <div class="data-detalle">{{autoridadMostrada.CorreoInstitucional}}</div>
-                </div>
-    
-                <div class="data">
-                    <h2>Detalles de la Autoridad: </h2>
-                </div>
-    
+
                 <div class="data">
                     <h3>Cargo:</h3>
                     <div class="data-detalle">{{autoridadMostrada.Cargo}}</div>
                 </div>
-    
+
                 <div class="data">
-                    <h3>Descripción</h3>
-                    <div class="data-detalle">{{autoridadMostrada.Descripcion}}</div>
+                    <h2>Datos de Contacto: </h2>
                 </div>
+
+                <div class="data">
+                    <h3>Teléfono:</h3>
+                    <div class="data-detalle">{{autoridadMostrada.Telefono}}</div>
+                </div>
+
+                <div class="data">
+                    <h3>Sector Domiciliario:</h3>
+                    <div class="data-detalle">{{autoridadMostrada.SectorDomiciliario}}</div>
+                </div>
+
+                <div class="data">
+                    <h3>Correo Personal:</h3>
+                    <div class="data-detalle">{{autoridadMostrada.CorreoPersonal}}</div>
+                </div>
+
+                <div class="data">
+                    <h3>Correo Institucional:</h3>
+                    <div class="data-detalle">{{autoridadMostrada.CorreoInstitucional}}</div>
+                </div>
+
+
             </div>
 
             <div class="line" fxHide.lt-lg></div>
-            
-            <div>
+
+            <div class="calendario">
                 <div class="data">
                     <h2>Horario: </h2>
                 </div>
                 <div>
-
+                    <app-horario-autoridad></app-horario-autoridad>
                 </div>
             </div>
         </div>
