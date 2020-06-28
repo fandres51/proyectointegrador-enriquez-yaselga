@@ -1,11 +1,11 @@
 export interface Transaccion {
     id:string;
     Descripcion?:string;
-    EventoID:string;
+    EventoID?:string;
     Fecha:Date;
-    FilialID:String;
+    FilialID?:String;
     Monto:number;
-    PersonaID:string;
+    PersonaID?:string;
     Tipo:string;
     TipoMonetario:string;
 }
