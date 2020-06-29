@@ -1,14 +1,27 @@
 <div fxLayout="column">
-    <div fxLayout="row" fxLayoutAlign="end center" class="top-bar">
-        <button class="but-cargar-financiero" mat-button fxLayoutAlign="center center">
-            Nueva Transaccion
-        </button>
-        <button class="but-cargar-financiero" mat-button fxLayoutAlign="center center">
-            Carga Masiva
-        </button>
-        <button class="but-cargar-financiero" mat-button fxLayoutAlign="center center">
-            Generar Reporte
-        </button>
+    <div fxLayout="row" fxLayoutAlign=" center" class="top-bar">
+        <div fxFlex="50">
+            <div class="registros mostrados">
+                Número de registros mostrados: {{transaccionesMostradas.length}} 
+            </div>
+            <div class="ingresos">
+                Ingresos totales: {{ingresos}} 
+            </div>
+            <div class="egresos">
+                Egresos totales: {{egresos}} 
+            </div>
+        </div>
+        <div fxFlex="50" fxLayoutAlign="end center">
+            <button routerLink="/main/nuevatransaccion" class="but-cargar-financiero" mat-button fxLayoutAlign="center center">
+                Nueva Transaccion
+            </button>
+            <button class="but-cargar-financiero" mat-button fxLayoutAlign="center center">
+                Carga Masiva
+            </button>
+            <button class="but-cargar-financiero" mat-button fxLayoutAlign="center center">
+                Generar Reporte
+            </button>
+        </div>
     </div>
 
     <div fxLayout="row" fxLayout.lt-md="column">
@@ -16,11 +29,10 @@
             <app-filtros-financiero></app-filtros-financiero>
             <!-- (eventEmitter)="transaccionesMostradas=$event" [transaccion]="transaccion" -->
         </div>
-        
+
         <div class="line" fxHide.lt-md></div>
-    
-        <div fxFlex="80" fxFlex.md="70" fxFlex.lt-md="auto" fxLayout="column" class="div-financiero" >
-        
+
+        <div fxFlex="80" fxFlex.md="70" fxFlex.lt-md="auto" fxLayout="column" class="div-financiero">
             <div fxLayout="column">
                 <app-listar-financiero [transacciones]="transaccionesMostradas"></app-listar-financiero>
             </div>

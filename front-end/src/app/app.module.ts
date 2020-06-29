@@ -33,6 +33,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { AjustesComponent } from './components/ajustes/ajustes.component';
+import { NuevaTransaccionComponent } from './components/financiero/nueva-transaccion/nueva-transaccion.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     FinancieroComponent,
     FiltrosFinancieroComponent,
     ListarFinancieroComponent,
-    HorarioAutoridadComponent
+    HorarioAutoridadComponent,
+    AjustesComponent,
+    NuevaTransaccionComponent
   ],
   imports: [
     BrowserModule,

@@ -32,11 +32,10 @@ export class FormularioActualizacionComponent implements OnInit {
   }
 
   agregarFechaAEsudiante(event: MatDatepickerInputEvent<Date>) {
-    this.estudianteAActualizar.FechaNacimiento = event.value
+    this.estudianteAActualizar.FechaNacimiento = event.value;
   }
 
   editEstudiante(Estudiante){
-
     this.estudiantesService.updateEstudiante(Estudiante);
     this.router.navigateByUrl('/main/estudiantes');
   }

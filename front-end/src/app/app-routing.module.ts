@@ -7,6 +7,8 @@ import { AutoridadesComponent } from './components/autoridades/autoridades.compo
 import { FormularioActualizacionComponent } from './components/estudiantes/formulario-actualizacion/formulario-actualizacion.component';
 import { FormularioAfiliacionComponent } from './components/estudiantes/formulario-afiliacion/formulario-afiliacion.component';
 import { FinancieroComponent } from './components/financiero/financiero.component';
+import { AjustesComponent } from './components/ajustes/ajustes.component';
+import { NuevaTransaccionComponent } from './components/financiero/nueva-transaccion/nueva-transaccion.component';
 
 
 const routes: Routes = [
@@ -18,6 +20,8 @@ const routes: Routes = [
     { path: 'afiliar', component: FormularioAfiliacionComponent },
     { path: 'autoridades', component: AutoridadesComponent },
     { path: 'financiero', component: FinancieroComponent },
+    { path: 'ajustes', component: AjustesComponent },
+    { path: 'nuevatransaccion', component: NuevaTransaccionComponent },
   ]},
 ];
 
