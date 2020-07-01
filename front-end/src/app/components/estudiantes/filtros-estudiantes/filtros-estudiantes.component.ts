@@ -39,7 +39,7 @@ export class FiltrosEstudiantesComponent implements OnInit {
 
   public buscarPorCedula() {
     this.estudiantesMostrados = this.estudiantes.filter(n => {
-      return n.id.search(this.porCedulaInput) != -1;
+      return n.Cedula.search(this.porCedulaInput) != -1;
     })
     this.enviarEstudiantes();
   }

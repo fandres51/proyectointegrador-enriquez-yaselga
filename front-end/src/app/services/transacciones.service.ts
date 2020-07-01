@@ -4,6 +4,7 @@ import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as firebase from 'firebase';
+import { Parametro } from '../models/parametro';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,8 @@ export class TransaccionesService {
   transaccionesCollection: AngularFirestoreCollection<Transaccion>;
   transacciones: Observable<Transaccion[]>;
   transaccionDoc: AngularFirestoreDocument<Transaccion>;
+
+  numeroTransaccion: Parametro;
 
   constructor(public afs: AngularFirestore) {
     this.transaccionesCollection = afs.collection<Transaccion>('Asociacion/AEIS/Transaccion');
@@ -40,10 +43,13 @@ export class TransaccionesService {
   }
   
   addTransaccion(transaccion: Transaccion) {
+    
     if(transaccion.Fecha instanceof Date) {
       transaccion.Fecha = firebase.firestore.Timestamp.fromDate(transaccion.Fecha);
     }
+
     this.transaccionesCollection.add(transaccion);
+
   }
 
   deleteTransaccion(transaccion: Transaccion) {

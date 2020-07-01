@@ -7,9 +7,8 @@
 
     <div fxFlex="80" fxFlex.md="70" fxFlex.lt-md="auto" fxLayout="column" class="div-estudiantes" >
         <div fxLayoutAlign="end ">
-            <button class="but-cargar-estudiantes" mat-button fxLayoutAlign="start center">
+            <button (click)="openDialog()" class="but-cargar-estudiantes" mat-button fxLayoutAlign="start center">
                 Cargar estudiantes
-                <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_drop_down</mat-icon>
             </button>
         </div>
     

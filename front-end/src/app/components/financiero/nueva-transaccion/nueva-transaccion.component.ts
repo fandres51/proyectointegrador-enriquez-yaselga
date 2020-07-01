@@ -17,7 +17,7 @@ export class NuevaTransaccionComponent implements OnInit {
     Ingreso: false,
     Tipo: "",
     TipoMonetario: "",
-    id: "03712897594875"
+    id: ""
   };
 
   constructor(

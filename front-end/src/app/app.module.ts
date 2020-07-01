@@ -35,6 +35,11 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { AjustesComponent } from './components/ajustes/ajustes.component';
 import { NuevaTransaccionComponent } from './components/financiero/nueva-transaccion/nueva-transaccion.component';
+import { DefinirCargosComponent } from './components/ajustes/definir-cargos/definir-cargos.component';
+import { CambiarAsociacionComponent } from './components/ajustes/cambiar-asociacion/cambiar-asociacion.component';
+import { CargaMasivaComponent } from './components/estudiantes/carga-masiva/carga-masiva.component';
+import { DropZoneDirective } from './dropzone.directive';
+import { DialogCargaMasivaComponent } from './components/estudiantes/dialog-carga-masiva/dialog-carga-masiva.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +62,12 @@ import { NuevaTransaccionComponent } from './components/financiero/nueva-transac
     ListarFinancieroComponent,
     HorarioAutoridadComponent,
     AjustesComponent,
-    NuevaTransaccionComponent
+    NuevaTransaccionComponent,
+    DefinirCargosComponent,
+    CambiarAsociacionComponent,
+    CargaMasivaComponent,
+    DropZoneDirective,
+    DialogCargaMasivaComponent
   ],
   imports: [
     BrowserModule,

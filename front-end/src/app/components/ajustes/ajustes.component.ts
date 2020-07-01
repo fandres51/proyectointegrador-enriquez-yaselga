@@ -12,4 +12,6 @@ export class AjustesComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  
+
 }

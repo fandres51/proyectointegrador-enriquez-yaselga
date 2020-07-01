@@ -3,6 +3,7 @@ export interface Estudiante {
     Apellido:string;
     Cargo?:string;
     Carrera?:string;
+    Cedula?:string;
     CorreoInstitucional?:string;
     CorreoPersonal?:string;
     Descripcion?:string;
