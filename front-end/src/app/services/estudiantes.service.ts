@@ -28,4 +28,9 @@ export class EstudiantesService {
   getEstudiante() {
     return this.estudiantes;
   }
+
+  updateEstudiante(estudiante: Estudiante) {
+    this.estudianteDoc = this.afs.doc(`Asociacion/AEIS/Persona/${estudiante.id}`)
+    this.estudianteDoc.update(estudiante);    
+  }
 }

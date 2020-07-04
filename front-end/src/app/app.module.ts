@@ -21,6 +21,7 @@ import { MaterialComponentsModule } from './material';
 import { ListarEstudiantesComponent } from './components/estudiantes/listar-estudiantes/listar-estudiantes.component';
 import { FiltrosEstudiantesComponent } from './components/estudiantes/filtros-estudiantes/filtros-estudiantes.component';
 import { FormularioActualizacionComponent } from './components/estudiantes/formulario-actualizacion/formulario-actualizacion.component';
+import { FormularioAfiliacionComponent } from './components/estudiantes/formulario-afiliacion/formulario-afiliacion.component';
 import { RecursosService } from './services/recursos.service';
 import { EstudiantesService } from './services/estudiantes.service';
 import { RecursosComponent } from './components/recursos/recursos.component';
@@ -41,6 +42,7 @@ import { RecursoComponent } from './components/recursos/recurso/recurso.componen
     ListarEstudiantesComponent,
     FiltrosEstudiantesComponent,
     FormularioActualizacionComponent,
+    FormularioAfiliacionComponent
     RecursosComponent,
     RecursoComponent,
   ],
@@ -53,7 +55,7 @@ import { RecursoComponent } from './components/recursos/recurso/recurso.componen
     AngularFirestoreModule,
     FormsModule,
     MaterialComponentsModule
-    
+
   ],
   providers: [
     RecursosService,

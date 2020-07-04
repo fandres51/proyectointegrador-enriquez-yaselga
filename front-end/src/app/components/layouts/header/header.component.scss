@@ -4,9 +4,11 @@
 
     .logo-user {
         div {
-            .imgLogo {
-                width: 100px;
-                margin: 0 15px 0 50px;
+            a{
+                .imgLogo {
+                    width: 100px;
+                    margin: 0 15px;
+                }
             }
             div {
                 .imgAvatar {
@@ -66,10 +68,62 @@
     background-color: #0d288a;
 }
 
-.menu-item:focus, .minibutton {
+.menu-item:focus,
+.minibutton {
     outline: 0px;
 }
 
 a:hover {
     text-decoration: none;
+}
+
+.menu-icon {
+    padding: 15px;
+    color: white;
+    button:focus {
+        outline: none;
+    }
+}
+
+.menu-size-small {
+    position: absolute;
+    background-color: #294fd7;
+    width: 300px;
+    z-index: 100;
+    height: 100vh;
+    div {
+        background-color: #0d288a;
+        .imgAvatar {
+            margin: 15px 20px 15px 50px;
+            width: 40px;
+        }
+        .nombre {
+            color: white;
+        }
+        .cargo {
+            color: white;
+            font-size: 80%;
+            top: -60px;
+        }
+        a {
+            button {
+                background-color: #294fd7;
+                color: white;
+                mat-icon {
+                    color: white;
+                }
+            }
+            button:focus {
+                outline: none;
+            }
+        }
+    }
+}
+
+.escondido {
+    left: -300px;
+}
+
+.mostrado {
+    left: 0;
 }

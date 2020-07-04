@@ -5,6 +5,7 @@ import { MainScreenComponent } from './components/layouts/main-screen/main-scree
 import { EstudiantesComponent } from './components/estudiantes/estudiantes.component';
 import { AutoridadesComponent } from './components/autoridades/autoridades.component';
 import { FormularioActualizacionComponent } from './components/estudiantes/formulario-actualizacion/formulario-actualizacion.component';
+import { FormularioAfiliacionComponent } from './components/estudiantes/formulario-afiliacion/formulario-afiliacion.component';
 import { RecursosComponent } from './components/recursos/recursos.component';
 
 
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'main', component: MainScreenComponent, children: [
     { path: 'estudiantes', component: EstudiantesComponent },
     { path: 'actualizar', component: FormularioActualizacionComponent },
+    { path: 'afiliar', component: FormularioAfiliacionComponent },
     { path: 'autoridades', component: AutoridadesComponent },
     { path: 'recursos', component: RecursosComponent},
   ]},
