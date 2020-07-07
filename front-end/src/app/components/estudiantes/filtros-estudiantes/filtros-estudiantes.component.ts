@@ -28,7 +28,7 @@ export class FiltrosEstudiantesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  /***Búsqueda****************************************** */
+  /***Búsqueda*******************************************/
 
   public buscarPorNombre() {
     this.estudiantesMostrados = this.estudiantes.filter(n => {
@@ -44,7 +44,7 @@ export class FiltrosEstudiantesComponent implements OnInit {
     this.enviarEstudiantes();
   }
 
-  /***Filtros****************************************** */
+  /***Filtros*******************************************/
 
   public filtroGeneroFun(valor: string) {
     this.filtroGenero = valor;
@@ -129,7 +129,7 @@ export class FiltrosEstudiantesComponent implements OnInit {
         this.estudiantesMostrados.sort(this.compararPorSemestre);
       }
     }
-    this.enviarEstudiantes;
+    this.enviarEstudiantes();
   }
 
   /***Enviar****************************************** */

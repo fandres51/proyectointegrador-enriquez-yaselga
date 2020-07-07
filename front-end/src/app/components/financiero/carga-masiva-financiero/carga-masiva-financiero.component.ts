@@ -1,14 +1,14 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
+import { AngularFireUploadTask, AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { CsvToFireService } from 'src/app/services/csv-to-fire.service';
 
 @Component({
-  selector: 'app-carga-masiva',
-  templateUrl: './carga-masiva.component.html',
-  styleUrls: ['./carga-masiva.component.scss']
+  selector: 'app-carga-masiva-financiero',
+  templateUrl: './carga-masiva-financiero.component.html',
+  styleUrls: ['./carga-masiva-financiero.component.scss']
 })
-export class CargaMasivaComponent {
+export class CargaMasivaFinancieroComponent {
 
   @Output() cerrarDialog = new EventEmitter();
 
@@ -37,9 +37,7 @@ export class CargaMasivaComponent {
 
     this.isUploading = true;
     this.isUploaded = false;
-    this.csv2fire.process(file, 'Asociacion/AEIS/Persona');
+    this.csv2fire.process(file, 'Asociacion/AEIS/Transaccion');
     this.cerrarDialog.emit('cerrar');
   }
 }
-
-

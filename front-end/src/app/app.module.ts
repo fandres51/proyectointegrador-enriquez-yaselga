@@ -40,6 +40,8 @@ import { CambiarAsociacionComponent } from './components/ajustes/cambiar-asociac
 import { CargaMasivaComponent } from './components/estudiantes/carga-masiva/carga-masiva.component';
 import { DropZoneDirective } from './dropzone.directive';
 import { DialogCargaMasivaComponent } from './components/estudiantes/dialog-carga-masiva/dialog-carga-masiva.component';
+import { DialogCargaMasivaFinancieroComponent } from './components/financiero/dialog-carga-masiva-financiero/dialog-carga-masiva-financiero.component';
+import { CargaMasivaFinancieroComponent } from './components/financiero/carga-masiva-financiero/carga-masiva-financiero.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,9 @@ import { DialogCargaMasivaComponent } from './components/estudiantes/dialog-carg
     CambiarAsociacionComponent,
     CargaMasivaComponent,
     DropZoneDirective,
-    DialogCargaMasivaComponent
+    DialogCargaMasivaComponent,
+    DialogCargaMasivaFinancieroComponent,
+    CargaMasivaFinancieroComponent
   ],
   imports: [
     BrowserModule,

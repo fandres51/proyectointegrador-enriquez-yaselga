@@ -15,7 +15,7 @@
             <button routerLink="/main/nuevatransaccion" class="but-cargar-financiero" mat-button fxLayoutAlign="center center">
                 Nueva Transaccion
             </button>
-            <button class="but-cargar-financiero" mat-button fxLayoutAlign="center center">
+            <button (click)="openDialog()" class="but-cargar-financiero" mat-button fxLayoutAlign="center center">
                 Carga Masiva
             </button>
             <button class="but-cargar-financiero" mat-button fxLayoutAlign="center center">
@@ -26,7 +26,7 @@
 
     <div fxLayout="row" fxLayout.lt-md="column">
         <div fxFlex="20" fxFlex.md="30" fxFlex.lt-md="auto" fxLayout="column">
-            <app-filtros-financiero></app-filtros-financiero>
+            <app-filtros-financiero (listaAMostrarEmitter)="cargarTransaccionesMostradas($event)" [transacciones]="transacciones"></app-filtros-financiero>
             <!-- (eventEmitter)="transaccionesMostradas=$event" [transaccion]="transaccion" -->
         </div>
 

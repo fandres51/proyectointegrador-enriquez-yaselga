@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { DialogComponent } from '../../estudiantes/dialog/dialog.component';
 import { MatDialogRef } from '@angular/material/dialog';
-import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
-  selector: 'app-dialog-carga-masiva',
-  templateUrl: './dialog-carga-masiva.component.html',
-  styleUrls: ['./dialog-carga-masiva.component.scss']
+  selector: 'app-dialog-carga-masiva-financiero',
+  templateUrl: './dialog-carga-masiva-financiero.component.html',
+  styleUrls: ['./dialog-carga-masiva-financiero.component.scss']
 })
-export class DialogCargaMasivaComponent implements OnInit {
+export class DialogCargaMasivaFinancieroComponent {
 
   cerrado: boolean = false;
 
@@ -26,5 +26,4 @@ export class DialogCargaMasivaComponent implements OnInit {
       this.dialogRef.close();
     }
   }
-
 }

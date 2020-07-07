@@ -1,1 +1,51 @@
-<p>filtros-financiero works!</p>
+<div class="filters">
+
+    <div fxHide.lt-md>
+        <h2 class="title">Filtros:</h2>
+        <div>
+            <h3 class="title">Por fecha</h3>
+            <form (ngSubmit)="filtrarPorFecha(fechaInicial.value, fechaFinal.value)">
+                <div>
+                    <input matInput [matDatepicker]="pickerInicial" #fechaInicial>
+                    <mat-datepicker-toggle matSuffix [for]="pickerInicial"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerInicial></mat-datepicker>
+                </div>
+                <div>
+                    <input matInput [matDatepicker]="pickerFinal" #fechaFinal>
+                    <mat-datepicker-toggle matSuffix [for]="pickerFinal"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFinal></mat-datepicker>
+                </div>
+                <div>
+                    <button type="submit">Filtrar</button>
+                    <button type="button" (click)="limpiarFiltro()">Limpiar Filtro</button>
+                </div>
+            </form>
+        </div>
+        <div>
+            <h3 class="title">Por Monto</h3>
+            <form (ngSubmit)="filtrarPorMonto(montoInicial.value, montoFinal.value)">
+                <div>
+                    <input type="number" step="0.01" min="0" #montoInicial>
+                </div>
+                <div>
+                    <input type="number" step="0.01" min="0" #montoFinal>
+                </div>
+                <button>Filtrar</button>
+                <button type="button" (click)="limpiarFiltro()">Limpiar Filtro</button>
+            </form>
+        </div>
+    </div>
+    <hr fxHide.lt-md>
+    <div fxHide.lt-md>
+        <h2 class="title">Ordenar por:</h2>
+        <!-- <div fxLayout="row"> -->
+        <button mat-button [ngClass]="{
+                                        'filtrosButton': tipoDeOrdenamiento != 'fecha', 
+                                        'selected': tipoDeOrdenamiento == 'fecha'
+                                    }" mat-button (click)="ordenar('fecha')">Fecha</button>
+        <button mat-button [ngClass]="{
+                                        'filtrosButton': tipoDeOrdenamiento != 'monto', 
+                                        'selected': tipoDeOrdenamiento == 'monto'
+                                    }" mat-button (click)="ordenar('monto')">Monto</button>
+    </div>
+</div>

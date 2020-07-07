@@ -28,7 +28,7 @@ export class EstudiantesComponent implements OnInit {
 
   public openDialog():void {
     const dialogRef = this.dialog.open(DialogCargaMasivaComponent, {
-      width: '400px'
+      width: '800px'
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');

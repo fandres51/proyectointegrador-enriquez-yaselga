@@ -20,5 +20,6 @@ export class ListarFinancieroComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log('Transacciones mostradas: ',this.transacciones);
   }
 }
