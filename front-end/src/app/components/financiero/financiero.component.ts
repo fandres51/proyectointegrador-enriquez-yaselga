@@ -55,5 +55,19 @@ export class FinancieroComponent implements OnInit {
 
   cargarTransaccionesMostradas(transaccionesMostradas: Transaccion[]) {
     this.transaccionesMostradas = Object.assign([], transaccionesMostradas);
+
+    this.ingresos = this.transaccionesMostradas.reduce((valorAcumulado, valorActual) => {
+      if(valorActual.Ingreso) {
+        return Number( Number(valorAcumulado) + Number(valorActual.Monto) );
+      }
+      return valorAcumulado;
+    }, 0);
+    
+    this.egresos = this.transaccionesMostradas.reduce((valorAcumulado, valorActual) => {
+      if(!valorActual.Ingreso) {
+        return Number( Number(valorAcumulado) + Number(valorActual.Monto) );
+      }
+      return valorAcumulado;
+    }, 0);
   }
 }

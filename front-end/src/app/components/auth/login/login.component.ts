@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public auth: AngularFireAuth
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  login() {
+    this.auth.signInWithPopup(new auth.OAuthProvider('microsoft.com'));
   }
 
 }

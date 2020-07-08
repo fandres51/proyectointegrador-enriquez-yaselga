@@ -23,10 +23,12 @@
                         <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_drop_down</mat-icon>
                     </button>
                     <mat-menu #minibutton="matMenu">
-                        <a routerLink="/main/ajustes"><button mat-menu-item
-                                class="menu-item">Configuración</button></a>
-                        <a routerLink="/main/recursos"><button mat-menu-item class="menu-item">Cerrar
-                                Sesión</button></a>
+                        <a routerLink="/main/ajustes">
+                            <button mat-menu-item class="menu-item">Configuración</button>
+                        </a>
+                        <a routerLink="/main/recursos">
+                            <button (click)="logout()" mat-menu-item class="menu-item">Cerrar Sesión</button>
+                        </a>
                     </mat-menu>
                 </div>
                 <!-- TODO Cambiar el texto para traerlo de la base de datos -->
