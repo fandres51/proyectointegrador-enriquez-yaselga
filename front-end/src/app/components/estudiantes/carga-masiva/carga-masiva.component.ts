@@ -37,7 +37,7 @@ export class CargaMasivaComponent {
 
     this.isUploading = true;
     this.isUploaded = false;
-    this.csv2fire.process(file, 'Asociacion/AEIS/Persona');
+    this.csv2fire.process(file, 'Asociacion/AEIS/Persona', 'estudiante');
     this.cerrarDialog.emit('cerrar');
   }
 }

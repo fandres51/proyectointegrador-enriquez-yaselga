@@ -37,7 +37,7 @@ export class CargaMasivaFinancieroComponent {
 
     this.isUploading = true;
     this.isUploaded = false;
-    this.csv2fire.process(file, 'Asociacion/AEIS/Transaccion');
+    this.csv2fire.process(file, 'Asociacion/AEIS/Transaccion', 'transaccion');
     this.cerrarDialog.emit('cerrar');
   }
 }

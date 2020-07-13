@@ -14,54 +14,54 @@
         </div>
 
         <div fxLayout="row">
-            <div fxFlex="50" class="dato">
-                <div class="titulo">Carrera </div>
+            <div *ngIf="estudiante.Carrera" fxFlex="50" class="dato">
+                <div  class="titulo">Carrera </div>
                 <div>{{estudiante.Carrera}}</div>
             </div>
     
-            <div class="dato">
+            <div *ngIf="estudiante.SemestreReferencial" class="dato">
                 <div class="titulo">Semestre Referencial </div>
                 <div>{{estudiante.SemestreReferencial}}</div>
             </div>
         </div>
 
         <div fxLayout="row">
-            <div fxFlex="50" class="dato">
+            <div *ngIf="estudiante.CorreoInstitucional" fxFlex="50" class="dato">
                 <div class="titulo">Correo Institucional </div>
                 <div>{{estudiante.CorreoInstitucional}}</div>
             </div>
     
-            <div class="dato">
+            <div *ngIf="estudiante.CorreoPersonal" class="dato">
                 <div class="titulo">Correo Personal </div>
                 <div>{{estudiante.CorreoPersonal}}</div>
             </div>
         </div>
   
-        <div fxLayout="row">
+        <div *ngIf="estudiante.Genero" fxLayout="row">
             <div fxFlex="50" class="dato">
                 <div class="titulo">Genero </div>
                 <div>{{estudiante.Genero}}</div>
             </div>
     
-            <div class="dato">
+            <div *ngIf="estudiante.Sexo" class="dato">
                 <div class="titulo">Sexo </div>
                 <div>{{estudiante.Sexo}}</div>
             </div>
         </div>
   
         <div fxLayout="row">
-            <div fxFlex="50" class="dato">
+            <div *ngIf="estudiante.SectorDomiciliario" fxFlex="50" class="dato">
                 <div class="titulo">Sector Domiciliario </div>
                 <div>{{estudiante.SectorDomiciliario}}</div>
             </div>
     
-            <div class="dato">
+            <div *ngIf="estudiante.Telefono" class="dato">
                 <div class="titulo">Número de Teléfono </div>
                 <div>{{estudiante.Telefono}}</div>
             </div>
         </div>
 
-        <div class="dato">
+        <div *ngIf="estudiante.FechaNacimiento" class="dato">
             <div class="titulo">Fecha de Nacimiento </div>
             <div>{{estudiante.FechaNacimiento}}</div>
         </div>

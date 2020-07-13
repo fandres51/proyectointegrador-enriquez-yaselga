@@ -3,6 +3,7 @@ import { Estudiante } from 'src/app/models/estudiante';
 import { Router } from '@angular/router';
 import { TransaccionesService } from 'src/app/services/transacciones.service';
 import { Transaccion } from 'src/app/models/transaccion';
+import { EstudiantesService } from 'src/app/services/estudiantes.service';
 
 @Component({
   selector: 'app-formulario-afiliacion',
@@ -24,7 +25,7 @@ export class FormularioAfiliacionComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private transaccionService: TransaccionesService
+    private estudianteService: EstudiantesService
   ) { }
 
 
@@ -35,10 +36,8 @@ export class FormularioAfiliacionComponent implements OnInit {
     this.router.navigateByUrl('/main/estudiantes');
   }
 
-  afiliarEstudiante(estudiante: Estudiante) {
-    // this.transaccionService.addTransaccion();
-    //generar un registro
-    //actualizar estado a afiliado
-    //regresar a pantalla anterior y mostrar mensaje de éxito
+  afiliarEstudiante() {
+    this.estudianteService.addAfiliation(this.estudiante, 20, new Date());
+    this.router.navigateByUrl('/main/estudiantes');
   }
 }

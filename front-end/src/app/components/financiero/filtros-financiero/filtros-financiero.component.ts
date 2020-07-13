@@ -66,10 +66,10 @@ export class FiltrosFinancieroComponent implements OnInit {
   /***Ordenamiento****************************************** */
 
   compararPorFecha(a, b) {
-    if (a.Fecha < b.Fecha) {
+    if (a.Fecha > b.Fecha) {
       return -1;
     }
-    if (a.Fecha > b.Fecha) {
+    if (a.Fecha < b.Fecha) {
       return 1;
     }
     return 0;

@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Estudiante } from '../models/estudiante';
 import * as firebase from 'firebase';
+import { TransaccionesService } from './transacciones.service';
+import { Transaccion } from '../models/transaccion';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,7 @@ export class EstudiantesService {
   estudiantes: Observable<Estudiante[]>;
   estudianteDoc: AngularFirestoreDocument<Estudiante>;
 
-  constructor(public afs: AngularFirestore) {
+  constructor(public afs: AngularFirestore, private transaccionService: TransaccionesService) {
     this.estudiantesCollection = afs.collection<Estudiante>('Asociacion/AEIS/Persona');
     // this.estudiantes = this.estudiantesCollection.valueChanges();
     this.estudiantes = this.estudiantesCollection.snapshotChanges().pipe(
@@ -39,4 +41,30 @@ export class EstudiantesService {
     this.estudianteDoc = this.afs.doc(`Asociacion/AEIS/Persona/${estudiante.id}`)
     this.estudianteDoc.update(estudiante);    
   }
+
+  addAfiliation(estudiante: Estudiante, monto: number, fecha: Date) {
+    
+    const idNuevaTransaccion:string = 'TRN_123'; 
+
+    const nuevaTransaccion: Transaccion = {
+      id: idNuevaTransaccion,
+      Monto: monto,
+      Fecha: firebase.firestore.Timestamp.fromDate(fecha),
+      Ingreso: true,
+      Tipo: 'Afiliacion 2020A',
+      TipoMonetario: 'Afiliacion',
+      PersonaID: estudiante.id 
+    }
+
+    this.transaccionService.addTransaccion(nuevaTransaccion);
+
+    // generar un registro
+
+    estudiante.EstadoAfiliacion = true;
+
+    this.updateEstudiante(estudiante);
+  }
+
+
+
 }

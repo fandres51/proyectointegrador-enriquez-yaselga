@@ -3,18 +3,18 @@
         <mat-card fxLayout="row" fxLayoutAlign=" center">
             
             <div fxLayout="column" fxLayoutAlign="center start" fxFlex="30">
-                <div class="nombre">{{estudiante.Nombre}} {{estudiante.Apellido}}</div>
+                <div class="nombre">{{estudiante.Nombre}}</div>
                 <div>{{estudiante.NoUnico}}</div>
             </div>
             
             <div fxLayout="column" fxLayoutAlign="center end" fxFlex="20" fxHide.lt-lg>
-                <div>{{estudiante.Carrera}}</div>
-                <div>{{estudiante.SemestreReferencial}} semestre</div>
+                <div *ngIf="estudiante.Carrera">{{estudiante.Carrera}}</div>
+                <div *ngIf="estudiante.SemestreReferencial">{{estudiante.SemestreReferencial}} semestre</div>
             </div>
             
             <div fxLayout="column" fxLayoutAlign="center end" fxFlex="20" fxHide.lt-lg>
-                <div>{{estudiante.SectorDomiciliario}}</div>
-                <div>{{estudiante.Telefono}}</div>
+                <div *ngIf="estudiante.SectorDomiciliario">{{estudiante.SectorDomiciliario}}</div>
+                <div *ngIf="estudiante.Telefono">{{estudiante.Telefono}}</div>
             </div>
 
             <div fxLayout="column" fxLayoutAlign="center end" fxFlex="20" fxHide.lt-lg>
