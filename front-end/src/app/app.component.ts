@@ -14,7 +14,7 @@ export class AppComponent {
   constructor(
     public auth: AngularFireAuth
   ) {
-
+    
   }
 
   

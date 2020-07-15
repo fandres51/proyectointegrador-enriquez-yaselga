@@ -10,12 +10,7 @@ export interface Estudiante {
     Telefono?: string;
     FechaNacimiento?: firebase.firestore.Timestamp | Date;
     SectorDomiciliario?: string;
-    
-    SemestreReferencial: string;
-    EstadoAfiliacion: boolean;
-    SemestreDeEntrada: string;
+    SemestreReferencial: '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | 'Egresado' | 'Graduado' | 'Retirado';
+    EstadoAfiliacion: boolean
 
-    Aportes: Object;
-    // EsAutoridad:boolean;
-    // Cargo?:string;
 }

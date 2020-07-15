@@ -1,0 +1,23 @@
+<div fxLayout="row" fxLayout.lt-md="row">
+    <div fxFlex="10" fxLayout="row" fxLayoutAlign="space-between center" fxHide.lt-md>
+        <div>Registros mostrados: {{estudiantes.length}}</div>
+        <div>  
+            <button mat-button (click)="cargaMasiva()" class="but-cargar-estudiantes">
+                Cargar estudiantes
+            </button>
+        </div>
+    </div>
+    <div fxFlex="90" fxFlex.lt-md="100" fxLayout="row" fxLayout.lt-md="column">
+        <div fxFlex="20" fxFlex.md="30" fxFlex.lt-md="auto" fxLayout="row">
+            <app-estudiantes-filtros [estudiantes]="estudiantes" (mostrarEstudiantes)="estudiantes=$event" ></app-estudiantes-filtros>
+        </div>
+        
+        <div class="line" fxHide.lt-md></div>
+
+        <div fxFlex="80" fxFlex.md="70" fxFlex.lt-md="auto" fxLayout="column" class="div-estudiantes" >
+            <div fxLayout="column">
+                <app-estudiantes-listar [estudiantes]="estudiantes"></app-estudiantes-listar>
+            </div>
+        </div>
+    </div>
+</div>
