@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CsvToFireService } from './csv-to-fire.service';
+import { AutoridadesService } from './autoridades.service';
 
-describe('CsvToFireService', () => {
-  let service: CsvToFireService;
+describe('AutoridadesService', () => {
+  let service: AutoridadesService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CsvToFireService);
+    service = TestBed.inject(AutoridadesService);
   });
 
   it('should be created', () => {

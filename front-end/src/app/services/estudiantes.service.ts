@@ -5,21 +5,28 @@ import { map } from 'rxjs/operators';
 import { Estudiante } from '../models/estudiante';
 import { Aporte } from '../models/aporte'
 import * as firebase from 'firebase';
-import { TransaccionesService } from './transacciones.service';
-import { Transaccion } from '../models/transaccion';
 import { AsociacionService } from './asociacion.service';
+import * as Papa from 'papaparse';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EstudiantesService {
 
-  constructor(
-    private afs: AngularFirestore,
-    private transaccionService: TransaccionesService,
-    private asociacionService: AsociacionService
-  ) {
+  private aporteActual;
+  private periodoActual;
 
+  constructor(
+    asociacionService: AsociacionService,
+    private afs: AngularFirestore
+  ) {
+    asociacionService.getAsociacion().subscribe(
+      asociacion => {
+        this.aporteActual = asociacion.AporteActual;
+        this.periodoActual = asociacion.PeriodoActual;
+      }
+    )
   }
 
   getCollection(): AngularFirestoreCollection<Estudiante> {
@@ -49,6 +56,10 @@ export class EstudiantesService {
     return this.afs.doc<Estudiante>(`Asociacion/AEIS/Persona/${noUnico}`).valueChanges();
   }
 
+  crearEstudiante(estudiante: Estudiante) {
+    this.getCollection().add(estudiante);
+  }
+
   updateEstudiante(estudiante: Estudiante) {
     if (estudiante.FechaNacimiento instanceof Date) {
       estudiante.FechaNacimiento = firebase.firestore.Timestamp.fromDate(estudiante.FechaNacimiento);
@@ -75,40 +86,32 @@ export class EstudiantesService {
     return this.afs.collection<Aporte>(`Asociacion/AEIS/Persona/${estudianteId}/Aportes`).valueChanges();
   }
 
-  async crearAportesNuevoSemestre(estudiantes: Estudiante[]) {
+  getAporteActual(estudiante: Estudiante): Observable<Aporte> {
+    return this.afs.doc<Aporte>(`Asociacion/AEIS/Persona/${estudiante.NoUnico}/Aporte/${estudiante.NoUnico + this.periodoActual}`).valueChanges();
+  }
 
-    let nuevoAporte: Aporte;
+  crearAportesNuevoSemestre(estudiantes: Estudiante[]) {
 
-    await this.asociacionService.getAsociacion().subscribe(
-      asociacion => {
-        nuevoAporte = {
-          deuda: asociacion.AporteActual,
-          periodo: asociacion.PeriodoActual,
-          valor: 0
-        }
-      }
-    )
+    const nuevoAporte: Aporte = {
+      deuda: this.aporteActual,
+      periodo: this.periodoActual,
+      valor: 0
+    };
 
     const estudiantesAfiliados: Estudiante[] = estudiantes.filter(estudiante => estudiante.EstadoAfiliacion);
 
-    estudiantesAfiliados.forEach(estudianteAfiliado => {
+    estudiantesAfiliados.forEach( estudianteAfiliado => {
       this.afs.collection(`Asociacion/AEIS/Persona/${estudianteAfiliado.NoUnico}/Aportes`).doc<Aporte>(estudianteAfiliado.NoUnico + nuevoAporte.periodo).set(nuevoAporte);
     })
   }
 
-  async afiliarEstudiante(estudiante: Estudiante, valor: number) {
+  afiliarEstudiante(estudiante: Estudiante, valor: number) {
 
-    let nuevoAporte: Aporte;
-
-    await this.asociacionService.getAsociacion().subscribe(
-      asociacion => {
-        nuevoAporte = {
-          deuda: asociacion.AporteActual - valor,
-          valor: valor,
-          periodo: asociacion.PeriodoActual
-        }
-      }
-    )
+    let nuevoAporte: Aporte = {
+      deuda: this.aporteActual - valor,
+      periodo: this.periodoActual,
+      valor: valor
+    };
 
     if (!estudiante.EstadoAfiliacion) {
       estudiante.EstadoAfiliacion = true;
@@ -116,7 +119,6 @@ export class EstudiantesService {
     }
 
     this.afs.collection(`Asociacion/AEIS/Persona/${estudiante.NoUnico}/Aporte`).doc<Aporte>(estudiante.NoUnico + nuevoAporte.periodo).set(nuevoAporte);
-    //TODO transaccion al afiliar
   }
 
   desafiliarEstudiante(estudiante: Estudiante) {
@@ -124,40 +126,36 @@ export class EstudiantesService {
     this.afs.doc<Estudiante>(`Asociacion/AEIS/Persona/${estudiante.NoUnico}`).update(estudiante);
   }
 
-  confirmarAfiliacionActual(estudiante: Estudiante): boolean {
-    this.afs.doc<Estudiante>(`Asociacion/AEIS/Persona/${estudiante.NoUnico}`).update(estudiante);
-
+  cargaMasivaEstudiantes(file) {
+    Papa.parse(file, {
+      complete: res => this.firethisEstudiante(res['data']),
+      header: true
+    });
   }
 
-  getAporteActual(estudiante: Estudiante): Observable<Aporte> { }
-
-  //TODO recibir datos de asocicaciona al login y no al hacer una afiliacion o al cargar service
-
-
-
-  addAfiliation(estudiante: Estudiante, monto: number, fecha: Date) {
-
-    const idNuevaTransaccion: string = 'TRN_123';
-
-    const nuevaTransaccion: Transaccion = {
-      id: idNuevaTransaccion,
-      Monto: monto,
-      Fecha: firebase.firestore.Timestamp.fromDate(fecha),
-      Ingreso: true,
-      Tipo: 'Afiliacion 2020A',
-      TipoMonetario: 'Afiliacion',
-      PersonaID: estudiante.NoUnico
-    }
-
-    this.transaccionService.addTransaccion(nuevaTransaccion);
-
-    // generar un registro
-
-    estudiante.EstadoAfiliacion = true;
-
-    this.updateEstudiante(estudiante);
+  private firethisEstudiante(estudiantes: Estudiante[]) {
+    return new Promise((resolve) => {
+      estudiantes.forEach( (estudiante) => {
+        this.afs.collection('Asociacion/AEIS/Persona').doc<Estudiante>(estudiante.NoUnico).set(estudiante);
+      })
+      resolve();
+    })
   }
 
+  cargaMasivaEstudiantesAportantes(file) {
+    Papa.parse(file, {
+      complete: res => this.firethisEstudianteAportante(res['data']),
+      header: true
+    });
+  }
 
-
+  private firethisEstudianteAportante(estudiantes: Estudiante[]) {
+    return new Promise((resolve) => {
+      estudiantes.forEach( (estudiante) => {
+        this.afs.collection('Asociacion/AEIS/Persona').doc<Estudiante>(estudiante.NoUnico).set(estudiante);
+        this.afiliarEstudiante(estudiante, this.aporteActual);
+      })
+      resolve();
+    })
+  }
 }
