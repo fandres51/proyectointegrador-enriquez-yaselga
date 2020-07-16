@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Estudiante } from 'src/app/models/estudiante';
 import { EstudiantesService } from 'src/app/services/estudiantes.service';
 
@@ -12,30 +12,28 @@ export class EstudiantesAfiliacionComponent implements OnInit {
 
   estudiante: Estudiante = window.history.state;
 
-  // transaccionACrear: Transaccion = {
-  //   // id:,
-  //   Fecha:new Date,
-  //   // Monto:30,
-  //   Tipo:'afiliacion',
-  //   TipoMonetario:'ingreso',
-  //   PersonaID:this.estudiante.id,
-  // };
-
   constructor(
     private router: Router,
-    private estudianteService: EstudiantesService
+    private estudiantesService: EstudiantesService,
+    private route: ActivatedRoute
   ) { }
 
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      const noUnicoParam = params['id'];
+      this.estudiantesService.getEstudiante(noUnicoParam).subscribe( estudiante => {
+        this.estudiante = estudiante;
+      })
+    });
   }
 
   regresar() {
-    this.router.navigateByUrl('/main/estudiantes');
+    this.router.navigateByUrl('/estudiantes');
   }
 
   afiliarEstudiante() {
-    this.estudianteService.addAfiliation(this.estudiante, 20, new Date());
-    this.router.navigateByUrl('/main/estudiantes');
+    this.estudiantesService.afiliarEstudiante( this.estudiante )
+    this.router.navigateByUrl('/estudiantes');
   }
 }

@@ -105,7 +105,7 @@ export class EstudiantesService {
     })
   }
 
-  afiliarEstudiante(estudiante: Estudiante, valor: number) {
+  afiliarEstudiante(estudiante: Estudiante, valor: number = this.aporteActual) {
 
     let nuevoAporte: Aporte = {
       deuda: this.aporteActual - valor,

@@ -12,16 +12,14 @@ import { EstudiantesAfiliacionComponent } from './components/estudiantes/estudia
 
 const routes: Routes = [
   { path: '', component: MainScreenComponent },
-  { path: '**', component: PageNotFoundComponent },
-  { path: 'estudiantes', component: EstudiantesMainComponent, children: [
-    { path: 'actualizar/:id', component: EstudiantesActualizacionComponent },
-    { path: 'afiliar/:id', component: EstudiantesAfiliacionComponent },
-  ]},
+  { path: 'estudiantes', component: EstudiantesMainComponent },
+  { path: 'estudiantes/actualizar/:id', component: EstudiantesActualizacionComponent },
+  { path: 'estudiantes/afiliar/:id', component: EstudiantesAfiliacionComponent },
   { path: 'ajustes', component: AjustesComponent, children: [
-      { path: 'definir-cargos', component: DefinirCargosComponent },
-      { path: 'cambiar-asociacion', component: CambiarAsociacionComponent }
-    ]
-  },
+    { path: 'definir-cargos', component: DefinirCargosComponent },
+    { path: 'cambiar-asociacion', component: CambiarAsociacionComponent }
+  ]},
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

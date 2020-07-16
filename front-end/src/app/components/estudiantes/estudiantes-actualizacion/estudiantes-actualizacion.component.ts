@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Estudiante } from 'src/app/models/estudiante';
 import { EstudiantesService } from 'src/app/services/estudiantes.service';
 
@@ -13,32 +13,39 @@ import { EstudiantesService } from 'src/app/services/estudiantes.service';
 export class EstudiantesActualizacionComponent implements OnInit {
 
   carreras: string[] = ['Sistemas', 'Computacion', 'Software'];
-  semestres: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', 'Retirado', 'Egresado', 'Graduado'];
-  
+  semestres: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Retirado', 'Egresado', 'Graduado'];
 
-  public estudiante: Estudiante = window.history.state;
-  public estudianteAActualizar: Estudiante = this.estudiante;
-  date = new FormControl(this.estudiante.FechaNacimiento);
+  public estudiante: Estudiante;
+  public date: FormControl;
 
   constructor(
     public estudiantesService: EstudiantesService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
 
-  ngOnInit(): void { }
-
-  agregarFechaAEsudiante(event: MatDatepickerInputEvent<Date>) {
-    this.estudianteAActualizar.FechaNacimiento = event.value;
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      const noUnicoParam = params['id'];
+      this.estudiantesService.getEstudiante(noUnicoParam).subscribe(estudiante => {
+        this.estudiante = estudiante;
+        this.date = new FormControl(this.estudiante.FechaNacimiento);
+      })
+    });
   }
 
-  editEstudiante(Estudiante){
-    this.estudiantesService.updateEstudiante(Estudiante);
-    this.router.navigateByUrl('/main/estudiantes');
+  agregarFechaAEsudiante(event: MatDatepickerInputEvent<Date>) {
+    this.estudiante.FechaNacimiento = event.value;
+  }
+
+  editEstudiante(estudiante: Estudiante) {
+    this.estudiantesService.updateEstudiante(estudiante);
+    this.router.navigateByUrl('/estudiantes');
   }
 
   regresar() {
-    this.router.navigateByUrl('/main/estudiantes');
+    this.router.navigateByUrl('/estudiantes');
   }
 
 }

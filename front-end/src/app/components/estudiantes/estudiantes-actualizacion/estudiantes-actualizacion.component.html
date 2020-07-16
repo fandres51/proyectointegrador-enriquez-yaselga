@@ -6,17 +6,15 @@
         <h1>Actualizar Información</h1>
     </div>
     <div>
-        <form fxLayout="column" fxLayoutAlign=" center" class="form" (ngSubmit)="editEstudiante(estudianteAActualizar)">
+        <form fxLayout="column" fxLayoutAlign=" center" class="form" (ngSubmit)="editEstudiante(estudiante)">
             <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateNombre">Nombre: </label>
-                    <input type="text" name="updateNombre" id="updateNombre" value={{estudiante.Nombre}}
-                        [(ngModel)]="estudianteAActualizar.Nombre">
+                    <input type="text" name="updateNombre" id="updateNombre" value={{estudiante.Nombre}} [(ngModel)]="estudiante.Nombre">
                 </div>
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateApellido">Apellido: </label>
-                    <input type="text" name="updateApellido" id="updateApellido" value={{estudiante.Apellido}}
-                        [(ngModel)]="estudianteAActualizar.Apellido">
+                    <input type="text" name="updateApellido" id="updateApellido" value={{estudiante.Apellido}} [(ngModel)]="estudiante.Apellido">
                 </div>
             </div>
             <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
@@ -31,7 +29,7 @@
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateCorreoPersonal">Correo Personal: </label>
                     <input type="text" name="updateCorreoPersonal" id="updateCorreoPersonal"
-                        value={{estudiante.CorreoPersonal}} [(ngModel)]="estudianteAActualizar.CorreoPersonal">
+                        value={{estudiante.CorreoPersonal}} [(ngModel)]="estudiante.CorreoPersonal">
                 </div>
             </div>
             <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
@@ -39,19 +37,19 @@
                     <label for="updateCorreoInstitucional">Correo Institucional: </label>
                     <input type="text" name="updateCorreoInstitucional" id="updateCorreoInstitucional"
                         value={{estudiante.CorreoInstitucional}}
-                        [(ngModel)]="estudianteAActualizar.CorreoInstitucional">
+                        [(ngModel)]="estudiante.CorreoInstitucional">
                 </div>
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateTelefono">Teléfono: </label>
                     <input type="text" name="updateTelefono" id="updateTelefono" value={{estudiante.Telefono}}
-                        [(ngModel)]="estudianteAActualizar.Telefono">
+                        [(ngModel)]="estudiante.Telefono">
                 </div>
             </div>
             <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateNoUnico">Número único: </label>
                     <input type="text" name="updateNoUnico" id="updateNoUnico" value={{estudiante.NoUnico}}
-                        [(ngModel)]="estudianteAActualizar.NoUnico">
+                        [(ngModel)]="estudiante.NoUnico">
                 </div>
             </div>
             <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
@@ -67,7 +65,7 @@
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateSectorDomiciliario">Sector Domiciliario: </label>
                     <input type="text" name="updateSectorDomiciliario" id="updateSectorDomiciliario"
-                        value={{estudiante.SectorDomiciliario}} [(ngModel)]="estudianteAActualizar.SectorDomiciliario">
+                        value={{estudiante.SectorDomiciliario}} [(ngModel)]="estudiante.SectorDomiciliario">
                 </div>
             </div>
             <div fxLayout="row" fxLayout.lt-md="column" class="form-row">

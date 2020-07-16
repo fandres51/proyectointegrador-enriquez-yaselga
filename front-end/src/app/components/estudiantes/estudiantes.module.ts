@@ -7,6 +7,8 @@ import { EstudiantesDialogInfoComponent } from './estudiantes-dialog-info/estudi
 import { EstudiantesActualizacionComponent } from './estudiantes-actualizacion/estudiantes-actualizacion.component';
 import { EstudiantesAfiliacionComponent } from './estudiantes-afiliacion/estudiantes-afiliacion.component';
 import { MaterialComponentsModule } from 'src/app/material.module';
+import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { MaterialComponentsModule } from 'src/app/material.module';
   ],
   imports: [
     CommonModule,
-    MaterialComponentsModule
+    MaterialComponentsModule,
+    FormsModule,
+    AppRoutingModule,
   ]
 })
 export class EstudiantesModule { }

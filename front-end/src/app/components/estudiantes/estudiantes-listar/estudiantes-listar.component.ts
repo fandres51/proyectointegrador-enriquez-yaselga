@@ -15,11 +15,9 @@ export class EstudiantesListarComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private router: Router,
   ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   public openDialog(index:number):void {
     const dialogRef = this.dialog.open( EstudiantesDialogInfoComponent, {
