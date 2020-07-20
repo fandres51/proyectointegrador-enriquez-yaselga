@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { Estudiante } from 'src/app/models/estudiante';
+import { EstudiantesService } from 'src/app/services/estudiantes.service';
 import { EstudiantesDialogInfoComponent } from '../estudiantes-dialog-info/estudiantes-dialog-info.component';
 
 @Component({
@@ -11,10 +11,19 @@ import { EstudiantesDialogInfoComponent } from '../estudiantes-dialog-info/estud
 })
 export class EstudiantesListarComponent implements OnInit {
 
-  @Input() public estudiantes: Estudiante[] = [];
+  public actualStart: number = 0;
+  public estudiantes: Estudiante[] = [];
+
+  @Input() set _estudiantes(estudiantes: Estudiante[]) {
+    this.estudiantes = estudiantes;
+    this.changePagination();
+  }
+  private pageIndex: number = 0;
+  private pageSize: number = 9;
 
   constructor(
     public dialog: MatDialog,
+    public estudiantesService: EstudiantesService
   ) { }
 
   ngOnInit(): void { }
@@ -28,4 +37,16 @@ export class EstudiantesListarComponent implements OnInit {
       console.log('The dialog was closed');
     })
   } 
+
+  public estudiantesPaginados: Estudiante[];
+
+  onPageChange($event) {
+    this.pageIndex = $event.pageIndex;
+    this.pageSize = $event.pageSize;
+    this.changePagination();
+  }
+  
+  changePagination() {
+    this.estudiantesPaginados = this.estudiantes.slice(this.pageIndex*this.pageSize, this.pageIndex*this.pageSize + this.pageSize);
+  }
 }

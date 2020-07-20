@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Estudiante } from 'src/app/models/estudiante';
 import { EstudiantesService } from 'src/app/services/estudiantes.service';
 
@@ -13,14 +13,18 @@ export class EstudiantesMainComponent implements OnInit {
 
   constructor(
     public EstudiantesService: EstudiantesService
-  ) {}
+  ) { }
 
-  ngOnInit() {
-    //trae el string de estudiantes de la base
-    this.EstudiantesService.getEstudiantes().subscribe( estudiante => {
-        this.estudiantes = estudiante;
-    })
+  ngOnInit() { }
+
+  cargaMasiva(event: FileList) {
+    const file = event.item(0);
+    if (file.type.split('/')[1] !== 'csv') {
+      console.error('Unsupported file type!!');
+    }
+    this.EstudiantesService.cargaMasivaEstudiantes(file);
   }
 
-  cargaMasiva(){}
+
+  //TODO implementar funciones y probar ( afiliaciones e historial de afiliaciones )
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -12,19 +12,23 @@ import * as _ from 'lodash';
 @Injectable({
   providedIn: 'root'
 })
-export class EstudiantesService {
+export class EstudiantesService implements OnInit {
 
   private aporteActual;
   private periodoActual;
 
   constructor(
-    asociacionService: AsociacionService,
+    private asociacionService: AsociacionService,
     private afs: AngularFirestore
   ) {
-    asociacionService.getAsociacion().subscribe(
+  }
+
+  ngOnInit(): void {
+    this.asociacionService.getAsociacion().subscribe(
       asociacion => {
         this.aporteActual = asociacion.AporteActual;
         this.periodoActual = asociacion.PeriodoActual;
+        console.log(this.periodoActual);
       }
     )
   }
@@ -71,14 +75,14 @@ export class EstudiantesService {
   darDeBajaEstudiante(estudiante: Estudiante) {
     const estudianteDoc: AngularFirestoreDocument<Estudiante> = this.afs.collection('Asociacion/AEIS/Persona').doc(estudiante.NoUnico);
     estudiante.SemestreReferencial = 'Retirado';
-    estudiante.EstadoAfiliacion = false;
+    estudiante.EstadoAfiliacion = 'No afiliado';
     estudianteDoc.update(estudiante);
   }
 
   graduarEstudiante(estudiante: Estudiante) {
     const estudianteDoc: AngularFirestoreDocument<Estudiante> = this.afs.collection('Asociacion/AEIS/Persona').doc(estudiante.NoUnico);
     estudiante.SemestreReferencial = 'Graduado';
-    estudiante.EstadoAfiliacion = false;
+    estudiante.EstadoAfiliacion = 'No afiliado';
     estudianteDoc.update(estudiante);
   }
 
@@ -100,7 +104,10 @@ export class EstudiantesService {
 
     const estudiantesAfiliados: Estudiante[] = estudiantes.filter(estudiante => estudiante.EstadoAfiliacion);
 
-    estudiantesAfiliados.forEach( estudianteAfiliado => {
+    estudiantesAfiliados.forEach(estudianteAfiliado => {
+
+      estudianteAfiliado.EstadoAfiliacion = 'No aportante';
+      this.afs.collection<Estudiante>('Asociacion/AEIS/Persona').doc(estudianteAfiliado.NoUnico).update(estudianteAfiliado);
       this.afs.collection(`Asociacion/AEIS/Persona/${estudianteAfiliado.NoUnico}/Aportes`).doc<Aporte>(estudianteAfiliado.NoUnico + nuevoAporte.periodo).set(nuevoAporte);
     })
   }
@@ -108,21 +115,21 @@ export class EstudiantesService {
   afiliarEstudiante(estudiante: Estudiante, valor: number = this.aporteActual) {
 
     let nuevoAporte: Aporte = {
-      deuda: this.aporteActual - valor,
-      periodo: this.periodoActual,
-      valor: valor
+      deuda: 0,
+      periodo: '2020B',
+      valor: 30
     };
 
-    if (!estudiante.EstadoAfiliacion) {
-      estudiante.EstadoAfiliacion = true;
-      this.afs.doc<Estudiante>(`Asociacion/AEIS/Persona/${estudiante.NoUnico}`).update(estudiante);
-    }
+    estudiante.EstadoAfiliacion = 'Aportante';
+    console.log('hola1');
+    this.afs.doc<Estudiante>(`Asociacion/AEIS/Persona/${estudiante.NoUnico}`).update(estudiante);
+    console.log('hola2');
 
     this.afs.collection(`Asociacion/AEIS/Persona/${estudiante.NoUnico}/Aporte`).doc<Aporte>(estudiante.NoUnico + nuevoAporte.periodo).set(nuevoAporte);
   }
 
   desafiliarEstudiante(estudiante: Estudiante) {
-    estudiante.EstadoAfiliacion = false;
+    estudiante.EstadoAfiliacion = 'No afiliado';
     this.afs.doc<Estudiante>(`Asociacion/AEIS/Persona/${estudiante.NoUnico}`).update(estudiante);
   }
 
@@ -135,7 +142,7 @@ export class EstudiantesService {
 
   private firethisEstudiante(estudiantes: Estudiante[]) {
     return new Promise((resolve) => {
-      estudiantes.forEach( (estudiante) => {
+      estudiantes.forEach((estudiante) => {
         this.afs.collection('Asociacion/AEIS/Persona').doc<Estudiante>(estudiante.NoUnico).set(estudiante);
       })
       resolve();
@@ -150,12 +157,10 @@ export class EstudiantesService {
   }
 
   private firethisEstudianteAportante(estudiantes: Estudiante[]) {
-    return new Promise((resolve) => {
-      estudiantes.forEach( (estudiante) => {
-        this.afs.collection('Asociacion/AEIS/Persona').doc<Estudiante>(estudiante.NoUnico).set(estudiante);
-        this.afiliarEstudiante(estudiante, this.aporteActual);
-      })
-      resolve();
+    estudiantes.forEach((estudiante) => {
+      this.afs.collection('Asociacion/AEIS/Persona').doc<Estudiante>(estudiante.NoUnico).set(estudiante).catch( e => {
+        console.error('\nNo se pudo cargar el siguiente estudiante: ', estudiante.Apellido, estudiante.Nombre, '\nError: ', e, '\n');
+      });
     })
   }
 }

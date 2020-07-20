@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Estudiante } from 'src/app/models/estudiante';
+import { Transaccion } from 'src/app/models/transaccion';
 import { EstudiantesService } from 'src/app/services/estudiantes.service';
+import { TransaccionesService } from 'src/app/services/transacciones.service';
 
 @Component({
   selector: 'app-estudiantes-afiliacion',
@@ -15,6 +17,7 @@ export class EstudiantesAfiliacionComponent implements OnInit {
   constructor(
     private router: Router,
     private estudiantesService: EstudiantesService,
+    private transaccionService: TransaccionesService,
     private route: ActivatedRoute
   ) { }
 
@@ -34,6 +37,7 @@ export class EstudiantesAfiliacionComponent implements OnInit {
 
   afiliarEstudiante() {
     this.estudiantesService.afiliarEstudiante( this.estudiante )
+    // this.transaccionService.addTransaccion()
     this.router.navigateByUrl('/estudiantes');
   }
 }

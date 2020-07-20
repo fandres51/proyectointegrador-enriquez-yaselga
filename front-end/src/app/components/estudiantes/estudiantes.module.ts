@@ -9,6 +9,7 @@ import { EstudiantesAfiliacionComponent } from './estudiantes-afiliacion/estudia
 import { MaterialComponentsModule } from 'src/app/material.module';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
     MaterialComponentsModule,
     FormsModule,
     AppRoutingModule,
+    FlexLayoutModule
   ]
 })
 export class EstudiantesModule { }

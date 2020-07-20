@@ -1,22 +1,21 @@
-<div fxLayout="row" fxLayout.lt-md="row">
-    <div fxFlex="10" fxLayout="row" fxLayoutAlign="space-between center" fxHide.lt-md>
-        <div>Registros mostrados: {{estudiantes.length}}</div>
-        <div>  
-            <button mat-button (click)="cargaMasiva()" class="but-cargar-estudiantes">
-                Cargar estudiantes
-            </button>
+<div fxLayout="column">
+    <div fxFlex="10" fxLayout="row" fxLayoutAlign="space-between center" class="top-bar" fxHide.lt-md>
+        <div class="registros-mostrados">Registros mostrados: {{estudiantes.length}}</div>
+        <div>
+            <label for="fileInput" class="btn-cargararchivo">Cargar Estudiantes</label>
+            <input id="fileInput" type="file" accept=".csv" (change)="cargaMasiva($event.target.files)" style="display: none;">
         </div>
     </div>
     <div fxFlex="90" fxFlex.lt-md="100" fxLayout="row" fxLayout.lt-md="column">
         <div fxFlex="20" fxFlex.md="30" fxFlex.lt-md="auto" fxLayout="row">
-            <app-estudiantes-filtros [estudiantes]="estudiantes" (mostrarEstudiantes)="estudiantes=$event" ></app-estudiantes-filtros>
+            <app-estudiantes-filtros (mostrarEstudiantes)="estudiantes=$event"></app-estudiantes-filtros>
         </div>
-        
+
         <div class="line" fxHide.lt-md></div>
 
-        <div fxFlex="80" fxFlex.md="70" fxFlex.lt-md="auto" fxLayout="column" class="div-estudiantes" >
+        <div fxFlex="80" fxFlex.md="70" fxFlex.lt-md="auto" fxLayout="column" class="div-estudiantes">
             <div fxLayout="column">
-                <app-estudiantes-listar [estudiantes]="estudiantes"></app-estudiantes-listar>
+                <app-estudiantes-listar [_estudiantes]="estudiantes"></app-estudiantes-listar>
             </div>
         </div>
     </div>

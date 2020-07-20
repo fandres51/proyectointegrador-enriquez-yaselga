@@ -57,7 +57,7 @@
 
 </div>
 <div mat-dialog-actions>
-    <button class="button" [routerLink]="['/estudiantes/afiliar', estudiante.NoUnico]" mat-button [disabled]="estudiante.EstadoAfiliacion">
+    <button class="button" [routerLink]="['/estudiantes/afiliar', estudiante.NoUnico]" mat-button [disabled]="estudiante.EstadoAfiliacion === 'Aportante'">
         <mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>
     </button>
     <button class="button" [routerLink]="['/estudiantes/actualizar', estudiante.NoUnico]" mat-button>

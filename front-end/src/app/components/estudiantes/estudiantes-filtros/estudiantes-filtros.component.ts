@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Estudiante } from 'src/app/models/estudiante';
+import { EstudiantesService } from 'src/app/services/estudiantes.service';
 
 @Component({
   selector: 'app-estudiantes-filtros',
@@ -8,66 +9,63 @@ import { Estudiante } from 'src/app/models/estudiante';
 })
 export class EstudiantesFiltrosComponent implements OnInit {
 
-  @Input() public estudiantes: Estudiante[] = [];
-  @Output() public mostrarEstudiantes = new EventEmitter();
-  public estudiantesMostrados: Estudiante[] = [];
+  private estudiantes: Estudiante[];
+  @Output() private mostrarEstudiantes = new EventEmitter();
 
-  public porNombreInput: string = "";
-  public porCedulaInput: string = "";
+  public filtroCarrera: 'Sistemas' | 'Computacion' | 'Software' | '' = '';
+  public filtroSemestre: '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | 'Egresado' | 'Retirado' | 'Graduado' | '' = '';
+  public filtroAfiliacion: 'Aportante' | 'No aportante' | 'No afiliado' | '' = '';
+  public tipoOrdenamiento: 'Carrera' | 'Semestre' | 'Apellido' | '' = '';
 
-  public filtroAfiliado: string = "";
-  public filtroSemestre: string = "";
-  public filtroCarrera: string = "";
+  constructor(
+    private estudiantesService: EstudiantesService
+  ) { }
 
-  public tipoOrdenamiento: string = "";
-
-  constructor() { }
-
-  ngOnInit(): void { }
-
-  /***Búsqueda*******************************************/
-
-  public buscarPorNombre() {
-    this.estudiantesMostrados = this.estudiantes.filter(n => {
-      return n.Nombre.search(this.porNombreInput) != -1 || n.Apellido.search(this.porNombreInput) != -1;
+  ngOnInit() {
+    this.estudiantesService.getEstudiantes().subscribe(estudiantes => {
+      this.estudiantes = estudiantes;
+      this.enviarEstudiantes(this.estudiantes);
     })
-    this.enviarEstudiantes();
   }
 
-  public buscarPorCedula() {
-    this.estudiantesMostrados = this.estudiantes.filter(n => {
-      return n.Cedula.search(this.porCedulaInput) != -1;
+  public buscarPorNombre(input: string) {
+    const estudiantesAMostrar = this.estudiantes.filter(estudiante => {
+      return estudiante.Nombre.search(input) != -1 || estudiante.Apellido.search(input) != -1;
     })
-    this.enviarEstudiantes();
+    this.enviarEstudiantes(estudiantesAMostrar);
+  }
+
+  public buscarPorCedula(input: string) {
+    const estudiantesAMostrar = this.estudiantes.filter(estudiante => {
+      return estudiante.Cedula.search(input) != -1;
+    })
+    this.enviarEstudiantes(estudiantesAMostrar);
   }
 
   /***Filtros*******************************************/
-
-  public filtroCarreraFun(valor: string) {
-    this.filtroCarrera = valor;
-    console.log(this.filtroCarrera);
+  
+  public filtrarPorCarrera(carrera) {
+    this.filtroCarrera = carrera;
+    this.filtrar();
+  }
+  
+  public filtrarPorSemestre(semestre) {
+    this.filtroSemestre = semestre;
+    this.filtrar();
+  }
+  
+  public filtrarPorAporte(afiliacion) {
+    this.filtroAfiliacion = afiliacion;
     this.filtrar();
   }
 
-  public filtroSmestreFun(valor: string) {
-    this.filtroSemestre = valor;
-    this.filtrar();
-  }
-
-  public filtroAfiliadoFun(valor: string) {
-    this.filtroAfiliado = valor;
-    this.filtrar();
-  }
-
-  public filtrar() {
-    this.estudiantesMostrados = this.estudiantes.filter(n => {
-      if (this.filtroAfiliado == '') {
-        return (n.SemestreReferencial.search(this.filtroSemestre) + 1) && (n.Carrera.search(this.filtroCarrera) + 1);
-      } else {
-        return ((this.filtroAfiliado == 'true') == n.EstadoAfiliacion) && (n.SemestreReferencial.search(this.filtroSemestre) + 1) && (n.Carrera.search(this.filtroCarrera) + 1);
-      }
+  private filtrar() {
+    const estudiantesAMostrar = this.estudiantes.filter(estudiante => {
+      return (estudiante.Carrera.search(this.filtroCarrera) + 1) && 
+             (estudiante.EstadoAfiliacion.search(this.filtroAfiliacion) + 1) && 
+             (estudiante.SemestreReferencial.search(this.filtroSemestre) + 1);
     })
-    this.enviarEstudiantes();
+    this.enviarEstudiantes(estudiantesAMostrar);
   }
 
   /***Ordenamiento*******************************************/
@@ -102,32 +100,28 @@ export class EstudiantesFiltrosComponent implements OnInit {
     return 0;
   }
 
-  ordenar(tipo: string) {
-    this.tipoOrdenamiento = tipo;
-    if (this.estudiantesMostrados != []) {
-      if (tipo == 'apellido') {
-        this.estudiantes.sort(this.compararPorApellido);
-      } else if (tipo == 'carrera') {
+  ordenar(tipo) {
+    this.tipoOrdenamiento = tipo
+    switch(this.tipoOrdenamiento) {
+      case 'Carrera':
         this.estudiantes.sort(this.compararPorCarrera);
-      } else {
+        break;
+      case 'Semestre':
         this.estudiantes.sort(this.compararPorSemestre);
-      }
-    } else {
-      if (tipo == 'apellido') {
-        this.estudiantesMostrados.sort(this.compararPorApellido);
-      } else if (tipo == 'carrera') {
-        this.estudiantesMostrados.sort(this.compararPorCarrera);
-      } else {
-        this.estudiantesMostrados.sort(this.compararPorSemestre);
-      }
+        break;
+      case 'Apellido':
+        this.estudiantes.sort(this.compararPorApellido);
+        break;
+      default:
+        break;    
     }
-    this.enviarEstudiantes();
+    this.filtrar()
   }
 
   /***Enviar****************************************** */
 
-  public enviarEstudiantes() {
-    this.mostrarEstudiantes.emit(this.estudiantesMostrados);
+  private enviarEstudiantes(estudiantesAMostrar: Estudiante[]) {
+    this.mostrarEstudiantes.emit(estudiantesAMostrar);
   }
 
 }
