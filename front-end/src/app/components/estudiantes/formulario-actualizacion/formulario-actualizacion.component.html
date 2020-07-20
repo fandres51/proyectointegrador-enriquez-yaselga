@@ -1,0 +1,109 @@
+<div fxLayout="column" fxLayoutAlign=" center">
+    <div class="update-title" fxLayout="row">
+        <button (click)="regresar()" class="button-white" mat-button>
+            <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_back</mat-icon>
+        </button>
+        <h1>Actualizar Información</h1>
+    </div>
+    <div>
+        <form fxLayout="column" fxLayoutAlign=" center" class="form" (ngSubmit)="editEstudiante(estudianteAActualizar)">
+            <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
+                <div fxLayout="column" fxFlex=50 class="form-item">
+                    <label for="updateNombre">Nombre: </label>
+                    <input type="text" name="updateNombre" id="updateNombre" value={{estudiante.Nombre}}
+                        [(ngModel)]="estudianteAActualizar.Nombre">
+                </div>
+                <div fxLayout="column" fxFlex=50 class="form-item">
+                    <label for="updateApellido">Apellido: </label>
+                    <input type="text" name="updateApellido" id="updateApellido" value={{estudiante.Apellido}}
+                        [(ngModel)]="estudianteAActualizar.Apellido">
+                </div>
+            </div>
+            <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
+                <div fxLayout="column" fxFlex=50 class="form-item">
+                    <label for="updateCarrera">Carrera: </label>
+                    <mat-select [(value)]="estudiante.Carrera">
+                        <mat-option *ngFor="let carrera of carreras" [value]="carrera">
+                            {{carrera}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div fxLayout="column" fxFlex=50 class="form-item">
+                    <label for="updateCorreoPersonal">Correo Personal: </label>
+                    <input type="text" name="updateCorreoPersonal" id="updateCorreoPersonal"
+                        value={{estudiante.CorreoPersonal}} [(ngModel)]="estudianteAActualizar.CorreoPersonal">
+                </div>
+            </div>
+            <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
+                <div fxLayout="column" fxFlex=50 class="form-item">
+                    <label for="updateCorreoInstitucional">Correo Institucional: </label>
+                    <input type="text" name="updateCorreoInstitucional" id="updateCorreoInstitucional"
+                        value={{estudiante.CorreoInstitucional}}
+                        [(ngModel)]="estudianteAActualizar.CorreoInstitucional">
+                </div>
+                <div fxLayout="column" fxFlex=50 class="form-item">
+                    <label for="updateTelefono">Teléfono: </label>
+                    <input type="text" name="updateTelefono" id="updateTelefono" value={{estudiante.Telefono}}
+                        [(ngModel)]="estudianteAActualizar.Telefono">
+                </div>
+            </div>
+            <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
+                <div fxLayout="column" fxFlex=50 class="form-item">
+                    <label for="updateGenero">Género: </label>
+                    <mat-select [(value)]="estudiante.Genero">
+                        <mat-option *ngFor="let genero of generos" [value]="genero">
+                            {{genero}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div fxLayout="column" fxFlex=50 class="form-item">
+                    <label for="updateNoUnico">Número único: </label>
+                    <input type="text" name="updateNoUnico" id="updateNoUnico" value={{estudiante.NoUnico}}
+                        [(ngModel)]="estudianteAActualizar.NoUnico">
+                </div>
+            </div>
+            <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
+                <div fxLayout="column" fxFlex=50 class="form-item">
+                    <label for="updateFechaNacimiento">Fecha de Nacimiento: </label>
+                    <div>
+                        <input matInput [matDatepicker]="picker" [value]="date.value"
+                        (dateChange)="agregarFechaAEsudiante($event)">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </div>
+                </div>
+                <div fxLayout="column" fxFlex=50 class="form-item">
+                    <label for="updateSectorDomiciliario">Sector Domiciliario: </label>
+                    <input type="text" name="updateSectorDomiciliario" id="updateSectorDomiciliario"
+                        value={{estudiante.SectorDomiciliario}} [(ngModel)]="estudianteAActualizar.SectorDomiciliario">
+                </div>
+            </div>
+            <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
+                <div fxLayout="column" fxFlex=50 class="form-item">
+                    <label for="updateSemestreReferencial">Semestre Referencial: </label>
+                    <mat-select [(value)]="estudiante.SemestreReferencial">
+                        <mat-option *ngFor="let semestre of semestres" [value]="semestre">
+                            {{semestre}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div fxLayout="column" fxFlex=50 class="form-item">
+                    <label for="updateSexo">Sexo: </label>
+                    <mat-select [(value)]="estudiante.Sexo">
+                        <mat-option *ngFor="let sexo of sexos" [value]="sexo">
+                            {{sexo}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+            </div>
+
+            <div class="form-row" fxLayout.lt-md="column">
+                <div fxLayout="column" fxFlex=100 class="form-item">
+                    <button mat-button>
+                        Actualizar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

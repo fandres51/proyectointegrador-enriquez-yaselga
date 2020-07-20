@@ -1,0 +1,44 @@
+<div class="students-area">
+    <div *ngFor="let estudiante of estudiantes; let i = index" class="card">
+        <mat-card fxLayout="row" fxLayoutAlign=" center">
+            
+            <div fxLayout="column" fxLayoutAlign="center start" fxFlex="30">
+                <div class="nombre">{{estudiante.Nombre}} {{estudiante.Apellido}}</div>
+                <div>{{estudiante.NoUnico}}</div>
+            </div>
+            
+            <div fxLayout="column" fxLayoutAlign="center end" fxFlex="20" fxHide.lt-lg>
+                <div>{{estudiante.Carrera}}</div>
+                <div>{{estudiante.SemestreReferencial}} semestre</div>
+            </div>
+            
+            <div fxLayout="column" fxLayoutAlign="center end" fxFlex="20" fxHide.lt-lg>
+                <div>{{estudiante.SectorDomiciliario}}</div>
+                <div>{{estudiante.Telefono}}</div>
+            </div>
+
+            <div fxLayout="column" fxLayoutAlign="center end" fxFlex="20" fxHide.lt-lg>
+                <div *ngIf="estudiante.EstadoAfiliacion; else noafiliado" fxLayout="row" fxLayoutAlign="end center">
+                    <div style="color: #37AA42;">Afiliado</div>
+                    <mat-icon style="color: #37AA42;" class="add-circle-icon" aria-hidden="false"
+                        aria-label="Example home icon">check_circle</mat-icon>
+                </div>
+                <ng-template #noafiliado>
+                    <div fxLayout="row" fxLayoutAlign="end center">
+                        <a (click)="afiliarEstudiante( estudiante.id )" class="a-afiliar" fxLayout="row" fxLayoutAlign="end center">
+                            <div style="color: #294FD7;">No afiliado</div>
+                            <mat-icon style="color: #294FD7;" class="add-circle-icon" aria-hidden="false"
+                                aria-label="Example home icon">add_circle</mat-icon>
+                        </a>
+                    </div>
+                </ng-template>
+            </div>
+
+            <div fxLayoutAlign="end " fxFlex="auto">
+                <button fxLayoutAlign="center " class="button-add-icon" mat-button (click)="openDialog(i)">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_forward</mat-icon>
+                </button>
+            </div>
+        </mat-card>
+    </div>
+</div>
