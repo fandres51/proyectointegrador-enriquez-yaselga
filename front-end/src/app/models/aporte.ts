@@ -1,5 +1,5 @@
 export interface Aporte {
-    periodo: string,
-    valor: number,
+    periodo: string;
+    valor: number;
     deuda: number
 }

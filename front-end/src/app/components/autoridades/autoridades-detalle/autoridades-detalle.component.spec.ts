@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DefinirCargosComponent } from './definir-cargos.component';
+import { AutoridadesDetalleComponent } from './autoridades-detalle.component';
 
-describe('DefinirCargosComponent', () => {
-  let component: DefinirCargosComponent;
-  let fixture: ComponentFixture<DefinirCargosComponent>;
+describe('AutoridadesDetalleComponent', () => {
+  let component: AutoridadesDetalleComponent;
+  let fixture: ComponentFixture<AutoridadesDetalleComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DefinirCargosComponent ]
+      declarations: [ AutoridadesDetalleComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DefinirCargosComponent);
+    fixture = TestBed.createComponent(AutoridadesDetalleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

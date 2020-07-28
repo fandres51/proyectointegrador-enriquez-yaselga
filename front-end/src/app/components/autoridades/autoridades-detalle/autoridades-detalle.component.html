@@ -1,0 +1,68 @@
+<div class="detalle-de-autoridades">
+    <div *ngIf="autoridadMostrada != undefined">
+        
+        <div class="data">
+            <div class="data-detalle" fxLayout="row" fxLayoutAlign="start start">
+                <button mat-button (click)="regresar()" fxLayoutAlign="center center" fxHide.gt-sm >
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_back</mat-icon>
+                </button>
+                <h1>
+                    {{autoridadMostrada.Nombre}}
+                </h1>
+            </div>
+        </div>
+
+        <div fxLayout="row" fxLayout.lt-lg="column">
+            <div fxLayout="column">
+                <div fxLayout="row" fxLayout.lt-xl="column">
+                    <div class="data">
+                        <h3>No. Único:</h3>
+                        <div class="data-detalle">{{autoridadMostrada.NoUnico}}</div>
+                    </div>
+
+                    <div class="data">
+                        <h3>Cédula:</h3>
+                        <div class="data-detalle">{{autoridadMostrada.Cedula}}</div>
+                    </div>
+                </div>
+
+                <div class="data">
+                    <h3>Cargo:</h3>
+                    <div class="data-detalle">{{autoridadMostrada.Cargo}}</div>
+                </div>
+
+                <div class="data">
+                    <h2>Datos de Contacto: </h2>
+                </div>
+
+                <div class="data">
+                    <h3>Teléfono:</h3>
+                    <div class="data-detalle">{{autoridadMostrada.Telefono}}</div>
+                </div>
+
+                <div class="data">
+                    <h3>Correo Personal:</h3>
+                    <div class="data-detalle">{{autoridadMostrada.CorreoPersonal}}</div>
+                </div>
+
+                <div class="data">
+                    <h3>Correo Institucional:</h3>
+                    <div class="data-detalle">{{autoridadMostrada.CorreoInstitucional}}</div>
+                </div>
+
+
+            </div>
+
+            <div class="line" fxHide.lt-lg></div>
+
+            <div class="calendario">
+                <div class="data">
+                    <h2>Horario: </h2>
+                </div>
+                <div>
+                    <!-- <app-horario-autoridad></app-horario-autoridad> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

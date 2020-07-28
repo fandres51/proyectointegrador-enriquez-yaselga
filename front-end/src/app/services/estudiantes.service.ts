@@ -12,7 +12,7 @@ import * as _ from 'lodash';
 @Injectable({
   providedIn: 'root'
 })
-export class EstudiantesService implements OnInit {
+export class EstudiantesService {
 
   private aporteActual;
   private periodoActual;
@@ -21,14 +21,10 @@ export class EstudiantesService implements OnInit {
     private asociacionService: AsociacionService,
     private afs: AngularFirestore
   ) {
-  }
-
-  ngOnInit(): void {
-    this.asociacionService.getAsociacion().subscribe(
+    asociacionService.getAsociacion().subscribe(
       asociacion => {
         this.aporteActual = asociacion.AporteActual;
         this.periodoActual = asociacion.PeriodoActual;
-        console.log(this.periodoActual);
       }
     )
   }
@@ -58,6 +54,13 @@ export class EstudiantesService implements OnInit {
 
   getEstudiante(noUnico: string): Observable<Estudiante> {
     return this.afs.doc<Estudiante>(`Asociacion/AEIS/Persona/${noUnico}`).valueChanges();
+  }
+
+  existeEstudiante(noUnico: string): boolean {
+    if(this.afs.doc<Estudiante>(`Asociacion/AEIS/Persona/${noUnico}`).valueChanges())
+      return true;
+    else
+      return false;
   }
 
   crearEstudiante(estudiante: Estudiante) {
@@ -121,9 +124,7 @@ export class EstudiantesService implements OnInit {
     };
 
     estudiante.EstadoAfiliacion = 'Aportante';
-    console.log('hola1');
     this.afs.doc<Estudiante>(`Asociacion/AEIS/Persona/${estudiante.NoUnico}`).update(estudiante);
-    console.log('hola2');
 
     this.afs.collection(`Asociacion/AEIS/Persona/${estudiante.NoUnico}/Aporte`).doc<Aporte>(estudiante.NoUnico + nuevoAporte.periodo).set(nuevoAporte);
   }

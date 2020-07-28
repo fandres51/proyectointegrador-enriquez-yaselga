@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CambiarAsociacionComponent } from './cambiar-asociacion.component';
+import { AjustesMainComponent } from './ajustes-main.component';
 
-describe('CambiarAsociacionComponent', () => {
-  let component: CambiarAsociacionComponent;
-  let fixture: ComponentFixture<CambiarAsociacionComponent>;
+describe('AjustesMainComponent', () => {
+  let component: AjustesMainComponent;
+  let fixture: ComponentFixture<AjustesMainComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CambiarAsociacionComponent ]
+      declarations: [ AjustesMainComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CambiarAsociacionComponent);
+    fixture = TestBed.createComponent(AjustesMainComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

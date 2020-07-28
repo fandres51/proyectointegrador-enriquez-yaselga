@@ -15,4 +15,9 @@ export class AsociacionService {
   getAsociacion(): Observable<Asociacion> {
      return this.afs.doc<Asociacion>('Asociacion/AEIS').valueChanges();
   }
+
+  updateAsociacion(asociacion) {
+    const asociacionDoc: AngularFirestoreDocument<Asociacion> = this.afs.collection('Asociacion').doc('AEIS');
+    asociacionDoc.update(asociacion);
+  }
 }
