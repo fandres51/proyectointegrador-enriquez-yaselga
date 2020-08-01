@@ -9,6 +9,7 @@ import { AutoridadesMainComponent } from './components/autoridades/autoridades-m
 import { AjustesMainComponent } from './components/ajustes/ajustes-main/ajustes-main.component';
 import { AjustesNuevoSemestreComponent } from './components/ajustes/ajustes-nuevo-semestre/ajustes-nuevo-semestre.component';
 import { AjustesCambiarAsociacionComponent } from './components/ajustes/ajustes-cambiar-asociacion/ajustes-cambiar-asociacion.component';
+import { EventosMainComponent } from './components/eventos/eventos-main/eventos-main.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'estudiantes/actualizar/:id', component: EstudiantesActualizacionComponent },
   { path: 'estudiantes/afiliar/:id', component: EstudiantesAfiliacionComponent },
   { path: 'autoridades', component: AutoridadesMainComponent },
+  { path: 'eventos', component: EventosMainComponent },
   { path: 'ajustes', component: AjustesMainComponent, children: [
     { path: 'nuevo-semestre', component: AjustesNuevoSemestreComponent },
     { path: 'cambiar-asociacion', component: AjustesCambiarAsociacionComponent }

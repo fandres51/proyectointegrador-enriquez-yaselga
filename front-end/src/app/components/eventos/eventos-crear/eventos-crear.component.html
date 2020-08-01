@@ -1,0 +1,27 @@
+<div>
+    <form fxLayout="column" (ngSubmit) = "crearEvento()"> 
+        <div fxLayout="column">
+            <label for="title">Titulo</label>
+            <input id="title" name="title" type="text" [(ngModel)]="nuevoEvento.title">
+        </div>
+        <div fxLayout="column">
+            <label for="start">Fecha de Inicio</label>
+            <input id="start" name="start" type="date" [(ngModel)]="nuevoEvento.start">
+        </div>
+        <div fxLayout="column">
+            <label for="end">Fecha de Inicio</label>
+            <input id="end" name="end" type="date" [(ngModel)]="nuevoEvento.end">
+        </div>
+        <div fxLayout="column">
+            <label for="allDay">Todo el día</label>
+            <input id="allDay" name="allDay" type="checkbox" [(ngModel)]="nuevoEvento.allDay">
+        </div>
+        <div fxLayout="column">
+            <label for="backgroundColor">Color de fondo</label>
+            <input id="backgroundColor" name="backgroundColor" type="color" [(ngModel)]="nuevoEvento.backgroundColor">
+        </div>
+        <button>
+            Crear Evento
+        </button>
+    </form>
+</div>
