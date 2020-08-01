@@ -8,13 +8,12 @@ import { EventosService } from 'src/app/services/eventos.service';
   templateUrl: './eventos-main.component.html',
   styleUrls: ['./eventos-main.component.scss']
 })
-export class EventosMainComponent implements OnInit {
 
-  private eventos: Evento[] = []
+export class EventosMainComponent implements OnInit {
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
-    events: this.eventos,
+    events: [],
   };
 
   constructor(
@@ -24,7 +23,15 @@ export class EventosMainComponent implements OnInit {
   ngOnInit() {
     this.eventosService.getEventos().subscribe(
       eventos => {
-        this.calendarOptions.events = eventos;
+        this.calendarOptions.events = eventos.map( (n: Evento) => {
+          return {
+            allDay: n.allDay,
+            start: n.start,
+            end: n.end,
+            title: n.title,
+            backgroundColor: n.backgroundColor
+          }
+        });
       }
     );
   }

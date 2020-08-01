@@ -14,8 +14,7 @@ export class EventosCrearComponent implements OnInit {
     backgroundColor: "",
     end: "",
     start: "",
-    title: "",
-    id: ""
+    title: ""
   };
 
   constructor(
@@ -25,7 +24,6 @@ export class EventosCrearComponent implements OnInit {
   ngOnInit() { }
 
   crearEvento() {
-    this.nuevoEvento.id = this.nuevoEvento.start + this.nuevoEvento.title;
     // console.log(this.nuevoEvento);
     this.eventoService.addEvento(this.nuevoEvento);
   }

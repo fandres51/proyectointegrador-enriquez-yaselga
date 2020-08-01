@@ -20,16 +20,10 @@ export class EventosService {
   }
 
   getEventos(): Observable<Evento[]> {
-    return this.getCollection().snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as Evento;
-        data.id = a.payload.doc.id;
-        return data;
-      }))
-    )
+    return this.getCollection().valueChanges();
   }
 
   addEvento(nuevoEvento: Evento) {
-    this.getCollection().doc(nuevoEvento.id).set(nuevoEvento)
+    this.getCollection().doc(nuevoEvento.start).set(nuevoEvento);
   }
 }
