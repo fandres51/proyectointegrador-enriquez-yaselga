@@ -26,6 +26,7 @@ import { RecursosService } from './services/recursos.service';
 import { EstudiantesService } from './services/estudiantes.service';
 import { RecursosComponent } from './components/recursos/recursos.component';
 import { RecursoComponent } from './components/recursos/recurso/recurso.component';
+import { DetalleRecursoComponent } from './components/recursos/detalle-recurso/detalle-recurso.component';
 
 @NgModule({
   declarations: [
@@ -42,9 +43,10 @@ import { RecursoComponent } from './components/recursos/recurso/recurso.componen
     ListarEstudiantesComponent,
     FiltrosEstudiantesComponent,
     FormularioActualizacionComponent,
-    FormularioAfiliacionComponent
+    FormularioAfiliacionComponent,
     RecursosComponent,
     RecursoComponent,
+    DetalleRecursoComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,6 @@ import { RecursoComponent } from './components/recursos/recurso/recurso.componen
     AngularFirestoreModule,
     FormsModule,
     MaterialComponentsModule
-
   ],
   providers: [
     RecursosService,

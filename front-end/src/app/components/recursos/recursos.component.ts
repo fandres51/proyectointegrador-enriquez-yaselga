@@ -17,6 +17,7 @@ export class RecursosComponent implements OnInit {
   ngOnInit(): void {
     this.RecursosServicie.readRecurso().subscribe(recurso =>{
         this.recursos = recurso;
+        this.recursosMostrados = recurso;
         console.log(this.recursos);
       }
     )

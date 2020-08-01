@@ -1,12 +1,11 @@
-<div *ngFor="let recurso of recursos" class="card" style="width: 18rem;">
-  <img src="" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Nombre: {{recurso.Nombre}}</h5>
-    <p class="card-text">{{recurso.Descripcion}}</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+<div fxLayout="row">
+  <div fxFlex="20" fxLayout="column">
+    <!--<app-filtros-estudiantes (eventEmitter)="estudiantesMostrados=$event" [estudiantes]="estudiantes"></app-filtros-estudiantes>-->
   </div>
-</div>
+  <div class="line"></div>
+  
+  
 
-<div class="alert alert-primary" role="alert" *ngFor="let recurso of recursos">
-  {{recurso.name}} - {{recurso.id}}
+  
+
 </div>
