@@ -14,7 +14,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { DialogComponent } from './components/estudiantes/dialog/dialog.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { ListaDeAutoridadesComponent } from './components/autoridades/lista-de-autoridades/lista-de-autoridades.component';
 import { DetalleDeAutoridadesComponent } from './components/autoridades/detalle-de-autoridades/detalle-de-autoridades.component';
 import { MaterialComponentsModule } from './material';
@@ -27,6 +27,26 @@ import { EstudiantesService } from './services/estudiantes.service';
 import { RecursosComponent } from './components/recursos/recursos.component';
 import { RecursoComponent } from './components/recursos/recurso/recurso.component';
 import { DetalleRecursoComponent } from './components/recursos/detalle-recurso/detalle-recurso.component';
+import { FinancieroComponent } from './components/financiero/financiero.component';
+import { FiltrosFinancieroComponent } from './components/financiero/filtros-financiero/filtros-financiero.component';
+import { ListarFinancieroComponent } from './components/financiero/listar-financiero/listar-financiero.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import * as moment from 'moment';
+import { HorarioAutoridadComponent } from './components/autoridades/horario-autoridad/horario-autoridad.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { AjustesComponent } from './components/ajustes/ajustes.component';
+import { NuevaTransaccionComponent } from './components/financiero/nueva-transaccion/nueva-transaccion.component';
+import { DefinirCargosComponent } from './components/ajustes/definir-cargos/definir-cargos.component';
+import { CambiarAsociacionComponent } from './components/ajustes/cambiar-asociacion/cambiar-asociacion.component';
+import { CargaMasivaComponent } from './components/estudiantes/carga-masiva/carga-masiva.component';
+import { DropZoneDirective } from './dropzone.directive';
+import { DialogCargaMasivaComponent } from './components/estudiantes/dialog-carga-masiva/dialog-carga-masiva.component';
+import { DialogCargaMasivaFinancieroComponent } from './components/financiero/dialog-carga-masiva-financiero/dialog-carga-masiva-financiero.component';
+import { CargaMasivaFinancieroComponent } from './components/financiero/carga-masiva-financiero/carga-masiva-financiero.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +67,19 @@ import { DetalleRecursoComponent } from './components/recursos/detalle-recurso/d
     RecursosComponent,
     RecursoComponent,
     DetalleRecursoComponent,
+    FinancieroComponent,
+    FiltrosFinancieroComponent,
+    ListarFinancieroComponent,
+    HorarioAutoridadComponent,
+    AjustesComponent,
+    NuevaTransaccionComponent,
+    DefinirCargosComponent,
+    CambiarAsociacionComponent,
+    CargaMasivaComponent,
+    DropZoneDirective,
+    DialogCargaMasivaComponent,
+    DialogCargaMasivaFinancieroComponent,
+    CargaMasivaFinancieroComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +89,14 @@ import { DetalleRecursoComponent } from './components/recursos/detalle-recurso/d
     AngularFireModule.initializeApp(environment.firabase),
     AngularFirestoreModule,
     FormsModule,
-    MaterialComponentsModule
+    MaterialComponentsModule,
+    ReactiveFormsModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    NgbModule,
+    CommonModule,
+    FormsModule,
+    NgbModalModule,
+    FlatpickrModule.forRoot(),
   ],
   providers: [
     RecursosService,

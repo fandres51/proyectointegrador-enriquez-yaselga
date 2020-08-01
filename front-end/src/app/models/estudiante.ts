@@ -3,6 +3,7 @@ export interface Estudiante {
     Apellido:string;
     Cargo?:string;
     Carrera?:string;
+    Cedula?:string;
     CorreoInstitucional?:string;
     CorreoPersonal?:string;
     Descripcion?:string;
@@ -11,7 +12,7 @@ export interface Estudiante {
     EsAutoridad:boolean;
     EsEstudiante:boolean;
     EstadoAfiliacion?:boolean;
-    FechaNacimiento?:Date;
+    FechaNacimiento?: firebase.firestore.Timestamp | Date;
     Genero?:string;
     NoUnico?:string;
     Nombre:string;

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+// import { AuthService } from './services/auth.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase/app';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'front-end';
+
+  constructor(
+    public auth: AngularFireAuth
+  ) {
+
+  }
+
+  
+
 }

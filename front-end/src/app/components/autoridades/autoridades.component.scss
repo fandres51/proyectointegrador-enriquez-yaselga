@@ -1,4 +1,16 @@
+.block {
+    width: 100%;
+}
 .linea {
-    height: 94vh;
     border-right: 1px solid #606060;
+}
+
+@media (max-width: 960px) {
+    .mostrado {
+        display: auto;
+    }
+
+    .escondido {
+        display: none;
+    }
 }

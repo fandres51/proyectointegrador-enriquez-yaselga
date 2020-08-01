@@ -1,0 +1,15 @@
+<div>
+    <div class="dropzone" appDropZone (dropped)="startUpload($event)" [class.hovering]="isHovering">
+        <p>Arrastra tu archivo CSV aquí</p>
+        <div class="file">
+            <label class="file-label">
+                <input type="file" (change)="startUpload($event.target.files)" style="display: none;" accept=".csv">
+                <span class="file-cta">
+                    <span class="file-icon">
+                    </span>
+                    <span class="file-label">o selecciona tu archivo manualmente...</span>
+                </span>
+            </label>
+        </div>
+    </div>
+</div>

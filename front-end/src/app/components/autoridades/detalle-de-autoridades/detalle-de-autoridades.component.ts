@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Estudiante } from 'src/app/models/estudiante';
 
 @Component({
@@ -8,12 +8,15 @@ import { Estudiante } from 'src/app/models/estudiante';
 })
 export class DetalleDeAutoridadesComponent implements OnInit {
 
-  @Input()
-  public autoridadMostrada: Estudiante;
+  @Input() public autoridadMostrada: Estudiante;
+  @Output() public autoridadSeleccionada = new EventEmitter();
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  devolverAutoridad() {
+    this.autoridadSeleccionada.emit(null);
   }
 
 }

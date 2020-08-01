@@ -1,1 +1,8 @@
-<router-outlet></router-outlet>
+<div>
+    <div *ngIf="auth.user | async as user; else login" >
+        <router-outlet></router-outlet>
+    </div>
+    <ng-template #login>
+        <app-login></app-login>
+    </ng-template>
+</div>

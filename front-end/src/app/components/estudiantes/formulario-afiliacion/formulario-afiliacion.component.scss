@@ -7,11 +7,15 @@
         margin: 25px;
         color: white;
     }
+    .button-white{
+        color: white;
+    }
 }
+
 
 .form{
     width: 100vw;
-    height: 100vh;
+    height: 70vh;
     .form-row{
         width: 60vw;
         .form-item{
@@ -31,6 +35,7 @@
                 border: none;
                 color: white;
                 background-color: #0d288a;
+                margin-top: 50px;
                 
             }
             button:focus{
