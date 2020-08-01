@@ -21,10 +21,12 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { EstudiantesModule } from './components/estudiantes/estudiantes.module';
 import { PageNotFoundComponent } from './components/layouts/page-not-found/page-not-found.component';
-import { AutoridadesModule } from './components/autoridades/autoridades.module';
 import { AjustesModule } from './components/ajustes/ajustes.module';
 import { EventosMainComponent } from './components/eventos/eventos-main/eventos-main.component';
 import { EventosCrearComponent } from './components/eventos/eventos-crear/eventos-crear.component';
+import { AutoridadesDetalleComponent } from './components/autoridades/autoridades-detalle/autoridades-detalle.component';
+import { AutoridadesMainComponent } from './components/autoridades/autoridades-main/autoridades-main.component';
+import { AutoridadesListarComponent } from './components/autoridades/autoridades-listar/autoridades-listar.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -39,7 +41,10 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MainScreenComponent,
     PageNotFoundComponent,
     EventosMainComponent,
-    EventosCrearComponent
+    EventosCrearComponent,
+    AutoridadesDetalleComponent,
+    AutoridadesMainComponent, 
+    AutoridadesListarComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firabase),
@@ -57,7 +62,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FormsModule,
     NgbModalModule,
     EstudiantesModule,
-    AutoridadesModule,
     AjustesModule,
     FullCalendarModule
   ],

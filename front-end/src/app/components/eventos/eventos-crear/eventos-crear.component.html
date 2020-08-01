@@ -1,5 +1,5 @@
 <div>
-    <form fxLayout="column" (ngSubmit) = "crearEvento()"> 
+    <form fxLayout="column" (ngSubmit) = "crearEvento(responsable.value)"> 
         <div fxLayout="column">
             <label for="title">Titulo</label>
             <input id="title" name="title" type="text" [(ngModel)]="nuevoEvento.title">
@@ -20,6 +20,14 @@
             <label for="backgroundColor">Color de fondo</label>
             <input id="backgroundColor" name="backgroundColor" type="color" [(ngModel)]="nuevoEvento.backgroundColor">
         </div>
+
+        <div fxLayout="column">
+            <label for="responsables">Responsables: </label>
+            <select name="responsables" id="responsables" #responsable>
+                <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
+            </select>
+        </div>
+
         <button>
             Crear Evento
         </button>

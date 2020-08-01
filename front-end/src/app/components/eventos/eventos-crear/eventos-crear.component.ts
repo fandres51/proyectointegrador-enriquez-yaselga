@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Evento } from 'src/app/models/evento';
+import { AutoridadesService } from 'src/app/services/autoridades.service';
 import { EventosService } from 'src/app/services/eventos.service';
 
 @Component({
@@ -9,22 +10,39 @@ import { EventosService } from 'src/app/services/eventos.service';
 })
 export class EventosCrearComponent implements OnInit {
 
+  public autoridades: string[] = [];
+
   public nuevoEvento: Evento = {
-    allDay: false, 
+    allDay: false,
     backgroundColor: "",
     end: "",
     start: "",
-    title: ""
+    title: "",
+    responsables: []
   };
 
   constructor(
-    private eventoService: EventosService
-  ) { }
+    private eventoService: EventosService,
+    private autoridadService: AutoridadesService
+  ) {
+    this.autoridadService.getConsejoActual()
+  }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.autoridadService.getConsejoActual().subscribe(
+      consejo => {
+        this.autoridadService.getAutoridades(consejo[0].nombre).subscribe(
+          autoridades => {
+            this.autoridades = autoridades.map( n => n.Nombre );
+          }
+        )
+      }
+    )
+  }
 
-  crearEvento() {
-    // console.log(this.nuevoEvento);
+  crearEvento(responsable: string) {
+    this.nuevoEvento.responsables[0] = responsable;
+    console.log(this.nuevoEvento);
     this.eventoService.addEvento(this.nuevoEvento);
   }
 

@@ -6,6 +6,6 @@
     <div class="linea" fxHide.lt-md></div>
 
     <div class="block" [ngClass]="{'mostrado': autoridadMostrada != null, 'escondido': autoridadMostrada == null}">
-        <app-autoridades-detalle [autoridadMostrada]="autoridadMostrada" (enviarNull)="autoridadMostrada=$event"></app-autoridades-detalle>
+        <app-autoridades-detalle [_autoridadMostrada]="autoridadMostrada" (enviarNull)="autoridadMostrada=$event"></app-autoridades-detalle>
     </div>
 </div>
