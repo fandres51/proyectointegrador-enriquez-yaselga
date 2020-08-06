@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Contador } from '../models/contador';
 import { Evento } from '../models/evento';
+import { AsociacionService } from './asociacion.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,8 @@ import { Evento } from '../models/evento';
 export class EventosService {
 
   constructor(
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private asociacionService: AsociacionService
   ) { }
 
 
@@ -24,6 +27,11 @@ export class EventosService {
   }
 
   addEvento(nuevoEvento: Evento) {
-    this.getCollection().doc(nuevoEvento.start).set(nuevoEvento);
+    this.asociacionService.getContador('Evento').subscribe(
+      (contador: Contador) => {
+        this.getCollection().doc('EVN'+contador.contador).set(nuevoEvento);
+        // this.asociacionService.increaseContador('Evento', contador.contador);
+      }
+    )
   }
 }

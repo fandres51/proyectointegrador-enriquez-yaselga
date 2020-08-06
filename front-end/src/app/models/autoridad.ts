@@ -1,5 +1,4 @@
 export interface Autoridad {
-    id: string;
     NoUnico: string;
     CorreoInstitucional: string;
     NivelDeAcceso: 0 | 1 | 2 | 3 | 4;

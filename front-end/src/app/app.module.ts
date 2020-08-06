@@ -27,6 +27,7 @@ import { EventosCrearComponent } from './components/eventos/eventos-crear/evento
 import { AutoridadesDetalleComponent } from './components/autoridades/autoridades-detalle/autoridades-detalle.component';
 import { AutoridadesMainComponent } from './components/autoridades/autoridades-main/autoridades-main.component';
 import { AutoridadesListarComponent } from './components/autoridades/autoridades-listar/autoridades-listar.component';
+import { EventosInfoComponent } from './components/eventos/eventos-info/eventos-info.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -44,7 +45,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     EventosCrearComponent,
     AutoridadesDetalleComponent,
     AutoridadesMainComponent, 
-    AutoridadesListarComponent
+    AutoridadesListarComponent, EventosInfoComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firabase),

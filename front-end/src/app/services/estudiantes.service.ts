@@ -18,7 +18,7 @@ export class EstudiantesService {
   private periodoActual;
 
   constructor(
-    private asociacionService: AsociacionService,
+    asociacionService: AsociacionService,
     private afs: AngularFirestore
   ) {
     asociacionService.getAsociacion().subscribe(
@@ -29,141 +29,217 @@ export class EstudiantesService {
     )
   }
 
-  getCollection(): AngularFirestoreCollection<Estudiante> {
+  private getCollection(): AngularFirestoreCollection<Estudiante> {
     return this.afs.collection<Estudiante>('Asociacion/AEIS/Persona');
   }
 
   getEstudiantes(): Observable<Estudiante[]> {
     return this.getCollection().snapshotChanges().pipe(
       map(actions => actions.map(a => {
-
         const data = a.payload.doc.data() as Estudiante;
 
         Object.keys(data).filter(
           key => data[key] instanceof firebase.firestore.Timestamp
         ).forEach(
           key => data[key] = data[key].toDate()
-        ) //convierte todos los tipos timestamp a tipo date
+        ) //convierte todos los objetos Timestamp a Date
 
         data.NoUnico = a.payload.doc.id;
         return data;
-
       }))
     )
   }
 
   getEstudiante(noUnico: string): Observable<Estudiante> {
-    return this.afs.doc<Estudiante>(`Asociacion/AEIS/Persona/${noUnico}`).valueChanges();
-  }
+    return this.afs.doc<Estudiante>(`Asociacion/AEIS/Persona/${noUnico}`).snapshotChanges().pipe(
+      map(a => {
+        const data = a.payload.data() as Estudiante;
 
-  existeEstudiante(noUnico: string): boolean {
-    if(this.afs.doc<Estudiante>(`Asociacion/AEIS/Persona/${noUnico}`).valueChanges())
-      return true;
-    else
-      return false;
+        Object.keys(data).filter(
+          key => data[key] instanceof firebase.firestore.Timestamp
+        ).forEach(
+          key => data[key] = data[key].toDate()
+        ) //convierte todos los objetos Timestamp a Date
+
+        return data;
+      })
+    );
   }
 
   crearEstudiante(estudiante: Estudiante) {
-    this.getCollection().add(estudiante);
+    this.getCollection().doc(estudiante.NoUnico).set(estudiante);
+  }
+
+  existeEstudiante(noUnico: string): Promise<boolean> {
+    return new Promise(
+      (res) => {
+        return this.afs.collection<Estudiante>('Asociacion/AEIS/Persona', ref => ref.where('NoUnico', '==', noUnico)).valueChanges().subscribe(
+          estudiantes => {
+            if (estudiantes.length)
+              res(true);
+            else
+              res(false)
+          }
+        );
+      }
+    )
   }
 
   updateEstudiante(estudiante: Estudiante) {
-    if (estudiante.FechaNacimiento instanceof Date) {
-      estudiante.FechaNacimiento = firebase.firestore.Timestamp.fromDate(estudiante.FechaNacimiento);
-    }
     const estudianteDoc: AngularFirestoreDocument<Estudiante> = this.afs.collection('Asociacion/AEIS/Persona').doc(estudiante.NoUnico);
     estudianteDoc.update(estudiante);
   }
 
-  darDeBajaEstudiante(estudiante: Estudiante) {
-    const estudianteDoc: AngularFirestoreDocument<Estudiante> = this.afs.collection('Asociacion/AEIS/Persona').doc(estudiante.NoUnico);
-    estudiante.SemestreReferencial = 'Retirado';
-    estudiante.EstadoAfiliacion = 'No afiliado';
-    estudianteDoc.update(estudiante);
+  darDeBajaEstudiante(noUnico: string) {
+    const estudianteDoc: AngularFirestoreDocument<Estudiante> = this.getCollection().doc(noUnico);
+    estudianteDoc.update({
+      SemestreReferencial: 'Retirado',
+      EstadoAfiliacion: 'No afiliado'
+    });
   }
 
-  graduarEstudiante(estudiante: Estudiante) {
-    const estudianteDoc: AngularFirestoreDocument<Estudiante> = this.afs.collection('Asociacion/AEIS/Persona').doc(estudiante.NoUnico);
-    estudiante.SemestreReferencial = 'Graduado';
-    estudiante.EstadoAfiliacion = 'No afiliado';
-    estudianteDoc.update(estudiante);
+  graduarEstudiante(noUnico: string) {
+    const estudianteDoc: AngularFirestoreDocument<Estudiante> = this.getCollection().doc(noUnico);
+    estudianteDoc.update({
+      SemestreReferencial: 'Graduado',
+      EstadoAfiliacion: 'No afiliado'
+    });
   }
 
-  getAportes(estudianteId: string): Observable<Aporte[]> {
-    return this.afs.collection<Aporte>(`Asociacion/AEIS/Persona/${estudianteId}/Aportes`).valueChanges();
+  private getAportesCollection(noUnico: string): AngularFirestoreCollection<Aporte> {
+    return this.afs.collection<Aporte>(`Asociacion/AEIS/Persona/${noUnico}/Aporte`);
   }
 
-  getAporteActual(estudiante: Estudiante): Observable<Aporte> {
-    return this.afs.doc<Aporte>(`Asociacion/AEIS/Persona/${estudiante.NoUnico}/Aporte/${estudiante.NoUnico + this.periodoActual}`).valueChanges();
+  afiliarEstudiante(noUnico: string) {
+    this.existeEstudiante(noUnico).then(
+      existe => {
+        if (existe) {
+          let nuevoAporte: Aporte = {
+            deuda: 0,
+            periodo: this.periodoActual,
+            valor: this.aporteActual
+          };
+
+          this.getCollection().doc(noUnico).update({ EstadoAfiliacion: 'Aportante' });
+          this.getAportesCollection(noUnico).doc<Aporte>(nuevoAporte.periodo).set(nuevoAporte);
+        } else {
+          console.error('Estudiante no existe');
+        }
+      }
+    )
   }
 
-  crearAportesNuevoSemestre(estudiantes: Estudiante[]) {
-
-    const nuevoAporte: Aporte = {
-      deuda: this.aporteActual,
-      periodo: this.periodoActual,
-      valor: 0
-    };
-
-    const estudiantesAfiliados: Estudiante[] = estudiantes.filter(estudiante => estudiante.EstadoAfiliacion);
-
-    estudiantesAfiliados.forEach(estudianteAfiliado => {
-
-      estudianteAfiliado.EstadoAfiliacion = 'No aportante';
-      this.afs.collection<Estudiante>('Asociacion/AEIS/Persona').doc(estudianteAfiliado.NoUnico).update(estudianteAfiliado);
-      this.afs.collection(`Asociacion/AEIS/Persona/${estudianteAfiliado.NoUnico}/Aportes`).doc<Aporte>(estudianteAfiliado.NoUnico + nuevoAporte.periodo).set(nuevoAporte);
-    })
+  getAportes(noUnico: string): Observable<Aporte[]> {
+    return this.getAportesCollection(noUnico).valueChanges();
   }
 
-  afiliarEstudiante(estudiante: Estudiante, valor: number = this.aporteActual) {
-
-    let nuevoAporte: Aporte = {
-      deuda: 0,
-      periodo: '2020B',
-      valor: 30
-    };
-
-    estudiante.EstadoAfiliacion = 'Aportante';
-    this.afs.doc<Estudiante>(`Asociacion/AEIS/Persona/${estudiante.NoUnico}`).update(estudiante);
-
-    this.afs.collection(`Asociacion/AEIS/Persona/${estudiante.NoUnico}/Aporte`).doc<Aporte>(estudiante.NoUnico + nuevoAporte.periodo).set(nuevoAporte);
+  getAporteActual(noUnico: string): Observable<Aporte> {
+    return this.getAportesCollection(noUnico).doc<Aporte>(this.periodoActual).valueChanges();
   }
 
-  desafiliarEstudiante(estudiante: Estudiante) {
-    estudiante.EstadoAfiliacion = 'No afiliado';
-    this.afs.doc<Estudiante>(`Asociacion/AEIS/Persona/${estudiante.NoUnico}`).update(estudiante);
+  crearAportesNuevoSemestre() {
+    const estudiantesAfiliadosCollection = this.afs.collection(
+      'Asociacion/AEIS/Persona',
+      ref => ref.where('EstadoAfiliacion', 'in', ['Aportante', 'No aportante'])
+    ).valueChanges(); //crea una variable con la coleccion de estudiantes afiliados
+
+    estudiantesAfiliadosCollection.subscribe(
+      estudiantesAfiliados => {
+        estudiantesAfiliados.forEach((estudiante: Estudiante) => {
+          this.getAportesCollection(estudiante.NoUnico).doc<Aporte>(this.periodoActual).set({
+            deuda: this.aporteActual,
+            periodo: this.periodoActual,
+            valor: 0
+          })
+          this.getCollection().doc(estudiante.NoUnico).update({ EstadoAfiliacion: 'No aportante' })
+        })
+      }
+    ) //cambia el estado de cada estudiante a 'No aportante' y crea un Aporte vacío
+  }
+
+
+
+  desafiliarEstudiante(noUnico: string) {
+    this.afs.doc<Estudiante>(`Asociacion/AEIS/Persona/${noUnico}`).update({ EstadoAfiliacion: 'No afiliado' });
   }
 
   cargaMasivaEstudiantes(file) {
-    Papa.parse(file, {
-      complete: res => this.firethisEstudiante(res['data']),
-      header: true
-    });
+    return new Promise(
+      (resF) => {
+        Papa.parse(file, {
+          complete: res => {
+            this.firethisEstudiante(res['data']).then(
+              estudiantesNoIngresados => resF(estudiantesNoIngresados)
+            ).catch (
+              e => console.error('Archivo no admitido')
+            )
+          },
+          header: true
+        });
+      }
+    )
   }
 
   private firethisEstudiante(estudiantes: Estudiante[]) {
+    const estudiantesNoIngresados: string[] = [];
     return new Promise((resolve) => {
       estudiantes.forEach((estudiante) => {
-        this.afs.collection('Asociacion/AEIS/Persona').doc<Estudiante>(estudiante.NoUnico).set(estudiante);
+        estudiante.FechaNacimiento = new Date(estudiante.FechaNacimiento);
+        estudiante.Apellido = estudiante.Apellido.toUpperCase();
+        estudiante.Nombre = estudiante.Nombre.toUpperCase();
+        if (this.comprobarEstructura(estudiante)) {
+          this.getCollection().doc(estudiante.NoUnico).set(estudiante);
+        } else {
+          estudiantesNoIngresados.push(estudiante.NoUnico);
+        }
       })
-      resolve();
+      resolve(estudiantesNoIngresados);
     })
   }
 
-  cargaMasivaEstudiantesAportantes(file) {
-    Papa.parse(file, {
-      complete: res => this.firethisEstudianteAportante(res['data']),
-      header: true
-    });
+  private comprobarEstructura(estudiante: Estudiante): boolean {
+    console.log(estudiante);
+    let aprueba: boolean = true;
+    if (
+      !estudiante.FechaNacimiento &&
+      !(estudiante.FechaNacimiento instanceof Date)
+    ) {
+      console.log('No aprueba por fecha');
+      aprueba = false;
+    }
+    if (
+      estudiante.Carrera !== 'Sistemas' &&
+      estudiante.Carrera !== 'Computacion' &&
+      estudiante.Carrera !== 'Software'
+    ) {
+      console.log('No aprueba por carrera');
+      aprueba = false;
+    }
+    if (
+      estudiante.EstadoAfiliacion !== 'Aportante' &&
+      estudiante.EstadoAfiliacion !== 'No aportante' &&
+      estudiante.EstadoAfiliacion !== 'No afiliado'
+    ) {
+      console.log('No aprueba por aporte');
+      aprueba = false;
+    }
+    if (
+      estudiante.SemestreReferencial !== '1' &&
+      estudiante.SemestreReferencial !== '2' &&
+      estudiante.SemestreReferencial !== '3' &&
+      estudiante.SemestreReferencial !== '4' &&
+      estudiante.SemestreReferencial !== '5' &&
+      estudiante.SemestreReferencial !== '6' &&
+      estudiante.SemestreReferencial !== '7' &&
+      estudiante.SemestreReferencial !== '8' &&
+      estudiante.SemestreReferencial !== '9' &&
+      estudiante.SemestreReferencial !== '10' &&
+      estudiante.SemestreReferencial !== 'Egresado'
+    ) {
+      console.log('No aprueba por semestre');
+      aprueba = false;
+    }
+    console.log(aprueba);
+    return aprueba
   }
-
-  private firethisEstudianteAportante(estudiantes: Estudiante[]) {
-    estudiantes.forEach((estudiante) => {
-      this.afs.collection('Asociacion/AEIS/Persona').doc<Estudiante>(estudiante.NoUnico).set(estudiante).catch( e => {
-        console.error('\nNo se pudo cargar el siguiente estudiante: ', estudiante.Apellido, estudiante.Nombre, '\nError: ', e, '\n');
-      });
-    })
-  }
-
-  //TODO poner valores por defecto en el momento de hacer carga masiva para no dañar los filtros
 }

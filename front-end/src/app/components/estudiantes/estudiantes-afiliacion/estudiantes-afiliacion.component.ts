@@ -36,8 +36,8 @@ export class EstudiantesAfiliacionComponent implements OnInit {
   }
 
   afiliarEstudiante() {
-    this.estudiantesService.afiliarEstudiante( this.estudiante )
-    // this.transaccionService.addTransaccion()
-    this.router.navigateByUrl('/estudiantes');
+    // this.estudiantesService.afiliarEstudiante( this.estudiante )
+    // // this.transaccionService.addTransaccion()
+    // this.router.navigateByUrl('/estudiantes');
   }
 }

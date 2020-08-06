@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { Evento } from 'src/app/models/evento';
 import { EventosService } from 'src/app/services/eventos.service';
+import { EventosInfoComponent } from '../eventos-info/eventos-info.component';
 
 @Component({
   selector: 'app-eventos-main',
@@ -14,9 +17,12 @@ export class EventosMainComponent implements OnInit {
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     events: [],
+    eventClick: this.openDialog.bind(this)
   };
 
   constructor(
+    public router: Router,
+    public dialog: MatDialog,
     private eventosService: EventosService
   ) { }
 
@@ -35,4 +41,9 @@ export class EventosMainComponent implements OnInit {
       }
     );
   }
+
+  public openDialog(event) {
+    console.log(event.event.title);
+    this.router.navigate(['/eventos/info', event.event.title]);
+  } 
 }

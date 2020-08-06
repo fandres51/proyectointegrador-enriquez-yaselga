@@ -1,5 +1,5 @@
-import { Injectable, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Injectable } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Autoridad } from '../models/autoridad';
@@ -12,7 +12,7 @@ import { EstudiantesService } from './estudiantes.service';
 })
 export class AutoridadesService {
 
-  private asociacionActual = 'AEIS2019';
+  private asociacionActual;
 
   constructor(
     private afs: AngularFirestore,
@@ -26,67 +26,47 @@ export class AutoridadesService {
     )
   }
 
-  getConsejoActual(): Observable<Consejo[]> {
-    return this.afs.collection<Consejo>('Asociacion/AEIS/Consejo', ref => ref.where('Vigencia','==',true)).snapshotChanges().pipe(
-      map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as Consejo;
-        data.nombre = a.payload.doc.id;
-        return data;
-      }))
-    )
+  // private getConsejos() {
+  //   return this.afs.collection<Autoridad>('Asociacion/AEIS/Consejo');
+  // }
+
+  private getAutoridadesActualesCollection() {
+    return this.afs.collection<Autoridad>(`Asociacion/AEIS/Consejo/${this.asociacionActual}/Autoridad`);
+  }
+  
+  getAutoridadesActuales(): Observable<Autoridad[]> {
+    return this.getAutoridadesActualesCollection().valueChanges();
   } 
   
-  getAutoridades(consejo:string): Observable<Autoridad[]> {
-    return this.afs.collection<Autoridad>(`Asociacion/AEIS/Consejo/${consejo}/Autoridad`).valueChanges();
+  getAutoridades(anio:string): Observable<Autoridad[]> {
+    return this.afs.collection<Autoridad>(`Asociacion/AEIS/Consejo/${'AEIS'+anio}/Autoridad`).valueChanges();
   }
 
-  private crearAutoridad(autoridad: Autoridad) {
-
-    //TODO comprobar si estudiante existe
-
-    this.estudianteService.getEstudiante(autoridad.NoUnico).subscribe(
-      estudiante => {
-        autoridad.Nombre = estudiante.Nombre.toLocaleUpperCase() + ' ' + estudiante.Apellido.toLocaleUpperCase();
-        autoridad.Cedula = estudiante.Cedula;
-      }
-    )
-
-    const autoridadesCollection: AngularFirestoreCollection = this.afs.collection(`Asociacion/AEIS/Consejo/${this.asociacionActual}/Autoridad`);
-    autoridadesCollection.add(autoridad);
+  crearAutoridad(autoridad: Autoridad) {
+    if(this.estudianteService.existeEstudiante(autoridad.NoUnico)) {
+      console.log(autoridad);
+      this.getAutoridadesActualesCollection().doc(autoridad.NoUnico).set(autoridad);
+    } else {
+      console.log('Estudainte no existe: ', autoridad.NoUnico);
+    }
   }
 
-  cambiarAsociacion(anio: string, autoridades: Autoridad[]): void {
+  cambiarAsociacion(autoridades: Autoridad[]): void {
 
-    this.afs.collection(`Asociacion/AEIS/Consejo`).doc(this.asociacionActual).update({Vigencia: false})
+    const anioActual: string = new Date().getFullYear().toString();
 
     const nuevoConsejo: Consejo = {
-      Vigencia: true,
-      nombre: 'AEIS' + anio,
-      AnioDePosecion: anio
+      nombre: 'AEIS' + anioActual,
+      AnioDePosecion: anioActual
     }
 
     this.afs.collection('Asociacion/AEIS/Consejo').doc(nuevoConsejo.nombre).set(nuevoConsejo);
-
-    this.asociacionService.updateAsociacion({
-      AsociacionActual: nuevoConsejo.nombre
-    })
+    this.asociacionService.updateAsociacion({ AsociacionActual: nuevoConsejo.nombre })
 
     autoridades.forEach(autoridad => {
       this.crearAutoridad(autoridad)
     })
-
   }
-
-  cambiarAutoridad(cargo: string, noUnico: string): void {
-    //comporbar que num unico sea de un estudiante
-
-  }
-
-
-
-  eliminarAutoridad(cargo: string): void { }
-
-
 
   obtenerNivelDeAcceso(correoInstitucional: string): number {
     return 0;

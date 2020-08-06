@@ -25,19 +25,19 @@ export class EventosCrearComponent implements OnInit {
     private eventoService: EventosService,
     private autoridadService: AutoridadesService
   ) {
-    this.autoridadService.getConsejoActual()
+    // this.autoridadService.getConsejoActual()
   }
 
   ngOnInit() {
-    this.autoridadService.getConsejoActual().subscribe(
-      consejo => {
-        this.autoridadService.getAutoridades(consejo[0].nombre).subscribe(
-          autoridades => {
-            this.autoridades = autoridades.map( n => n.Nombre );
-          }
-        )
-      }
-    )
+    // this.autoridadService.getConsejoActual().subscribe(
+    //   consejo => {
+    //     this.autoridadService.getAutoridades(consejo[0].nombre).subscribe(
+    //       autoridades => {
+    //         this.autoridades = autoridades.map( n => n.Nombre );
+    //       }
+    //     )
+    //   }
+    // )
   }
 
   crearEvento(responsable: string) {
