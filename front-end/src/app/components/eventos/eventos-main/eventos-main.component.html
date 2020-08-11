@@ -1,9 +1,28 @@
-<div fxLayout="row" fxLayout.lt-md="column">
-    <div class="calendar" fxFlex="70">
-        <full-calendar [options]="calendarOptions"></full-calendar>
+<div fxLayout="column" fxLayoutAlign="space-around center">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="calendar-options">
+        <div>
+            <button fxLayout="row" fxLayoutAlign="space-around center" (click)="irANuevoEvento()">
+                Nuevo evento
+                <mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>
+            </button>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center" fxFlex="40">
+            <div fxLayout="row" fxLayoutAlign="space-evenly center" fxFlex="30">
+                <label for="tipoCurso">Curso</label>
+                <input id="tipoCurso" type="checkbox" ng-change="eventosPorCurso(tipoCurso.value)" #tipoCurso>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-evenly center" fxFlex="30">
+                <label for="tipoClub">Club</label>
+                <input id="tipoClub" type="checkbox" ng-change="eventosPorClub(tipoClub.value)" #tipoClub>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-evenly center" fxFlex="30">
+                <label for="tipoEvento">Evento</label>
+                <input id="tipoEvento" type="checkbox" ng-change="eventosPorEvento(tipoEvento.value)" #tipoEvento>
+            </div>
+        </div>
     </div>
-    <div fxFlex="30">
-        <!-- <app-eventos-crear></app-eventos-crear> -->
+    <div class="calendar">
+        <full-calendar [options]="calendarOptions"></full-calendar>
     </div>
 </div>
 

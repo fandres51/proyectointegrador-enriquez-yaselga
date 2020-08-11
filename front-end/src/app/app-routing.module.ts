@@ -11,6 +11,7 @@ import { AjustesNuevoSemestreComponent } from './components/ajustes/ajustes-nuev
 import { AjustesCambiarAsociacionComponent } from './components/ajustes/ajustes-cambiar-asociacion/ajustes-cambiar-asociacion.component';
 import { EventosMainComponent } from './components/eventos/eventos-main/eventos-main.component';
 import { EventosInfoComponent } from './components/eventos/eventos-info/eventos-info.component';
+import { EventosCrearComponent } from './components/eventos/eventos-crear/eventos-crear.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'autoridades', component: AutoridadesMainComponent },
   { path: 'eventos', component: EventosMainComponent },
   { path: 'eventos/info/:id', component: EventosInfoComponent },
+  { path: 'eventos/nuevo', component: EventosCrearComponent },
   { path: 'ajustes', component: AjustesMainComponent, children: [
     { path: 'nuevo-semestre', component: AjustesNuevoSemestreComponent },
     { path: 'cambiar-asociacion', component: AjustesCambiarAsociacionComponent }

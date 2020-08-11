@@ -14,10 +14,12 @@ import { EventosInfoComponent } from '../eventos-info/eventos-info.component';
 
 export class EventosMainComponent implements OnInit {
 
+  private eventos: Evento[] = [];
+
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     events: [],
-    eventClick: this.openDialog.bind(this)
+    eventClick: this.openEventWindow.bind(this)
   };
 
   constructor(
@@ -29,21 +31,72 @@ export class EventosMainComponent implements OnInit {
   ngOnInit() {
     this.eventosService.getEventos().subscribe(
       eventos => {
-        this.calendarOptions.events = eventos.map( (n: Evento) => {
-          return {
-            allDay: n.allDay,
-            start: n.start,
-            end: n.end,
-            title: n.title,
-            backgroundColor: n.backgroundColor
-          }
-        });
+        this.eventos = eventos;
+        this.generarCalendario(eventos);
       }
     );
   }
 
-  public openDialog(event) {
+  private generarCalendario(eventos: Evento[]) {
+    this.calendarOptions.events = eventos.map((n: Evento) => {
+      if (n.tipo === 'Evento') {
+        return {
+          id: n.id,
+          allDay: n.allDay,
+          start: n.start,
+          end: n.end,
+          title: n.title,
+          color: n.color
+        }
+      } else {
+        return {
+          id: n.id,
+          allDay: n.allDay,
+          startRecur: n.startRecur,
+          endRecur: n.endRecur,
+          startTime: n.startTime,
+          endTime: n.endTime,
+          daysOfWeek: n.daysOfWeek,
+          title: n.title,
+          color: n.color
+        }
+      }
+    })
+  }
+
+  private generarCalendarioCondicion(eventos: Evento[], condicion: string) {
+    this.calendarOptions.events = eventos.map((n: Evento) => {
+      if (n.tipo === condicion) {
+        return {
+          id: n.id,
+          allDay: n.allDay,
+          start: n.start,
+          end: n.end,
+          title: n.title,
+          color: n.color
+        }
+      }
+    })
+  }
+
+  public eventosPorCurso(mostrar: boolean) {
+    this.generarCalendarioCondicion(this.eventos, 'Curso')
+  }
+
+  public eventosPorClub(mostrar: boolean) {
+    this.generarCalendarioCondicion(this.eventos, 'Club')
+  }
+
+  public eventosPorEvento(mostrar: boolean) {
+    this.generarCalendarioCondicion(this.eventos, 'Evento')
+  }
+
+  public openEventWindow(event) {
     console.log(event.event.title);
     this.router.navigate(['/eventos/info', event.event.title]);
-  } 
+  }
+
+  irANuevoEvento() {
+    this.router.navigateByUrl('/eventos/nuevo');
+  }
 }

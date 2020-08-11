@@ -1,8 +1,20 @@
 export interface Evento {
-    allDay:boolean;
-    start: string;
-    end: string;
+    //paramtros aceptados por el calendario
+    id: string;
     title: string;
-    backgroundColor: string;
+    allDay:boolean;
+    daysOfWeek?: number[];
+    start?: string;
+    end?: string;
+    startTime?: string;
+    endTime?: string;
+    startRecur?: string;
+    endRecur?: string;
+    color: string;
+    //parametros extra definidos por las reglas de negocio
+    tipo: 'Curso' | 'Club' | 'Evento' | 'Horario';
     responsables: string[];
+    presupuesto?: number;
+    lugar: string;
+    descripcion?: string;
 }

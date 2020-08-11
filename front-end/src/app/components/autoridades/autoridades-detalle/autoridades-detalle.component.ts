@@ -13,22 +13,22 @@ export class AutoridadesDetalleComponent implements OnInit {
 
   public autoridadMostrada: Autoridad;
   @Input() set _autoridadMostrada(autoridadMostrada: Autoridad) {
-    this.eventosService.getEventos().subscribe(
-      eventos => {
-        this.autoridadMostrada = autoridadMostrada;
-        this.calendarOptions.events = eventos.map( (n: Evento) => {
-          if(autoridadMostrada.Nombre === n.responsables[0]) {
-            return {
-              allDay: n.allDay,
-              start: n.start,
-              end: n.end,
-              title: n.title,
-              backgroundColor: n.backgroundColor
-            }
-          }
-        })
-      }
-    );
+    // this.eventosService.getEventos().subscribe(
+    //   eventos => {
+    //     this.autoridadMostrada = autoridadMostrada;
+    //     this.calendarOptions.events = eventos.map( (n: Evento) => {
+    //       if(autoridadMostrada.Nombre === n.responsables[0]) {
+    //         return {
+    //           allDay: n.allDay,
+    //           start: n.start,
+    //           end: n.end,
+    //           title: n.title,
+    //           backgroundColor: n.backgroundColor
+    //         }
+    //       }
+    //     })
+    //   }
+    // );
   }
   @Output() public enviarNull = new EventEmitter();
 

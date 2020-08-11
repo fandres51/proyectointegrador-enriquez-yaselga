@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Autoridad } from '../models/autoridad';
 import { Consejo } from '../models/consejo';
 import { AsociacionService } from './asociacion.service';
@@ -22,6 +21,7 @@ export class AutoridadesService {
     asociacionService.getAsociacion().subscribe(
       asociacion => {
         this.asociacionActual = asociacion.AsociacionActual;
+        console.log(this.asociacionActual);
       }
     )
   }
@@ -30,12 +30,38 @@ export class AutoridadesService {
   //   return this.afs.collection<Autoridad>('Asociacion/AEIS/Consejo');
   // }
 
-  private getAutoridadesActualesCollection() {
-    return this.afs.collection<Autoridad>(`Asociacion/AEIS/Consejo/${this.asociacionActual}/Autoridad`);
+  private getAsociacionActual(): Promise<string> {
+    return new Promise(
+      (res, rej) => {
+        this.asociacionService.getAsociacion().subscribe(
+          asociacion => {
+            res(asociacion.AsociacionActual);
+          },
+          error => {
+            rej(error);
+          }
+        )
+      }
+    )
+  }
+
+  private async getAutoridadesActualesCollection() {
+    // console.log(this.asociacionActual); 
+    try {
+      const asociacionActual = await this.getAsociacionActual();
+      return this.afs.collection<Autoridad>(`Asociacion/AEIS/Consejo/${asociacionActual}/Autoridad`);
+    } catch (e) {
+      console.error(e);
+    }
   }
   
-  getAutoridadesActuales(): Observable<Autoridad[]> {
-    return this.getAutoridadesActualesCollection().valueChanges();
+  async getAutoridadesActuales() {
+    try {
+      const autActualesColl = await this.getAutoridadesActualesCollection();
+      return autActualesColl.valueChanges();
+    } catch (e) {
+      console.error(e);
+    }
   } 
   
   getAutoridades(anio:string): Observable<Autoridad[]> {
@@ -45,7 +71,7 @@ export class AutoridadesService {
   crearAutoridad(autoridad: Autoridad) {
     if(this.estudianteService.existeEstudiante(autoridad.NoUnico)) {
       console.log(autoridad);
-      this.getAutoridadesActualesCollection().doc(autoridad.NoUnico).set(autoridad);
+      this.afs.collection('Asociacion/AEIS/Consejo/AEIS2020').doc(autoridad.NoUnico).set(autoridad);
     } else {
       console.log('Estudainte no existe: ', autoridad.NoUnico);
     }
