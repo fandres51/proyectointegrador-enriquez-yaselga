@@ -31,8 +31,12 @@ export class EventosService {
     )
   }
 
+  getEvento(id: string): Observable<Evento> {
+    return this.getCollection().doc<Evento>(id).valueChanges();
+  }
+
   addEvento(nuevoEvento: Evento) {
-    let bool = true;
+    let bool = true; //eveita un bucle infinito X((
     this.asociacionService.getContador('Evento').subscribe(
       (contador: Contador) => {
           if(bool) {

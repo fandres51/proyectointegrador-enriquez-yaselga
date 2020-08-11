@@ -92,8 +92,8 @@ export class EventosMainComponent implements OnInit {
   }
 
   public openEventWindow(event) {
-    console.log(event.event.title);
-    this.router.navigate(['/eventos/info', event.event.title]);
+    console.log(event.event.id);
+    this.router.navigate(['/eventos/info', event.event.id]);
   }
 
   irANuevoEvento() {
