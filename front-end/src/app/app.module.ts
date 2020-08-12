@@ -28,6 +28,7 @@ import { AutoridadesDetalleComponent } from './components/autoridades/autoridade
 import { AutoridadesMainComponent } from './components/autoridades/autoridades-main/autoridades-main.component';
 import { AutoridadesListarComponent } from './components/autoridades/autoridades-listar/autoridades-listar.component';
 import { EventosInfoComponent } from './components/eventos/eventos-info/eventos-info.component';
+import { FinancieroModule } from './components/financiero/financiero.module';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -64,7 +65,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     NgbModalModule,
     EstudiantesModule,
     AjustesModule,
-    FullCalendarModule
+    FullCalendarModule,
+    FinancieroModule
   ],
   providers: [
   ],

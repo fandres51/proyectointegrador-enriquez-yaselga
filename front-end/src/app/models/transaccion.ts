@@ -2,7 +2,7 @@ export interface Transaccion {
     id:string;
     Descripcion?:string;
     EventoID?:string;
-    Fecha: firebase.firestore.Timestamp | Date;
+    Fecha: Date;
     FilialID?:string;
     Ingreso: boolean;
     Monto:number;

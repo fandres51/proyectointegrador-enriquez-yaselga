@@ -28,6 +28,8 @@ export class EstudiantesFiltrosComponent implements OnInit {
     })
   }
 
+  /***Filtros*******************************************/
+
   public buscarPorNombre(input: string) {
     const estudiantesAMostrar = this.estudiantes.filter(estudiante => {
       return estudiante.Nombre.search(input) != -1 || estudiante.Apellido.search(input) != -1;
@@ -60,7 +62,7 @@ export class EstudiantesFiltrosComponent implements OnInit {
   }
 
   private filtrar() {
-    const estudiantesAMostrar = this.estudiantes.filter(estudiante => {
+    const estudiantesAMostrar = this.estudiantes.filter( estudiante => {
       return (estudiante.Carrera.search(this.filtroCarrera) + 1) && 
              (estudiante.EstadoAfiliacion.search(this.filtroAfiliacion) + 1) && 
              (estudiante.SemestreReferencial.search(this.filtroSemestre) + 1);

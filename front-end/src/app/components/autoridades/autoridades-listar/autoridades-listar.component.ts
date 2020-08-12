@@ -17,15 +17,15 @@ export class AutoridadesListarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.autoridadService.getConsejoActual().subscribe(
-    //   consejo =>{
-    //     this.autoridadService.getAutoridades(consejo[0].nombre).subscribe(
-    //       autoridades => {
-    //         this.autoridades = autoridades;
-    //       }
-    //     )
-    //   }
-    // )
+    this.autoridadService.getAutoridadesActuales().then(
+      autoridades => {
+        autoridades.subscribe(
+          autoridades => {
+            this.autoridades = autoridades;
+          }
+        )
+      }
+    )
   }
 
   devolverAutoridad(autoridad: Autoridad) {

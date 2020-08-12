@@ -1,1 +1,53 @@
-<p>financiero-crear works!</p>
+<div fxLayout="column" fxLayoutAlign=" center">
+    <div class="add-title" fxLayout="row">
+        <button routerLink="/financiero" class="button-white" mat-button>
+            <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_back</mat-icon>
+        </button>
+        <h1>Nueva Transacción</h1>
+    </div>
+
+    <div>
+        <form (ngSubmit)="addTransaccion(transaccion)" fxLayout="column" fxLayoutAlign="center center" class="form">
+            <div>
+                <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
+                    <div fxLayout="column" fxFlex=50 class="form-item">
+                        <label for="addMonto">Monto: </label>
+                        <input type="text" name="addMonto" id="addMonto" [(ngModel)]="transaccion.Monto">
+                    </div>
+                    <div fxLayout="column" fxFlex=50 class="form-item">
+                        <label for="addIngreso">Ingreso / Egreso: </label>
+                        <input type="text" name="addIngreso" id="addIngreso" [(ngModel)]="transaccion.Ingreso">
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
+                    <div fxLayout="column" fxFlex=50 class="form-item">
+                        <label for="addFecha">Fecha: </label>
+                        <div>
+                            <input matInput [matDatepicker]="picker" (dateChange)="agregarFechaATransaccion($event)">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </div>
+                    </div>
+                    <div fxLayout="column" fxFlex=50 class="form-item">
+                        <label for="addTipo">Tipo: </label>
+                        <input type="text" name="addTipo" id="addTipo" [(ngModel)]="transaccion.Tipo">
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
+                    <div fxLayout="column" fxFlex=50 class="form-item">
+                        <label for="addDescripcion">Descripción: </label>
+                        <input type="text" name="addDescripcion" id="addDescripcion"
+                            [(ngModel)]="transaccion.Descripcion">
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div fxLayout="column" fxFlex=100 class="form-item">
+                    <button mat-button>
+                        Generar transacción
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

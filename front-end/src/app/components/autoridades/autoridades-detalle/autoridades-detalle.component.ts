@@ -13,22 +13,14 @@ export class AutoridadesDetalleComponent implements OnInit {
 
   public autoridadMostrada: Autoridad;
   @Input() set _autoridadMostrada(autoridadMostrada: Autoridad) {
-    // this.eventosService.getEventos().subscribe(
-    //   eventos => {
-    //     this.autoridadMostrada = autoridadMostrada;
-    //     this.calendarOptions.events = eventos.map( (n: Evento) => {
-    //       if(autoridadMostrada.Nombre === n.responsables[0]) {
-    //         return {
-    //           allDay: n.allDay,
-    //           start: n.start,
-    //           end: n.end,
-    //           title: n.title,
-    //           backgroundColor: n.backgroundColor
-    //         }
-    //       }
-    //     })
-    //   }
-    // );
+    this.autoridadMostrada = autoridadMostrada;
+    this.eventosService.getEventos().subscribe(
+      eventos => {
+        this.generarCalendario(eventos.filter(n => {
+          return n.responsables.find( n => n === this.autoridadMostrada.Nombre )
+        }))
+      }
+    )
   }
   @Output() public enviarNull = new EventEmitter();
 
@@ -42,6 +34,33 @@ export class AutoridadesDetalleComponent implements OnInit {
   ) { }
 
   ngOnInit() {}
+
+  private generarCalendario(eventos: Evento[]) {
+    this.calendarOptions.events = eventos.map((n: Evento) => {
+      if (n.tipo === 'Evento') {
+        return {
+          id: n.id,
+          allDay: n.allDay,
+          start: n.start,
+          end: n.end,
+          title: n.title,
+          color: n.color
+        }
+      } else {
+        return {
+          id: n.id,
+          allDay: n.allDay,
+          startRecur: n.startRecur,
+          endRecur: n.endRecur,
+          startTime: n.startTime,
+          endTime: n.endTime,
+          daysOfWeek: n.daysOfWeek,
+          title: n.title,
+          color: n.color
+        }
+      }
+    })
+  }
 
   regresar() {
     this.enviarNull.emit(null);

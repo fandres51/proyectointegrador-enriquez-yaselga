@@ -1,1 +1,41 @@
-<p>financiero-main works!</p>
+<div fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign=" center" class="top-bar">
+        <div fxFlex="50">
+            <div class="registros mostrados">
+                Número de registros mostrados: {{transacciones.length}} 
+            </div>
+            <div class="ingresos">
+                Ingresos totales: {{ingresos}} 
+            </div>
+            <div class="egresos">
+                Egresos totales: {{egresos}} 
+            </div>
+        </div>
+        <div fxFlex="50" fxLayoutAlign="end center">
+            <button routerLink="/financiero/nuevo" class="but-cargar-financiero" mat-button fxLayoutAlign="center center">
+                Nueva Transaccion
+            </button>
+            <div>
+                <label for="fileInput" class="btn-cargararchivo">Cargar Estudiantes</label>
+                <input id="fileInput" type="file" accept=".csv" (change)="cargaMasiva($event.target.files)" style="display: none;">
+            </div>
+            <button class="but-cargar-financiero" mat-button fxLayoutAlign="center center">
+                Generar Reporte
+            </button>
+        </div>
+    </div>
+
+    <div fxLayout="row" fxLayout.lt-md="column">
+        <div fxFlex="20" fxFlex.md="30" fxFlex.lt-md="auto" fxLayout="column">
+            <app-financiero-filtros (listaAMostrarEmitter)="crearIngresosYEgresos($event)"></app-financiero-filtros>
+        </div>
+
+        <div class="line" fxHide.lt-md></div>
+
+        <div fxFlex="80" fxFlex.md="70" fxFlex.lt-md="auto" fxLayout="column" class="div-financiero">
+            <div fxLayout="column">
+                <app-financiero-listar [_transacciones]="transacciones"></app-financiero-listar>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Estudiante } from 'src/app/models/estudiante';
-import { EstudiantesService } from 'src/app/services/estudiantes.service';
 import { EstudiantesDialogInfoComponent } from '../estudiantes-dialog-info/estudiantes-dialog-info.component';
 
 @Component({
@@ -23,7 +22,6 @@ export class EstudiantesListarComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    public estudiantesService: EstudiantesService
   ) { }
 
   ngOnInit(): void { }

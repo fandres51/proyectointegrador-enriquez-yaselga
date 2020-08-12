@@ -1,1 +1,50 @@
-<p>financiero-listar works!</p>
+<div class="financiero-area">
+    <div *ngFor="let transaccion of transaccionesPaginadas; let i = index" class="card">
+        <mat-card fxLayout="row" fxLayoutAlign=" center">
+
+            <div fxLayout="column" fxLayoutAlign="center start" fxFlex="20" fxFlex.lt-md="50">
+                <div class="nombre">Monto</div>
+                <div>{{transaccion.Monto}}</div>
+            </div>
+
+            <div fxLayout="column" fxLayoutAlign="center start" fxFlex="20" fxHide.lt-lg>
+                <div class="nombre">Fecha</div>
+                <div>{{transaccion.Fecha.getDate()}}/{{
+                    transaccion.Fecha.getMonth()+1}}/{{transaccion.Fecha.getFullYear()}} </div>
+            </div>
+            
+            <div fxLayout="column" fxLayoutAlign="center start" fxFlex="20" fxHide.lt-lg>
+                <div class="nombre">Hora</div>
+                <div>{{transaccion.Fecha.getHours()}}:{{transaccion.Fecha.getMinutes()}}</div>
+            </div>
+
+            <div fxLayout="column" fxLayoutAlign="center start" fxFlex="10" fxHide.lt-lg>
+                <div class="nombre">Tipo</div>
+                <div>{{transaccion.Tipo}}</div>
+            </div>
+
+            <div fxLayout="column" fxLayoutAlign="center end" fxFlex="20" fxFlex.lt-md="50">
+                <div *ngIf="transaccion.Ingreso; else noafiliado" fxLayout="row" fxLayoutAlign="end center">
+                    <div style="color: #37AA42;">Ingreso</div>
+                    <mat-icon style="color: #37AA42;" class="add-circle-icon" aria-hidden="false"
+                        aria-label="Example home icon">add_circle</mat-icon>
+                </div>
+                <ng-template #noafiliado>
+                    <div fxLayout="row" fxLayoutAlign="end center">
+                        <div style="color: #E53737;">Egreso</div>
+                        <mat-icon style="color: #E53737;" class="add-circle-icon" aria-hidden="false"
+                            aria-label="Example home icon">remove_circle</mat-icon>
+                    </div>
+                </ng-template>
+            </div>
+
+            <div fxLayoutAlign="end " fxFlex="auto">
+                <button fxLayoutAlign="center " class="button-add-icon">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_forward</mat-icon>
+                </button>
+            </div>
+        </mat-card>
+    </div>
+
+    <mat-paginator (page)="onPageChange($event)" [length]="transacciones.length" [pageSize]="9" [pageSizeOptions]="[5, 9, 20]"></mat-paginator>
+</div>
