@@ -15,6 +15,7 @@ import { EventosInfoComponent } from '../eventos-info/eventos-info.component';
 export class EventosMainComponent implements OnInit {
 
   private eventos: Evento[] = [];
+  tipoFiltro: 'Evento' | 'Curso' | 'Club' | 'Todos' = 'Todos';
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -66,14 +67,28 @@ export class EventosMainComponent implements OnInit {
 
   private generarCalendarioCondicion(eventos: Evento[], condicion: string) {
     this.calendarOptions.events = eventos.map((n: Evento) => {
-      if (n.tipo === condicion) {
-        return {
-          id: n.id,
-          allDay: n.allDay,
-          start: n.start,
-          end: n.end,
-          title: n.title,
-          color: n.color
+      if(n.tipo === condicion || condicion === 'Todos') {
+        if (n.tipo === 'Evento') {
+          return {
+            id: n.id,
+            allDay: n.allDay,
+            start: n.start,
+            end: n.end,
+            title: n.title,
+            color: n.color
+          }
+        } else {
+          return {
+            id: n.id,
+            allDay: n.allDay,
+            startRecur: n.startRecur,
+            endRecur: n.endRecur,
+            startTime: n.startTime,
+            endTime: n.endTime,
+            daysOfWeek: n.daysOfWeek,
+            title: n.title,
+            color: n.color
+          }
         }
       }
     })
@@ -89,6 +104,13 @@ export class EventosMainComponent implements OnInit {
 
   public eventosPorEvento(mostrar: boolean) {
     this.generarCalendarioCondicion(this.eventos, 'Evento')
+  }
+
+  cambiarFiltro() {
+    if(this.tipoFiltro !== 'Todos')
+      this.generarCalendario(this.eventos.filter( n => n.tipo === this.tipoFiltro ));
+    else 
+      this.generarCalendario(this.eventos);
   }
 
   public openEventWindow(event) {

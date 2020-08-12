@@ -7,18 +7,12 @@
             </button>
         </div>
         <div fxLayout="row" fxLayoutAlign="end center" fxFlex="40">
-            <div fxLayout="row" fxLayoutAlign="space-evenly center" fxFlex="30">
-                <label for="tipoCurso">Curso</label>
-                <input id="tipoCurso" type="checkbox" ng-change="eventosPorCurso(tipoCurso.value)" #tipoCurso>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="space-evenly center" fxFlex="30">
-                <label for="tipoClub">Club</label>
-                <input id="tipoClub" type="checkbox" ng-change="eventosPorClub(tipoClub.value)" #tipoClub>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="space-evenly center" fxFlex="30">
-                <label for="tipoEvento">Evento</label>
-                <input id="tipoEvento" type="checkbox" ng-change="eventosPorEvento(tipoEvento.value)" #tipoEvento>
-            </div>
+            <select name="tipoEvento" id="tipoEvento" [(ngModel)]="tipoFiltro" (change)="cambiarFiltro()">
+                <option value="Todos">Todos</option>
+                <option value="Evento">Evento</option>
+                <option value="Club">Club</option>
+                <option value="Curso">Curso</option>
+            </select>
         </div>
     </div>
     <div class="calendar">
