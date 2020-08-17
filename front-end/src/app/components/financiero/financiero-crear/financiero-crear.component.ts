@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { Router } from '@angular/router';
 import { Transaccion } from 'src/app/models/transaccion';
 import { TransaccionesService } from 'src/app/services/transacciones.service';
 
@@ -12,25 +13,27 @@ export class FinancieroCrearComponent implements OnInit {
   public transaccion: Transaccion = {
     Monto: 0,
     Descripcion: "",
-    Fecha: null,
+    Fecha: new Date(),
     Ingreso: false,
-    Tipo: "",
-    TipoMonetario: "",
-    id: ""
+    Tipo: 'Otro',
+    id: "",
+    Activa: true
   };
 
   constructor(
-    public transaccionService:TransaccionesService
+    public transaccionService:TransaccionesService,
+    private router: Router
   ) { }
 
   ngOnInit(): void { }
 
   agregarFechaATransaccion(event: MatDatepickerInputEvent<Date>) {
-    this.transaccion.Fecha = event.value;
+    this.transaccion.Fecha = new Date(event.value);
   }
 
   addTransaccion(transaccion) {
     this.transaccionService.addTransaccion(transaccion);
+    this.router.navigateByUrl('/financiero')
   }
 
 }

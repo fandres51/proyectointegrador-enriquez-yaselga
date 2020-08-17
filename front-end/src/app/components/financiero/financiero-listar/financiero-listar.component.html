@@ -4,7 +4,7 @@
 
             <div fxLayout="column" fxLayoutAlign="center start" fxFlex="20" fxFlex.lt-md="50">
                 <div class="nombre">Monto</div>
-                <div>{{transaccion.Monto}}</div>
+                <div>{{transaccion.Monto}} $</div>
             </div>
 
             <div fxLayout="column" fxLayoutAlign="center start" fxFlex="20" fxHide.lt-lg>
@@ -23,7 +23,7 @@
                 <div>{{transaccion.Tipo}}</div>
             </div>
 
-            <div fxLayout="column" fxLayoutAlign="center end" fxFlex="20" fxFlex.lt-md="50">
+            <div *ngIf="transaccion.Activa; else noactiva" fxLayout="column" fxLayoutAlign="center end" fxFlex="20" fxFlex.lt-md="50">
                 <div *ngIf="transaccion.Ingreso; else noafiliado" fxLayout="row" fxLayoutAlign="end center">
                     <div style="color: #37AA42;">Ingreso</div>
                     <mat-icon style="color: #37AA42;" class="add-circle-icon" aria-hidden="false"
@@ -37,9 +37,14 @@
                     </div>
                 </ng-template>
             </div>
+            <ng-template #noactiva>
+                <div fxLayout="column" fxLayoutAlign="center end" fxFlex="20" fxFlex.lt-md="50">
+                    <div style="color: #E53737;">Inactiva</div>
+                </div>
+            </ng-template>
 
             <div fxLayoutAlign="end " fxFlex="auto">
-                <button fxLayoutAlign="center " class="button-add-icon">
+                <button fxLayoutAlign="center " class="button-add-icon" mat-button (click)="openDialog(i)">
                     <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_forward</mat-icon>
                 </button>
             </div>

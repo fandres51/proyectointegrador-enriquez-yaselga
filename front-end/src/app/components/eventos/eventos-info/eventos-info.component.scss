@@ -11,3 +11,34 @@
         color: white;
     }
 }
+
+.informacion {
+    margin: 50px;
+    width: 50%;
+}
+
+.group {
+    margin: 20px 0;
+    
+}
+
+.title {
+    color: #0d288a
+}
+
+.icons {
+    width: 100%;
+    button {
+        background-color: #0d288a;
+        color: white;
+        padding: 10px 50px;
+    }
+    div{
+        margin: 50px 50px 50px 0;
+    }
+}
+
+.line {
+    border-top: 1px solid gray;
+    margin: 0 50px;
+}

@@ -19,6 +19,7 @@ export class EstudiantesListarComponent implements OnInit {
   }
   private pageIndex: number = 0;
   private pageSize: number = 9;
+  public estudiantesPaginados: Estudiante[];
 
   constructor(
     public dialog: MatDialog,
@@ -35,8 +36,6 @@ export class EstudiantesListarComponent implements OnInit {
       console.log('The dialog was closed');
     })
   } 
-
-  public estudiantesPaginados: Estudiante[];
 
   onPageChange($event) {
     this.pageIndex = $event.pageIndex;

@@ -8,6 +8,7 @@ import { MaterialComponentsModule } from 'src/app/material.module';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FinancieroDialogComponent } from './financiero-dialog/financiero-dialog.component';
 
 
 
@@ -16,7 +17,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FinancieroFiltrosComponent, 
     FinancieroMainComponent, 
     FinancieroListarComponent, 
-    FinancieroCrearComponent],
+    FinancieroCrearComponent, FinancieroDialogComponent],
   imports: [
     CommonModule,
     MaterialComponentsModule,

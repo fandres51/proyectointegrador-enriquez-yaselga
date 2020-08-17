@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Transaccion } from 'src/app/models/transaccion';
+import { FinancieroDialogComponent } from '../financiero-dialog/financiero-dialog.component';
 
 @Component({
   selector: 'app-financiero-listar',
@@ -18,9 +20,21 @@ export class FinancieroListarComponent implements OnInit {
   public transaccionesPaginadas: Transaccion[];
   public transacciones: Transaccion[] = [];
 
-  constructor( ) { }
+  constructor(
+    public dialog: MatDialog,
+  ) { }
 
   ngOnInit(): void { }
+
+  public openDialog(index:number):void {
+    const dialogRef = this.dialog.open( FinancieroDialogComponent, {
+      width: '500px',
+      data: this.transacciones[index]
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    })
+  } 
 
   onPageChange($event) {
     this.pageIndex = $event.pageIndex;

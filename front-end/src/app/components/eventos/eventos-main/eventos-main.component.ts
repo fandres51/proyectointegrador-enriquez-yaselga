@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { Evento } from 'src/app/models/evento';
 import { EventosService } from 'src/app/services/eventos.service';
-import { EventosInfoComponent } from '../eventos-info/eventos-info.component';
 
 @Component({
   selector: 'app-eventos-main',
@@ -114,9 +113,10 @@ export class EventosMainComponent implements OnInit {
   }
 
   public openEventWindow(event) {
-    console.log(event.event.id);
+    console.log(event.event);
     this.router.navigate(['/eventos/info', event.event.id]);
   }
+
 
   irANuevoEvento() {
     this.router.navigateByUrl('/eventos/nuevo');

@@ -24,19 +24,19 @@ export class FinancieroMainComponent implements OnInit {
     
     this.transacciones = transacciones;
 
-    this.ingresos = this.transacciones.reduce((valorAcumulado, valorActual) => {
-      if(valorActual.Ingreso) {
+    this.ingresos = Math.round( this.transacciones.reduce((valorAcumulado, valorActual) => {
+      if(valorActual.Ingreso && valorActual.Activa) {
         return Number( Number(valorAcumulado) + Number(valorActual.Monto) );
       }
       return valorAcumulado;
-    }, 0);
+    }, 0) * 100)/100;
     
-    this.egresos = this.transacciones.reduce((valorAcumulado, valorActual) => {
-      if(!valorActual.Ingreso) {
+    this.egresos = Math.round(this.transacciones.reduce((valorAcumulado, valorActual) => {
+      if(!valorActual.Ingreso && valorActual.Activa) {
         return Number( Number(valorAcumulado) + Number(valorActual.Monto) );
       }
       return valorAcumulado;
-    }, 0);
+    }, 0) * 100)/100;
   }
 
   cargaMasiva(event: FileList) {
@@ -44,6 +44,16 @@ export class FinancieroMainComponent implements OnInit {
     if (file.type.split('/')[1] !== 'csv') {
       console.error('Unsupported file type!!');
     }
-    // this.transaccionService.cargaMasivaTransacciones(file);
+    this.transaccionService.cargaMasivaTransaccion(file).then(
+      noingresados => {
+        if(noingresados.length > 0) {
+          let registros: string = '';
+          noingresados.forEach( n => {
+            registros = registros + n + '\n';
+          })
+          alert('Registros no ingresados: \n' + registros);
+        }
+      }
+    );
   }
 }

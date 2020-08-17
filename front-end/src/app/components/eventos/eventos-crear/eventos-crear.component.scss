@@ -11,3 +11,33 @@
         color: white;
     }
 }
+
+.form {
+    width: 50%;
+    margin-top: 30px;
+}
+
+.label {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 130%;
+    color: #0d288a;
+}
+
+.input, select {
+    padding: 8px;
+}
+
+.button {
+    background-color: #0d288a;
+    color: white;
+    margin: 50px 0 60px 0;
+    padding: 10px;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.group-day {
+    margin-right: 40px;
+}

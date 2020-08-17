@@ -46,7 +46,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     EventosCrearComponent,
     AutoridadesDetalleComponent,
     AutoridadesMainComponent, 
-    AutoridadesListarComponent, EventosInfoComponent
+    AutoridadesListarComponent, 
+    EventosInfoComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firabase),

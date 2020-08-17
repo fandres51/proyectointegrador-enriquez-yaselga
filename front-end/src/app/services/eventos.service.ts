@@ -43,7 +43,6 @@ export class EventosService {
             nuevoEvento.id = 'EVN' + contador.contador;
             this.getCollection().doc('EVN' + contador.contador).set(nuevoEvento);
             this.asociacionService.increaseContador('Evento');
-            console.log('Hola');
             bool = false
           }
       }

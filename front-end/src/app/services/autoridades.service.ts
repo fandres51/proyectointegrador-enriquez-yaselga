@@ -21,7 +21,6 @@ export class AutoridadesService {
     asociacionService.getAsociacion().subscribe(
       asociacion => {
         this.asociacionActual = asociacion.AsociacionActual;
-        console.log(this.asociacionActual);
       }
     )
   }
@@ -70,7 +69,6 @@ export class AutoridadesService {
 
   crearAutoridad(autoridad: Autoridad) {
     if(this.estudianteService.existeEstudiante(autoridad.NoUnico)) {
-      console.log(autoridad);
       this.afs.collection('Asociacion/AEIS/Consejo/AEIS2020').doc(autoridad.NoUnico).set(autoridad);
     } else {
       console.log('Estudainte no existe: ', autoridad.NoUnico);

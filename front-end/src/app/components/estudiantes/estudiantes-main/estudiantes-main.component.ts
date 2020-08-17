@@ -22,7 +22,17 @@ export class EstudiantesMainComponent implements OnInit {
     if (file.type.split('/')[1] !== 'csv') {
       console.error('Unsupported file type!!');
     }
-    this.EstudiantesService.cargaMasivaEstudiantes(file);
+    this.EstudiantesService.cargaMasivaEstudiantes(file).then(
+      eni => {
+        if(eni.length > 0) {
+          let registros: string = '';
+          eni.forEach( n => {
+            registros = registros + n + '\n';
+          })
+          alert('Registros no ingresados: \n' + registros);
+        }
+      }
+    );
   }
 
 

@@ -29,4 +29,12 @@ export class EventosInfoComponent implements OnInit {
   regresar() {
     this.router.navigateByUrl('/eventos');
   }
+
+  editarEvento(){
+    
+  }
+
+  borrarEvento(){
+
+  }
 }

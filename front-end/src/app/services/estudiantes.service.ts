@@ -7,7 +7,7 @@ import { Aporte } from '../models/aporte'
 import * as firebase from 'firebase';
 import { AsociacionService } from './asociacion.service';
 import * as Papa from 'papaparse';
-import * as _ from 'lodash';
+import { TransaccionesService } from './transacciones.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,7 @@ export class EstudiantesService {
 
   constructor(
     asociacionService: AsociacionService,
+    private transaccionService: TransaccionesService,
     private afs: AngularFirestore
   ) {
     asociacionService.getAsociacion().subscribe(
@@ -122,6 +123,16 @@ export class EstudiantesService {
 
           this.getCollection().doc(noUnico).update({ EstadoAfiliacion: 'Aportante' });
           this.getAportesCollection(noUnico).doc<Aporte>(nuevoAporte.periodo).set(nuevoAporte);
+          this.transaccionService.addTransaccion({
+            Fecha: new Date(),
+            Ingreso: true,
+            Monto: nuevoAporte.valor,
+            Tipo: 'Afiliacion',
+            id: '',
+            Descripcion: 'Transaccion por afiliacion del estudiante con numero unico: ' + noUnico,
+            PersonaID: noUnico,
+            Activa: true
+          })
         } else {
           console.error('Estudiante no existe');
         }
@@ -163,7 +174,7 @@ export class EstudiantesService {
     this.afs.doc<Estudiante>(`Asociacion/AEIS/Persona/${noUnico}`).update({ EstadoAfiliacion: 'No afiliado' });
   }
 
-  cargaMasivaEstudiantes(file) {
+  cargaMasivaEstudiantes(file): Promise<string[]> {
     return new Promise(
       (resF) => {
         Papa.parse(file, {
@@ -180,48 +191,50 @@ export class EstudiantesService {
     )
   }
 
-  private firethisEstudiante(estudiantes: Estudiante[]) {
+  private firethisEstudiante(estudiantes: Estudiante[]): Promise<string[]> {
     const estudiantesNoIngresados: string[] = [];
     return new Promise((resolve) => {
       estudiantes.forEach((estudiante) => {
         estudiante.FechaNacimiento = new Date(estudiante.FechaNacimiento);
         estudiante.Apellido = estudiante.Apellido.toUpperCase();
         estudiante.Nombre = estudiante.Nombre.toUpperCase();
-        if (this.comprobarEstructura(estudiante)) {
+        const razon = this.comprobarEstructura(estudiante);
+        if (!razon) {
           this.getCollection().doc(estudiante.NoUnico).set(estudiante);
         } else {
-          estudiantesNoIngresados.push(estudiante.NoUnico);
+          estudiantesNoIngresados.push(
+            'No único: ' + 
+            estudiante.NoUnico + 
+            'Razón: ' + 
+            razon  
+          );
         }
       })
       resolve(estudiantesNoIngresados);
     })
   }
 
-  private comprobarEstructura(estudiante: Estudiante): boolean {
-    console.log(estudiante);
-    let aprueba: boolean = true;
+  private comprobarEstructura(estudiante: Estudiante): string {
+    let razon: string = '';
     if (
-      !estudiante.FechaNacimiento &&
+      !estudiante.FechaNacimiento ||
       !(estudiante.FechaNacimiento instanceof Date)
     ) {
-      console.log('No aprueba por fecha');
-      aprueba = false;
+      razon = 'fecha';
     }
     if (
       estudiante.Carrera !== 'Sistemas' &&
       estudiante.Carrera !== 'Computacion' &&
       estudiante.Carrera !== 'Software'
     ) {
-      console.log('No aprueba por carrera');
-      aprueba = false;
+      razon = 'carrera';
     }
     if (
       estudiante.EstadoAfiliacion !== 'Aportante' &&
       estudiante.EstadoAfiliacion !== 'No aportante' &&
       estudiante.EstadoAfiliacion !== 'No afiliado'
     ) {
-      console.log('No aprueba por aporte');
-      aprueba = false;
+      razon = 'aporte';
     }
     if (
       estudiante.SemestreReferencial !== '1' &&
@@ -236,10 +249,8 @@ export class EstudiantesService {
       estudiante.SemestreReferencial !== '10' &&
       estudiante.SemestreReferencial !== 'Egresado'
     ) {
-      console.log('No aprueba por semestre');
-      aprueba = false;
+      razon = 'semestre';
     }
-    console.log(aprueba);
-    return aprueba
+    return razon;
   }
 }

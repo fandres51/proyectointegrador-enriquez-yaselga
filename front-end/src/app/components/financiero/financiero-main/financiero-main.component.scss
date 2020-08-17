@@ -19,6 +19,31 @@ hr {
     width: 150px;
 }
 
+.btn-cargararchivo {
+    background-color: #0D288A;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 4px;
+    margin: 0;
+    font-weight: 500;
+    cursor: pointer;
+}
+
 .div-financiero {
     margin: 2% 7%;
+}
+
+.ingresos {
+    font-size: 120%;
+    font-weight: 500;
+    color: #0D288A;
+    margin: 0 20px;
+}
+
+.verde {
+    color: #37aa42;
+}
+
+.rojo {
+    color: #e53737
 }

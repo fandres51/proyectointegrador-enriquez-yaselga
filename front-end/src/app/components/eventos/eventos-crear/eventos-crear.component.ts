@@ -95,7 +95,6 @@ export class EventosCrearComponent implements OnInit {
     this.nuevoEvento.responsables = this.crearArregoResp();
     if(this.nuevoEvento.tipo !== 'Evento')
       this.nuevoEvento.daysOfWeek = this.crearArregoDias();
-    console.log(this.nuevoEvento);
     this.eventoService.addEvento(this.nuevoEvento);
   }
 

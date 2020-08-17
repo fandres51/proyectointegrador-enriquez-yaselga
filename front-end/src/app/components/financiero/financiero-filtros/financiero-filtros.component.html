@@ -4,7 +4,14 @@
         <h2 class="title">Filtros:</h2>
         <div>
             <h3 class="title">Por tipo</h3>
-            <input type="text" name="filtroTipo" id="filtroTipo" [(ngModel)]="tipoFiltro">
+            <select name="filtroTipo" id="filtroTipo" [(ngModel)]="tipoFiltro">
+                <option value="">Todos</option>
+                <option value="Afiliacion">Afiliación</option>
+                <option value="Bar">Bar</option>
+                <option value="Alquiler">Préstamo o alquiler</option>
+                <option value="Evento">Evento</option>
+                <option value="Otro">Otro</option>
+            </select>
         </div>
         <div>
             <h3 class="title">Por tipo económico</h3>
@@ -32,9 +39,9 @@
                 <input type="number" step="0.01" min="0" [(ngModel)]="endMontoFiltro">
             </div>
         </div>
-        <div>
-            <button (click)="filtrar()">Filtrar</button>
-            <button (click)="limpiarFiltro()">Limpiar filtros</button>
+        <div fxLayout="row" fxLayoutAlign="space-between ">
+            <button class="button" (click)="filtrar()">Filtrar</button>
+            <button class="button" (click)="limpiarFiltro()">Limpiar filtros</button>
         </div>
     </div>
     <hr fxHide.lt-md>
@@ -49,5 +56,9 @@
                                         'filtrosButton': tipoDeOrdenamiento != 'monto', 
                                         'selected': tipoDeOrdenamiento == 'monto'
                                     }" mat-button (click)="ordenar('monto')">Monto</button>
+        <button mat-button [ngClass]="{
+                                        'filtrosButton': tipoDeOrdenamiento != 'tipo', 
+                                        'selected': tipoDeOrdenamiento == 'tipo'
+                                    }" mat-button (click)="ordenar('tipo')">Tipo</button>
     </div>
 </div>

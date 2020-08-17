@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import * as firebase from 'firebase';
 import { AsociacionService } from './asociacion.service';
 import { Contador } from '../models/contador';
+import * as Papa from 'papaparse';
 
 @Injectable({
   providedIn: 'root'
@@ -65,18 +66,105 @@ export class TransaccionesService {
     this.asociacionService.getContador('Transaccion').subscribe(
       (contador: Contador) => {
         if (bool) {
+          console.log(nuevaTransaccion);
           nuevaTransaccion.id = 'TRN' + contador.contador;
           this.getCollection().doc('TRN' + contador.contador).set(nuevaTransaccion);
           this.asociacionService.increaseContador('Transaccion');
-          console.log('Hola');
           bool = false
         }
       }
     )
   }
 
-  deleteTransaccion(transaccion: Transaccion) {
-    this.transaccionDoc = this.afs.doc(`Asociacion/AEIS/Transaccion/${transaccion.id}`);
-    this.transaccionDoc.delete();
+  darDeBajaTransaccion(transaccionId: string) {
+    this.getCollection().doc(transaccionId).update({Activa: false})
+  }
+
+  reactivarTransaccion(transaccionId: string) {
+    this.getCollection().doc(transaccionId).update({Activa: true})
+  }
+
+  cargaMasivaTransaccion(file): Promise<string[]> {
+    return new Promise(
+      (resF) => {
+        Papa.parse(file, {
+          complete: res => {
+            this.firethisEstudiante(res['data']).then(
+              transaccionesNoIngresadas => resF(transaccionesNoIngresadas)
+            ).catch (
+              e => console.error('Archivo no admitido')
+            )
+          },
+          header: true
+        });
+      }
+    )
+  }
+
+  private firethisEstudiante(transacciones: Transaccion[]): Promise<string[]> {
+    const transaccionesNoIngresadas: string[] = [];
+    return new Promise((resolve) => {
+      transacciones.forEach((transaccion) => {
+        transaccion.Fecha = new Date(transaccion.Fecha);
+        transaccion.Monto = Number(transaccion.Monto)
+        transaccion.Activa = Boolean(transaccion.Activa);
+        transaccion.Ingreso = Boolean(transaccion.Ingreso);
+        const respuesta = this.comprobarEstructura(transaccion);
+        if (!respuesta) {
+          this.getCollection().add(transaccion)
+        } else {
+          transaccionesNoIngresadas.push(
+            'Fecha: ' + 
+            transaccion.Fecha.getDay() + '/' + 
+            transaccion.Fecha.getMonth() + '/' + 
+            transaccion.Fecha.getFullYear() + ' ' + 
+            'Monto: ' + 
+            transaccion.Monto + ' ' + 
+            'Razón: ' + 
+            respuesta
+          );
+        }
+      })
+      resolve(transaccionesNoIngresadas);
+    })
+  }
+
+  private comprobarEstructura(transaccion: Transaccion): string {
+    
+    let respuesta: string = '';
+
+    if (
+      !transaccion.Fecha ||
+      !(transaccion.Fecha instanceof Date)
+    ) {
+      respuesta = 'fecha';
+    }
+    if (
+      !transaccion.Monto ||
+      transaccion.Monto <= 0 ||
+      typeof transaccion.Monto !== 'number'
+    ) {
+      respuesta = 'monto';
+    }
+    if (
+      typeof transaccion.Ingreso !== 'boolean'
+    ) {
+      respuesta = 'tipo ingreso/egreso';
+    }
+    if (
+      typeof transaccion.Activa !== 'boolean'
+    ) {
+      respuesta = 'tipo activa/inactiva';
+    }
+    if (
+      transaccion.Tipo !== 'Afiliacion' &&
+      transaccion.Tipo !== 'Otro' &&
+      transaccion.Tipo !== 'Bar' &&
+      transaccion.Tipo !== 'Alquiler' &&
+      transaccion.Tipo !== 'Evento'
+    ) {
+      respuesta = 'tipo';
+    }
+    return respuesta;
   }
 }
