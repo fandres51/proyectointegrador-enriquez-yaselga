@@ -30,11 +30,15 @@ export class EventosInfoComponent implements OnInit {
     this.router.navigateByUrl('/eventos');
   }
 
-  editarEvento(){
+  editarEvento() {
     
+    this.router.navigate(['/eventos/actualizar', this.evento.id]);
   }
 
-  borrarEvento(){
-
+  borrarEvento() {
+    if (window.confirm('¿Está seguro que desea eliminar el evento?')) {
+      this.eventoService.deleteEvento(this.evento.id);
+      this.router.navigateByUrl('/eventos');
+    }
   }
 }

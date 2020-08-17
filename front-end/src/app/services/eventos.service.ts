@@ -48,4 +48,13 @@ export class EventosService {
       }
     )
   }
+
+  updateEvento(evento: Evento) {
+    this.getCollection().doc(evento.id).set(evento);
+  }
+
+  deleteEvento(eventoId: string) {
+    const eventoAElimiar = this.getCollection().doc(eventoId);
+    eventoAElimiar.delete();
+  }
 }

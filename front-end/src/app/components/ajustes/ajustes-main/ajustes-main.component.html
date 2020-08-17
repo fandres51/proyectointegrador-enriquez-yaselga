@@ -1,1 +1,35 @@
-<p>ajustes-main works!</p>
+<div fxLayout="row">
+    <div fxLayout="column" fxFlex="20">
+
+        <a routerLink="/ajustes/nuevo-semestre">
+            <div class="element" fxLayout="row" fxLayoutAlign="space-between center">
+                Iniciar nuevo semestre
+                <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_right</mat-icon>
+            </div>
+        </a>
+        <a routerLink="/ajustes/cambiar-asociacion">
+            <div class="element" fxLayout="row" fxLayoutAlign="space-between center">
+                Cambiar asociación
+                <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_right</mat-icon>
+            </div>
+        </a>
+        <a routerLink="/ajustes/consultar-asociacion">
+            <div class="element" fxLayout="row" fxLayoutAlign="space-between center">
+                Consultar asociacion anterior
+                <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_right</mat-icon>
+            </div>
+        </a>
+        <a routerLink="/ajustes/definir-aporte">
+            <div class="element" fxLayout="row" fxLayoutAlign="space-between center">
+                Definir aporte
+                <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_right</mat-icon>
+            </div>
+        </a>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="ro">
+        <router-outlet></router-outlet>
+    </div>
+</div>

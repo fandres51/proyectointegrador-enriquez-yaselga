@@ -14,6 +14,9 @@ import { EventosInfoComponent } from './components/eventos/eventos-info/eventos-
 import { EventosCrearComponent } from './components/eventos/eventos-crear/eventos-crear.component';
 import { FinancieroMainComponent } from './components/financiero/financiero-main/financiero-main.component';
 import { FinancieroCrearComponent } from './components/financiero/financiero-crear/financiero-crear.component';
+import { EventosEditarComponent } from './components/eventos/eventos-editar/eventos-editar.component';
+import { AjustesConsultarAsociacionComponent } from './components/ajustes/ajustes-consultar-asociacion/ajustes-consultar-asociacion.component';
+import { AjustesDefinirAporteComponent } from './components/ajustes/ajustes-definir-aporte/ajustes-definir-aporte.component';
 
 
 const routes: Routes = [
@@ -25,11 +28,14 @@ const routes: Routes = [
   { path: 'eventos', component: EventosMainComponent },
   { path: 'eventos/info/:id', component: EventosInfoComponent },
   { path: 'eventos/nuevo', component: EventosCrearComponent },
+  { path: 'eventos/actualizar/:id', component: EventosEditarComponent },
   { path: 'financiero', component: FinancieroMainComponent },
   { path: 'financiero/nuevo', component: FinancieroCrearComponent },
   { path: 'ajustes', component: AjustesMainComponent, children: [
     { path: 'nuevo-semestre', component: AjustesNuevoSemestreComponent },
-    { path: 'cambiar-asociacion', component: AjustesCambiarAsociacionComponent }
+    { path: 'cambiar-asociacion', component: AjustesCambiarAsociacionComponent },
+    { path: 'consultar-asociacion', component: AjustesConsultarAsociacionComponent },
+    { path: 'definir-aporte', component: AjustesDefinirAporteComponent }
   ]},
   { path: '**', component: PageNotFoundComponent }
 ];

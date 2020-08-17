@@ -1,0 +1,123 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Evento } from 'src/app/models/evento';
+import { AutoridadesService } from 'src/app/services/autoridades.service';
+import { EventosService } from 'src/app/services/eventos.service';
+
+@Component({
+  selector: 'app-eventos-editar',
+  templateUrl: './eventos-editar.component.html',
+  styleUrls: ['./eventos-editar.component.scss']
+})
+export class EventosEditarComponent implements OnInit {
+
+  public autoridades: string[] = [];
+
+  public evento: Evento = {
+    id: '',
+    title: '',
+    allDay: false,
+    color: 'blue',
+    tipo: 'Evento',
+    responsables: [],
+    lugar: 'EPN'
+  };
+
+  public dias = {
+    lunes: false,
+    martes: false,
+    miercoles: false,
+    jueves: false,
+    viernes: false,
+    sabado: false,
+    domingo: false
+  };
+
+  public responsables = {
+    resp1: "",
+    resp2: "",
+    resp3: ""
+  }
+
+  constructor(
+    public eventosService: EventosService,
+    public autoridadesService: AutoridadesService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      const id = params['id'];
+      this.eventosService.getEvento(id).subscribe(evento => {
+        this.evento = evento;
+        if(evento.responsables[0]) {this.responsables.resp1 = evento.responsables[0];}
+        if(evento.responsables[1]) {this.responsables.resp2 = evento.responsables[1];}
+        if(evento.responsables[2]) {this.responsables.resp3 = evento.responsables[2];}
+        if(evento.tipo !== 'Evento') {
+          if(evento.daysOfWeek.find(n=>n===0)) {this.dias.domingo = true}
+          if(evento.daysOfWeek.find(n=>n===1)) {this.dias.lunes = true}
+          if(evento.daysOfWeek.find(n=>n===2)) {this.dias.martes = true}
+          if(evento.daysOfWeek.find(n=>n===3)) {this.dias.miercoles = true}
+          if(evento.daysOfWeek.find(n=>n===4)) {this.dias.jueves = true}
+          if(evento.daysOfWeek.find(n=>n===5)) {this.dias.viernes = true}
+          if(evento.daysOfWeek.find(n=>n===6)) {this.dias.sabado = true}
+        }
+      })
+    });
+    this.autoridadesService.getAutoridadesActuales().then(
+      autoridades => {
+        autoridades.subscribe(
+          autoridades => {
+            this.autoridades = autoridades.map(n => n.Nombre);
+          }
+        )
+      }
+    )
+  }
+
+  crearArregoDias(): number[] {
+    const arregloDias: number[] = [];
+    if (this.dias.domingo)
+      arregloDias.push(0);
+    if (this.dias.lunes)
+      arregloDias.push(1);
+    if (this.dias.martes)
+      arregloDias.push(2);
+    if (this.dias.miercoles)
+      arregloDias.push(3);
+    if (this.dias.jueves)
+      arregloDias.push(4);
+    if (this.dias.viernes)
+      arregloDias.push(5);
+    if (this.dias.sabado)
+      arregloDias.push(6);
+    return arregloDias;
+  }
+  
+  crearArregoResp(): string[] {
+    const arregloResp: string[] = [];
+    if (this.responsables.resp1)
+      arregloResp.push(this.responsables.resp1);
+    if (this.responsables.resp2)
+      arregloResp.push(this.responsables.resp2);
+    if (this.responsables.resp3)
+      arregloResp.push(this.responsables.resp3);
+    return arregloResp.filter( (n, i) => {
+      if(arregloResp.indexOf(n) === i)
+        return n
+    })
+  }
+
+  editEvento() {
+    this.evento.responsables = this.crearArregoResp();
+    if(this.evento.tipo !== 'Evento')
+      this.evento.daysOfWeek = this.crearArregoDias();
+    this.eventosService.updateEvento(this.evento);
+    this.router.navigateByUrl('/eventos');
+  }
+
+  regresar() {
+    this.router.navigateByUrl('/eventos');
+  }
+}
