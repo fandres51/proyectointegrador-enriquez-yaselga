@@ -2,11 +2,11 @@ export interface Transaccion {
     id:string;
     Descripcion?:string;
     EventoID?:string;
-    Fecha: firebase.firestore.Timestamp | Date;
+    Fecha: Date;
     FilialID?:string;
     Ingreso: boolean;
     Monto:number;
     PersonaID?:string;
-    Tipo:string;
-    TipoMonetario:string;
+    Tipo: 'Afiliacion' | 'Evento' | 'Bar' | 'Alquiler' | 'Otro';
+    Activa: boolean;
 }

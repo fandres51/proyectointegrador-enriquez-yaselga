@@ -1,37 +1,43 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainScreenComponent } from './components/layouts/main-screen/main-screen.component';
-import { EstudiantesComponent } from './components/estudiantes/estudiantes.component';
-import { AutoridadesComponent } from './components/autoridades/autoridades.component';
-import { FormularioActualizacionComponent } from './components/estudiantes/formulario-actualizacion/formulario-actualizacion.component';
-import { FormularioAfiliacionComponent } from './components/estudiantes/formulario-afiliacion/formulario-afiliacion.component';
-import { RecursosComponent } from './components/recursos/recursos.component';
-import { FinancieroComponent } from './components/financiero/financiero.component';
-import { AjustesComponent } from './components/ajustes/ajustes.component';
-import { NuevaTransaccionComponent } from './components/financiero/nueva-transaccion/nueva-transaccion.component';
-import { DefinirCargosComponent } from './components/ajustes/definir-cargos/definir-cargos.component';
-import { CambiarAsociacionComponent } from './components/ajustes/cambiar-asociacion/cambiar-asociacion.component';
+import { PageNotFoundComponent } from './components/layouts/page-not-found/page-not-found.component';
+import { EstudiantesMainComponent } from './components/estudiantes/estudiantes-main/estudiantes-main.component';
+import { EstudiantesActualizacionComponent } from './components/estudiantes/estudiantes-actualizacion/estudiantes-actualizacion.component';
+import { EstudiantesAfiliacionComponent } from './components/estudiantes/estudiantes-afiliacion/estudiantes-afiliacion.component';
+import { AutoridadesMainComponent } from './components/autoridades/autoridades-main/autoridades-main.component';
+import { AjustesMainComponent } from './components/ajustes/ajustes-main/ajustes-main.component';
+import { AjustesNuevoSemestreComponent } from './components/ajustes/ajustes-nuevo-semestre/ajustes-nuevo-semestre.component';
+import { AjustesCambiarAsociacionComponent } from './components/ajustes/ajustes-cambiar-asociacion/ajustes-cambiar-asociacion.component';
+import { EventosMainComponent } from './components/eventos/eventos-main/eventos-main.component';
+import { EventosInfoComponent } from './components/eventos/eventos-info/eventos-info.component';
+import { EventosCrearComponent } from './components/eventos/eventos-crear/eventos-crear.component';
+import { FinancieroMainComponent } from './components/financiero/financiero-main/financiero-main.component';
+import { FinancieroCrearComponent } from './components/financiero/financiero-crear/financiero-crear.component';
+import { EventosEditarComponent } from './components/eventos/eventos-editar/eventos-editar.component';
+import { AjustesConsultarAsociacionComponent } from './components/ajustes/ajustes-consultar-asociacion/ajustes-consultar-asociacion.component';
+import { AjustesDefinirAporteComponent } from './components/ajustes/ajustes-definir-aporte/ajustes-definir-aporte.component';
 
 
 const routes: Routes = [
   { path: '', component: MainScreenComponent },
-  { path: 'main', component: MainScreenComponent, children: [
-      { path: 'estudiantes', component: EstudiantesComponent },
-      { path: 'actualizar', component: FormularioActualizacionComponent },
-      { path: 'afiliar', component: FormularioAfiliacionComponent },
-      { path: 'autoridades', component: AutoridadesComponent },
-      { path: 'financiero', component: FinancieroComponent },
-      { path: 'ajustes', component: AjustesComponent },
-      { path: 'nuevatransaccion', component: NuevaTransaccionComponent },
-      { path: 'recursos', component: RecursosComponent},
-      {
-        path: 'ajustes', component: AjustesComponent, children: [
-          { path: 'definir-cargos', component: DefinirCargosComponent },
-          { path: 'cambiar-asociacion', component: CambiarAsociacionComponent }
-        ]
-      }
-    ]
-  },
+  { path: 'estudiantes', component: EstudiantesMainComponent },
+  { path: 'estudiantes/actualizar/:id', component: EstudiantesActualizacionComponent },
+  { path: 'estudiantes/afiliar/:id', component: EstudiantesAfiliacionComponent },
+  { path: 'autoridades', component: AutoridadesMainComponent },
+  { path: 'eventos', component: EventosMainComponent },
+  { path: 'eventos/info/:id', component: EventosInfoComponent },
+  { path: 'eventos/nuevo', component: EventosCrearComponent },
+  { path: 'eventos/actualizar/:id', component: EventosEditarComponent },
+  { path: 'financiero', component: FinancieroMainComponent },
+  { path: 'financiero/nuevo', component: FinancieroCrearComponent },
+  { path: 'ajustes', component: AjustesMainComponent, children: [
+    { path: 'nuevo-semestre', component: AjustesNuevoSemestreComponent },
+    { path: 'cambiar-asociacion', component: AjustesCambiarAsociacionComponent },
+    { path: 'consultar-asociacion', component: AjustesConsultarAsociacionComponent },
+    { path: 'definir-aporte', component: AjustesDefinirAporteComponent }
+  ]},
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

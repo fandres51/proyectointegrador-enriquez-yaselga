@@ -1,0 +1,118 @@
+<div fxLayout="column">
+    <div class="afiliar-title" fxLayout="row">
+        <button (click)="regresar()" class="button-white" mat-button>
+            <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_back</mat-icon>
+        </button>
+        <h1>Título: {{evento.title}}</h1>
+    </div>
+    <div class="informacion" fxLayout="row" fxLayoutAlign=" start" fxLayout.lt-md="row">
+        <div fxLayout="column" fxLayoutAlign=" start" fxFlex="50">
+            <div *ngIf="evento.tipo==='Evento'" fxLayout="column">
+                <div class="group">
+                    <div>
+                        <h2 class="title">Inicio</h2>
+                    </div>
+                    <div class="info">{{evento.start}}</div>
+                </div>
+                <div class="group">
+                    <div>
+                        <h2 class="title">Fin</h2>
+                    </div>
+                    <div class="info">{{evento.end}}</div>
+                </div>
+            </div>
+            <div *ngIf="evento.tipo!=='Evento'" fxLayout="column">
+                <div class="group">
+                    <div>
+                        <h2 class="title">Hora de inicio</h2>
+                    </div>
+                    <div class="info">{{evento.startTime}}</div>
+                </div>
+                <div class="group">
+                    <div>
+                        <h2 class="title">Hora de fin</h2>
+                    </div>
+                    <div class="info">{{evento.endTime}}</div>
+                </div>
+                <div class="group">
+                    <div>
+                        <h2 class="title">Días</h2>
+                    </div>
+                    <div class="info" *ngFor="let dia of evento.daysOfWeek">
+                        <div *ngIf="dia===0">Domingo</div>
+                        <div *ngIf="dia===1">Lunes</div>
+                        <div *ngIf="dia===2">Martes</div>
+                        <div *ngIf="dia===3">Miercoles</div>
+                        <div *ngIf="dia===4">Jueves</div>
+                        <div *ngIf="dia===5">Viernes</div>
+                        <div *ngIf="dia===6">Sábado</div>
+                    </div>
+                </div>
+                <div class="group">
+                    <div>
+                        <h2 class="title">Fecha de inicio</h2>
+                    </div>
+                    <div class="info">{{evento.startRecur}}</div>
+                </div>
+                <div class="group">
+                    <div>
+                        <h2 class="title">Fecha de fin</h2>
+                    </div>
+                    <div class="info">{{evento.endRecur}}</div>
+                </div>
+            </div>
+        </div>
+        <div fxLayout="column" fxLayoutAlign=" start" fxFlex="50">
+            <div class="group" fxLayout="column">
+                <div>
+                    <h2 class="title">Tipo</h2>
+                </div>
+                <div class="info">{{evento.tipo}}</div>
+            </div>
+            <div class="group" *ngIf="evento.presupuesto" fxLayout="column">
+                <div>
+                    <h2 class="title">Presupuesto</h2>
+                </div>
+                <div class="info">{{evento.presupuesto}}</div>
+            </div>
+            <div class="group" *ngIf="evento.lugar" fxLayout="column">
+                <div>
+                    <h2 class="title">Lugar</h2>
+                </div>
+                <div class="info">{{evento.lugar}}</div>
+            </div>
+            <div class="group" fxLayout="column">
+                <div>
+                    <h2 class="title">Todo el día</h2>
+                </div>
+                <div *ngIf="evento.allDay" class="info">Si</div>
+                <div *ngIf="!evento.allDay" class="info">No</div>
+            </div>
+            <div class="group" *ngIf="evento.descripcion" fxLayout="column">
+                <div>
+                    <h2 class="title">Descripción</h2>
+                </div>
+                <div class="info">{{evento.descripcion}}</div>
+            </div>
+            <div class="group" *ngIf="evento.responsables.length > 0" fxLayout="column">
+                <div>
+                    <h2 class="title">Responsables</h2>
+                </div>
+                <div class="info" *ngFor="let responsable of evento.responsables">{{responsable}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="line"></div>
+    <div class="icons" fxLayout="row" fxLayoutAlign="end end">
+        <div>
+            <button mat-button (click)="editarEvento()">
+                <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
+            </button>
+        </div>
+        <div>
+            <button mat-button (click)="borrarEvento()">
+                <mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+.filters {
+    padding: 20px;
+}
+
+.title {
+    color: #0d288a;
+    margin-top: 10px;
+}
+
+input, select, .button {
+    padding: 10px;
+    width: 100%;
+    border: grey 1px solid;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.button {
+    background-color: #0d288a;
+    color: white;
+    width: 45%;
+    border: none;
+}
+
+.filtrosButton {
+    border: none;
+    color: #0d288a;
+    background-color: white;
+    margin: 1px;
+    border-radius: 0;
+    padding: 0 10px;
+    width: 70px;
+}
+
+.selected {
+    border: none;
+    color: white;
+    background-color: #0d288a;
+    margin: 1px;
+    border-radius: 0;
+    padding: 0 10px;
+    width: 70px;
+}
+

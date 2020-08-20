@@ -1,0 +1,27 @@
+<div class="event-component" fxLayout="column" fxLayoutAlign="space-around center">
+    <div fxLayout="row" fxLayoutAlign="end center" class="calendar-options">
+        <div>
+            <h2>
+                Mostrar: 
+            </h2>
+        </div>
+        <div>
+            <select name="tipoEvento" id="tipoEvento" [(ngModel)]="tipoFiltro" (change)="cambiarFiltro()">
+                <option value="Todos">Todos</option>
+                <option value="Evento">Evento</option>
+                <option value="Club">Club</option>
+                <option value="Curso">Curso</option>
+            </select>
+        </div>
+        <div>
+            <button mat-button fxLayout="row" fxLayoutAlign="space-around center" (click)="irANuevoEvento()">
+                Nuevo evento
+                <mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>
+            </button>
+        </div>
+    </div>
+    <hr>
+    <div class="calendar">
+        <full-calendar [options]="calendarOptions"></full-calendar>
+    </div>
+</div>

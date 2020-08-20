@@ -1,0 +1,120 @@
+<h1 mat-dialog-title>{{estudiante.Nombre}} {{estudiante.Apellido}}</h1>
+<div mat-dialog-content>
+
+    <div fxLayout="row">
+        <div fxFlex="50" class="dato">
+            <div class="titulo">Cedula </div>
+            <div>{{estudiante.Cedula}}</div>
+        </div>
+
+        <div class="dato">
+            <div class="titulo">No. Único </div>
+            <div>{{estudiante.NoUnico}}</div>
+        </div>
+    </div>
+
+    <div fxLayout="row">
+        <div *ngIf="estudiante.Carrera" fxFlex="50" class="dato">
+            <div class="titulo">Carrera </div>
+            <div>{{estudiante.Carrera}}</div>
+        </div>
+
+        <div *ngIf="estudiante.SemestreReferencial" class="dato">
+            <div class="titulo">Semestre Referencial </div>
+            <div>{{estudiante.SemestreReferencial}}</div>
+        </div>
+    </div>
+
+    <div fxLayout="row">
+        <div *ngIf="estudiante.CorreoInstitucional" fxFlex="50" class="dato">
+            <div class="titulo">Correo Institucional </div>
+            <div>{{estudiante.CorreoInstitucional}}</div>
+        </div>
+
+        <div *ngIf="estudiante.CorreoPersonal" class="dato">
+            <div class="titulo">Correo Personal </div>
+            <div>{{estudiante.CorreoPersonal}}</div>
+        </div>
+    </div>
+
+    <div fxLayout="row">
+        <div *ngIf="estudiante.SectorDomiciliario" fxFlex="50" class="dato">
+            <div class="titulo">Sector Domiciliario </div>
+            <div>{{estudiante.SectorDomiciliario}}</div>
+        </div>
+
+        <div *ngIf="estudiante.Telefono" class="dato">
+            <div class="titulo">Número de Teléfono </div>
+            <div>{{estudiante.Telefono}}</div>
+        </div>
+    </div>
+
+    <div *ngIf="estudiante.FechaNacimiento" class="dato">
+        <div class="titulo">Fecha de Nacimiento </div>
+        <div>{{estudiante.FechaNacimiento}}</div>
+    </div>
+
+</div>
+<hr>
+<div fxLayout="row" fxLayoutAlign="space-between end">
+    <div class="aportes" fxLayout="column" fxFlex="60">
+        <div>
+            <h2>Aportes previos: </h2>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between ">
+            <div>
+                <h2>
+                    Período
+                </h2>
+            </div>
+            <div>
+                <h2>
+                    Aporte
+                </h2>
+            </div>
+            <div>
+                <h2>
+                    Deuda
+                </h2>
+            </div>
+        </div>
+        <div *ngFor="let aporte of aportes">
+            <div fxLayout="row" fxLayoutAlign="space-between ">
+                <div>
+                    <h4>
+                        {{aporte.periodo}}
+                    </h4>
+                </div>
+                <div>$ {{aporte.valor}}</div>
+                <div>$ {{aporte.deuda}}</div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h3 class="deuda">
+            Deuda total: $ {{deuda}}
+        </h3>
+    </div>
+</div>
+<hr>
+<div mat-dialog-actions>
+    <button class="button" [routerLink]="['/estudiantes/afiliar', estudiante.NoUnico]" (click)="cerrarDialog()" mat-button
+        [disabled]="estudiante.EstadoAfiliacion === 'Aportante' || estudiante.SemestreReferencial === 'Graduado' || estudiante.SemestreReferencial === 'Retirado'">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>
+    </button>
+    <button class="button" [routerLink]="['/estudiantes/actualizar', estudiante.NoUnico]" (click)="cerrarDialog()" mat-button>
+        <mat-icon aria-hidden=" false" aria-label="Example home icon">edit</mat-icon>
+    </button>
+    <button class="button red" mat-button (click)="graduar()">
+        <!-- <mat-icon aria-hidden="false" aria-label="Example home icon">grade</mat-icon> -->
+        Graduar
+    </button>
+    <button class="button red" mat-button (click)="darDeBaja()">
+        <!-- <mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon> -->
+        Dar de baja
+    </button>
+    <button class="button red" mat-button (click)="desafiliar()">
+        <!-- <mat-icon aria-hidden="false" aria-label="Example home icon">remove</mat-icon> -->
+        Desafiliar
+    </button>
+</div>

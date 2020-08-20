@@ -1,0 +1,124 @@
+<div fxLayout="column" fxLayoutAlign=" center">
+    <div class="afiliar-title" fxLayout="row">
+        <button (click)="regresar()" class="button-white" mat-button>
+            <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_back</mat-icon>
+        </button>
+        <h1>Crear Evento</h1>
+    </div>
+    <div class="form">
+        <form fxLayout="column" (ngSubmit) = "crearEvento()"> 
+            <div fxLayout="column">
+                <label class="label" for="title">Titulo</label>
+                <input class="input" id="title" name="title" type="text" [(ngModel)]="nuevoEvento.title">
+            </div>
+            <div fxLayout="column">
+                <label class="label" for="allDay">Todo el día</label>
+                <input class="input" id="allDay" name="allDay" type="checkbox" [(ngModel)]="nuevoEvento.allDay">
+            </div>
+            <div fxLayout="column">
+                <label class="label" for="color">Color</label>
+                <input class="input" id="color" name="color" type="color" [(ngModel)]="nuevoEvento.color">
+            </div>
+            <div fxLayout="column">
+                <label class="label" for="descripcion">Descripción</label>
+                <input class="input" id="descripcion" name="descripcion" type="text" [(ngModel)]="nuevoEvento.descripcion">
+            </div>
+            <div fxLayout="column">
+                <label class="label" for="presupuesto">Presupuesto</label>
+                <input class="input" id="presupuesto" name="presupuesto" type="number" min="0" step=".01" [(ngModel)]="nuevoEvento.presupuesto">
+            </div>
+            <div fxLayout="column">
+                <label class="label" for="responsables">Responsable 1: </label>
+                <select name="responsables" id="responsables" [(ngModel)]="responsables.resp1">
+                    <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
+                </select>
+            </div>
+            <div fxLayout="column">
+                <label class="label" for="responsables">Responsable 2: </label>
+                <select name="responsables" id="responsables" [(ngModel)]="responsables.resp2">
+                    <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
+                </select>
+            </div>
+            <div fxLayout="column">
+                <label class="label" for="responsables">Responsable 3: </label>
+                <select name="responsables" id="responsables" [(ngModel)]="responsables.resp3">
+                    <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
+                </select>
+            </div>
+
+            <div fxLayout="column">
+                <label class="label" for="responsables">Tipo: </label>
+                <select name="responsables" id="responsables" #responsable [(ngModel)]="nuevoEvento.tipo">
+                    <option value="Evento">Evento</option>
+                    <option value="Club">Club</option>
+                    <option value="Curso">Curso</option>
+                </select>
+            </div>
+
+            <div *ngIf="nuevoEvento.tipo === 'Evento'">
+                <div fxLayout="column">
+                    <label class="label" for="start">Inicio</label>
+                    <input class="input" id="start" name="start" type="datetime-local" [(ngModel)]="nuevoEvento.start">
+                </div>
+                <div fxLayout="column">
+                    <label class="label" for="end">Fin</label>
+                    <input class="input" id="end" name="end" type="datetime-local" [(ngModel)]="nuevoEvento.end">
+                </div>
+            </div>
+            <div *ngIf="nuevoEvento.tipo === 'Club' || nuevoEvento.tipo === 'Curso'">
+                <div fxLayout="column">
+                    <label class="label" for="startRecur">Fecha de Inicio</label>
+                    <input class="input" id="startRecur" name="startRecur" type="date" [(ngModel)]="nuevoEvento.startRecur">
+                </div>
+                <div fxLayout="column">
+                    <label class="label" for="endRecur">Fecha del Fin</label>
+                    <input class="input" id="endRecur" name="endRecur" type="date" [(ngModel)]="nuevoEvento.endRecur">
+                </div>
+                <div class="label">
+                    Días de la semana: 
+                </div>
+                <div fxLayout="row">
+                    <div class="group-day" fxLayout="column">
+                        <label class="label" for="lunes">Lunes</label>
+                        <input id="lunes" name="lunes" type="checkbox" [(ngModel)]="dias.domingo">
+                    </div>
+                    <div class="group-day" fxLayout="column">
+                        <label class="label" for="martes">Martes</label>
+                        <input id="martes" name="martes" type="checkbox" [(ngModel)]="dias.lunes">
+                    </div>
+                    <div class="group-day" fxLayout="column">
+                        <label class="label" for="miercoles">Miercoles</label>
+                        <input id="miercoles" name="miercoles" type="checkbox" [(ngModel)]="dias.martes">
+                    </div>
+                    <div class="group-day" fxLayout="column">
+                        <label class="label" for="jueves">Jueves</label>
+                        <input id="jueves" name="jueves" type="checkbox" [(ngModel)]="dias.miercoles">
+                    </div>
+                    <div class="group-day" fxLayout="column">
+                        <label class="label" for="viernes">Viernes</label>
+                        <input id="viernes" name="viernes" type="checkbox" [(ngModel)]="dias.jueves">
+                    </div>
+                    <div class="group-day" fxLayout="column">
+                        <label class="label" for="sabado">Sabado</label>
+                        <input id="sabado" name="sabado" type="checkbox" [(ngModel)]="dias.viernes">
+                    </div>
+                    <div class="group-day" fxLayout="column">
+                        <label class="label" for="domingo">Domingo</label>
+                        <input id="domingo" name="domingo" type="checkbox" [(ngModel)]="dias.sabado">
+                    </div>
+                </div>
+                <div fxLayout="column">
+                    <label class="label" for="startTime">Hora de Inicio</label>
+                    <input class="input" id="startTime" name="startTime" type="time" [(ngModel)]="nuevoEvento.startTime">
+                </div>
+                <div fxLayout="column">
+                    <label class="label" for="endTime">Hora de Fin</label>
+                    <input class="input" id="endTime" name="endTime" type="time" [(ngModel)]="nuevoEvento.endTime">
+                </div>
+            </div>
+
+            <button mat-button class="button">
+                Crear Evento
+            </button>
+        </form>
+    </div>

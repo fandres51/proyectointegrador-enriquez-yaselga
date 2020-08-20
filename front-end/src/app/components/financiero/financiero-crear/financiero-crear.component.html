@@ -1,0 +1,49 @@
+<div fxLayout="column" fxLayoutAlign=" center">
+    <div class="add-title" fxLayout="row">
+        <button routerLink="/financiero" class="button-white" mat-button>
+            <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_back</mat-icon>
+        </button>
+        <h1>Nueva Transacción</h1>
+    </div>
+
+    <div>
+        <form (ngSubmit)="addTransaccion(transaccion)" fxLayout="column" fxLayoutAlign="center center" class="form">
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addMonto">Monto: </label>
+                <input type="number" min="0" step=".01" name="addMonto" id="addMonto" [(ngModel)]="transaccion.Monto">
+            </div>
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addIngreso">Ingreso / Egreso: </label>
+                <select name="addIngreso" id="addIngreso" [(ngModel)]="transaccion.Ingreso">
+                    <option value="true">Ingreso</option>
+                    <option value="false">Egreso</option>
+                </select>
+            </div>
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addFecha">Fecha: </label>
+                <div>
+                    <input type="date" name="fechaTransaccion" ng-change="agregarFechaATransaccion($event)">
+                </div>
+            </div>
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addTipo">Tipo: </label>
+                <select name="addTipo" id="addTipo" [(ngModel)]="transaccion.Tipo">
+                    <option value="Afiliacion">Afiliacion</option>
+                    <option value="Evento">Evento</option>
+                    <option value="Bar">Bar</option>
+                    <option value="Alquiler">Alquiler</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addDescripcion">Descripción: </label>
+                <input type="text" name="addDescripcion" id="addDescripcion" [(ngModel)]="transaccion.Descripcion">
+            </div>
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <button mat-button>
+                    Generar transacción
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

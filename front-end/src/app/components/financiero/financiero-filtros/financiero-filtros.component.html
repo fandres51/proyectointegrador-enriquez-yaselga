@@ -1,0 +1,64 @@
+<div class="filters">
+
+    <div fxHide.lt-md>
+        <h2 class="title">Filtros:</h2>
+        <div>
+            <h3 class="title">Por tipo</h3>
+            <select name="filtroTipo" id="filtroTipo" [(ngModel)]="tipoFiltro">
+                <option value="">Todos</option>
+                <option value="Afiliacion">Afiliación</option>
+                <option value="Bar">Bar</option>
+                <option value="Alquiler">Préstamo o alquiler</option>
+                <option value="Evento">Evento</option>
+                <option value="Otro">Otro</option>
+            </select>
+        </div>
+        <div>
+            <h3 class="title">Por tipo económico</h3>
+            <select name="tipoIngreso" id="tipoIngreso" [(ngModel)]="ingresoFiltro">
+                <option value="t">Todos</option>
+                <option value="ingreso">Ingreso</option>
+                <option value="egreso">Egreso</option>
+            </select>
+        </div>
+        <div>
+            <h3 class="title">Por fecha</h3>
+            <div>
+                <input type="date" name="fechaInicial" [(ngModel)]="startDateFiltro">
+            </div>
+            <div>
+                <input type="date" name="fechaFinal" [(ngModel)]="endDateFiltro">
+            </div>
+        </div>
+        <div>
+            <h3 class="title">Por Monto</h3>
+            <div>
+                <input type="number" step="0.01" min="0" [(ngModel)]="startMontoFiltro">
+            </div>
+            <div>
+                <input type="number" step="0.01" min="0" [(ngModel)]="endMontoFiltro">
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between ">
+            <button class="button" (click)="filtrar()">Filtrar</button>
+            <button class="button" (click)="limpiarFiltro()">Limpiar filtros</button>
+        </div>
+    </div>
+    <hr fxHide.lt-md>
+    <div fxHide.lt-md>
+        <h2 class="title">Ordenar por:</h2>
+        <!-- <div fxLayout="row"> -->
+        <button mat-button [ngClass]="{
+                                        'filtrosButton': tipoDeOrdenamiento != 'fecha', 
+                                        'selected': tipoDeOrdenamiento == 'fecha'
+                                    }" mat-button (click)="ordenar('fecha')">Fecha</button>
+        <button mat-button [ngClass]="{
+                                        'filtrosButton': tipoDeOrdenamiento != 'monto', 
+                                        'selected': tipoDeOrdenamiento == 'monto'
+                                    }" mat-button (click)="ordenar('monto')">Monto</button>
+        <button mat-button [ngClass]="{
+                                        'filtrosButton': tipoDeOrdenamiento != 'tipo', 
+                                        'selected': tipoDeOrdenamiento == 'tipo'
+                                    }" mat-button (click)="ordenar('tipo')">Tipo</button>
+    </div>
+</div>

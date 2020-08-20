@@ -1,0 +1,25 @@
+.line {
+    border-right: 1px solid #606060;
+}
+
+.element {
+    width: 100%;
+    padding: 20px;
+    border-bottom: 1px solid gray;
+}
+
+a:hover {
+    text-decoration: none;
+    color: black;
+    div{
+        background-color: rgb(204, 204, 204);
+    }  
+}
+
+a {
+    color: #606060;
+}
+
+.ro {
+    margin: 40px;
+}
