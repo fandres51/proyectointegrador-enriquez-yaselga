@@ -24,6 +24,10 @@
                 <input class="input" id="descripcion" name="descripcion" type="text" [(ngModel)]="evento.descripcion">
             </div>
             <div fxLayout="column">
+                <label class="label" for="lugar">Lugar</label>
+                <input class="input" id="lugar" name="lugar" type="text" [(ngModel)]="evento.lugar">
+            </div>
+            <div fxLayout="column">
                 <label class="label" for="presupuesto">Presupuesto</label>
                 <input class="input" id="presupuesto" name="presupuesto" type="number" min="0" step=".01" [(ngModel)]="evento.presupuesto">
             </div>

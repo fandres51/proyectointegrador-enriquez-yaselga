@@ -21,7 +21,7 @@ export class EventosCrearComponent implements OnInit {
     color: 'blue',
     tipo: 'Evento',
     responsables: [],
-    lugar: 'EPN'
+    lugar: ''
   };
 
   public dias = {
