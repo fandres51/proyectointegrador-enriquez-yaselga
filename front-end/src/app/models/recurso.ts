@@ -8,4 +8,5 @@ export interface Recurso{
     tipo?: string;
     ubicacion?: string;
     valor?: number;
+    condicion: string;
 }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainScreenComponent } from './components/layouts/main-screen/main-screen.component';
 import { PageNotFoundComponent } from './components/layouts/page-not-found/page-not-found.component';
@@ -17,6 +17,7 @@ import { FinancieroCrearComponent } from './components/financiero/financiero-cre
 import { EventosEditarComponent } from './components/eventos/eventos-editar/eventos-editar.component';
 import { AjustesConsultarAsociacionComponent } from './components/ajustes/ajustes-consultar-asociacion/ajustes-consultar-asociacion.component';
 import { AjustesDefinirAporteComponent } from './components/ajustes/ajustes-definir-aporte/ajustes-definir-aporte.component';
+import { RecursosMainComponent } from './components/recursos/recursos-main/recursos-main.component'
 
 
 const routes: Routes = [
@@ -29,9 +30,10 @@ const routes: Routes = [
   { path: 'eventos/info/:id', component: EventosInfoComponent },
   { path: 'eventos/nuevo', component: EventosCrearComponent },
   { path: 'eventos/actualizar/:id', component: EventosEditarComponent },
+  { path: 'recursos',component: RecursosMainComponent }, 
   { path: 'financiero', component: FinancieroMainComponent },
   { path: 'financiero/nuevo', component: FinancieroCrearComponent },
-  { path: 'ajustes', component: AjustesMainComponent, children: [
+    { path: 'ajustes', component: AjustesMainComponent, children: [
     { path: 'nuevo-semestre', component: AjustesNuevoSemestreComponent },
     { path: 'cambiar-asociacion', component: AjustesCambiarAsociacionComponent },
     { path: 'consultar-asociacion', component: AjustesConsultarAsociacionComponent },

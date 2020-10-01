@@ -30,6 +30,7 @@ import { AutoridadesListarComponent } from './components/autoridades/autoridades
 import { EventosInfoComponent } from './components/eventos/eventos-info/eventos-info.component';
 import { FinancieroModule } from './components/financiero/financiero.module';
 import { EventosEditarComponent } from './components/eventos/eventos-editar/eventos-editar.component';
+import { RecursosModule } from './components/recursos/recurso.module'
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -48,7 +49,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AutoridadesDetalleComponent,
     AutoridadesMainComponent, 
     AutoridadesListarComponent, 
-    EventosInfoComponent, EventosEditarComponent
+    EventosInfoComponent, 
+    EventosEditarComponent,
+    
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firabase),
@@ -68,7 +71,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     EstudiantesModule,
     AjustesModule,
     FullCalendarModule,
-    FinancieroModule
+    FinancieroModule,
+    RecursosModule,
   ],
   providers: [
   ],
