@@ -1,6 +1,6 @@
-import { Component, Inject, OnInit, Output } from '@angular/core';
+import { Component, Inject, OnInit, Output ,EventEmitter} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { EventEmitter } from 'protractor';
+
 import { Recurso } from 'src/app/models/recurso';
 import { RecursosService } from 'src/app/services/recursos.service';
 
