@@ -1,0 +1,21 @@
+<div>
+    <div>
+        <app-titles [regresarA]="rutaDeRegreso" [text]="fechaEleccion"></app-titles>
+    </div>
+    <div>
+        <label for="date">Fecha: </label>
+        <input type="text" name="fecha" id="fecha" [(ngModel)]="eleccion.fecha">
+    </div>
+    <div>
+        <app-basic-crud [listOfElements]=listas (selectedItem)="irALista($event)" (newItem)="nuevaLista()"></app-basic-crud>
+    </div>
+    <div>
+        <h2>Definir lista ganadora</h2>
+    </div>
+    <div>
+        <app-list [list]=listas (selectedItem)="definirListaGanadora($event)"></app-list>
+    </div>
+    <div>
+        
+    </div>
+</div>

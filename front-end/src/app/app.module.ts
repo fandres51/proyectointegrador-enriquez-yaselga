@@ -30,6 +30,13 @@ import { AutoridadesListarComponent } from './components/autoridades/autoridades
 import { EventosInfoComponent } from './components/eventos/eventos-info/eventos-info.component';
 import { FinancieroModule } from './components/financiero/financiero.module';
 import { EventosEditarComponent } from './components/eventos/eventos-editar/eventos-editar.component';
+import { TitlesComponent } from './components/layouts/titles/titles.component';
+import { ListComponent } from './components/layouts/list/list.component';
+import { EleccionesMainComponent } from './components/elecciones/elecciones-main/elecciones-main.component';
+import { BasicCrudComponent } from './components/layouts/basic-crud/basic-crud.component';
+import { SearchComponent } from './components/layouts/search/search.component';
+import { EleccionesDetalleComponent } from './components/elecciones/elecciones-detalle/elecciones-detalle.component';
+import { EleccionesListaComponent } from './components/elecciones/elecciones-lista/elecciones-lista.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -48,7 +55,13 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AutoridadesDetalleComponent,
     AutoridadesMainComponent, 
     AutoridadesListarComponent, 
-    EventosInfoComponent, EventosEditarComponent
+    EventosInfoComponent, 
+    EventosEditarComponent, 
+    TitlesComponent, 
+    ListComponent, 
+    EleccionesMainComponent, 
+    BasicCrudComponent, 
+    SearchComponent, EleccionesDetalleComponent, EleccionesListaComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firabase),
@@ -58,7 +71,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FlexLayoutModule,
     BrowserAnimationsModule,
     AngularFirestoreModule,
-    FormsModule,
     MaterialComponentsModule,
     ReactiveFormsModule,
     NgbModule,

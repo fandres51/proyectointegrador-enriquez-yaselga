@@ -17,7 +17,9 @@ import { FinancieroCrearComponent } from './components/financiero/financiero-cre
 import { EventosEditarComponent } from './components/eventos/eventos-editar/eventos-editar.component';
 import { AjustesConsultarAsociacionComponent } from './components/ajustes/ajustes-consultar-asociacion/ajustes-consultar-asociacion.component';
 import { AjustesDefinirAporteComponent } from './components/ajustes/ajustes-definir-aporte/ajustes-definir-aporte.component';
-
+import { EleccionesMainComponent } from './components/elecciones/elecciones-main/elecciones-main.component';
+import { EleccionesDetalleComponent } from './components/elecciones/elecciones-detalle/elecciones-detalle.component';
+import { EleccionesListaComponent } from './components/elecciones/elecciones-lista/elecciones-lista.component';
 
 const routes: Routes = [
   { path: '', component: MainScreenComponent },
@@ -31,6 +33,9 @@ const routes: Routes = [
   { path: 'eventos/actualizar/:id', component: EventosEditarComponent },
   { path: 'financiero', component: FinancieroMainComponent },
   { path: 'financiero/nuevo', component: FinancieroCrearComponent },
+  { path: 'elecciones', component: EleccionesMainComponent },
+  { path: 'elecciones/:eleccion/:lista', component: EleccionesListaComponent },
+  { path: 'elecciones/:id', component: EleccionesDetalleComponent },
   { path: 'ajustes', component: AjustesMainComponent, children: [
     { path: 'nuevo-semestre', component: AjustesNuevoSemestreComponent },
     { path: 'cambiar-asociacion', component: AjustesCambiarAsociacionComponent },
