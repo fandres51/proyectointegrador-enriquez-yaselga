@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AjustesMainComponent } from './ajustes-main/ajustes-main.component';
-import { AjustesCambiarAsociacionComponent } from './ajustes-cambiar-asociacion/ajustes-cambiar-asociacion.component';
 import { AjustesNuevoSemestreComponent } from './ajustes-nuevo-semestre/ajustes-nuevo-semestre.component';
 import { MaterialComponentsModule } from 'src/app/material.module';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +12,7 @@ import { AjustesDefinirAporteComponent } from './ajustes-definir-aporte/ajustes-
 
 
 @NgModule({
-  declarations: [AjustesMainComponent, AjustesCambiarAsociacionComponent, AjustesNuevoSemestreComponent, AjustesConsultarAsociacionComponent, AjustesDefinirAporteComponent],
+  declarations: [AjustesMainComponent, AjustesNuevoSemestreComponent, AjustesConsultarAsociacionComponent, AjustesDefinirAporteComponent],
   imports: [
     CommonModule,
     MaterialComponentsModule,

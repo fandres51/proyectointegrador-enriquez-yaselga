@@ -18,7 +18,7 @@
             </div>
             <div fxLayout="column" fxLayoutAlign="center start">
                 <div class="nombre" fxLayoutAlign=" end">
-                    Ernesto Yaselga
+                    {{nombreUsuario}}
                     <button class="minibutton" fxLayoutAlign=" center" [matMenuTriggerFor]="minibutton">
                         <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_drop_down</mat-icon>
                     </button>
@@ -26,14 +26,11 @@
                         <a routerLink="/ajustes">
                             <button mat-menu-item class="menu-item">Configuración</button>
                         </a>
-                        <a routerLink="/recursos">
+                        <a>
                             <button (click)="logout()" mat-menu-item class="menu-item">Cerrar Sesión</button>
                         </a>
                     </mat-menu>
                 </div>
-                <!-- TODO Cambiar el texto para traerlo de la base de datos -->
-                <div class="cargo" fxLayoutAlign=" start">Presidente</div>
-                <!-- TODO Cambiar el texto para traerlo de la base de datos -->
             </div>
         </div>
     </div>

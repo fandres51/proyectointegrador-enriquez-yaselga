@@ -1,17 +1,19 @@
 <div>
-    <div>
-        <app-titles [regresarA]="rutaDeRegreso" [text]="lista.nombre"></app-titles>
-    </div>
-    <div>
-        <h2>Nombre de la lista: </h2>
-        <h3>{{lista.nombre}}</h3>
-    </div>
+    <app-titles [regresarA]="rutaDeRegreso" [text]="lista.nombre"></app-titles>
+</div>
+<div class="lista">
     <div>
         <div>
             <h2>Lista de integrantes:</h2>
         </div>
         <div>
-            <app-basic-crud [listOfElements]="dignidades" (selectedItem)="irADignidad($event)" (newItem)="newDignidad()"></app-basic-crud>
+            <app-basic-crud [listOfElements]="dignidadesNombres" (selectedItem)="irADignidad($event)" (newItem)="newDignidad()"></app-basic-crud>
         </div>
+    </div>
+    <div class="delete">
+        <button mat-button (click)="deleteList()">
+            Eliminar lista
+            <mat-icon aria-hidden="false" aria-label="trash">delete</mat-icon>
+        </button>
     </div>
 </div>

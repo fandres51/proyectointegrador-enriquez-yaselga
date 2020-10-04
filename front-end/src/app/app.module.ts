@@ -37,6 +37,23 @@ import { BasicCrudComponent } from './components/layouts/basic-crud/basic-crud.c
 import { SearchComponent } from './components/layouts/search/search.component';
 import { EleccionesDetalleComponent } from './components/elecciones/elecciones-detalle/elecciones-detalle.component';
 import { EleccionesListaComponent } from './components/elecciones/elecciones-lista/elecciones-lista.component';
+import { AutoridadFormComponent } from './components/elecciones/autoridad-form/autoridad-form.component';
+import { AuthService } from './services/auth.service';
+import { EleccionService } from './services/eleccion.service';
+import { EstudiantesService } from './services/estudiantes.service';
+import { TransaccionesService } from './services/transacciones.service';
+import { EventosService } from './services/eventos.service';
+import { AsociacionService } from './services/asociacion.service';
+import { AutoridadesService } from './services/autoridades.service';
+import { AutoridadEditComponent } from './components/elecciones/autoridad-edit/autoridad-edit.component';
+import { ContratosMainComponent } from './components/contratos/contratos-main/contratos-main.component';
+import { ContratosDetalleComponent } from './components/contratos/contratos-detalle/contratos-detalle.component';
+import { ContratosNuevoComponent } from './components/contratos/contratos-nuevo/contratos-nuevo.component';
+import { IncidentesMainComponent } from './components/incidentes/incidentes-main/incidentes-main.component';
+import { IncidentesFiltrosComponent } from './components/incidentes/incidentes-filtros/incidentes-filtros.component';
+import { IncidentesListarComponent } from './components/incidentes/incidentes-listar/incidentes-listar.component';
+import { IncidentesCrearComponent } from './components/incidentes/incidentes-crear/incidentes-crear.component';
+import { IncidentesEditarComponent } from './components/incidentes/incidentes-editar/incidentes-editar.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -61,7 +78,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     ListComponent, 
     EleccionesMainComponent, 
     BasicCrudComponent, 
-    SearchComponent, EleccionesDetalleComponent, EleccionesListaComponent
+    SearchComponent, EleccionesDetalleComponent, EleccionesListaComponent, AutoridadFormComponent, AutoridadEditComponent, ContratosMainComponent, ContratosDetalleComponent, ContratosNuevoComponent, IncidentesMainComponent, IncidentesFiltrosComponent, IncidentesListarComponent, IncidentesCrearComponent, IncidentesEditarComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firabase),
@@ -83,6 +100,13 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FinancieroModule
   ],
   providers: [
+    AuthService,
+    EleccionService,
+    EstudiantesService,
+    TransaccionesService,
+    EventosService,
+    AsociacionService,
+    AutoridadesService,
   ],
   bootstrap: [AppComponent]
 })

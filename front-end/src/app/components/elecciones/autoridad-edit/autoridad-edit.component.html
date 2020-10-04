@@ -1,0 +1,47 @@
+<div>
+    <app-titles [text]="dignidadParam" [regresarA]="rutaDeRegreso"></app-titles>
+</div>
+<div class="form">
+    <form (ngSubmit)="editar()">
+        
+        <div fxLayout="column">
+            <label for="NoUnico">Número único:</label>
+            <input type="text" id="NoUnico" name="NoUnico" disabled [(ngModel)]="autoridad.NoUnico">
+        </div>
+        <div fxLayout="column">
+            <label for="Cargo">Cargo:</label>
+            <input type="text" id="Cargo" name="Cargo" disabled [(ngModel)]="autoridad.Cargo">
+        </div>
+        <div fxLayout="column">
+            <label for="CorreoInstitucional">Correo Institucional:</label>
+            <input type="text" id="CorreoInstitucional" name="CorreoInstitucional" [(ngModel)]="autoridad.CorreoInstitucional">
+        </div>
+        <div fxLayout="column">
+            <label for="Nombre">Nombre:</label>
+            <input type="text" id="Nombre" name="Nombre" [(ngModel)]="autoridad.Nombre">
+        </div>
+        <div fxLayout="column">
+            <label for="Telefono">Teléfono:</label>
+            <input type="text" id="Telefono" name="Telefono" [(ngModel)]="autoridad.Telefono">
+        </div>
+        <div fxLayout="column">
+            <label for="CorreoPersonal">Correo Personal:</label>
+            <input type="text" id="CorreoPersonal" name="CorreoPersonal" [(ngModel)]="autoridad.CorreoPersonal">
+        </div>
+        <div fxLayout="column">
+            <label for="Cedula">Cedula:</label>
+            <input type="text" id="Cedula" name="Cedula" [(ngModel)]="autoridad.Cedula">
+        </div>
+        
+        <div>
+            <button mat-button type="submit">
+                Editar
+                <mat-icon aria-hidden="false" aria-label="Edit">edit</mat-icon>
+            </button>
+            <button class="deleteBTN" mat-button type="button" (click)="eliminar()">
+                Eliminar
+                <mat-icon aria-hidden="false" aria-label="Delete">delete</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>

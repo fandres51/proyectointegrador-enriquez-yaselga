@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Eleccion } from 'src/app/models/eleccion';
 import { Lista } from 'src/app/models/lista';
+import { AutoridadesService } from 'src/app/services/autoridades.service';
 import { EleccionService } from 'src/app/services/eleccion.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class EleccionesDetalleComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private eleccionService: EleccionService,
+    private autoridadService: AutoridadesService,
     private router: Router
   ) { }
 
@@ -40,7 +42,7 @@ export class EleccionesDetalleComponent implements OnInit {
   }
 
   irALista(lista: string) {
-    this.router.navigate(['/elecciones' + '/' + this.fechaEleccion + '/' + lista])
+    this.router.navigate(['/elecciones' + '/' + this.fechaEleccion + '/' + lista]);
   }
 
   nuevaLista() {
@@ -52,7 +54,25 @@ export class EleccionesDetalleComponent implements OnInit {
   }
 
   definirListaGanadora(lista: string) {
-    this.eleccionService.definirListaGanadora(lista, this.fechaEleccion);
+    const estaSeguro = confirm('¿Está seguro que desea definir esta lista como ganadora? \nEsta acción generará un nuevo consejo de autoridades y eliminará todas las actividades del consejo anterior');
+    if(estaSeguro) {
+      const estaSeguro2 = confirm('¿Está seguro de proceder? \nEsta acción no se puede deshacer');
+      if(estaSeguro && estaSeguro2) {
+        this.eleccionService.definirListaGanadora(lista, this.fechaEleccion);
+        this.eleccionService.getDignidadesDeLista(lista, this.fechaEleccion).subscribe(
+          dignidades => {
+            this.autoridadService.cambiarAsociacion(dignidades);
+          }
+        )
+      }
+    }
   }
 
+  deleteElection() {
+    const estaSeguro = confirm('¿Está seguro que desea eliminar esta elección?');
+    if(estaSeguro) {
+      this.eleccionService.deleteEleccion(this.eleccion);
+      this.router.navigate(['/elecciones']);
+    }
+  }
 }

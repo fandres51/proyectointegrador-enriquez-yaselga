@@ -8,7 +8,6 @@ import { EstudiantesAfiliacionComponent } from './components/estudiantes/estudia
 import { AutoridadesMainComponent } from './components/autoridades/autoridades-main/autoridades-main.component';
 import { AjustesMainComponent } from './components/ajustes/ajustes-main/ajustes-main.component';
 import { AjustesNuevoSemestreComponent } from './components/ajustes/ajustes-nuevo-semestre/ajustes-nuevo-semestre.component';
-import { AjustesCambiarAsociacionComponent } from './components/ajustes/ajustes-cambiar-asociacion/ajustes-cambiar-asociacion.component';
 import { EventosMainComponent } from './components/eventos/eventos-main/eventos-main.component';
 import { EventosInfoComponent } from './components/eventos/eventos-info/eventos-info.component';
 import { EventosCrearComponent } from './components/eventos/eventos-crear/eventos-crear.component';
@@ -20,6 +19,11 @@ import { AjustesDefinirAporteComponent } from './components/ajustes/ajustes-defi
 import { EleccionesMainComponent } from './components/elecciones/elecciones-main/elecciones-main.component';
 import { EleccionesDetalleComponent } from './components/elecciones/elecciones-detalle/elecciones-detalle.component';
 import { EleccionesListaComponent } from './components/elecciones/elecciones-lista/elecciones-lista.component';
+import { AutoridadFormComponent } from './components/elecciones/autoridad-form/autoridad-form.component';
+import { AutoridadEditComponent } from './components/elecciones/autoridad-edit/autoridad-edit.component';
+import { ContratosMainComponent } from './components/contratos/contratos-main/contratos-main.component';
+import { ContratosDetalleComponent } from './components/contratos/contratos-detalle/contratos-detalle.component';
+import { ContratosNuevoComponent } from './components/contratos/contratos-nuevo/contratos-nuevo.component';
 
 const routes: Routes = [
   { path: '', component: MainScreenComponent },
@@ -35,10 +39,14 @@ const routes: Routes = [
   { path: 'financiero/nuevo', component: FinancieroCrearComponent },
   { path: 'elecciones', component: EleccionesMainComponent },
   { path: 'elecciones/:eleccion/:lista', component: EleccionesListaComponent },
+  { path: 'elecciones/:eleccion/:lista/crear', component: AutoridadFormComponent },
+  { path: 'elecciones/:eleccion/:lista/:dignidad', component: AutoridadEditComponent },
   { path: 'elecciones/:id', component: EleccionesDetalleComponent },
+  { path: 'contratos', component: ContratosMainComponent },
+  { path: 'contratos/nuevo', component: ContratosNuevoComponent },
+  { path: 'contratos/:contrato', component: ContratosDetalleComponent },
   { path: 'ajustes', component: AjustesMainComponent, children: [
     { path: 'nuevo-semestre', component: AjustesNuevoSemestreComponent },
-    { path: 'cambiar-asociacion', component: AjustesCambiarAsociacionComponent },
     { path: 'consultar-asociacion', component: AjustesConsultarAsociacionComponent },
     { path: 'definir-aporte', component: AjustesDefinirAporteComponent }
   ]},

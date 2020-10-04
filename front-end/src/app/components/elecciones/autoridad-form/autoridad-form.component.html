@@ -1,0 +1,40 @@
+<div>
+    <app-titles text="Ingrese información de la autoridad" [regresarA]="rutaDeRegreso"></app-titles>
+</div>
+<div class="form">
+    <form (ngSubmit)="crear()">
+        
+        <div fxLayout="column">
+            <label for="NoUnico">Número único:</label>
+            <input type="text" id="NoUnico" name="NoUnico" [(ngModel)]="autoridad.NoUnico">
+        </div>
+        <div fxLayout="column">
+            <label for="CorreoInstitucional">Correo Institucional:</label>
+            <input type="text" id="CorreoInstitucional" name="CorreoInstitucional" [(ngModel)]="autoridad.CorreoInstitucional">
+        </div>
+        <div fxLayout="column">
+            <label for="Cargo">Cargo:</label>
+            <input type="text" id="Cargo" name="Cargo" [(ngModel)]="autoridad.Cargo">
+        </div>
+        <div fxLayout="column">
+            <label for="Nombre">Nombre:</label>
+            <input type="text" id="Nombre" name="Nombre" [(ngModel)]="autoridad.Nombre">
+        </div>
+        <div fxLayout="column">
+            <label for="Telefono">Teléfono:</label>
+            <input type="text" id="Telefono" name="Telefono" [(ngModel)]="autoridad.Telefono">
+        </div>
+        <div fxLayout="column">
+            <label for="CorreoPersonal">Correo Personal:</label>
+            <input type="text" id="CorreoPersonal" name="CorreoPersonal" [(ngModel)]="autoridad.CorreoPersonal">
+        </div>
+        <div fxLayout="column">
+            <label for="Cedula">Cedula:</label>
+            <input type="text" id="Cedula" name="Cedula" [(ngModel)]="autoridad.Cedula">
+        </div>
+        
+        <div>
+            <button mat-button type="submit">Crear</button>
+        </div>
+    </form>
+</div>

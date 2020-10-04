@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Dignidad } from '../models/dignidad';
+import { Autoridad } from '../models/autoridad';
 import { Eleccion } from '../models/eleccion';
 import { Lista } from '../models/lista';
 
@@ -24,8 +24,8 @@ export class EleccionService {
         return this.afs.collection<Lista>(`Asociacion/AEIS/Eleccion/${eleccion}/Lista`);
     }
     
-    private getDignidadesCollection(eleccion: string, lista: string): AngularFirestoreCollection<Dignidad> {
-        return this.afs.collection<Dignidad>(`Asociacion/AEIS/Eleccion/${eleccion}/Lista/${lista}`);
+    private getDignidadesCollection(eleccion: string, lista: string): AngularFirestoreCollection<Autoridad> {
+        return this.afs.collection<Autoridad>(`Asociacion/AEIS/Eleccion/${eleccion}/Lista/${lista}/Dignidad`);
     }
 
     getElecciones(): Observable<Eleccion[]> {
@@ -88,24 +88,24 @@ export class EleccionService {
         this.getListaCollection(eleccion).doc(lista.nombre).delete();
     }
 
-    getDignidadesDeLista(lista: string, eleccion: string): Observable<Dignidad[]> {
+    getDignidadesDeLista(lista: string, eleccion: string): Observable<Autoridad[]> {
         return this.getDignidadesCollection(eleccion, lista).valueChanges();
     }
     
-    getDignidad(cargo: string, lista: string, eleccion: string): Observable<Dignidad> {
-        return this.getDignidadesCollection(eleccion, lista).doc<Dignidad>(cargo).valueChanges();
+    getDignidad(cargo: string, lista: string, eleccion: string): Observable<Autoridad> {
+        return this.getDignidadesCollection(eleccion, lista).doc<Autoridad>(cargo).valueChanges();
     }
 
-    createDignidad(dignidad: Dignidad, lista: string, eleccion: string) {
-        this.getDignidadesCollection(eleccion, lista).doc(dignidad.cargo).set(dignidad);
+    createDignidad(dignidad: Autoridad, lista: string, eleccion: string) {
+        this.getDignidadesCollection(eleccion, lista).doc(dignidad.Cargo).set(dignidad);
     }
     
-    updateDignidad(dignidad: Dignidad, lista: string, eleccion: string) {
-        this.getDignidadesCollection(eleccion, lista).doc(dignidad.cargo).set(dignidad);
+    updateDignidad(dignidad: Autoridad, lista: string, eleccion: string) {
+        this.getDignidadesCollection(eleccion, lista).doc(dignidad.Cargo).set(dignidad);
     }
     
-    deleteDignidad(dignidad: Dignidad, lista: string, eleccion: string) {
-        this.getDignidadesCollection(eleccion, lista).doc(dignidad.cargo).delete();
+    deleteDignidad(dignidad: Autoridad, lista: string, eleccion: string) {
+        this.getDignidadesCollection(eleccion, lista).doc(dignidad.Cargo).delete();
     }
 
     definirListaGanadora(nombreLista: String, eleccion: string) {

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 // import { AuthService } from './services/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AsociacionService } from './services/asociacion.service';
+import { AuthService } from './services/auth.service';
 import { AutoridadesService } from './services/autoridades.service';
 import { EstudiantesService } from './services/estudiantes.service';
 import { EventosService } from './services/eventos.service';
@@ -19,7 +20,7 @@ export class AppComponent {
   // json: string;
 
   constructor(
-    public auth: AngularFireAuth,
+    public authService: AuthService
     // public estudianteService: EstudiantesService,
     // public transaccionService: TransaccionesService,
     // public autoridadService: AutoridadesService,
@@ -55,6 +56,11 @@ export class AppComponent {
   // clean() {
   //   this.json = "";
   // }
+
+
+  printUser(user) {
+    console.log(user);
+  }
 
 
 }

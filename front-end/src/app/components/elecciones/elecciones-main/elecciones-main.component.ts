@@ -29,11 +29,13 @@ export class EleccionesMainComponent implements OnInit {
   }
 
   crearEleccion(nueva) {
-    console.log('nueva1');
-    this.eleccionService.createEleccion({
-      fecha: new Date(),
-      listaGanadora: ''
-    })
+    const conf = confirm('Está por crear una nueva elección con la fecha actual, ¿está seguro que desea continuar?');
+    if(conf) {
+      this.eleccionService.createEleccion({
+        fecha: new Date(),
+        listaGanadora: ''
+      })
+    }
   }
 
   irAEleccion(eleccion: string) {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -9,12 +10,18 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class HeaderComponent implements OnInit {
 
   public estadoMenu:boolean = false;
+  public nombreUsuario: string;
 
   constructor(
-    public auth: AngularFireAuth
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.authService.auth.user.subscribe(
+      user => {
+        this.nombreUsuario = user.displayName;
+      }
+    )
   }
 
   mostrarMenu() {
@@ -22,7 +29,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.auth.signOut();
+    this.authService.logOut();
   }
 
 }

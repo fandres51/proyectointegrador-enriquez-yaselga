@@ -69,7 +69,9 @@ export class AutoridadesService {
 
   crearAutoridad(autoridad: Autoridad) {
     if(this.estudianteService.existeEstudiante(autoridad.NoUnico)) {
-      this.afs.collection('Asociacion/AEIS/Consejo/AEIS2020').doc(autoridad.NoUnico).set(autoridad);
+      console.log(this.asociacionActual);
+      console.log(autoridad);
+      this.afs.collection(`Asociacion/AEIS/Consejo/${this.asociacionActual}/Autoridad`).doc(autoridad.Cargo).set(autoridad);
     } else {
       console.log('Estudainte no existe: ', autoridad.NoUnico);
     }
