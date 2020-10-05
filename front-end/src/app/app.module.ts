@@ -61,6 +61,18 @@ import { AjustesNuevoSemestreComponent } from './components/ajustes/ajustes-nuev
 import { EditarAutoridadesComponent } from './components/ajustes/editar-autoridades/editar-autoridades.component';
 import { NotificacionesCrearComponent } from './components/notificaciones/notificaciones-crear/notificaciones-crear.component';
 import { NotificacionesEditComponent } from './components/notificaciones/notificaciones-edit/notificaciones-edit.component';
+import { EstudiantesGuard } from './services/guards/estudiantes.guard';
+import { FilialesGuard } from './services/guards/filiales.guard';
+import { AjustesGuard } from './services/guards/ajustes.guard';
+import { AutoridadesGuard } from './services/guards/autoridades.guard';
+import { ContratosGuard } from './services/guards/contratos.guard';
+import { EventosGuard } from './services/guards/eventos.guard';
+import { EleccionesGuard } from './services/guards/elecciones.guard';
+import { FinancieroGuard } from './services/guards/financiero.guard';
+import { IncidentesGuard } from './services/guards/incidentes.guard';
+import { NotificacionesGuard } from './services/guards/notificaciones.guard';
+import { RecursosGuard } from './services/guards/recursos.guard';
+import { CrearPermisoComponent } from './components/ajustes/crear-permiso/crear-permiso.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -106,7 +118,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     EditarAutoridadFormComponent,
     EditarAutoridadesComponent,
     NotificacionesCrearComponent,
-    NotificacionesEditComponent
+    NotificacionesEditComponent,
+    CrearPermisoComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firabase),
@@ -133,7 +146,18 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     TransaccionesService,
     EventosService,
     AsociacionService,
-    AutoridadesService
+    AutoridadesService,
+    EstudiantesGuard,
+    FilialesGuard,
+    AjustesGuard,
+    AutoridadesGuard,
+    ContratosGuard,
+    EventosGuard,
+    EleccionesGuard,
+    FinancieroGuard,
+    IncidentesGuard,
+    NotificacionesGuard,
+    RecursosGuard
   ],
   bootstrap: [AppComponent]
 })

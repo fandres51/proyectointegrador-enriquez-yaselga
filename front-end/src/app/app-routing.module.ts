@@ -31,39 +31,50 @@ import { EditarAutoridadFormComponent } from './components/ajustes/editar-autori
 import { NotificacionesMainComponent } from './components/notificaciones/notificaciones-main/notificaciones-main.component';
 import { NotificacionesCrearComponent } from './components/notificaciones/notificaciones-crear/notificaciones-crear.component';
 import { NotificacionesEditComponent } from './components/notificaciones/notificaciones-edit/notificaciones-edit.component';
+import { EstudiantesGuard } from './services/guards/estudiantes.guard';
+import { AutoridadesGuard } from './services/guards/autoridades.guard';
+import { EventosGuard } from './services/guards/eventos.guard';
+import { FinancieroGuard } from './services/guards/financiero.guard';
+import { EleccionesGuard } from './services/guards/elecciones.guard';
+import { ContratosGuard } from './services/guards/contratos.guard';
+import { IncidentesGuard } from './services/guards/incidentes.guard';
+import { NotificacionesGuard } from './services/guards/notificaciones.guard';
+import { AjustesGuard } from './services/guards/ajustes.guard';
+import { CrearPermisoComponent } from './components/ajustes/crear-permiso/crear-permiso.component';
 
 const routes: Routes = [
   { path: '', component: MainScreenComponent },
-  { path: 'estudiantes', component: EstudiantesMainComponent },
-  { path: 'estudiantes/actualizar/:id', component: EstudiantesActualizacionComponent },
-  { path: 'estudiantes/afiliar/:id', component: EstudiantesAfiliacionComponent },
-  { path: 'autoridades', component: AutoridadesMainComponent },
-  { path: 'eventos', component: EventosMainComponent },
-  { path: 'eventos/info/:id', component: EventosInfoComponent },
-  { path: 'eventos/nuevo', component: EventosCrearComponent },
-  { path: 'eventos/actualizar/:id', component: EventosEditarComponent },
-  { path: 'financiero', component: FinancieroMainComponent },
-  { path: 'financiero/nuevo', component: FinancieroCrearComponent },
-  { path: 'elecciones', component: EleccionesMainComponent },
-  { path: 'elecciones/:eleccion/:lista', component: EleccionesListaComponent },
-  { path: 'elecciones/:eleccion/:lista/crear', component: AutoridadFormComponent },
-  { path: 'elecciones/:eleccion/:lista/:dignidad', component: AutoridadEditComponent },
-  { path: 'elecciones/:id', component: EleccionesDetalleComponent },
-  { path: 'contratos', component: ContratosMainComponent },
-  { path: 'incidentes', component: IncidentesMainComponent },
+  { path: 'estudiantes', component: EstudiantesMainComponent, canActivate: [EstudiantesGuard] },
+  { path: 'estudiantes/actualizar/:id', component: EstudiantesActualizacionComponent, canActivate: [EstudiantesGuard]  },
+  { path: 'estudiantes/afiliar/:id', component: EstudiantesAfiliacionComponent, canActivate: [EstudiantesGuard]  },
+  { path: 'autoridades', component: AutoridadesMainComponent, canActivate: [AutoridadesGuard] },
+  { path: 'eventos', component: EventosMainComponent, canActivate: [EventosGuard] },
+  { path: 'eventos/info/:id', component: EventosInfoComponent, canActivate: [EventosGuard] },
+  { path: 'eventos/nuevo', component: EventosCrearComponent, canActivate: [EventosGuard] },
+  { path: 'eventos/actualizar/:id', component: EventosEditarComponent, canActivate: [EventosGuard] },
+  { path: 'financiero', component: FinancieroMainComponent, canActivate: [FinancieroGuard] },
+  { path: 'financiero/nuevo', component: FinancieroCrearComponent, canActivate: [FinancieroGuard] },
+  { path: 'elecciones', component: EleccionesMainComponent, canActivate: [EleccionesGuard] },
+  { path: 'elecciones/:eleccion/:lista', component: EleccionesListaComponent, canActivate: [EleccionesGuard] },
+  { path: 'elecciones/:eleccion/:lista/crear', component: AutoridadFormComponent, canActivate: [EleccionesGuard] },
+  { path: 'elecciones/:eleccion/:lista/:dignidad', component: AutoridadEditComponent, canActivate: [EleccionesGuard] },
+  { path: 'elecciones/:id', component: EleccionesDetalleComponent, canActivate: [EleccionesGuard] },
+  { path: 'incidentes', component: IncidentesMainComponent, canActivate: [IncidentesGuard] },
   { path: 'incidentes/nuevo', component: IncidentesCrearComponent },
-  { path: 'contratos/nuevo', component: ContratosNuevoComponent },
-  { path: 'contratos/:contrato', component: ContratosDetalleComponent },
-  { path: 'notificaciones', component: NotificacionesMainComponent },
-  { path: 'notificaciones/nuevo', component: NotificacionesCrearComponent },
-  { path: 'notificaciones/editar/:nombre', component: NotificacionesEditComponent },
+  { path: 'contratos', component: ContratosMainComponent, canActivate: [ContratosGuard] },
+  { path: 'contratos/nuevo', component: ContratosNuevoComponent, canActivate: [ContratosGuard] },
+  { path: 'contratos/:contrato', component: ContratosDetalleComponent, canActivate: [ContratosGuard] },
+  { path: 'notificaciones', component: NotificacionesMainComponent, canActivate: [NotificacionesGuard] },
+  { path: 'notificaciones/nuevo', component: NotificacionesCrearComponent, canActivate: [NotificacionesGuard] },
+  { path: 'notificaciones/editar/:nombre', component: NotificacionesEditComponent, canActivate: [NotificacionesGuard] },
   { path: 'ajustes', component: AjustesMainComponent, children: [
     { path: 'nuevo-semestre', component: AjustesNuevoSemestreComponent },
     { path: 'consultar-asociacion', component: AjustesConsultarAsociacionComponent },
     { path: 'definir-aporte', component: AjustesDefinirAporteComponent },
     { path: 'editar-autoridades', component: EditarAutoridadesComponent },
+    { path: 'crear-permiso', component: CrearPermisoComponent },
     { path: ':cargo', component: EditarAutoridadFormComponent }
-  ]},
+  ], canActivate: [AjustesGuard] },
   { path: '**', component: PageNotFoundComponent }
 ];
 
