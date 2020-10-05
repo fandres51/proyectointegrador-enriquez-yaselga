@@ -60,6 +60,7 @@ import { AjustesMainComponent } from './components/ajustes/ajustes-main/ajustes-
 import { AjustesNuevoSemestreComponent } from './components/ajustes/ajustes-nuevo-semestre/ajustes-nuevo-semestre.component';
 import { EditarAutoridadesComponent } from './components/ajustes/editar-autoridades/editar-autoridades.component';
 import { NotificacionesCrearComponent } from './components/notificaciones/notificaciones-crear/notificaciones-crear.component';
+import { NotificacionesEditComponent } from './components/notificaciones/notificaciones-edit/notificaciones-edit.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -104,7 +105,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AjustesNuevoSemestreComponent,
     EditarAutoridadFormComponent,
     EditarAutoridadesComponent,
-    NotificacionesCrearComponent
+    NotificacionesCrearComponent,
+    NotificacionesEditComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firabase),

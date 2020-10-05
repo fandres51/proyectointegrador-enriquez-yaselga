@@ -1,5 +1,5 @@
 <div>
-    <form (ngSubmit)="nueva()">
+    <form (ngSubmit)="editar()">
         <div fxLayout="column">
             <label for="nombre">Nombre: </label>
             <input type="text" name="nombre" id="nombre" [(ngModel)]="notificacion.nombre">
@@ -13,7 +13,8 @@
             <input type="datetime-local" name="fecha" id="fecha" [(ngModel)]="tiempo">
         </div>
         <div>
-            <button>Crear</button>
+            <button type="submit">Editar</button>
+            <button type="button" (click)="eliminar()">Eliminar</button>
         </div>
     </form>
 </div>

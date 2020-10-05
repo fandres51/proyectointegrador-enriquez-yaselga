@@ -20,15 +20,15 @@ export class NotificacionService {
 
     public getNotificacions(): Observable<Notificacion[]> {
         return this.getNotificacionCollection().snapshotChanges().pipe(
-            map(actions => actions.map( a => {
+            map(actions => actions.map(a => {
                 const data = a.payload.doc.data() as Notificacion;
-                
+
                 Object.keys(data).filter(
                     key => data[key] instanceof firebase.firestore.Timestamp
-                  ).forEach(
+                ).forEach(
                     key => data[key] = data[key].toDate()
-                  ) //convierte todos los objetos Timestamp a Date
-
+                ) //convierte todos los objetos Timestamp a Date
+                data.id = a.payload.doc.id;
                 return data;
             }))
         )
@@ -37,21 +37,21 @@ export class NotificacionService {
     public getNotificacion(id: string): Observable<Notificacion> {
         return this.getNotificacionCollection().doc<Notificacion>(id).snapshotChanges().pipe(
             map(a => {
-              const data = a.payload.data() as Notificacion;
-      
-              Object.keys(data).filter(
-                key => data[key] instanceof firebase.firestore.Timestamp
-              ).forEach(
-                key => data[key] = data[key].toDate()
-              ) //convierte todos los objetos Timestamp a Date
-      
-              return data;
-              })
+                const data = a.payload.data() as Notificacion;
+
+                Object.keys(data).filter(
+                    key => data[key] instanceof firebase.firestore.Timestamp
+                ).forEach(
+                    key => data[key] = data[key].toDate()
+                ) //convierte todos los objetos Timestamp a Date
+                data.id = a.payload.id;
+                return data;
+            })
         )
     }
-    
+
     public addNotificacion(notificacion: Notificacion) {
-        this.getNotificacionCollection().doc(notificacion.id).set(notificacion);
+        this.getNotificacionCollection().add(notificacion);
     }
 
     public updateNotificacion(notificacion: Notificacion) {

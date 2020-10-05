@@ -1,6 +1,6 @@
 export interface Notificacion {
-    id:string;
+    id?:string;
     nombre: string;
-    desripcion: string;
+    descripcion: string;
     tiempo: Date
 }

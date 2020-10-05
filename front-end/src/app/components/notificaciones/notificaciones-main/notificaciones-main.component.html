@@ -1,3 +1,10 @@
 <div>
-    
+    <app-titles text="Notificaciones" regresarA="/main"></app-titles>
+</div>
+<div>
+    <app-basic-crud
+        [listOfElements]="notNombres"
+        (selectedItem)="edit($event)"
+        (newItem)="new()"
+    ></app-basic-crud>
 </div>

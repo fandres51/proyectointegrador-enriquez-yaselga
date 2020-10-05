@@ -28,6 +28,9 @@ import { IncidentesMainComponent } from './components/incidentes/incidentes-main
 import { IncidentesCrearComponent } from './components/incidentes/incidentes-crear/incidentes-crear.component';
 import { EditarAutoridadesComponent } from './components/ajustes/editar-autoridades/editar-autoridades.component';
 import { EditarAutoridadFormComponent } from './components/ajustes/editar-autoridad-form/editar-autoridad-form.component';
+import { NotificacionesMainComponent } from './components/notificaciones/notificaciones-main/notificaciones-main.component';
+import { NotificacionesCrearComponent } from './components/notificaciones/notificaciones-crear/notificaciones-crear.component';
+import { NotificacionesEditComponent } from './components/notificaciones/notificaciones-edit/notificaciones-edit.component';
 
 const routes: Routes = [
   { path: '', component: MainScreenComponent },
@@ -51,6 +54,9 @@ const routes: Routes = [
   { path: 'incidentes/nuevo', component: IncidentesCrearComponent },
   { path: 'contratos/nuevo', component: ContratosNuevoComponent },
   { path: 'contratos/:contrato', component: ContratosDetalleComponent },
+  { path: 'notificaciones', component: NotificacionesMainComponent },
+  { path: 'notificaciones/nuevo', component: NotificacionesCrearComponent },
+  { path: 'notificaciones/editar/:nombre', component: NotificacionesEditComponent },
   { path: 'ajustes', component: AjustesMainComponent, children: [
     { path: 'nuevo-semestre', component: AjustesNuevoSemestreComponent },
     { path: 'consultar-asociacion', component: AjustesConsultarAsociacionComponent },

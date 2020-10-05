@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Notificacion } from 'src/app/models/notificacion';
+import { NotificacionService } from 'src/app/services/notificacion.service';
 
 @Component({
   selector: 'app-notificaciones-crear',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotificacionesCrearComponent implements OnInit {
 
-  constructor() { }
+  notificacion: Notificacion;
+  tiempo: string;
+
+  constructor(
+    private readonly notificService: NotificacionService
+  ) { }
 
   ngOnInit(): void {
+    this.notificacion = {
+      descripcion: '',
+      nombre: '',
+      tiempo: new Date()
+    }
   }
+
+  nueva() {
+    this.notificacion.tiempo = new Date(this.tiempo);
+    this.notificService.addNotificacion(this.notificacion);
+  }
+
+
 
 }
