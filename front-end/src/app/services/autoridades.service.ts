@@ -44,24 +44,39 @@ export class AutoridadesService {
     )
   }
 
-  private async getAutoridadesActualesCollection() {
-    // console.log(this.asociacionActual); 
-    try {
-      const asociacionActual = await this.getAsociacionActual();
-      return this.afs.collection<Autoridad>(`Asociacion/AEIS/Consejo/${asociacionActual}/Autoridad`);
-    } catch (e) {
-      console.error(e);
-    }
-  }
+  // private async getAutoridadesActualesCollection() {
+  //   // console.log(this.asociacionActual); 
+  //   try {
+  //     const asociacionActual = await this.getAsociacionActual();
+  //     return this.afs.collection<Autoridad>(`Asociacion/AEIS/Consejo/${asociacionActual}/Autoridad`);
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // }
   
-  async getAutoridadesActuales() {
-    try {
-      const autActualesColl = await this.getAutoridadesActualesCollection();
-      return autActualesColl.valueChanges();
-    } catch (e) {
-      console.error(e);
-    }
-  } 
+  // async getAutoridadesActuales() {
+  //   try {
+  //     const autActualesColl = await this.getAutoridadesActualesCollection();
+  //     return autActualesColl.valueChanges();
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // } 
+  public getAutoridadesActuales(periodoActual) {
+    return this.afs.collection<Autoridad>(`Asociacion/AEIS/Consejo/${periodoActual}/Autoridad`).valueChanges();
+  }
+
+  public getAutoridad(cargo, periodoActual) {
+    return this.afs.collection(`Asociacion/AEIS/Consejo/${periodoActual}/Autoridad`).doc<Autoridad>(cargo).valueChanges();
+  }
+
+  public updateAutoridad(cargo, periodoActual, autoridad) {
+    this.afs.collection(`Asociacion/AEIS/Consejo/${periodoActual}/Autoridad`).doc<Autoridad>(cargo).update(autoridad);
+  }
+
+  public deleteAutoridad(cargo, periodoActual) {
+    this.afs.collection(`Asociacion/AEIS/Consejo/${periodoActual}/Autoridad`).doc<Autoridad>(cargo).delete();
+  }
   
   getAutoridades(anio:string): Observable<Autoridad[]> {
     return this.afs.collection<Autoridad>(`Asociacion/AEIS/Consejo/${'AEIS'+anio}/Autoridad`).valueChanges();
@@ -93,21 +108,4 @@ export class AutoridadesService {
       this.crearAutoridad(autoridad)
     })
   }
-
-  obtenerNivelDeAcceso(correoInstitucional: string): number {
-    return 0;
-  }
-
-  obtenerAsociacionAnterior(anio: string): Autoridad[] {
-    return null;
-  }
-
-
-
-
-
-
-
-
-
 }

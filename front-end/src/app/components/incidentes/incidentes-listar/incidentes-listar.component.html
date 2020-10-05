@@ -1,1 +1,15 @@
-<p>incidentes-listar works!</p>
+<div>
+    <div *ngFor="let incidente of incidentesPaginados" fxLayout="column">
+        <mat-card>
+            <div>{{incidente.nombre}}</div>
+            <div>{{incidente.descripcion}}</div>
+            <div>{{incidente.fecha}}</div>
+            <div>{{incidente.estudiante}}</div>
+            <div>{{incidente.evento}}</div>
+            <div>
+                <button type="button" (click)="eliminar(incidente)">Eliminar</button>
+            </div>
+        </mat-card>
+    </div>
+    <mat-paginator (page)="onPageChange($event)" [length]="incidentes.length" [pageSize]="9" [pageSizeOptions]="[5, 9, 20]"></mat-paginator>
+</div>

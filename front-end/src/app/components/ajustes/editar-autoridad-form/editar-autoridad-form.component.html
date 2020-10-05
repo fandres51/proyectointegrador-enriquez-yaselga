@@ -1,0 +1,95 @@
+<div>
+    <div class="form">
+        <form (ngSubmit)="editar()">
+            
+            <div fxLayout="column">
+                <label for="NoUnico">Número único:</label>
+                <input type="text" id="NoUnico" name="NoUnico" [(ngModel)]="autoridad.NoUnico">
+            </div>
+            <div fxLayout="column">
+                <label for="Cargo">Cargo:</label>
+                <input type="text" id="Cargo" name="Cargo" disabled [(ngModel)]="autoridad.Cargo">
+            </div>
+            <div fxLayout="column">
+                <label for="CorreoInstitucional">Correo Institucional:</label>
+                <input type="text" id="CorreoInstitucional" name="CorreoInstitucional" [(ngModel)]="autoridad.CorreoInstitucional">
+            </div>
+            <div fxLayout="column">
+                <label for="Nombre">Nombre:</label>
+                <input type="text" id="Nombre" name="Nombre" [(ngModel)]="autoridad.Nombre">
+            </div>
+            <div fxLayout="column">
+                <label for="Telefono">Teléfono:</label>
+                <input type="text" id="Telefono" name="Telefono" [(ngModel)]="autoridad.Telefono">
+            </div>
+            <div fxLayout="column">
+                <label for="CorreoPersonal">Correo Personal:</label>
+                <input type="text" id="CorreoPersonal" name="CorreoPersonal" [(ngModel)]="autoridad.CorreoPersonal">
+            </div>
+            <div fxLayout="column">
+                <label for="Cedula">Cedula:</label>
+                <input type="text" id="Cedula" name="Cedula" [(ngModel)]="autoridad.Cedula">
+            </div>
+            
+            <div>
+                <button mat-button type="submit">
+                    Editar
+                    <mat-icon aria-hidden="false" aria-label="Edit">edit</mat-icon>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    Permisos de acceso a modulos:
+</div>
+<div *ngIf="autoridadCargo === 'Presidente'">
+    El presidente tiene acceso a todos los módulos por defecto
+</div>
+<div *ngIf="autoridadCargo !== 'Presidente'">
+    <form (ngSubmit)="cambiarPermisos()">
+        <div>
+            <label for="estudiante">Módulo estudiantes:</label>
+            <input type="checkbox" name="estudiante" id="estudiante" [(ngModel)]="modulos.Estudiantes">
+        </div>
+        <div>
+            <label for="financiero">Módulo financiero:</label>
+            <input type="checkbox" name="financiero" id="financiero" [(ngModel)]="modulos.Financiero">
+        </div>
+        <div>
+            <label for="eventos">Módulo eventos:</label>
+            <input type="checkbox" name="eventos" id="eventos" [(ngModel)]="modulos.Eventos">
+        </div>
+        <div>
+            <label for="filiales">Módulo filiales:</label>
+            <input type="checkbox" name="filiales" id="filiales" [(ngModel)]="modulos.Filiales">
+        </div>
+        <div>
+            <label for="notificaciones">Módulo notificaciones:</label>
+            <input type="checkbox" name="notificaciones" id="notificaciones" [(ngModel)]="modulos.Notificaciones">
+        </div>
+        <div>
+            <label for="autoridades">Módulo autoridades:</label>
+            <input type="checkbox" name="autoridades" id="autoridades" [(ngModel)]="modulos.Autoridades">
+        </div>
+        <div>
+            <label for="recursos">Módulo recursos:</label>
+            <input type="checkbox" name="recursos" id="recursos" [(ngModel)]="modulos.Recursos">
+        </div>
+        <div>
+            <label for="elecciones">Módulo elecciones:</label>
+            <input type="checkbox" name="elecciones" id="elecciones" [(ngModel)]="modulos.Elecciones">
+        </div>
+        <div>
+            <label for="contratos">Módulo contratos:</label>
+            <input type="checkbox" name="contratos" id="contratos" [(ngModel)]="modulos.Contratos">
+        </div>
+        <div>
+            <label for="incidentes">Módulo incidentes:</label>
+            <input type="checkbox" name="incidentes" id="incidentes" [(ngModel)]="modulos.Incidentes">
+        </div>
+        <div>
+            <button type="submit">Cambiar permisos</button>
+        </div>
+    </form>
+</div>

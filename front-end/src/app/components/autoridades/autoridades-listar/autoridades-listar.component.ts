@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Autoridad } from 'src/app/models/autoridad';
+import { AsociacionService } from 'src/app/services/asociacion.service';
 import { AutoridadesService } from 'src/app/services/autoridades.service';
 
 @Component({
@@ -13,13 +14,14 @@ export class AutoridadesListarComponent implements OnInit {
   public autoridades: Autoridad[] = [];
   
   constructor(
-    public autoridadService: AutoridadesService
+    public autoridadService: AutoridadesService,
+    public asociacionService: AsociacionService
   ) { }
 
   ngOnInit() {
-    this.autoridadService.getAutoridadesActuales().then(
-      autoridades => {
-        autoridades.subscribe(
+    this.asociacionService.getAsociacion().subscribe(
+      asociacion => {
+        this.autoridadService.getAutoridadesActuales(asociacion.AsociacionActual).subscribe(
           autoridades => {
             this.autoridades = autoridades;
           }

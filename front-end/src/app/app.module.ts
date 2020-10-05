@@ -21,7 +21,6 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { EstudiantesModule } from './components/estudiantes/estudiantes.module';
 import { PageNotFoundComponent } from './components/layouts/page-not-found/page-not-found.component';
-import { AjustesModule } from './components/ajustes/ajustes.module';
 import { EventosMainComponent } from './components/eventos/eventos-main/eventos-main.component';
 import { EventosCrearComponent } from './components/eventos/eventos-crear/eventos-crear.component';
 import { AutoridadesDetalleComponent } from './components/autoridades/autoridades-detalle/autoridades-detalle.component';
@@ -53,7 +52,14 @@ import { IncidentesMainComponent } from './components/incidentes/incidentes-main
 import { IncidentesFiltrosComponent } from './components/incidentes/incidentes-filtros/incidentes-filtros.component';
 import { IncidentesListarComponent } from './components/incidentes/incidentes-listar/incidentes-listar.component';
 import { IncidentesCrearComponent } from './components/incidentes/incidentes-crear/incidentes-crear.component';
-import { IncidentesEditarComponent } from './components/incidentes/incidentes-editar/incidentes-editar.component';
+import { NotificacionesMainComponent } from './components/notificaciones/notificaciones-main/notificaciones-main.component';
+import { EditarAutoridadFormComponent } from './components/ajustes/editar-autoridad-form/editar-autoridad-form.component';
+import { AjustesConsultarAsociacionComponent } from './components/ajustes/ajustes-consultar-asociacion/ajustes-consultar-asociacion.component';
+import { AjustesDefinirAporteComponent } from './components/ajustes/ajustes-definir-aporte/ajustes-definir-aporte.component';
+import { AjustesMainComponent } from './components/ajustes/ajustes-main/ajustes-main.component';
+import { AjustesNuevoSemestreComponent } from './components/ajustes/ajustes-nuevo-semestre/ajustes-nuevo-semestre.component';
+import { EditarAutoridadesComponent } from './components/ajustes/editar-autoridades/editar-autoridades.component';
+import { NotificacionesCrearComponent } from './components/notificaciones/notificaciones-crear/notificaciones-crear.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -75,10 +81,30 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     EventosInfoComponent, 
     EventosEditarComponent, 
     TitlesComponent, 
-    ListComponent, 
     EleccionesMainComponent, 
     BasicCrudComponent, 
-    SearchComponent, EleccionesDetalleComponent, EleccionesListaComponent, AutoridadFormComponent, AutoridadEditComponent, ContratosMainComponent, ContratosDetalleComponent, ContratosNuevoComponent, IncidentesMainComponent, IncidentesFiltrosComponent, IncidentesListarComponent, IncidentesCrearComponent, IncidentesEditarComponent
+    SearchComponent, 
+    EleccionesDetalleComponent, 
+    EleccionesListaComponent, 
+    AutoridadFormComponent, 
+    AutoridadEditComponent, 
+    ContratosMainComponent, 
+    ContratosDetalleComponent, 
+    ContratosNuevoComponent, 
+    IncidentesMainComponent, 
+    IncidentesFiltrosComponent, 
+    IncidentesListarComponent, 
+    IncidentesCrearComponent, 
+    NotificacionesMainComponent,
+    EditarAutoridadFormComponent,
+    ListComponent,
+    AjustesConsultarAsociacionComponent,
+    AjustesDefinirAporteComponent,
+    AjustesMainComponent,
+    AjustesNuevoSemestreComponent,
+    EditarAutoridadFormComponent,
+    EditarAutoridadesComponent,
+    NotificacionesCrearComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firabase),
@@ -95,7 +121,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FormsModule,
     NgbModalModule,
     EstudiantesModule,
-    AjustesModule,
     FullCalendarModule,
     FinancieroModule
   ],
@@ -106,7 +131,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     TransaccionesService,
     EventosService,
     AsociacionService,
-    AutoridadesService,
+    AutoridadesService
   ],
   bootstrap: [AppComponent]
 })

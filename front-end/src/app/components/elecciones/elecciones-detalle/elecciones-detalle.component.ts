@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Eleccion } from 'src/app/models/eleccion';
 import { Lista } from 'src/app/models/lista';
+import { AsociacionService } from 'src/app/services/asociacion.service';
 import { AutoridadesService } from 'src/app/services/autoridades.service';
 import { EleccionService } from 'src/app/services/eleccion.service';
 
@@ -21,6 +22,7 @@ export class EleccionesDetalleComponent implements OnInit {
     private route: ActivatedRoute,
     private eleccionService: EleccionService,
     private autoridadService: AutoridadesService,
+    private asociacionService: AsociacionService,
     private router: Router
   ) { }
 
@@ -58,6 +60,7 @@ export class EleccionesDetalleComponent implements OnInit {
     if(estaSeguro) {
       const estaSeguro2 = confirm('¿Está seguro de proceder? \nEsta acción no se puede deshacer');
       if(estaSeguro && estaSeguro2) {
+        this.asociacionService.updateAsociacion({AsociacionActual: 'AEIS'+(new Date()).getFullYear()});
         this.eleccionService.definirListaGanadora(lista, this.fechaEleccion);
         this.eleccionService.getDignidadesDeLista(lista, this.fechaEleccion).subscribe(
           dignidades => {

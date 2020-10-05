@@ -41,17 +41,18 @@ export class EventosCrearComponent implements OnInit {
   }
 
   constructor (
-    private autoridadesService: AutoridadesService,
+    private autoridadService: AutoridadesService,
+    private asociacionService: AsociacionService,
     private eventoService: EventosService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.autoridadesService.getAutoridadesActuales().then(
-      autoridades => {
-        autoridades.subscribe(
+    this.asociacionService.getAsociacion().subscribe(
+      asociacion => {
+        this.autoridadService.getAutoridadesActuales(asociacion.AsociacionActual).subscribe(
           autoridades => {
-            this.autoridades = autoridades.map(n => n.Nombre);
+            this.autoridades = autoridades.map(n=>n.Nombre);
           }
         )
       }

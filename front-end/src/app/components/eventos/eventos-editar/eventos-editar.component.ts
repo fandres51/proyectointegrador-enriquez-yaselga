@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Evento } from 'src/app/models/evento';
+import { AsociacionService } from 'src/app/services/asociacion.service';
 import { AutoridadesService } from 'src/app/services/autoridades.service';
 import { EventosService } from 'src/app/services/eventos.service';
 
@@ -43,7 +44,8 @@ export class EventosEditarComponent implements OnInit {
     public eventosService: EventosService,
     public autoridadesService: AutoridadesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private asociacionService: AsociacionService
   ) { }
 
   ngOnInit() {
@@ -65,11 +67,11 @@ export class EventosEditarComponent implements OnInit {
         }
       })
     });
-    this.autoridadesService.getAutoridadesActuales().then(
-      autoridades => {
-        autoridades.subscribe(
+    this.asociacionService.getAsociacion().subscribe(
+      asociacion => {
+        this.autoridadesService.getAutoridadesActuales(asociacion.AsociacionActual).subscribe(
           autoridades => {
-            this.autoridades = autoridades.map(n => n.Nombre);
+            this.autoridades = autoridades.map(n=>n.Nombre);
           }
         )
       }

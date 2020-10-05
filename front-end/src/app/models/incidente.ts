@@ -1,5 +1,5 @@
 export interface Incidente {
-    id:string;
+    id?:string;
     nombre: string;
     descripcion: string;
     estudiante: string;

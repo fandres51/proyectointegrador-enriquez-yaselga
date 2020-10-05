@@ -1,1 +1,9 @@
-<p>incidentes-main works!</p>
+<div fxLayout="row">
+    <div fxFlex="20">
+        <app-incidentes-filtros (onSearch)="mostrarElementos($event)"></app-incidentes-filtros>
+    </div>
+    <div fxFlex="70">
+        <button (click)="nuevo()">Nuevo</button>
+        <app-incidentes-listar [_incidentes]="incidentes"></app-incidentes-listar>
+    </div>
+</div>

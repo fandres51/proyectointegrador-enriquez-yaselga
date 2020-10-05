@@ -24,6 +24,10 @@ import { AutoridadEditComponent } from './components/elecciones/autoridad-edit/a
 import { ContratosMainComponent } from './components/contratos/contratos-main/contratos-main.component';
 import { ContratosDetalleComponent } from './components/contratos/contratos-detalle/contratos-detalle.component';
 import { ContratosNuevoComponent } from './components/contratos/contratos-nuevo/contratos-nuevo.component';
+import { IncidentesMainComponent } from './components/incidentes/incidentes-main/incidentes-main.component';
+import { IncidentesCrearComponent } from './components/incidentes/incidentes-crear/incidentes-crear.component';
+import { EditarAutoridadesComponent } from './components/ajustes/editar-autoridades/editar-autoridades.component';
+import { EditarAutoridadFormComponent } from './components/ajustes/editar-autoridad-form/editar-autoridad-form.component';
 
 const routes: Routes = [
   { path: '', component: MainScreenComponent },
@@ -43,12 +47,16 @@ const routes: Routes = [
   { path: 'elecciones/:eleccion/:lista/:dignidad', component: AutoridadEditComponent },
   { path: 'elecciones/:id', component: EleccionesDetalleComponent },
   { path: 'contratos', component: ContratosMainComponent },
+  { path: 'incidentes', component: IncidentesMainComponent },
+  { path: 'incidentes/nuevo', component: IncidentesCrearComponent },
   { path: 'contratos/nuevo', component: ContratosNuevoComponent },
   { path: 'contratos/:contrato', component: ContratosDetalleComponent },
   { path: 'ajustes', component: AjustesMainComponent, children: [
     { path: 'nuevo-semestre', component: AjustesNuevoSemestreComponent },
     { path: 'consultar-asociacion', component: AjustesConsultarAsociacionComponent },
-    { path: 'definir-aporte', component: AjustesDefinirAporteComponent }
+    { path: 'definir-aporte', component: AjustesDefinirAporteComponent },
+    { path: 'editar-autoridades', component: EditarAutoridadesComponent },
+    { path: ':cargo', component: EditarAutoridadFormComponent }
   ]},
   { path: '**', component: PageNotFoundComponent }
 ];

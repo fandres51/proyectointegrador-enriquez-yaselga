@@ -20,15 +20,15 @@ export class IncidenteService {
 
     public getIncidentes(): Observable<Incidente[]> {
         return this.getIncidenteCollection().snapshotChanges().pipe(
-            map(actions => actions.map( a => {
+            map(actions => actions.map(a => {
                 const data = a.payload.doc.data() as Incidente;
-                
+
                 Object.keys(data).filter(
                     key => data[key] instanceof firebase.firestore.Timestamp
-                  ).forEach(
+                ).forEach(
                     key => data[key] = data[key].toDate()
-                  ) //convierte todos los objetos Timestamp a Date
-
+                ) //convierte todos los objetos Timestamp a Date
+                data.id = a.payload.doc.id;
                 return data;
             }))
         )
@@ -37,21 +37,21 @@ export class IncidenteService {
     public getIncidente(id: string): Observable<Incidente> {
         return this.getIncidenteCollection().doc<Incidente>(id).snapshotChanges().pipe(
             map(a => {
-              const data = a.payload.data() as Incidente;
-      
-              Object.keys(data).filter(
-                key => data[key] instanceof firebase.firestore.Timestamp
-              ).forEach(
-                key => data[key] = data[key].toDate()
-              ) //convierte todos los objetos Timestamp a Date
-      
-              return data;
-              })
+                const data = a.payload.data() as Incidente;
+
+                Object.keys(data).filter(
+                    key => data[key] instanceof firebase.firestore.Timestamp
+                ).forEach(
+                    key => data[key] = data[key].toDate()
+                ) //convierte todos los objetos Timestamp a Date
+                
+                return data;
+            })
         )
     }
-    
+
     public addIncidente(incidente: Incidente) {
-        this.getIncidenteCollection().doc(incidente.id).set(incidente);
+        this.getIncidenteCollection().add(incidente);
     }
 
     public updateIncidente(incidente: Incidente) {

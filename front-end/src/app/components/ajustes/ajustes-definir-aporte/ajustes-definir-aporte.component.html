@@ -2,6 +2,6 @@
 
 <form (ngSubmit)="cambiarAporte()">
     <label for="aporte">Nuevo aporte: </label>
-    <input type="number" step=".01" name="aporte" id="aporte">
-    <button>Aporte</button>
+    <input type="number" step=".01" name="aporte" id="aporte" [(ngModel)]="aporte">
+    <button>Cambiar</button>
 </form>

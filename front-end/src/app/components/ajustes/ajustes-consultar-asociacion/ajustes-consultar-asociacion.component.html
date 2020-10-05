@@ -1,2 +1,31 @@
-<h1>Consultar Asociacion anterior</h1>
-<h2>Ingrese el anio de posecion: </h2>
+<div>
+    <div>
+        <form (ngSubmit)="cargarAutoridades()">
+            <label for="anio">Ingrese el año del cual desee conocer la información:</label>
+            <input type="text" id="anio" name="anio" [(ngModel)]="anio">
+            <button type="submit">Consultar</button>
+        </form>
+    </div>
+    <div *ngIf="infoCargada">
+        <div *ngFor="let autoridad of autoridades">
+            <div>
+                <div>Nombre: </div>
+                <div>{{autoridad.Nombre}}</div>
+            </div>
+            <div>
+                <div>Cargo: </div>
+                <div>{{autoridad.Cargo}}</div>
+            </div>
+            <div>
+                <div>Email: </div>
+                <div>{{autoridad.CorreoPersonal}}</div>
+            </div>
+            <div>
+                <div>NoUnico: </div>
+                <div>{{autoridad.NoUnico}}</div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
