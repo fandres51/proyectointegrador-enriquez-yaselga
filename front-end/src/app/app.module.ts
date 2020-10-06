@@ -19,7 +19,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { EstudiantesModule } from './components/estudiantes/estudiantes.module';
 import { PageNotFoundComponent } from './components/layouts/page-not-found/page-not-found.component';
 import { EventosMainComponent } from './components/eventos/eventos-main/eventos-main.component';
 import { EventosCrearComponent } from './components/eventos/eventos-crear/eventos-crear.component';
@@ -27,7 +26,6 @@ import { AutoridadesDetalleComponent } from './components/autoridades/autoridade
 import { AutoridadesMainComponent } from './components/autoridades/autoridades-main/autoridades-main.component';
 import { AutoridadesListarComponent } from './components/autoridades/autoridades-listar/autoridades-listar.component';
 import { EventosInfoComponent } from './components/eventos/eventos-info/eventos-info.component';
-import { FinancieroModule } from './components/financiero/financiero.module';
 import { EventosEditarComponent } from './components/eventos/eventos-editar/eventos-editar.component';
 import { TitlesComponent } from './components/layouts/titles/titles.component';
 import { ListComponent } from './components/layouts/list/list.component';
@@ -73,6 +71,21 @@ import { IncidentesGuard } from './services/guards/incidentes.guard';
 import { NotificacionesGuard } from './services/guards/notificaciones.guard';
 import { RecursosGuard } from './services/guards/recursos.guard';
 import { CrearPermisoComponent } from './components/ajustes/crear-permiso/crear-permiso.component';
+import { ContratoService } from './services/contrato.service';
+import { IncidenteService } from './services/incidente.service';
+import { NotificacionService } from './services/notificacion.service';
+import { IconBoxComponent } from './components/layouts/icon-box/icon-box.component';
+import { EstudiantesMainComponent } from './components/estudiantes/estudiantes-main/estudiantes-main.component';
+import { EstudiantesFiltrosComponent } from './components/estudiantes/estudiantes-filtros/estudiantes-filtros.component';
+import { EstudiantesDialogInfoComponent } from './components/estudiantes/estudiantes-dialog-info/estudiantes-dialog-info.component';
+import { EstudiantesActualizacionComponent } from './components/estudiantes/estudiantes-actualizacion/estudiantes-actualizacion.component';
+import { FinancieroFiltrosComponent } from './components/financiero/financiero-filtros/financiero-filtros.component';
+import { FinancieroMainComponent } from './components/financiero/financiero-main/financiero-main.component';
+import { FinancieroListarComponent } from './components/financiero/financiero-listar/financiero-listar.component';
+import { FinancieroCrearComponent } from './components/financiero/financiero-crear/financiero-crear.component';
+import { FinancieroDialogComponent } from './components/financiero/financiero-dialog/financiero-dialog.component';
+import { EstudiantesListarComponent } from './components/estudiantes/estudiantes-listar/estudiantes-listar.component';
+import { EstudiantesAfiliacionComponent } from './components/estudiantes/estudiantes-afiliacion/estudiantes-afiliacion.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -119,7 +132,19 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     EditarAutoridadesComponent,
     NotificacionesCrearComponent,
     NotificacionesEditComponent,
-    CrearPermisoComponent
+    CrearPermisoComponent,
+    IconBoxComponent,
+    EstudiantesActualizacionComponent, 
+    EstudiantesAfiliacionComponent,
+    EstudiantesDialogInfoComponent, 
+    EstudiantesFiltrosComponent, 
+    EstudiantesListarComponent, 
+    EstudiantesMainComponent, 
+    FinancieroFiltrosComponent, 
+    FinancieroMainComponent, 
+    FinancieroListarComponent, 
+    FinancieroCrearComponent, 
+    FinancieroDialogComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firabase),
@@ -135,25 +160,27 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     CommonModule,
     FormsModule,
     NgbModalModule,
-    EstudiantesModule,
-    FullCalendarModule,
-    FinancieroModule
+    FullCalendarModule
   ],
   providers: [
+    AsociacionService,
     AuthService,
+    AutoridadesService,
+    EleccionService,
+    ContratoService,
     EleccionService,
     EstudiantesService,
-    TransaccionesService,
     EventosService,
-    AsociacionService,
-    AutoridadesService,
-    EstudiantesGuard,
-    FilialesGuard,
+    IncidenteService,
+    NotificacionService,
+    TransaccionesService,
     AjustesGuard,
     AutoridadesGuard,
     ContratosGuard,
-    EventosGuard,
     EleccionesGuard,
+    EstudiantesGuard,
+    EventosGuard,
+    FilialesGuard,
     FinancieroGuard,
     IncidentesGuard,
     NotificacionesGuard,
