@@ -20,8 +20,8 @@
             <div *ngIf="estudiante.SemestreReferencial !== 'Graduado' && estudiante.SemestreReferencial !== 'Retirado'" fxLayout="column" fxLayoutAlign="center end" fxFlex="20" fxHide.lt-lg>
                 <div *ngIf="estudiante.EstadoAfiliacion === 'Aportante'; else noafiliado" fxLayout="row"
                     fxLayoutAlign="end center">
-                    <div style="color: #37AA42;">Aportante</div>
-                    <mat-icon style="color: #37AA42;" class="add-circle-icon" aria-hidden="false"
+                    <div class="green">Aportante</div>
+                    <mat-icon class="green add-circle-icon" aria-hidden="false"
                         aria-label="Example home icon">check_circle</mat-icon>
                 </div>
                 <ng-template #noafiliado>
@@ -29,8 +29,8 @@
                         fxLayoutAlign="end center">
                         <a [routerLink]="['/estudiantes/afiliar', estudiante.NoUnico]" class="a-afiliar" fxLayout="row"
                             fxLayoutAlign="end center">
-                            <div style="color: #294FD7;">No Afiliado</div>
-                            <mat-icon style="color: #294FD7;" class="add-circle-icon" aria-hidden="false"
+                            <div class="main-color">No Afiliado</div>
+                            <mat-icon class="main-color" class="add-circle-icon" aria-hidden="false"
                                 aria-label="Example home icon">add_circle</mat-icon>
                         </a>
                     </div>
@@ -38,8 +38,8 @@
                         <div fxLayout="row" fxLayoutAlign="end center">
                             <a [routerLink]="['/estudiantes/afiliar', estudiante.NoUnico]" class="a-afiliar"
                                 fxLayout="row" fxLayoutAlign="end center">
-                                <div style="color: #294FD7;">No Aportante</div>
-                                <mat-icon style="color: #294FD7;" class="add-circle-icon" aria-hidden="false"
+                                <div class="main-color">No Aportante</div>
+                                <mat-icon class="main-color" class="add-circle-icon" aria-hidden="false"
                                     aria-label="Example home icon">add_circle</mat-icon>
                             </a>
                         </div>

@@ -6,15 +6,41 @@
         <h1>Actualizar Información</h1>
     </div>
     <div>
-        <form fxLayout="column" fxLayoutAlign=" center" class="form" (ngSubmit)="editEstudiante(estudiante)">
+        <form #form="ngForm" fxLayout="column" fxLayoutAlign=" center" class="form" (ngSubmit)="editEstudiante(estudiante)">
             <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateNombre">Nombre: </label>
-                    <input type="text" name="updateNombre" id="updateNombre" value={{estudiante.Nombre}} [(ngModel)]="estudiante.Nombre">
+                    <input 
+                        type="text" 
+                        name="updateNombre" 
+                        id="updateNombre" 
+                        value={{estudiante.Nombre}} 
+                        maxlength="50"
+                        minlength="2"
+                        required
+                        [(ngModel)]="estudiante.Nombre"
+                        #est="ngModel"
+                    >
+                    <div class="err" *ngIf="est.touched && est.errors">
+                        Error, campo requerido
+                    </div>
                 </div>
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateApellido">Apellido: </label>
-                    <input type="text" name="updateApellido" id="updateApellido" value={{estudiante.Apellido}} [(ngModel)]="estudiante.Apellido">
+                    <input 
+                        type="text" 
+                        name="updateApellido" 
+                        id="updateApellido" 
+                        value={{estudiante.Apellido}} 
+                        maxlength="50"
+                        minlength="2"
+                        required
+                        [(ngModel)]="estudiante.Apellido"
+                        #ape="ngModel"
+                    >
+                    <div class="err" *ngIf="ape.touched && ape.errors">
+                        Error, campo requerido
+                    </div>
                 </div>
             </div>
             <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
@@ -28,44 +54,97 @@
                 </div>
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateCorreoPersonal">Correo Personal: </label>
-                    <input type="text" name="updateCorreoPersonal" id="updateCorreoPersonal"
-                        value={{estudiante.CorreoPersonal}} [(ngModel)]="estudiante.CorreoPersonal">
+                    <input 
+                        type="text" 
+                        name="updateCorreoPersonal"    
+                        id="updateCorreoPersonal"
+                        value={{estudiante.CorreoPersonal}} 
+                        [(ngModel)]="estudiante.CorreoPersonal"
+                        required
+                        email
+                        #corrP="ngModel"
+                    >
+                    <div class="err" *ngIf="corrP.touched && corrP.errors">
+                        Error, campo requerido y en formato de email
+                    </div>
                 </div>
             </div>
             <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateCorreoInstitucional">Correo Institucional: </label>
-                    <input type="text" name="updateCorreoInstitucional" id="updateCorreoInstitucional"
+                    <input 
+                        type="text" 
+                        name="updateCorreoInstitucional" 
+                        id="updateCorreoInstitucional"
                         value={{estudiante.CorreoInstitucional}}
-                        [(ngModel)]="estudiante.CorreoInstitucional">
+                        email
+                        minlength="4"
+                        maxlength="30"
+                        [(ngModel)]="estudiante.CorreoInstitucional"
+                        #corrInst="ngModel"
+                    >
+                    <div class="err" *ngIf="corrInst.touched && corrInst.errors">
+                        Error, campo debe estar en formato de email
+                    </div>
                 </div>
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateTelefono">Teléfono: </label>
-                    <input type="text" name="updateTelefono" id="updateTelefono" value={{estudiante.Telefono}}
-                        [(ngModel)]="estudiante.Telefono">
+                    <input 
+                        type="text" 
+                        name="updateTelefono" 
+                        id="updateTelefono" 
+                        value={{estudiante.Telefono}}
+                        minlength="6"
+                        maxlength="12"
+                        pattern="^[0-9]*$"
+                        required
+                        [(ngModel)]="estudiante.Telefono"
+                        #tel="ngModel"
+                    >
+                    <div class="err" *ngIf="tel.touched && tel.errors">
+                        Error, campo requerido y solo numérico
+                    </div>
                 </div>
             </div>
             <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateNoUnico">Número único: </label>
-                    <input type="text" name="updateNoUnico" id="updateNoUnico" value={{estudiante.NoUnico}}
-                        [(ngModel)]="estudiante.NoUnico">
+                    <input 
+                        type="text" 
+                        name="updateNoUnico" 
+                        id="updateNoUnico" 
+                        value={{estudiante.NoUnico}}
+                        [(ngModel)]="estudiante.NoUnico"
+                        minlength="8"
+                        maxlength="9"
+                        pattern="^[0-9]*$"
+                        required
+                        disabled
+                    >
                 </div>
             </div>
             <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateFechaNacimiento">Fecha de Nacimiento: </label>
                     <div>
-                        <input matInput [matDatepicker]="picker" [value]="date.value"
-                        (dateChange)="agregarFechaAEsudiante($event)">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
+                        <input id="updateFechaNacimiento" name="updateFechaNacimiento" type="date" [(ngModel)]="date">
                     </div>
                 </div>
                 <div fxLayout="column" fxFlex=50 class="form-item">
                     <label for="updateSectorDomiciliario">Sector Domiciliario: </label>
-                    <input type="text" name="updateSectorDomiciliario" id="updateSectorDomiciliario"
-                        value={{estudiante.SectorDomiciliario}} [(ngModel)]="estudiante.SectorDomiciliario">
+                    <input 
+                        type="text"
+                        name="updateSectorDomiciliario"
+                        id="updateSectorDomiciliario"
+                        value={{estudiante.SectorDomiciliario}}
+                        minlength="4"
+                        required
+                        [(ngModel)]="estudiante.SectorDomiciliario"
+                        #sector="ngModel"
+                    >
+                    <div  class="err" *ngIf="sector.touched && sector.errors">
+                        Error, campo requerido
+                    </div>
                 </div>
             </div>
             <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
@@ -81,11 +160,12 @@
 
             <div class="form-row" fxLayout.lt-md="column">
                 <div fxLayout="column" fxFlex=100 class="form-item">
-                    <button mat-button>
+                    <button type="submit" mat-button [disabled]="!form.form.valid" #btn>
                         Actualizar
                     </button>
                 </div>
             </div>
+            
         </form>
     </div>
 </div>

@@ -1,0 +1,17 @@
+<div>
+    <div fxLayout="column">
+        <div class="label">Buscar por No. único: </div>
+        <app-search (elementToSearch)="buscarPorNoUnico($event)"></app-search>
+    </div>
+    <div fxLayout="column">
+        <div class="label">Buscar por nombre del incidente: </div>
+        <app-search (elementToSearch)="buscarPorNombre($event)"></app-search>
+    </div>
+    <div fxLayout="column">
+        <div class="label">Buscar por evento: </div>
+        <app-search (elementToSearch)="buscarPorEvento($event)"></app-search>
+    </div>
+    <div>
+        <button (click)="limpiarBusqueda()">Limpiar búsqueda</button>
+    </div>
+</div>

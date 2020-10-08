@@ -1,0 +1,106 @@
+<div>
+    <app-titles [text]="contrato.id" regresarA="/contratos"></app-titles>
+</div>
+
+<div class="form">
+    <form #form="ngForm" (ngSubmit)="editar()">
+        <div fxLayout="column">
+            <label for="id">Nombre:</label>
+            <input 
+                type="text" 
+                id="id" 
+                name="id" 
+                maxlength="50" 
+                required
+                [(ngModel)]="contrato.id"
+                #nomb="ngModel"
+                [disabled]=!editable
+            >
+            <div class="err" *ngIf="nomb.touched && nomb.errors">
+                Error, campo requerido
+            </div>
+        </div>
+        <div fxLayout="column">
+            <label for="descripcion">Descripción:</label>
+            <input 
+                type="text" 
+                id="descripcion" 
+                name="descripcion" 
+                required
+                [(ngModel)]="contrato.descripcion"
+                #desc="ngModel"
+                [disabled]=!editable
+            >
+            <div class="err" *ngIf="desc.touched && desc.errors">
+                Error, campo requerido
+            </div>
+        </div>
+        <div fxLayout="column">
+            <label for="interesados">Interesados:</label>
+            <input 
+                type="text" 
+                id="interesados" 
+                name="interesados" 
+                [(ngModel)]="contrato.interesados"
+                [disabled]=!editable
+                required
+                #inter="ngModel"
+            >
+            <div class="err" *ngIf="inter.touched && inter.errors">
+                Error, campo requerido
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between " fxLayout.lt-md="column">
+            <div fxLayout="column" fxFlex="48">
+                <label for="fechaInicial">Fecha inicial:</label>
+                <input 
+                    type="date" 
+                    id="fechaInicial" 
+                    name="fechaInicial" 
+                    [(ngModel)]="fechaInicial"
+                    [max]="fechFin.value"
+                    required
+                    #fec="ngModel"
+                    [disabled]=!editable
+                >
+                <div class="err" *ngIf="fec.touched && fec.errors">
+                    Error, campo requerido
+                </div>
+            </div>
+            <div fxLayout="column" fxFlex="48">
+                <label for="fechaFinal">Fecha final:</label>
+                <input 
+                    type="date" 
+                    id="fechaFinal" 
+                    name="fechaFinal" 
+                    [(ngModel)]="fechaFinal"
+                    [min]="fec.value"
+                    required
+                    #fechFin="ngModel"
+                    [disabled]=!editable
+                >
+                <div class="err" *ngIf="fechFin.touched && fechFin.errors">
+                    Error, campo requerido
+                </div>
+            </div>
+        </div>
+        
+        <div fxLayout="row" fxLayoutAlign="end ">
+            <div class="butt-box" *ngIf="editable">
+                <button mat-button type="submit" [disabled]="!form.form.valid">
+                    Editar
+                    <mat-icon aria-hidden="false" aria-label="Edit">new</mat-icon>
+                </button>
+            </div>
+            <div>
+                <button mat-button type="button" class="dlt-btn" (click)="eliminar()">Eliminar</button>
+            </div>
+        </div>
+    </form>
+    <div class="btn-edit-box">
+        <button class="btn-edit" mat-button type="button" (click)="cambiarEditable()">
+            Editar
+            <mat-icon aria-hidden="false" aria-label="Edit">edit</mat-icon>
+        </button>
+    </div>
+</div>

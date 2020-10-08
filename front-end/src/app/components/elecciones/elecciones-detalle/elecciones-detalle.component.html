@@ -1,0 +1,24 @@
+<div>
+    <app-titles [regresarA]="rutaDeRegreso" [text]="fechaEleccion"></app-titles>
+</div>
+<div class="eleccion">
+    <div>
+        <h2>Listas ingresadas:</h2>
+    </div>
+    <div>
+        <app-basic-crud [listOfElements]=listas (selectedItem)="irALista($event)" (newItem)="nuevaLista()">
+        </app-basic-crud>
+    </div>
+    <div>
+        <h2>Definir lista ganadora:</h2>
+    </div>
+    <div>
+        <app-list [list]=listas (selectedItem)="definirListaGanadora($event)"></app-list>
+    </div>
+    <div class="delete">
+        <button mat-button (click)="deleteElection()">
+            Eliminar elección
+            <mat-icon aria-hidden="false" aria-label="trash">delete</mat-icon>
+        </button>
+    </div>
+</div>

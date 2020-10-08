@@ -10,8 +10,11 @@ import { TransaccionesService } from 'src/app/services/transacciones.service';
   styleUrls: ['./financiero-crear.component.scss']
 })
 export class FinancieroCrearComponent implements OnInit {
+
+  public fecha;
+
   public transaccion: Transaccion = {
-    Monto: 0,
+    Monto: 0.05,
     Descripcion: "",
     Fecha: new Date(),
     Ingreso: false,
@@ -27,11 +30,8 @@ export class FinancieroCrearComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  agregarFechaATransaccion(event: MatDatepickerInputEvent<Date>) {
-    this.transaccion.Fecha = new Date(event.value);
-  }
-
   addTransaccion(transaccion) {
+    this.transaccion.Fecha = new Date(this.fecha);
     this.transaccionService.addTransaccion(transaccion);
     this.router.navigateByUrl('/financiero')
   }

@@ -66,12 +66,14 @@ export class TransaccionesService {
     this.asociacionService.getContador('Transaccion').subscribe(
       (contador: Contador) => {
         if (bool) {
-          console.log(nuevaTransaccion);
           nuevaTransaccion.id = 'TRN' + contador.contador;
           this.getCollection().doc('TRN' + contador.contador).set(nuevaTransaccion);
           this.asociacionService.increaseContador('Transaccion');
           bool = false
         }
+      },
+      error => {
+        console.error(error);
       }
     )
   }

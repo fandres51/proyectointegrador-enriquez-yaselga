@@ -1,5 +1,7 @@
+@import "../../../../assets/css/colors.scss";
+
 .afiliar-title {
-    background-color: #0d288a;
+    background-color: $MainDarkColor;
     width: 100%;
     text-align: center;
     margin-bottom: 20px;
@@ -14,14 +16,14 @@
 
 .form {
     width: 50%;
-    margin-top: 30px;
+    margin: 30px auto;
 }
 
 .label {
     margin-top: 30px;
     margin-bottom: 15px;
     font-size: 130%;
-    color: #0d288a;
+    color: $MainDarkColor;
 }
 
 .input, select {
@@ -29,7 +31,7 @@
 }
 
 .button {
-    background-color: #0d288a;
+    background-color: $MainDarkColor;
     color: white;
     margin: 50px 0 60px 0;
     padding: 10px;
@@ -40,4 +42,19 @@
 
 .group-day {
     margin-right: 40px;
+}
+
+.tit1 {
+    color: $MainDarkColor;
+    font-weight: 500;
+    font-size: 160%;
+}
+
+.margin-top {
+    margin-top: 80px;
+}
+
+.btn-edit {
+    border: 1px solid $MainDarkColor;
+    color: $MainDarkColor;
 }

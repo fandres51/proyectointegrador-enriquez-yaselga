@@ -18,10 +18,10 @@ export class EventosCrearComponent implements OnInit {
     id: '',
     title: '',
     allDay: false,
-    color: 'blue',
+    color: '#4A71FF',
     tipo: 'Evento',
     responsables: [],
-    lugar: 'EPN'
+    lugar: ''
   };
 
   public dias = {
@@ -41,19 +41,26 @@ export class EventosCrearComponent implements OnInit {
   }
 
   constructor (
-    private autoridadesService: AutoridadesService,
+    private autoridadService: AutoridadesService,
+    private asociacionService: AsociacionService,
     private eventoService: EventosService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.autoridadesService.getAutoridadesActuales().then(
-      autoridades => {
-        autoridades.subscribe(
+    this.asociacionService.getAsociacion().subscribe(
+      asociacion => {
+        this.autoridadService.getAutoridadesActuales(asociacion.AsociacionActual).subscribe(
           autoridades => {
-            this.autoridades = autoridades.map(n => n.Nombre);
+            this.autoridades = autoridades.map(n=>n.Nombre);
+          },
+          error => {
+            console.error(error);
           }
         )
+      },
+      error => {
+        console.error(error);
       }
     )
   }
@@ -92,10 +99,32 @@ export class EventosCrearComponent implements OnInit {
   }
 
   crearEvento() {
+    let validado = true;
     this.nuevoEvento.responsables = this.crearArregoResp();
-    if(this.nuevoEvento.tipo !== 'Evento')
+    if(this.nuevoEvento.tipo !== 'Evento') {
       this.nuevoEvento.daysOfWeek = this.crearArregoDias();
-    this.eventoService.addEvento(this.nuevoEvento);
+      if(this.nuevoEvento.daysOfWeek.length < 1) {
+        alert('Debe ingresar al menos un día de la semana');
+        validado = false;
+      }
+      if(this.nuevoEvento.startTime > this.nuevoEvento.endTime) {
+        alert('Error: hora de inicio debe ser anterior a hora de finalización');
+        validado = false;
+      }
+    }
+
+    if(this.nuevoEvento.tipo === 'Evento') {
+      if(this.nuevoEvento.start > this.nuevoEvento.end) {
+        alert('Error: hora de inicio debe ser anterior a hora de finalización');
+        validado = false;
+      }
+    }
+
+    if(validado) {
+      this.eventoService.addEvento(this.nuevoEvento);
+      alert('Evento creado');
+      this.router.navigate(['/eventos']);
+    }
   }
 
   regresar() {

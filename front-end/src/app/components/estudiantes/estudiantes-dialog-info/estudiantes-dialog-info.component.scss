@@ -1,3 +1,5 @@
+@import "../../../../assets/css/colors.scss";
+
 .dato {
     margin: 10px 10px 10px 0;
     .titulo {
@@ -7,7 +9,7 @@
 
 .button {
     background-color: white;
-    color: #294fd7;
+    color: $MainColor;
 }
 
 .button:focus {
@@ -15,6 +17,6 @@
 }
 
 .deuda {
-    color: #294fd7;
+    color: $MainColor;
 }
 

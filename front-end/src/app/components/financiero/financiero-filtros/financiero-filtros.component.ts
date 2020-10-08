@@ -29,11 +29,22 @@ export class FinancieroFiltrosComponent implements OnInit {
       transacciones => {
         this.transacciones = transacciones;
         this.enviarTransacciones(this.transacciones)
+      },
+      error => {
+        console.error(error);
       }
     )
   }
 
   /***Filtros****************************************** */
+
+  buscarPorEstudiante(noUnico: string) {
+    let transaccionesAMostrar = this.transacciones.filter( n => {
+      if(n.PersonaID)
+        return n.PersonaID.includes(noUnico);
+    })
+    this.enviarTransacciones(transaccionesAMostrar);
+  }
 
   private getTomorrowDate(): Date {
     const today = new Date()
@@ -44,12 +55,6 @@ export class FinancieroFiltrosComponent implements OnInit {
 
   filtrar() {
     let transaccionesAMostrar = this.transacciones.filter((transaccion) => {
-      // console.log('Tipo: ',(transaccion.Tipo === this.tipoFiltro || this.tipoFiltro === ''));
-      // console.log('Ingreso: ',this.esIngresoFiltro(transaccion.Ingreso));
-      // console.log('Fecha: ',(transaccion.Fecha >= new Date(this.startDateFiltro)));
-      // console.log('Fecha: ',(transaccion.Fecha <= new Date(this.endDateFiltro)));
-      // console.log('Monto: ',(transaccion.Monto > this.startMontoFiltro));
-      // console.log('Monto: ',(transaccion.Monto < this.endMontoFiltro));
       return (transaccion.Tipo === this.tipoFiltro || this.tipoFiltro === '') &&
              this.esIngresoFiltro(transaccion.Ingreso) &&
              (transaccion.Fecha >= new Date(this.startDateFiltro)) &&
@@ -58,8 +63,6 @@ export class FinancieroFiltrosComponent implements OnInit {
              (transaccion.Monto <= this.endMontoFiltro)
     })
 
-    // console.log(new Date(this.startDateFiltro));
-    // console.log(new Date(this.endDateFiltro));
     this.enviarTransacciones(transaccionesAMostrar);
   }
 

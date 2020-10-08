@@ -1,0 +1,13 @@
+@import "../../../../assets/css/colors.scss";
+
+input {
+    padding: 10px;
+    border: none;
+}
+
+button {
+    background-color: $MainColor;
+    color: white;
+    border-radius: 0 0 0 0;
+    padding: 1px;
+}

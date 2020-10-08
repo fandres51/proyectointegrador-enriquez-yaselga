@@ -1,0 +1,81 @@
+<div>
+    <app-titles regresarA="/incidentes" text="Nuevo incidente"></app-titles>
+</div>
+<div class="form-box">
+    <form class="form" #form="ngForm" (ngSubmit)="nuevo()">
+        <div fxLayout="column">
+            <label for="nombre">Título*: </label>
+            <input 
+                type="text" 
+                name="nombre" 
+                id="nombre" 
+                required
+                [(ngModel)]="incidente.nombre"
+                #tit="ngModel"
+            >
+            <div class="err" *ngIf="tit.touched && tit.errors">
+                Error, campo requerido
+            </div>
+        </div>
+        <div fxLayout="column">
+            <label for="descripcion">Descripción*: </label>
+            <input 
+                type="text" 
+                name="descripcion" 
+                id="descripcion" 
+                required
+                [(ngModel)]="incidente.descripcion"
+                #desc="ngModel"
+                required
+            >
+            <div class="err" *ngIf="desc.touched && desc.errors">
+                Error, campo requerido
+            </div>
+        </div>
+        <div fxLayout="column">
+            <label for="estudiante">No. único de estudiante: </label>
+            <input 
+                type="text" 
+                name="estudiante" 
+                id="estudiante"
+                minlength="8"
+                maxlength="9"
+                pattern="^[0-9]*$"
+                [(ngModel)]="incidente.estudiante"
+                #nouni="ngModel"
+            >
+            <div class="err" *ngIf="nouni.touched && nouni.errors">
+                Error, campo solo numérico
+            </div>
+        </div>
+        <div fxLayout="column">
+            <label for="evento">Evento: </label>
+            <input 
+                type="text" 
+                name="evento" 
+                id="evento" 
+                [(ngModel)]="incidente.evento"
+            >
+        </div>
+        <div fxLayout="column">
+            <label for="fecha">Fecha*: </label>
+            <input 
+                type="date" 
+                name="fecha" 
+                id="fecha" 
+                [(ngModel)]="fecha"
+                required
+                #fech="ngModel"
+            >
+            <div class="err" *ngIf="fech.touched && fech.errors">
+                Error, campo requerido
+            </div>
+        </div>
+        <div fxLayout="column" class="centrar">
+            <button type="submit" [disabled]="!form.form.valid">Crear</button>
+        </div>
+    </form>
+</div>
+<div class="centrar">
+    *Campos obligatorios
+</div>

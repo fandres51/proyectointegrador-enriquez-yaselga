@@ -1,45 +1,49 @@
+@import "../../../../assets/css/colors.scss";
+
 .afiliar-title {
-    background-color: #0d288a;
+    background-color: $MainDarkColor;
     width: 100%;
     text-align: center;
     margin-bottom: 20px;
-    h1{
+    h1 {
         margin: 25px;
         color: white;
     }
-    .button-white{
+    .button-white {
         color: white;
     }
 }
 
-
-.form{
+.form {
     width: 100vw;
     height: 70vh;
-    .form-row{
+    .form-row {
         width: 60vw;
-        .form-item{
+        .form-item {
             padding: 20px;
             label {
                 font-size: 120%;
-                color: #0d288a;
+                color: $MainDarkColor;
             }
-            input{
+            input, select {
                 padding: 10px;
                 border-radius: 5px;
                 border: 1px solid #606060;
             }
-            button{
+            button {
                 padding: 10px;
                 border-radius: 5px;
                 border: none;
                 color: white;
-                background-color: #0d288a;
+                background-color: $MainDarkColor;
                 margin-top: 50px;
-                
             }
-            button:focus{
+            button:focus {
                 outline: none;
+            }
+
+            button:disabled {
+                background-color:$DisabledColor;
             }
         }
     }

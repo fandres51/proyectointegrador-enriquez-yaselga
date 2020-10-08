@@ -9,16 +9,16 @@
             <a routerLink="/">
                 <img class="imgLogo" src="assets/images/LogoAEIS-Vertical.png" alt="Logo AEIS">
             </a>
-            <!-- TODO Cambiar la imagen para que no sea estática sino importada de la base de datos de acuerdo a la asociación -->
         </div>
         <div fxLayout="row" fxLayoutAlign=" center" fxHide.lt-md>
             <div>
                 <img class="imgAvatar" src="assets/images/Avatar.png" alt="Avatar">
-                <!-- TODO Cambiar la imagen para que no sea estática sino importada de la base de datos de acuerdo a la persona -->
             </div>
             <div fxLayout="column" fxLayoutAlign="center start">
                 <div class="nombre" fxLayoutAlign=" end">
-                    Ernesto Yaselga
+                    <div class="nombre-usr">
+                        {{nombreUsuario}}
+                    </div>
                     <button class="minibutton" fxLayoutAlign=" center" [matMenuTriggerFor]="minibutton">
                         <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_drop_down</mat-icon>
                     </button>
@@ -26,14 +26,11 @@
                         <a routerLink="/ajustes">
                             <button mat-menu-item class="menu-item">Configuración</button>
                         </a>
-                        <a routerLink="/recursos">
+                        <a>
                             <button (click)="logout()" mat-menu-item class="menu-item">Cerrar Sesión</button>
                         </a>
                     </mat-menu>
                 </div>
-                <!-- TODO Cambiar el texto para traerlo de la base de datos -->
-                <div class="cargo" fxLayoutAlign=" start">Presidente</div>
-                <!-- TODO Cambiar el texto para traerlo de la base de datos -->
             </div>
         </div>
     </div>
@@ -48,73 +45,17 @@
                 <a routerLink="/recursos"><button mat-menu-item class="menu-item">Recursos</button></a>
                 <a routerLink="/elecciones"><button mat-menu-item class="menu-item">Elecciones</button></a>
                 <a routerLink="/contratos"><button mat-menu-item class="menu-item">Contratos</button></a>
+                <a routerLink="/incidentes"><button mat-menu-item class="menu-item">Incidentes</button></a>
             </mat-menu>
         </div>
         <div><a fxLayoutAlign=" center" routerLink="/estudiantes">Estudiantes</a></div>
         <div><a fxLayoutAlign=" center" routerLink="/filiales">Filiales</a></div>
         <div><a fxLayoutAlign=" center" routerLink="/financiero">Financiero</a></div>
         <div><a fxLayoutAlign=" center" routerLink="/eventos">Eventos</a></div>
-        <div>
+        <!-- <div>
             <a fxLayoutAlign=" center" routerLink="/notificaciones">
                 <mat-icon aria-hidden="false" aria-label="Example home icon">notifications</mat-icon>
             </a>
-        </div>
-    </div>
-</div>
-
-<div fxLayout="column" fxHide.gt-sm
-    [ngClass]="{'menu-size-small':true, 'escondido': !estadoMenu, 'mostrado': estadoMenu}">
-    <div class="" fxLayout="row" fxLayoutAlign=" center">
-        <div>
-            <img class="imgAvatar" src="assets/images/Avatar.png" alt="Avatar">
-            <!-- TODO Cambiar la imagen para que no sea estática sino importada de la base de datos de acuerdo a la persona -->
-        </div>
-        <div fxLayout="column" fxLayoutAlign="center start">
-            <div class="nombre" fxLayoutAlign=" end">
-                Ernesto Yaselga
-                <button class="minibutton" fxLayoutAlign=" center" [matMenuTriggerFor]="minibutton">
-                    <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_drop_down</mat-icon>
-                </button>
-                <mat-menu #minibutton="matMenu">
-                    <a routerLink="/autoridades"><button mat-menu-item class="menu-item">Configuración</button></a>
-                    <a routerLink="/recursos"><button mat-menu-item class="menu-item">Cerrar
-                            Sesión</button></a>
-                </mat-menu>
-            </div>
-            <!-- TODO Cambiar el texto para traerlo de la base de datos -->
-            <div class="cargo" fxLayoutAlign=" start">Presidente</div>
-            <!-- TODO Cambiar el texto para traerlo de la base de datos -->
-        </div>
-    </div>
-    <div>
-        <a routerLink="/autoridades"><button mat-menu-item>Autoridades</button></a>
-    </div>
-    <div>
-        <a routerLink="/recursos"><button mat-menu-item>Recursos</button></a>
-    </div>
-    <div>
-        <a routerLink="/elecciones"><button mat-menu-item>Elecciones</button></a>
-    </div>
-    <div>
-        <a routerLink="/contratos"><button mat-menu-item>Contratos</button></a>
-    </div>
-    <div>
-        <a routerLink="/estudiantes"><button mat-menu-item>Estudiantes</button></a>
-    </div>
-    <div>
-        <a routerLink="/filiales"><button mat-menu-item>Filiales</button></a>
-    </div>
-    <div>
-        <a routerLink="/financiero"><button mat-menu-item>Financiero</button></a>
-    </div>
-    <div>
-        <a routerLink="/eventos"><button mat-menu-item>Eventos</button></a>
-    </div>
-    <div>
-        <a fxLayoutAlign=" center" routerLink="/notificaciones">
-            <button mat-menu-item>
-                <mat-icon aria-hidden="false" aria-label="Example home icon">notifications</mat-icon>
-            </button>
-        </a>
+        </div> -->
     </div>
 </div>

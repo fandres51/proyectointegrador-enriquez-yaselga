@@ -1,5 +1,5 @@
 <div>
-    <div *ngIf="auth.user | async as user; else login" >
+    <div *ngIf="authService.auth.user | async as user; else login">
         <app-header></app-header>
         <router-outlet></router-outlet>
     </div>
@@ -7,8 +7,3 @@
         <app-login></app-login>
     </ng-template>
 </div>
-<!-- 
-<button (click)="ejecutarAccion()">Accion</button>
-<button (click)="clean()">Clean</button>
-<div>{{json}}</div> 
--->

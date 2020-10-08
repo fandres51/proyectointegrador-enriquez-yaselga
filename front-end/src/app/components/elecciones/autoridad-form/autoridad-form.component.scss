@@ -1,0 +1,30 @@
+@import "../../../../assets/css/colors.scss";
+
+label {
+    margin: 20px 0;
+    font-size: 130%;
+    color: $MainDarkColor;
+    font-weight: 500;
+}
+
+input {
+    padding: 10px;
+    border: none;
+}
+
+form {
+    width: 60%;
+    margin: 50px auto;
+}
+
+button {
+    background-color: $MainColor;
+    color: white;
+    margin: 60px auto;
+    width: 200px;
+}
+
+button:disabled {
+    color: white;
+    background-color:$DisabledColor;
+}

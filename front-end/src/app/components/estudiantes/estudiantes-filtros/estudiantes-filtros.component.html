@@ -3,7 +3,15 @@
     <h3 class="title">Buscar por nombre: </h3>
     <div class="search-space">
         <form (ngSubmit)="buscarPorNombre(nombreInput.value)" fxLayout="row">
-            <input fxFlex="85" class="input-search" id="porNombreInput" name="porNombreInput" type="text" #nombreInput>
+            <input 
+                fxFlex="85" 
+                class="input-search" 
+                id="porNombreInput" 
+                name="porNombreInput" 
+                type="text" 
+                maxlength="50"
+                #nombreInput
+            >
             <button fxFlex="15" class="button-search" mat-button>
                 <mat-icon aria-hidden="false" aria-label="Example home icon">search</mat-icon>
             </button>
@@ -12,7 +20,14 @@
     <h3 class="title">Buscar por cedula: </h3>
     <div class="search-space">
         <form (ngSubmit)="buscarPorCedula(inputCedula.value)" fxLayout="row">
-            <input fxFlex="85" class="input-search" id="porCedulaInput" name="porCedulaInput" type="text" #inputCedula>
+            <input 
+                fxFlex="85" 
+                class="input-search" 
+                id="porCedulaInput" 
+                name="porCedulaInput" 
+                type="text" 
+                maxlength="12"
+                #inputCedula>
             <button fxFlex="15" class="button-search" mat-button>
                 <mat-icon aria-hidden="false" aria-label="Example home icon">search</mat-icon>
             </button>
@@ -124,7 +139,6 @@
     <hr fxHide.lt-md>
     <div fxHide.lt-md>
         <h2 class="title">Ordenar por:</h2>
-        <!-- <div fxLayout="row"> -->
         <button mat-button [ngClass]="{
                                         'filtrosButton': tipoOrdenamiento != 'Apellido', 
                                         'selected': tipoOrdenamiento == 'Apellido'
@@ -137,6 +151,5 @@
                                         'filtrosButton': tipoOrdenamiento != 'Semestre', 
                                         'selected': tipoOrdenamiento == 'Semestre'
                                     }" mat-button (click)="ordenar('Semestre')">Semest</button>
-        <!-- </div> -->
     </div>
 </div>

@@ -1,6 +1,6 @@
 <div fxLayout="column">
     <div fxLayout="row" fxLayoutAlign=" center" class="top-bar">
-        <div fxFlex="50" fxLayout="row" fxLayoutAlign=" center">
+        <div fxFlex="50" fxLayout="row" fxLayoutAlign=" center" fxHide.lt-md>
             <div class="ingresos">
                 Datos mostrados:
             </div>
@@ -22,9 +22,10 @@
                 <label for="fileInput" class="btn-cargararchivo">Cargar transacciones</label>
                 <input id="fileInput" type="file" accept=".csv" (change)="cargaMasiva($event.target.files)" style="display: none;">
             </div>
-            <button class="but-cargar-financiero" mat-button fxLayoutAlign="center center">
-                Generar Reporte
-            </button>
+            <div fxHide.lt-md>
+                <a class="btn-dwn" href="https://drive.google.com/file/d/1R45QLLEwabX-cx8ZpR7qriCk8AIeA2qL/view?usp=sharing">Descargar formato de carga</a>
+            </div>
+           
         </div>
     </div>
 

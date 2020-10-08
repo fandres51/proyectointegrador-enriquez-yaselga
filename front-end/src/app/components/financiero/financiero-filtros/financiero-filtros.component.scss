@@ -1,9 +1,11 @@
+@import "../../../../assets/css/colors.scss";
+
 .filters {
     padding: 20px;
 }
 
 .title {
-    color: #0d288a;
+    color: $MainDarkColor;
     margin-top: 10px;
 }
 
@@ -16,7 +18,7 @@ input, select, .button {
 }
 
 .button {
-    background-color: #0d288a;
+    background-color: $MainDarkColor;
     color: white;
     width: 45%;
     border: none;
@@ -24,7 +26,7 @@ input, select, .button {
 
 .filtrosButton {
     border: none;
-    color: #0d288a;
+    color: $MainDarkColor;
     background-color: white;
     margin: 1px;
     border-radius: 0;
@@ -35,7 +37,7 @@ input, select, .button {
 .selected {
     border: none;
     color: white;
-    background-color: #0d288a;
+    background-color: $MainDarkColor;
     margin: 1px;
     border-radius: 0;
     padding: 0 10px;

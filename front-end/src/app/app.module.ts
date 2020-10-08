@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
-import { FullCalendarModule } from '@fullcalendar/angular'; 
+import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { AppComponent } from './app.component';
@@ -19,17 +19,72 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { EstudiantesModule } from './components/estudiantes/estudiantes.module';
 import { PageNotFoundComponent } from './components/layouts/page-not-found/page-not-found.component';
-import { AjustesModule } from './components/ajustes/ajustes.module';
 import { EventosMainComponent } from './components/eventos/eventos-main/eventos-main.component';
 import { EventosCrearComponent } from './components/eventos/eventos-crear/eventos-crear.component';
 import { AutoridadesDetalleComponent } from './components/autoridades/autoridades-detalle/autoridades-detalle.component';
 import { AutoridadesMainComponent } from './components/autoridades/autoridades-main/autoridades-main.component';
 import { AutoridadesListarComponent } from './components/autoridades/autoridades-listar/autoridades-listar.component';
-import { EventosInfoComponent } from './components/eventos/eventos-info/eventos-info.component';
-import { FinancieroModule } from './components/financiero/financiero.module';
 import { EventosEditarComponent } from './components/eventos/eventos-editar/eventos-editar.component';
+import { TitlesComponent } from './components/layouts/titles/titles.component';
+import { ListComponent } from './components/layouts/list/list.component';
+import { EleccionesMainComponent } from './components/elecciones/elecciones-main/elecciones-main.component';
+import { BasicCrudComponent } from './components/layouts/basic-crud/basic-crud.component';
+import { SearchComponent } from './components/layouts/search/search.component';
+import { EleccionesDetalleComponent } from './components/elecciones/elecciones-detalle/elecciones-detalle.component';
+import { EleccionesListaComponent } from './components/elecciones/elecciones-lista/elecciones-lista.component';
+import { AutoridadFormComponent } from './components/elecciones/autoridad-form/autoridad-form.component';
+import { AuthService } from './services/auth.service';
+import { EleccionService } from './services/eleccion.service';
+import { EstudiantesService } from './services/estudiantes.service';
+import { TransaccionesService } from './services/transacciones.service';
+import { EventosService } from './services/eventos.service';
+import { AsociacionService } from './services/asociacion.service';
+import { AutoridadesService } from './services/autoridades.service';
+import { AutoridadEditComponent } from './components/elecciones/autoridad-edit/autoridad-edit.component';
+import { ContratosMainComponent } from './components/contratos/contratos-main/contratos-main.component';
+import { ContratosDetalleComponent } from './components/contratos/contratos-detalle/contratos-detalle.component';
+import { ContratosNuevoComponent } from './components/contratos/contratos-nuevo/contratos-nuevo.component';
+import { IncidentesMainComponent } from './components/incidentes/incidentes-main/incidentes-main.component';
+import { IncidentesFiltrosComponent } from './components/incidentes/incidentes-filtros/incidentes-filtros.component';
+import { IncidentesListarComponent } from './components/incidentes/incidentes-listar/incidentes-listar.component';
+import { IncidentesCrearComponent } from './components/incidentes/incidentes-crear/incidentes-crear.component';
+import { NotificacionesMainComponent } from './components/notificaciones/notificaciones-main/notificaciones-main.component';
+import { EditarAutoridadFormComponent } from './components/ajustes/editar-autoridad-form/editar-autoridad-form.component';
+import { AjustesConsultarAsociacionComponent } from './components/ajustes/ajustes-consultar-asociacion/ajustes-consultar-asociacion.component';
+import { AjustesDefinirAporteComponent } from './components/ajustes/ajustes-definir-aporte/ajustes-definir-aporte.component';
+import { AjustesMainComponent } from './components/ajustes/ajustes-main/ajustes-main.component';
+import { AjustesNuevoSemestreComponent } from './components/ajustes/ajustes-nuevo-semestre/ajustes-nuevo-semestre.component';
+import { EditarAutoridadesComponent } from './components/ajustes/editar-autoridades/editar-autoridades.component';
+import { NotificacionesCrearComponent } from './components/notificaciones/notificaciones-crear/notificaciones-crear.component';
+import { NotificacionesEditComponent } from './components/notificaciones/notificaciones-edit/notificaciones-edit.component';
+import { EstudiantesGuard } from './services/guards/estudiantes.guard';
+import { FilialesGuard } from './services/guards/filiales.guard';
+import { AjustesGuard } from './services/guards/ajustes.guard';
+import { AutoridadesGuard } from './services/guards/autoridades.guard';
+import { ContratosGuard } from './services/guards/contratos.guard';
+import { EventosGuard } from './services/guards/eventos.guard';
+import { EleccionesGuard } from './services/guards/elecciones.guard';
+import { FinancieroGuard } from './services/guards/financiero.guard';
+import { IncidentesGuard } from './services/guards/incidentes.guard';
+import { NotificacionesGuard } from './services/guards/notificaciones.guard';
+import { RecursosGuard } from './services/guards/recursos.guard';
+import { CrearPermisoComponent } from './components/ajustes/crear-permiso/crear-permiso.component';
+import { ContratoService } from './services/contrato.service';
+import { IncidenteService } from './services/incidente.service';
+import { NotificacionService } from './services/notificacion.service';
+import { IconBoxComponent } from './components/layouts/icon-box/icon-box.component';
+import { EstudiantesMainComponent } from './components/estudiantes/estudiantes-main/estudiantes-main.component';
+import { EstudiantesFiltrosComponent } from './components/estudiantes/estudiantes-filtros/estudiantes-filtros.component';
+import { EstudiantesDialogInfoComponent } from './components/estudiantes/estudiantes-dialog-info/estudiantes-dialog-info.component';
+import { EstudiantesActualizacionComponent } from './components/estudiantes/estudiantes-actualizacion/estudiantes-actualizacion.component';
+import { FinancieroFiltrosComponent } from './components/financiero/financiero-filtros/financiero-filtros.component';
+import { FinancieroMainComponent } from './components/financiero/financiero-main/financiero-main.component';
+import { FinancieroListarComponent } from './components/financiero/financiero-listar/financiero-listar.component';
+import { FinancieroCrearComponent } from './components/financiero/financiero-crear/financiero-crear.component';
+import { FinancieroDialogComponent } from './components/financiero/financiero-dialog/financiero-dialog.component';
+import { EstudiantesListarComponent } from './components/estudiantes/estudiantes-listar/estudiantes-listar.component';
+import { EstudiantesAfiliacionComponent } from './components/estudiantes/estudiantes-afiliacion/estudiantes-afiliacion.component';
 import { RecursosModule } from './components/recursos/recurso.module'
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -47,11 +102,48 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     EventosMainComponent,
     EventosCrearComponent,
     AutoridadesDetalleComponent,
-    AutoridadesMainComponent, 
-    AutoridadesListarComponent, 
-    EventosInfoComponent, 
+    AutoridadesMainComponent,
+    AutoridadesListarComponent,
     EventosEditarComponent,
-    
+    TitlesComponent,
+    EleccionesMainComponent,
+    BasicCrudComponent,
+    SearchComponent,
+    EleccionesDetalleComponent,
+    EleccionesListaComponent,
+    AutoridadFormComponent,
+    AutoridadEditComponent,
+    ContratosMainComponent,
+    ContratosDetalleComponent,
+    ContratosNuevoComponent,
+    IncidentesMainComponent,
+    IncidentesFiltrosComponent,
+    IncidentesListarComponent,
+    IncidentesCrearComponent,
+    NotificacionesMainComponent,
+    EditarAutoridadFormComponent,
+    ListComponent,
+    AjustesConsultarAsociacionComponent,
+    AjustesDefinirAporteComponent,
+    AjustesMainComponent,
+    AjustesNuevoSemestreComponent,
+    EditarAutoridadFormComponent,
+    EditarAutoridadesComponent,
+    NotificacionesCrearComponent,
+    NotificacionesEditComponent,
+    CrearPermisoComponent,
+    IconBoxComponent,
+    EstudiantesActualizacionComponent,
+    EstudiantesAfiliacionComponent,
+    EstudiantesDialogInfoComponent,
+    EstudiantesFiltrosComponent,
+    EstudiantesListarComponent,
+    EstudiantesMainComponent,
+    FinancieroFiltrosComponent,
+    FinancieroMainComponent,
+    FinancieroListarComponent,
+    FinancieroCrearComponent,
+    FinancieroDialogComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firabase),
@@ -61,13 +153,13 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FlexLayoutModule,
     BrowserAnimationsModule,
     AngularFirestoreModule,
-    FormsModule,
     MaterialComponentsModule,
     ReactiveFormsModule,
     NgbModule,
     CommonModule,
     FormsModule,
     NgbModalModule,
+    FullCalendarModule,
     EstudiantesModule,
     AjustesModule,
     FullCalendarModule,
@@ -75,6 +167,28 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     RecursosModule,
   ],
   providers: [
+    AsociacionService,
+    AuthService,
+    AutoridadesService,
+    EleccionService,
+    ContratoService,
+    EleccionService,
+    EstudiantesService,
+    EventosService,
+    IncidenteService,
+    NotificacionService,
+    TransaccionesService,
+    AjustesGuard,
+    AutoridadesGuard,
+    ContratosGuard,
+    EleccionesGuard,
+    EstudiantesGuard,
+    EventosGuard,
+    FilialesGuard,
+    FinancieroGuard,
+    IncidentesGuard,
+    NotificacionesGuard,
+    RecursosGuard
   ],
   bootstrap: [AppComponent]
 })

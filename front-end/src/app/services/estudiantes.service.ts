@@ -26,6 +26,9 @@ export class EstudiantesService {
       asociacion => {
         this.aporteActual = asociacion.AporteActual;
         this.periodoActual = asociacion.PeriodoActual;
+      },
+      error => {
+        console.error(error);
       }
     )
   }
@@ -80,6 +83,9 @@ export class EstudiantesService {
               res(true);
             else
               res(false)
+          },
+          error => {
+            console.error(error);
           }
         );
       }
@@ -164,6 +170,9 @@ export class EstudiantesService {
           })
           this.getCollection().doc(estudiante.NoUnico).update({ EstadoAfiliacion: 'No aportante' })
         })
+      },
+      error => {
+        console.error(error);
       }
     ) //cambia el estado de cada estudiante a 'No aportante' y crea un Aporte vacío
   }

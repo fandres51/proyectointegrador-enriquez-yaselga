@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Autoridad } from 'src/app/models/autoridad';
+import { AutoridadesService } from 'src/app/services/autoridades.service';
 
 @Component({
   selector: 'app-ajustes-consultar-asociacion',
@@ -7,9 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AjustesConsultarAsociacionComponent implements OnInit {
 
-  constructor() { }
+  infoCargada = false;
+  autoridades: Autoridad[] = [];
+  anio: string;
 
-  ngOnInit(): void {
+  constructor(
+    private readonly autoridadesService: AutoridadesService
+  ) { }
+
+  ngOnInit(): void { }
+
+  cargarAutoridades() {
+    this.autoridadesService.getAutoridades(this.anio).subscribe(
+      autoridades => {
+        this.autoridades = autoridades;
+        this.infoCargada = true;
+      },
+      error => {
+        console.error(error);
+      }
+    )
   }
+
+
 
 }

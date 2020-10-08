@@ -27,7 +27,13 @@ export class EstudiantesAfiliacionComponent implements OnInit {
       const noUnicoParam = params['id'];
       this.estudiantesService.getEstudiante(noUnicoParam).subscribe( estudiante => {
         this.estudiante = estudiante;
+      },
+      error => {
+        console.error(error);
       })
+    },
+    error => {
+      console.error(error);
     });
   }
 

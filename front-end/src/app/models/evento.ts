@@ -12,7 +12,7 @@ export interface Evento {
     endRecur?: string;
     color: string;
     //parametros extra definidos por las reglas de negocio
-    tipo: 'Curso' | 'Club' | 'Evento' | 'Horario';
+    tipo: 'Curso' | 'Club' | 'Evento' | 'Recursivo';
     responsables: string[];
     presupuesto?: number;
     lugar: string;

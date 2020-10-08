@@ -1,5 +1,7 @@
+@import "../../../../assets/css/colors.scss";
+
 .add-title {
-    background-color: #0d288a;
+    background-color: $MainDarkColor;
     width: 100%;
     text-align: center;
     margin-bottom: 20px;
@@ -19,7 +21,7 @@
         padding: 20px;
         label {
             font-size: 120%;
-            color: #0d288a;
+            color: $MainDarkColor;
         }
         input,
         select {
@@ -43,10 +45,13 @@
             border-radius: 5px;
             border: none;
             color: white;
-            background-color: #0d288a;
+            background-color: $MainDarkColor;
         }
         button:focus {
             outline: none;
+        }
+        button:disabled {
+            background-color:$DisabledColor;
         }
     }
 }

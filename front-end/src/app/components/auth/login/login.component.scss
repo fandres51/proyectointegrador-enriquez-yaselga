@@ -1,20 +1,23 @@
+@import "../../../../assets/css/colors.scss";
+
 .login {
     width: 100vw;
     height: 100vh;
 }
 
 .login-box {
-    width: 350px;
-    height: 450px;
-    background-color: #4a71ff;
-    color: white;
+    width: 360px;
+    height: 260px;
+    border: $MainDarkColor 1px solid;
+    color: $MainDarkColor;
     text-align: center;
+    border-radius: 20px;
 }
 
 button {
     width: 300px;
     padding: 20px;
-    background-color: #0d288a;
+    background-color: $MainDarkColor;
     border: none;
     border-radius: 10px;
     color: white;

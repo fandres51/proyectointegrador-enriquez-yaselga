@@ -1,0 +1,16 @@
+<div class="crud" fxLayout="column">
+    <div class="top-bar" fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="new-button">
+            <button mat-flat-button fxLayout="row" fxLayoutAlign="space-between center" (click)="nuevoElemento()">
+                Nuevo
+                <mat-icon aria-hidden="false" aria-label="New">add</mat-icon>
+            </button>
+        </div>
+        <div class="search">
+            <app-search (elementToSearch)="buscar($event)"></app-search>
+        </div>
+    </div>
+    <div class="list-of-elements">
+        <app-list [list]="listOfElements" (selectedItem)="sendSelectedItem($event)"></app-list>
+    </div>
+</div>

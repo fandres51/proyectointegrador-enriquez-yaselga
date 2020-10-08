@@ -1,13 +1,14 @@
+@import "../../../../assets/css/colors.scss";
+
 .calendar{
-    width: 50%;
+    width: 70%;
     margin-bottom: 60px;
-    // margin: 50px;
 }
 
 .calendar-options{
     width: 100%;
     padding: 30px;
-    background-color: #0d288a;
+    background-color: $MainDarkColor;
     div { 
         margin: 0 20px;
     }
@@ -16,7 +17,7 @@
         margin-bottom: 0;
     }
     button { 
-        background-color: #0d288a;
+        background-color: $MainDarkColor;
         color: white;
         border: 1px white solid;
     }

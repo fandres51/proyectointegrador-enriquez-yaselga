@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Estudiante } from 'src/app/models/estudiante';
 import { EstudiantesService } from 'src/app/services/estudiantes.service';
@@ -16,7 +14,7 @@ export class EstudiantesActualizacionComponent implements OnInit {
   semestres: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Retirado', 'Egresado', 'Graduado'];
 
   public estudiante: Estudiante;
-  public date: FormControl;
+  public date: string = '';
 
   constructor(
     public estudiantesService: EstudiantesService,
@@ -26,20 +24,40 @@ export class EstudiantesActualizacionComponent implements OnInit {
 
 
   ngOnInit() {
+    
+    this.estudiante = {
+      Apellido: '',
+      Carrera: 'Sistemas',
+      Cedula: '',
+      EstadoAfiliacion: 'No afiliado',
+      NoUnico: '',
+      SemestreReferencial: '1',
+      CorreoInstitucional: '',
+      CorreoPersonal: '',
+      FechaNacimiento: new Date(),
+      Nombre: '',
+      SectorDomiciliario: '',
+      Telefono: ''
+    }
     this.route.params.subscribe(params => {
       const noUnicoParam = params['id'];
       this.estudiantesService.getEstudiante(noUnicoParam).subscribe(estudiante => {
         this.estudiante = estudiante;
-        this.date = new FormControl(this.estudiante.FechaNacimiento);
+        let estFecha: Date = estudiante.FechaNacimiento;
+        estFecha = new Date(estFecha);
+        this.date = estFecha.getFullYear() +'-'+ ('0' + estFecha.getMonth()).slice(-2) + '-' + ('0' + estFecha.getDate()).slice(-2);
+      },
+      error => {
+        console.error(error);
       })
+    },
+    error => {
+      console.error(error);
     });
   }
 
-  agregarFechaAEsudiante(event: MatDatepickerInputEvent<Date>) {
-    this.estudiante.FechaNacimiento = event.value;
-  }
-
   editEstudiante(estudiante: Estudiante) {
+    this.estudiante.FechaNacimiento = new Date(this.date);
     this.estudiantesService.updateEstudiante(estudiante);
     this.router.navigateByUrl('/estudiantes');
   }
@@ -47,5 +65,4 @@ export class EstudiantesActualizacionComponent implements OnInit {
   regresar() {
     this.router.navigateByUrl('/estudiantes');
   }
-
 }

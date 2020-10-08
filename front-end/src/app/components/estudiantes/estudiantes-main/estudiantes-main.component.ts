@@ -34,7 +34,4 @@ export class EstudiantesMainComponent implements OnInit {
       }
     );
   }
-
-
-  //TODO implementar funciones y probar ( afiliaciones e historial de afiliaciones )
 }

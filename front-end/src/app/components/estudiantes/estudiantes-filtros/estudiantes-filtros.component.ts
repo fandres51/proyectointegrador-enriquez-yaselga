@@ -25,6 +25,9 @@ export class EstudiantesFiltrosComponent implements OnInit {
     this.estudiantesService.getEstudiantes().subscribe(estudiantes => {
       this.estudiantes = estudiantes;
       this.enviarEstudiantes(this.estudiantes);
+    },
+    error => {
+      console.error(error);
     })
   }
 
