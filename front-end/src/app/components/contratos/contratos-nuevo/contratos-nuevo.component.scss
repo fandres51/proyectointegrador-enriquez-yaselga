@@ -1,5 +1,7 @@
+@import "../../../../assets/css/colors.scss";
+
 button:disabled {
-    background-color: #4f5c8d;
+    background-color:$DisabledColor;
 }
 
 button, input, select {
@@ -13,7 +15,7 @@ button, input, select {
 
 label {
     font-size: 130%;
-    color: #0d288a;
+    color: $MainDarkColor;
     font-weight: 500;
     margin: 30px 0 15px 0;
 }
@@ -26,7 +28,7 @@ label {
 button {
     margin: 50px auto 50px auto;
     width: 40%;
-    background-color: #0d288a;
+    background-color: $MainDarkColor;
     color: white;
 
 }

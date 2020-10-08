@@ -1,10 +1,12 @@
+@import "../../../../assets/css/colors.scss";
+
 .form {
     width: 60%;
     margin: 30px auto;
 }
 
 label {
-    color: #0d288a;
+    color: $MainDarkColor;
     margin: 40px 0 20px 0;
     font-size: 130%;
     font-weight: 500;
@@ -16,14 +18,14 @@ input, select, button {
 button {
     margin: 40px 20px 0 20px;
     color: white;
-    background-color: #0d288a;
+    background-color: $MainDarkColor;
     border: none;
     width: 30%;
     border-radius: 5px;
 }
 
 button:disabled {
-    background-color: #4f5c8d;
+    background-color:$DisabledColor;
 }
 
 .centrar {

@@ -19,6 +19,9 @@ export class AutoridadesDetalleComponent implements OnInit {
         this.generarCalendario(eventos.filter(n => {
           return n.responsables.find( n => n === this.autoridadMostrada.Nombre )
         }))
+      },
+      error => {
+        console.error(error);
       }
     )
   }

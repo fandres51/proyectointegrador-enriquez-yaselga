@@ -1,7 +1,9 @@
+@import "../../../../assets/css/colors.scss";
+
 .icon-box {
     height: 200px;
     width: 200px;
-    background-color: #0D288A;
+    background-color: $MainDarkColor;
     color: white;
 }
 

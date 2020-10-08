@@ -53,8 +53,14 @@ export class EventosCrearComponent implements OnInit {
         this.autoridadService.getAutoridadesActuales(asociacion.AsociacionActual).subscribe(
           autoridades => {
             this.autoridades = autoridades.map(n=>n.Nombre);
+          },
+          error => {
+            console.error(error);
           }
         )
+      },
+      error => {
+        console.error(error);
       }
     )
   }

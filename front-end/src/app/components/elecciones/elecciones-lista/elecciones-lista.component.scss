@@ -1,3 +1,5 @@
+@import "../../../../assets/css/colors.scss";
+
 .lista {
     margin: 50px auto 0 auto;
     width: 75%;
@@ -7,7 +9,7 @@
     margin-top: 50px;
     text-align: right;
     button {
-        background-color: #E53737;
+        background-color:$RedColor;
         color: white;
         border: none;
     }

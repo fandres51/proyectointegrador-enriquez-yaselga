@@ -23,47 +23,13 @@ export class AutoridadesService {
     asociacionService.getAsociacion().subscribe(
       asociacion => {
         this.asociacionActual = asociacion.AsociacionActual;
+      },
+      error => {
+        console.error(error);
       }
     )
   }
-
-  // private getConsejos() {
-  //   return this.afs.collection<Autoridad>('Asociacion/AEIS/Consejo');
-  // }
-
-  // private getAsociacionActual(): Promise<string> {
-  //   return new Promise(
-  //     (res, rej) => {
-  //       this.asociacionService.getAsociacion().subscribe(
-  //         asociacion => {
-  //           res(asociacion.AsociacionActual);
-  //         },
-  //         error => {
-  //           rej(error);
-  //         }
-  //       )
-  //     }
-  //   )
-  // }
-
-  // private async getAutoridadesActualesCollection() {
-  //   // console.log(this.asociacionActual); 
-  //   try {
-  //     const asociacionActual = await this.getAsociacionActual();
-  //     return this.afs.collection<Autoridad>(`Asociacion/AEIS/Consejo/${asociacionActual}/Autoridad`);
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // }
   
-  // async getAutoridadesActuales() {
-  //   try {
-  //     const autActualesColl = await this.getAutoridadesActualesCollection();
-  //     return autActualesColl.valueChanges();
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // } 
   public getAutoridadesActuales(periodoActual) {
     return this.afs.collection<Autoridad>(`Asociacion/AEIS/Consejo/${periodoActual}/Autoridad`).valueChanges();
   }

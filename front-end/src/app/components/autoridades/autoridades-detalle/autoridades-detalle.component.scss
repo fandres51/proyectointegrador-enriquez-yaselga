@@ -1,9 +1,11 @@
+@import "../../../../assets/css/colors.scss";
+
 .detalle-de-autoridades {
     margin: 3% 2%;
     .data {
         margin: 15px 30px;
         h1,h2,h3 {
-            color: #0d288a;
+            color: $MainDarkColor;
         }
         h2 {
             margin-top: 25px;

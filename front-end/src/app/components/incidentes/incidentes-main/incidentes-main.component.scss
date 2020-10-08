@@ -1,5 +1,7 @@
+@import "../../../../assets/css/colors.scss";
+
 button {
-    background-color: #0d288a;
+    background-color: $MainDarkColor;
     color: white;
     border: none;
     margin-top: 40px;

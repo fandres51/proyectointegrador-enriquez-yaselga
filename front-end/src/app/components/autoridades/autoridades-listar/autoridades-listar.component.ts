@@ -24,8 +24,14 @@ export class AutoridadesListarComponent implements OnInit {
         this.autoridadService.getAutoridadesActuales(asociacion.AsociacionActual).subscribe(
           autoridades => {
             this.autoridades = autoridades;
+          },
+          error => {
+            console.error(error);
           }
         )
+      },
+      error => {
+        console.error(error);
       }
     )
   }

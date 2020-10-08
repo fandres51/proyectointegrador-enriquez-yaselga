@@ -21,6 +21,9 @@ export class IncidentesMainComponent implements OnInit {
     this.incidenteService.getIncidentes().subscribe(
       incidentes => {
         this.incidentes = incidentes;
+      },
+      error => {
+        console.error(error);
       }
     )
   }

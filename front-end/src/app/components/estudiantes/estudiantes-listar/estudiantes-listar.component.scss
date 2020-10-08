@@ -1,3 +1,5 @@
+@import "../../../../assets/css/colors.scss";
+
 .students-area {
     max-height: 90vh;
     .card {
@@ -30,4 +32,12 @@
 
 .add-circle-icon {
     margin-left: 5px;
+}
+
+.main-color {
+    color: $MainColor;
+}
+
+.green {
+    color: $GreenColor;
 }

@@ -69,12 +69,24 @@ export class EditarAutoridadFormComponent implements OnInit {
                         this.modulos[mod] = false;
                       }
                     })
+                  },
+                  error => {
+                    console.error(error);
                   }
                 )
+              },
+              error => {
+                console.error(error);
               }
             )
+          },
+          error => {
+            console.error(error);
           }
         )
+      },
+      error => {
+        console.error(error);
       }
     )
   }
@@ -94,7 +106,6 @@ export class EditarAutoridadFormComponent implements OnInit {
       this.authService.deletePermiso(n);
     })
     modulosNombres.forEach( n => {
-      console.log('Hola');
       if(this.modulos[n])
         this.authService.createPermiso({
           email: this.autoridad.CorreoInstitucional,

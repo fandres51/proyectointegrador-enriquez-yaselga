@@ -33,8 +33,14 @@ export class NotificacionesEditComponent implements OnInit {
           notif => {
             this.notificacion = notif;
             this.tiempo = this.formatDate(notif.tiempo);
+          },
+          error => {
+            console.error(error);
           }
         )
+      },
+      error => {
+        console.error(error);
       }
     )
   }

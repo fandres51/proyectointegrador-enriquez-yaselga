@@ -1,7 +1,9 @@
+@import "../../../../assets/css/colors.scss";
+
 label {
     margin: 20px 0;
     font-size: 130%;
-    color: #0D288A;
+    color: $MainDarkColor;
     font-weight: 500;
 }
 
@@ -16,7 +18,7 @@ form {
 }
 
 button {
-    background-color: #294FD7;
+    background-color: $MainColor;
     color: white;
     margin: 60px auto;
     width: 200px;
@@ -24,5 +26,5 @@ button {
 
 button:disabled {
     color: white;
-    background-color: #4f5c8d;
+    background-color:$DisabledColor;
 }

@@ -34,12 +34,15 @@ export class ContratosDetalleComponent implements OnInit {
           contrato => {
             this.contrato = contrato;
             this.fechaInicial = contrato.fechaInicial.getFullYear() + '-' + ('0' + contrato.fechaInicial.getMonth()).slice(-2) + '-' + ('0' + contrato.fechaInicial.getDate()).slice(-2);
-            console.log(this.fechaInicial);
             this.fechaFinal = contrato.fechaFinal.getFullYear() + '-' + ('0' + contrato.fechaFinal.getMonth()).slice(-2) + '-' + ('0' + contrato.fechaFinal.getDate()).slice(-2);
-            console.log(this.fechaFinal);
-
+          },
+          error => {
+            console.error(error);
           }
         )
+      },
+      error => {
+        console.error(error);
       }
     )
   }

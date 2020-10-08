@@ -23,6 +23,9 @@ export class ContratosMainComponent implements OnInit {
       contratos => {
         this.contratos = contratos;
         this.contratosNombres = contratos.map(n=>n.id);
+      },
+      error => {
+        console.error(error);
       }
     )
   }

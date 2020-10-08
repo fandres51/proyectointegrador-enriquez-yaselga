@@ -139,7 +139,6 @@
     <hr fxHide.lt-md>
     <div fxHide.lt-md>
         <h2 class="title">Ordenar por:</h2>
-        <!-- <div fxLayout="row"> -->
         <button mat-button [ngClass]="{
                                         'filtrosButton': tipoOrdenamiento != 'Apellido', 
                                         'selected': tipoOrdenamiento == 'Apellido'
@@ -152,6 +151,5 @@
                                         'filtrosButton': tipoOrdenamiento != 'Semestre', 
                                         'selected': tipoOrdenamiento == 'Semestre'
                                     }" mat-button (click)="ordenar('Semestre')">Semest</button>
-        <!-- </div> -->
     </div>
 </div>

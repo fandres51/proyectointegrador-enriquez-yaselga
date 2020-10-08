@@ -38,7 +38,9 @@ export class AutoridadFormComponent implements OnInit {
         this.eleccion = params.get('eleccion');
         this.lista = params.get('lista');
         this.rutaDeRegreso = '/elecciones/' + this.eleccion + '/' + this.lista;
-
+      },
+      error => {
+        console.error(error);
       }
     )
   }
@@ -50,8 +52,6 @@ export class AutoridadFormComponent implements OnInit {
       existe => {
         if (existe) {
           //2) agregar autoridad a lista
-          console.log(this.eleccion);
-          console.log(this.lista);
           this.eleccionService.createDignidad(this.autoridad, this.lista, this.eleccion);
           //3) regresar
           this.router.navigate(['/elecciones', this.eleccion, this.lista]);

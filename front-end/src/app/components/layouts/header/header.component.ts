@@ -20,6 +20,9 @@ export class HeaderComponent implements OnInit {
     this.authService.auth.user.subscribe(
       user => {
         this.nombreUsuario = user.displayName;
+      },
+      error => {
+        console.error(error);
       }
     )
   }

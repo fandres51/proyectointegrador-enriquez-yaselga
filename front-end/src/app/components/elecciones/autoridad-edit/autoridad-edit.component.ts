@@ -41,8 +41,14 @@ export class AutoridadEditComponent implements OnInit {
         this.eleccionService.getDignidad(this.dignidadParam, this.lista, this.eleccion).subscribe(
           dignidad => {
             this.autoridad = dignidad;
+          },
+          error => {
+            console.error(error);
           }
         )
+      },
+      error => {
+        console.error(error);
       }
     )
   }

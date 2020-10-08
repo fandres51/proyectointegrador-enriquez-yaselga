@@ -22,8 +22,10 @@ export class EleccionesMainComponent implements OnInit {
   ngOnInit(): void {
     this.eleccionService.getElecciones().subscribe(
       elecciones => {
-        console.log(elecciones.length);
         this.elecciones = elecciones.map( n => n.fecha.getMonth() + '-' + n.fecha.getDate() + '-' + n.fecha.getFullYear());
+      },
+      error => {
+        console.error(error);
       }
     )
   }
@@ -39,7 +41,6 @@ export class EleccionesMainComponent implements OnInit {
   }
 
   irAEleccion(eleccion: string) {
-    console.log(eleccion);
     this.router.navigate(['/elecciones', eleccion])
   }
 

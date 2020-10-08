@@ -23,6 +23,9 @@ export class NotificacionesMainComponent implements OnInit {
       notif => {
         this.notificaciones = notif;
         this.notNombres = notif.map(n=>n.nombre);
+      },
+      error => {
+        console.error(error);
       }
     )
   }

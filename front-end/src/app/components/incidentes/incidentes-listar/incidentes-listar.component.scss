@@ -1,7 +1,9 @@
+@import "../../../../assets/css/colors.scss";
+
 .tit {
     font-size: 140%;
     font-weight: 500;
-    color: #0d288a;
+    color: $MainDarkColor;
 }
 
 .card {
@@ -21,5 +23,5 @@
 
 .delete {
     font-size: 140%;
-    color: #0d288a;
+    color: $MainDarkColor;
 }

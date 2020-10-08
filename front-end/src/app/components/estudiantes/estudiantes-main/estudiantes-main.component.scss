@@ -1,16 +1,18 @@
+@import "../../../../assets/css/colors.scss";
+
 .line {
     border-right: 1px solid #606060;
 }
 
 .but-cargar-estudiantes {
-    background-color: #294fd7;
+    background-color: $MainColor;
     color: white;
     margin-bottom: 30px;
 }
 
 .btn-dwn {
     margin: 8px;
-    background-color: #0D288A;
+    background-color: $MainDarkColor;
     padding: 9px 15px;
     color: white;
     cursor: pointer;
@@ -29,7 +31,7 @@
 
 .btn-cargararchivo {
     margin: 8px;
-    background-color: #0D288A;
+    background-color: $MainDarkColor;
     padding: 8px 15px;
     color: white;
     cursor: pointer;
@@ -37,7 +39,7 @@
 }
 
 .registros-mostrados {
-    color: #0D288A;
+    color: $MainDarkColor;
     font-size: 110%;
     font-weight: 500;
 }

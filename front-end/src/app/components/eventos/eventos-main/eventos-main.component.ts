@@ -33,6 +33,9 @@ export class EventosMainComponent implements OnInit {
       eventos => {
         this.eventos = eventos;
         this.generarCalendario(eventos);
+      },
+      error => {
+        console.error(error);
       }
     );
   }
@@ -113,7 +116,6 @@ export class EventosMainComponent implements OnInit {
   }
 
   public openEventWindow(event) {
-    console.log(event.event);
     this.router.navigate(['/eventos', 'actualizar', event.event.id]);
   }
 

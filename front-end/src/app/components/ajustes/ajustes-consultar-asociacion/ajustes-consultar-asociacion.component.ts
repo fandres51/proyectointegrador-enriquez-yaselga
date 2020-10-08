@@ -24,6 +24,9 @@ export class AjustesConsultarAsociacionComponent implements OnInit {
       autoridades => {
         this.autoridades = autoridades;
         this.infoCargada = true;
+      },
+      error => {
+        console.error(error);
       }
     )
   }

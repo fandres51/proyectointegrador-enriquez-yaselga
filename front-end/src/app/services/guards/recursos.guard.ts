@@ -22,8 +22,14 @@ export class RecursosGuard implements CanActivate {
                                     res(true);
                                 else
                                     res(false)
+                            },
+                            error => {
+                              console.error(error);
                             }
                         )
+                    },
+                    error => {
+                      console.error(error);
                     }
                 )
             }

@@ -1,16 +1,18 @@
+@import "../../../../assets/css/colors.scss";
+
 .filters {
     padding: 25px;
 }
 
 .text {
     font-size: 120%;
-    color: #0d288a;
+    color: $MainDarkColor;
     font-weight: 500;
 }
 
 .filtrosButton {
     border: none;
-    color: #0d288a;
+    color: $MainDarkColor;
     background-color: white;
     margin: 1px;
     border-radius: 0;
@@ -21,7 +23,7 @@
 .selected {
     border: none;
     color: white;
-    background-color: #0d288a;
+    background-color: $MainDarkColor;
     margin: 1px;
     border-radius: 0;
     padding: 0 10px;
@@ -33,7 +35,7 @@
 }
 
 .title {
-    color: #0d288a;
+    color: $MainDarkColor;
     margin-top: 15px;
 }
 
@@ -43,7 +45,7 @@
     form{
         width: 100%;
         .button-search {
-            background-color: #0d288a;
+            background-color: $MainDarkColor;
             color: white;
             height: 40px;
             border-radius: 0;

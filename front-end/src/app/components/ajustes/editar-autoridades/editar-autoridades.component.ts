@@ -25,11 +25,16 @@ export class EditarAutoridadesComponent implements OnInit {
       asociacion => {
         this.autoridadService.getAutoridadesActuales(asociacion.AsociacionActual).subscribe(
           autoridades => {
-            console.log(autoridades);
             this.autoridades = autoridades;
             this.autoridadesNombres = autoridades.map(n=>n.Cargo);
+          },
+          error => {
+            console.error(error);
           }
         )
+      },
+      error => {
+        console.error(error);
       }
     )
   }

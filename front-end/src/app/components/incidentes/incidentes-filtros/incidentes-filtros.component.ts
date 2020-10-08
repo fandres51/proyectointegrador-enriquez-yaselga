@@ -20,6 +20,9 @@ export class IncidentesFiltrosComponent implements OnInit {
     this.incidentesService.getIncidentes().subscribe(
       incidentes => {
         this.incidentes = incidentes;
+      },
+      error => {
+        console.error(error);
       }
     )
   }

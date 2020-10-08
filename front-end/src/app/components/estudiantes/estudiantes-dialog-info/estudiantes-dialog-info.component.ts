@@ -29,6 +29,9 @@ export class EstudiantesDialogInfoComponent implements OnInit {
       aportes => {
         this.aportes = aportes;
         this.deuda = this.aportes.reduce((pv, cv) => pv + cv.deuda ,0)
+      },
+      error => {
+        console.error(error);
       }
     )
   }

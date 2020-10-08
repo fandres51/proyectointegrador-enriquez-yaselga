@@ -66,15 +66,27 @@ export class EventosEditarComponent implements OnInit {
           if (evento.daysOfWeek.find(n => n === 5)) { this.dias.viernes = true }
           if (evento.daysOfWeek.find(n => n === 6)) { this.dias.sabado = true }
         }
+      },
+      error => {
+        console.error(error);
       })
+    },
+    error => {
+      console.error(error);
     });
     this.asociacionService.getAsociacion().subscribe(
       asociacion => {
         this.autoridadesService.getAutoridadesActuales(asociacion.AsociacionActual).subscribe(
           autoridades => {
             this.autoridades = autoridades.map(n => n.Nombre);
+          },
+          error => {
+            console.error(error);
           }
         )
+      },
+      error => {
+        console.error(error);
       }
     )
   }

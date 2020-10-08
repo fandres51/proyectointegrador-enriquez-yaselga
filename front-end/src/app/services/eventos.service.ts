@@ -45,6 +45,9 @@ export class EventosService {
             this.asociacionService.increaseContador('Evento');
             bool = false
           }
+      },
+      error => {
+        console.error(error);
       }
     )
   }

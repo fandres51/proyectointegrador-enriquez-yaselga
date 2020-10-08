@@ -25,21 +25,21 @@
 
             <div *ngIf="transaccion.Activa; else noactiva" fxLayout="column" fxLayoutAlign="center end" fxFlex="20" fxFlex.lt-md="50">
                 <div *ngIf="transaccion.Ingreso; else noafiliado" fxLayout="row" fxLayoutAlign="end center">
-                    <div style="color: #37AA42;">Ingreso</div>
-                    <mat-icon style="color: #37AA42;" class="add-circle-icon" aria-hidden="false"
+                    <div class="green">Ingreso</div>
+                    <mat-icon class="green add-circle-icon" aria-hidden="false"
                         aria-label="Example home icon">add_circle</mat-icon>
                 </div>
                 <ng-template #noafiliado>
                     <div fxLayout="row" fxLayoutAlign="end center">
-                        <div style="color: #E53737;">Egreso</div>
-                        <mat-icon style="color: #E53737;" class="add-circle-icon" aria-hidden="false"
+                        <div class="red">Egreso</div>
+                        <mat-icon class="add-circle-icon red" aria-hidden="false"
                             aria-label="Example home icon">remove_circle</mat-icon>
                     </div>
                 </ng-template>
             </div>
             <ng-template #noactiva>
                 <div fxLayout="column" fxLayoutAlign="center end" fxFlex="20" fxFlex.lt-md="50">
-                    <div style="color: #E53737;">Inactiva</div>
+                    <div class="red">Inactiva</div>
                 </div>
             </ng-template>
 

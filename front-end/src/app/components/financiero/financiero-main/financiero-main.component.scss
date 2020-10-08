@@ -1,3 +1,5 @@
+@import "../../../../assets/css/colors.scss";
+
 .top-bar {
     height: 60px;
     border-bottom: #606060 1px solid;
@@ -13,14 +15,14 @@ hr {
 }
 
 .but-cargar-financiero {
-    background-color: #0D288A;
+    background-color: $MainDarkColor;
     color: white;
     margin: 0 20px;
     width: 150px;
 }
 
 .btn-cargararchivo {
-    background-color: #0D288A;
+    background-color: $MainDarkColor;
     color: white;
     padding: 8px 15px;
     border-radius: 4px;
@@ -36,21 +38,21 @@ hr {
 .ingresos {
     font-size: 120%;
     font-weight: 500;
-    color: #0D288A;
+    color: $MainDarkColor;
     margin: 0 20px;
 }
 
 .verde {
-    color: #37aa42;
+    color: $GreenColor;
 }
 
 .rojo {
-    color: #e53737
+    color:$RedColor
 }
 
 .btn-dwn {
     margin: 8px;
-    background-color: #0D288A;
+    background-color: $MainDarkColor;
     padding: 9px 15px;
     color: white;
     cursor: pointer;

@@ -36,10 +36,19 @@ export class EleccionesDetalleComponent implements OnInit {
           this.eleccionService.getListas(fechaParam).subscribe(
             listas => {
               this.listas = listas.map( n => n.nombre );
+            },
+            error => {
+              console.error(error);
             }
           )
+        },
+        error => {
+          console.error(error);
         }
       )
+    },
+    error => {
+      console.error(error);
     });
   }
 
@@ -65,6 +74,9 @@ export class EleccionesDetalleComponent implements OnInit {
         this.eleccionService.getDignidadesDeLista(lista, this.fechaEleccion).subscribe(
           dignidades => {
             this.autoridadService.cambiarAsociacion(dignidades);
+          },
+          error => {
+            console.error(error);
           }
         )
       }

@@ -46,7 +46,13 @@ export class EstudiantesActualizacionComponent implements OnInit {
         let estFecha: Date = estudiante.FechaNacimiento;
         estFecha = new Date(estFecha);
         this.date = estFecha.getFullYear() +'-'+ ('0' + estFecha.getMonth()).slice(-2) + '-' + ('0' + estFecha.getDate()).slice(-2);
+      },
+      error => {
+        console.error(error);
       })
+    },
+    error => {
+      console.error(error);
     });
   }
 
@@ -59,9 +65,4 @@ export class EstudiantesActualizacionComponent implements OnInit {
   regresar() {
     this.router.navigateByUrl('/estudiantes');
   }
-
-  verErrores(form) {
-    console.log(form);
-  }
-
 }

@@ -36,10 +36,19 @@ export class EleccionesListaComponent implements OnInit {
             dignidades => {
               this.dignidades = dignidades;
               this.dignidadesNombres = dignidades.map(n=>n.Cargo);
+            },
+            error => {
+              console.error(error);
             }
           )
+        },
+        error => {
+          console.error(error);
         }
       )
+    },
+    error => {
+      console.error(error);
     })
   }
 

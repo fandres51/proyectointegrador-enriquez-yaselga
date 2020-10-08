@@ -45,6 +45,9 @@ export class CrearPermisoComponent implements OnInit {
             this.modulos[mod] = false;
           }
         })
+      },
+      error => {
+        console.error(error);
       }
     )
   }
