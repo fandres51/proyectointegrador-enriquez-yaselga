@@ -14,7 +14,7 @@
 
 .form {
     width: 50%;
-    margin-top: 30px;
+    margin: 30px auto;
 }
 
 .label {
@@ -40,4 +40,19 @@
 
 .group-day {
     margin-right: 40px;
+}
+
+.tit1 {
+    color: #0d288a;
+    font-weight: 500;
+    font-size: 160%;
+}
+
+.margin-top {
+    margin-top: 80px;
+}
+
+.btn-edit {
+    border: 1px solid #0d288a;
+    color: #0d288a;
 }

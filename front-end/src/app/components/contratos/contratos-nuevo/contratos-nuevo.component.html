@@ -2,31 +2,85 @@
     <app-titles text="Nuevo contrato" regresarA="/contratos"></app-titles>
 </div>
 <div class="form">
-    <form (ngSubmit)="nuevo()">
-        
+    <form #form="ngForm" (ngSubmit)="nuevo()">
         <div fxLayout="column">
             <label for="id">Nombre:</label>
-            <input type="text" id="id" name="id" maxlength="50" [(ngModel)]="contrato.id">
+            <input 
+                type="text" 
+                id="id" 
+                name="id" 
+                maxlength="50" 
+                required
+                [(ngModel)]="contrato.id"
+                #nomb="ngModel"
+            >
+            <div class="err" *ngIf="nomb.touched && nomb.errors">
+                Error, campo requerido
+            </div>
         </div>
         <div fxLayout="column">
             <label for="descripcion">Descripción:</label>
-            <input type="text" id="descripcion" name="descripcion" [(ngModel)]="contrato.descripcion">
+            <input 
+                type="text" 
+                id="descripcion" 
+                name="descripcion" 
+                required
+                [(ngModel)]="contrato.descripcion"
+                #desc="ngModel"
+            >
+            <div class="err" *ngIf="desc.touched && desc.errors">
+                Error, campo requerido
+            </div>
         </div>
         <div fxLayout="column">
             <label for="interesados">Interesados:</label>
-            <input type="text" id="interesados" name="interesados" [(ngModel)]="contrato.interesados">
+            <input 
+                type="text" 
+                id="interesados" 
+                name="interesados" 
+                [(ngModel)]="contrato.interesados"
+                required
+                #inter="ngModel"
+            >
+            <div class="err" *ngIf="inter.touched && inter.errors">
+                Error, campo requerido
+            </div>
         </div>
-        <div fxLayout="column">
-            <label for="fechaInicial">Fecha inicial:</label>
-            <input type="date" id="fechaInicial" name="fechaInicial" [(ngModel)]="fechaInicial">
-        </div>
-        <div fxLayout="column">
-            <label for="fechaFinal">Fecha final:</label>
-            <input type="date" id="fechaFinal" name="fechaFinal" [(ngModel)]="fechaFinal">
+        <div fxLayout="row" fxLayoutAlign="space-between " fxLayout.lt-md="column">
+            <div fxLayout="column" fxFlex="48">
+                <label for="fechaInicial">Fecha inicial:</label>
+                <input 
+                    type="date" 
+                    id="fechaInicial" 
+                    name="fechaInicial" 
+                    [(ngModel)]="fechaInicial"
+                    [max]="fechFin.value"
+                    required
+                    #fec="ngModel"
+                >
+                <div class="err" *ngIf="fec.touched && fec.errors">
+                    Error, campo requerido
+                </div>
+            </div>
+            <div fxLayout="column" fxFlex="48">
+                <label for="fechaFinal">Fecha final:</label>
+                <input 
+                    type="date" 
+                    id="fechaFinal" 
+                    name="fechaFinal" 
+                    [(ngModel)]="fechaFinal"
+                    [min]="fec.value"
+                    required
+                    #fechFin="ngModel"
+                >
+                <div class="err" *ngIf="fechFin.touched && fechFin.errors">
+                    Error, campo requerido
+                </div>
+            </div>
         </div>
         
-        <div>
-            <button mat-button type="submit">
+        <div class="butt-box">
+            <button mat-button type="submit" [disabled]="!form.form.valid">
                 Nuevo
                 <mat-icon aria-hidden="false" aria-label="Edit">new</mat-icon>
             </button>

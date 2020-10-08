@@ -1,7 +1,7 @@
 <div>
-    <app-titles text="Notificaciones" regresarA="/main"></app-titles>
+    <app-titles text="Notificaciones" regresarA="/"></app-titles>
 </div>
-<div>
+<div class="notif-main">
     <app-basic-crud
         [listOfElements]="notNombres"
         (selectedItem)="edit($event)"

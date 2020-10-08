@@ -1,12 +1,14 @@
 <div>
-    <form (ngSubmit)="cargarPermiso()">
-        <label for="email">Email:</label>
-        <input type="text" name="email" id="email" [(ngModel)]="email">
-        <button>Cargar</button>
+    <form (ngSubmit)="cargarPermiso()" fxLayout="column">
+        <label class="label" for="email">Ingrese un email para consultar, asignar o revocar sus permisos:</label>
+        <div>
+            <input type="text" name="email" id="email" [(ngModel)]="email">
+            <button>Cargar</button>
+        </div>
     </form>
 </div>
 
-<div *ngIf="mostrarPermisos">
+<div class="permisos" *ngIf="mostrarPermisos">
     <form (ngSubmit)="crearPermiso()">
         <div>
             <label for="estudiante">Módulo estudiantes:</label>

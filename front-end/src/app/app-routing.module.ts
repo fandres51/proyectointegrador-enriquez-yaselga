@@ -9,7 +9,6 @@ import { AutoridadesMainComponent } from './components/autoridades/autoridades-m
 import { AjustesMainComponent } from './components/ajustes/ajustes-main/ajustes-main.component';
 import { AjustesNuevoSemestreComponent } from './components/ajustes/ajustes-nuevo-semestre/ajustes-nuevo-semestre.component';
 import { EventosMainComponent } from './components/eventos/eventos-main/eventos-main.component';
-import { EventosInfoComponent } from './components/eventos/eventos-info/eventos-info.component';
 import { EventosCrearComponent } from './components/eventos/eventos-crear/eventos-crear.component';
 import { FinancieroMainComponent } from './components/financiero/financiero-main/financiero-main.component';
 import { FinancieroCrearComponent } from './components/financiero/financiero-crear/financiero-crear.component';
@@ -49,7 +48,6 @@ const routes: Routes = [
   { path: 'estudiantes/afiliar/:id', component: EstudiantesAfiliacionComponent, canActivate: [EstudiantesGuard]  },
   { path: 'autoridades', component: AutoridadesMainComponent, canActivate: [AutoridadesGuard] },
   { path: 'eventos', component: EventosMainComponent, canActivate: [EventosGuard] },
-  { path: 'eventos/info/:id', component: EventosInfoComponent, canActivate: [EventosGuard] },
   { path: 'eventos/nuevo', component: EventosCrearComponent, canActivate: [EventosGuard] },
   { path: 'eventos/actualizar/:id', component: EventosEditarComponent, canActivate: [EventosGuard] },
   { path: 'financiero', component: FinancieroMainComponent, canActivate: [FinancieroGuard] },

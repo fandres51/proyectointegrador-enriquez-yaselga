@@ -35,6 +35,14 @@ export class FinancieroFiltrosComponent implements OnInit {
 
   /***Filtros****************************************** */
 
+  buscarPorEstudiante(noUnico: string) {
+    let transaccionesAMostrar = this.transacciones.filter( n => {
+      if(n.PersonaID)
+        return n.PersonaID.includes(noUnico);
+    })
+    this.enviarTransacciones(transaccionesAMostrar);
+  }
+
   private getTomorrowDate(): Date {
     const today = new Date()
     const tomorrow = new Date(today)

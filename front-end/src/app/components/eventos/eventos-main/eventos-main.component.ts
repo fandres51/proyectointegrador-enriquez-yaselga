@@ -114,7 +114,7 @@ export class EventosMainComponent implements OnInit {
 
   public openEventWindow(event) {
     console.log(event.event);
-    this.router.navigate(['/eventos/info', event.event.id]);
+    this.router.navigate(['/eventos', 'actualizar', event.event.id]);
   }
 
 

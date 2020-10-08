@@ -3,6 +3,10 @@
     <div fxHide.lt-md>
         <h2 class="title">Filtros:</h2>
         <div>
+            <h3 class="title">Buscar por NoUnico: </h3>
+            <app-search (elementToSearch)="buscarPorEstudiante($event)"></app-search>
+        </div>
+        <div>
             <h3 class="title">Por tipo</h3>
             <select name="filtroTipo" id="filtroTipo" [(ngModel)]="tipoFiltro">
                 <option value="">Todos</option>

@@ -111,4 +111,8 @@ export class EditarAutoridadFormComponent implements OnInit {
       })
     }
   }
+
+  return() {
+    this.router.navigate(['/ajustes', 'editar-autoridades']);
+  }
 }

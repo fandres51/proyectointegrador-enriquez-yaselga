@@ -1,7 +1,9 @@
 <div>
-    <form (ngSubmit)="reiniciarAportes()">
-        <label for="nuevoPeriodo">Ingrese nombre del nuevo ciclo (Ej: 2020A)</label>
-        <input type="text" id="nuevoPeriodo" name="nuevoPeriodo" [(ngModel)]="periodoActual">
-        <button type="submit">Reiniciar aportes</button>
+    <form (ngSubmit)="reiniciarAportes()" fxLayout="column">
+        <label for="nuevoPeriodo">Ingrese nombre del nuevo ciclo (Ej: 2020A): </label>
+        <div>
+            <input type="text" id="nuevoPeriodo" name="nuevoPeriodo" [(ngModel)]="periodoActual">
+            <button type="submit">Reiniciar aportes</button>
+        </div>
     </form>
 </div>

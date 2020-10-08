@@ -1,28 +1,29 @@
 <div>
     <div>
-        <form (ngSubmit)="cargarAutoridades()">
+        <form (ngSubmit)="cargarAutoridades()" fxLayout="column">
             <label for="anio">Ingrese el año del cual desee conocer la información:</label>
-            <input type="text" id="anio" name="anio" [(ngModel)]="anio">
-            <button type="submit">Consultar</button>
+            <div>
+                <input type="text" id="anio" name="anio" [(ngModel)]="anio">
+                <button type="submit">Consultar</button>
+            </div>
         </form>
     </div>
     <div *ngIf="infoCargada">
         <div *ngFor="let autoridad of autoridades">
             <div>
-                <div>Nombre: </div>
-                <div>{{autoridad.Nombre}}</div>
+                <div class="tit">{{autoridad.Cargo}}</div>
             </div>
             <div>
-                <div>Cargo: </div>
-                <div>{{autoridad.Cargo}}</div>
+                <div class="label">Nombre: </div>
+                <div class="data">{{autoridad.Nombre}}</div>
             </div>
             <div>
-                <div>Email: </div>
-                <div>{{autoridad.CorreoPersonal}}</div>
+                <div class="label">Email: </div>
+                <div class="data">{{autoridad.CorreoPersonal}}</div>
             </div>
             <div>
-                <div>NoUnico: </div>
-                <div>{{autoridad.NoUnico}}</div>
+                <div class="label">NoUnico: </div>
+                <div class="data">{{autoridad.NoUnico}}</div>
             </div>
         </div>
     </div>

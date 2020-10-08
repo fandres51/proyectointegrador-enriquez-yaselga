@@ -21,3 +21,8 @@ button {
     margin: 60px auto;
     width: 200px;
 }
+
+button:disabled {
+    color: white;
+    background-color: #4f5c8d;
+}

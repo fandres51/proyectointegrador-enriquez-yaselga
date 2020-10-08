@@ -1,20 +1,59 @@
 <div>
-    <form (ngSubmit)="editar()">
+    <app-titles regresarA="/notificaciones" text="Editar notificacion"></app-titles>
+</div>
+<div>
+    <form class="form" (ngSubmit)="editar()" #form="ngForm">
         <div fxLayout="column">
             <label for="nombre">Nombre: </label>
-            <input type="text" name="nombre" id="nombre" [(ngModel)]="notificacion.nombre">
+            <input 
+                type="text" 
+                name="nombre" 
+                id="nombre" 
+                required
+                [(ngModel)]="notificacion.nombre"
+                #nom="ngModel"
+            >
+            <div class="err" *ngIf="nom.touched && nom.errors">
+                Error, campo requerido
+            </div>
         </div>
         <div fxLayout="column">
             <label for="descripcion">Descripción: </label>
-            <input type="text" name="descripcion" id="descripcion" [(ngModel)]="notificacion.descripcion">
+            <input 
+                type="text" 
+                name="descripcion" 
+                id="descripcion" 
+                [(ngModel)]="notificacion.descripcion"
+                required
+                #desc="ngModel"
+            >
+            <div class="err" *ngIf="desc.touched && desc.errors">
+                Error, campo requerido
+            </div>
         </div>
         <div fxLayout="column">
             <label for="fecha">Fecha y hora: </label>
-            <input type="datetime-local" name="fecha" id="fecha" [(ngModel)]="tiempo">
+            <input 
+                type="datetime-local" 
+                name="fecha" 
+                id="fecha" 
+                [(ngModel)]="tiempo"
+                required
+                #fech="ngModel"
+            >
+            <div class="err" *ngIf="fech.touched && fech.errors">
+                Error, campo requerido
+            </div>
         </div>
-        <div>
-            <button type="submit">Editar</button>
-            <button type="button" (click)="eliminar()">Eliminar</button>
+        <div fxLayout="row" fxLayoutAlign="center ">
+            <button [disabled]="!form.form.valid" fxLayout="row" fxLayoutAlign="center center" type="submit">
+                Editar
+                <mat-icon aria-hidden="false" aria-label="delete">edit</mat-icon>
+            </button>
+            <button class="delete-btn" type="button" (click)="eliminar()" fxLayout="row" fxLayoutAlign="center center">
+                Eliminar
+                <mat-icon aria-hidden="false" aria-label="delete">delete</mat-icon>
+            </button>
         </div>
     </form>
 </div>

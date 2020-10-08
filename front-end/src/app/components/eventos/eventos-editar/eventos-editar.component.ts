@@ -13,6 +13,7 @@ import { EventosService } from 'src/app/services/eventos.service';
 export class EventosEditarComponent implements OnInit {
 
   public autoridades: string[] = [];
+  public editable = false;
 
   public evento: Evento = {
     id: '',
@@ -53,17 +54,17 @@ export class EventosEditarComponent implements OnInit {
       const id = params['id'];
       this.eventosService.getEvento(id).subscribe(evento => {
         this.evento = evento;
-        if(evento.responsables[0]) {this.responsables.resp1 = evento.responsables[0];}
-        if(evento.responsables[1]) {this.responsables.resp2 = evento.responsables[1];}
-        if(evento.responsables[2]) {this.responsables.resp3 = evento.responsables[2];}
-        if(evento.tipo !== 'Evento') {
-          if(evento.daysOfWeek.find(n=>n===0)) {this.dias.domingo = true}
-          if(evento.daysOfWeek.find(n=>n===1)) {this.dias.lunes = true}
-          if(evento.daysOfWeek.find(n=>n===2)) {this.dias.martes = true}
-          if(evento.daysOfWeek.find(n=>n===3)) {this.dias.miercoles = true}
-          if(evento.daysOfWeek.find(n=>n===4)) {this.dias.jueves = true}
-          if(evento.daysOfWeek.find(n=>n===5)) {this.dias.viernes = true}
-          if(evento.daysOfWeek.find(n=>n===6)) {this.dias.sabado = true}
+        if (evento.responsables[0]) { this.responsables.resp1 = evento.responsables[0]; }
+        if (evento.responsables[1]) { this.responsables.resp2 = evento.responsables[1]; }
+        if (evento.responsables[2]) { this.responsables.resp3 = evento.responsables[2]; }
+        if (evento.tipo !== 'Evento') {
+          if (evento.daysOfWeek.find(n => n === 0)) { this.dias.domingo = true }
+          if (evento.daysOfWeek.find(n => n === 1)) { this.dias.lunes = true }
+          if (evento.daysOfWeek.find(n => n === 2)) { this.dias.martes = true }
+          if (evento.daysOfWeek.find(n => n === 3)) { this.dias.miercoles = true }
+          if (evento.daysOfWeek.find(n => n === 4)) { this.dias.jueves = true }
+          if (evento.daysOfWeek.find(n => n === 5)) { this.dias.viernes = true }
+          if (evento.daysOfWeek.find(n => n === 6)) { this.dias.sabado = true }
         }
       })
     });
@@ -71,7 +72,7 @@ export class EventosEditarComponent implements OnInit {
       asociacion => {
         this.autoridadesService.getAutoridadesActuales(asociacion.AsociacionActual).subscribe(
           autoridades => {
-            this.autoridades = autoridades.map(n=>n.Nombre);
+            this.autoridades = autoridades.map(n => n.Nombre);
           }
         )
       }
@@ -96,7 +97,7 @@ export class EventosEditarComponent implements OnInit {
       arregloDias.push(6);
     return arregloDias;
   }
-  
+
   crearArregoResp(): string[] {
     const arregloResp: string[] = [];
     if (this.responsables.resp1)
@@ -105,21 +106,54 @@ export class EventosEditarComponent implements OnInit {
       arregloResp.push(this.responsables.resp2);
     if (this.responsables.resp3)
       arregloResp.push(this.responsables.resp3);
-    return arregloResp.filter( (n, i) => {
-      if(arregloResp.indexOf(n) === i)
+    return arregloResp.filter((n, i) => {
+      if (arregloResp.indexOf(n) === i)
         return n
     })
   }
 
   editEvento() {
+    let validado = true;
     this.evento.responsables = this.crearArregoResp();
-    if(this.evento.tipo !== 'Evento')
+    if (this.evento.tipo !== 'Evento') {
       this.evento.daysOfWeek = this.crearArregoDias();
-    this.eventosService.updateEvento(this.evento);
-    this.router.navigateByUrl('/eventos');
+      if (this.evento.daysOfWeek.length < 1) {
+        alert('Debe ingresar al menos un día de la semana');
+        validado = false;
+      }
+      if (this.evento.startTime > this.evento.endTime) {
+        alert('Error: hora de inicio debe ser anterior a hora de finalización');
+        validado = false;
+      }
+    }
+
+    if (this.evento.tipo === 'Evento') {
+      if (this.evento.start > this.evento.end) {
+        alert('Error: hora de inicio debe ser anterior a hora de finalización');
+        validado = false;
+      }
+    }
+
+    if (validado) {
+      this.eventosService.updateEvento(this.evento);
+      alert('Evento editado');
+      this.router.navigate(['/eventos']);
+    }
+  }
+
+  cambiarEditable() {
+    this.editable = !this.editable;
   }
 
   regresar() {
     this.router.navigateByUrl('/eventos');
+  }
+
+  delete() {
+    let estaSeguro = confirm('¿Está seguro que desea eliminar este evento?');
+    if(estaSeguro) {
+      this.eventosService.deleteEvento(this.evento.id);
+      this.router.navigate(['/eventos']);
+    }
   }
 }

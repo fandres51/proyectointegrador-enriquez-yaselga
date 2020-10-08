@@ -44,7 +44,7 @@ export class IncidenteService {
                 ).forEach(
                     key => data[key] = data[key].toDate()
                 ) //convierte todos los objetos Timestamp a Date
-                
+                data.id = a.payload.id;
                 return data;
             })
         )

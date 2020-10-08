@@ -1,0 +1,50 @@
+button:disabled {
+    background-color: #4f5c8d;
+}
+
+button, input, select {
+    padding: 10px;
+}
+
+.form {
+    width: 70%;
+    margin: 20px auto;
+}
+
+label {
+    font-size: 130%;
+    color: #0d288a;
+    font-weight: 500;
+    margin: 30px 0 15px 0;
+}
+
+.butt-box {
+    width: 100%;
+    text-align: center;
+}
+
+button {
+    margin: 50px auto 30px auto;
+    width: 40%;
+    background-color: #0d288a;
+    color: white;
+    border: none;
+}
+
+.btn-edit-box {
+    width: 100%;
+    text-align: right;
+}
+
+.btn-edit {
+    background-color: rgba(255, 255, 255, 0);
+    width: 80px;
+    height: 40px;
+    border: 1px solid #0d288a;
+    color: #0d288a;
+    padding: 0;
+}
+
+.dlt-btn {
+    width: 100px;
+}

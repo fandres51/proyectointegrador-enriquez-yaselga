@@ -48,5 +48,8 @@
         button:focus {
             outline: none;
         }
+        button:disabled {
+            background-color: #4f5c8d;
+        }
     }
 }
