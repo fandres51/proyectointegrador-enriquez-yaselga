@@ -7,14 +7,16 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { RecursosMainComponent } from './recursos-main/recursos-main.component';
 import { RecursosListarComponent } from './recursos-listar/recursos-listar.component'
 import { DetalleRecursoComponent } from './detalle-recurso/detalle-recurso.component';
-import { RecursosDialogInfoComponent } from './recursos-dialog-info/recursos-dialog-info.component'
+import { RecursosDialogInfoComponent } from './recursos-dialog-info/recursos-dialog-info.component';
+import { RecursosFiltrosComponent } from './recursos-filtros/recursos-filtros.component';
+import { RecursosActualizacionComponent } from './recursos-actualizacion/recursos-actualizacion.component'
 
 
 @NgModule({
   declarations: [ 
       RecursosMainComponent, 
       RecursosListarComponent, 
-      DetalleRecursoComponent, RecursosDialogInfoComponent,
+      DetalleRecursoComponent, RecursosDialogInfoComponent, RecursosFiltrosComponent, RecursosActualizacionComponent,
     ],
   imports: [
     CommonModule,
