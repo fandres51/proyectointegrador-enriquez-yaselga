@@ -62,9 +62,9 @@ const routes: Routes = [
   { path: 'contratos', component: ContratosMainComponent, canActivate: [ContratosGuard] },
   { path: 'contratos/nuevo', component: ContratosNuevoComponent, canActivate: [ContratosGuard] },
   { path: 'contratos/:contrato', component: ContratosDetalleComponent, canActivate: [ContratosGuard] },
-  { path: 'notificaciones', component: NotificacionesMainComponent, canActivate: [NotificacionesGuard] },
-  { path: 'notificaciones/nuevo', component: NotificacionesCrearComponent, canActivate: [NotificacionesGuard] },
-  { path: 'notificaciones/editar/:nombre', component: NotificacionesEditComponent, canActivate: [NotificacionesGuard] },
+  // { path: 'notificaciones', component: NotificacionesMainComponent, canActivate: [NotificacionesGuard] },
+  // { path: 'notificaciones/nuevo', component: NotificacionesCrearComponent, canActivate: [NotificacionesGuard] },
+  // { path: 'notificaciones/editar/:nombre', component: NotificacionesEditComponent, canActivate: [NotificacionesGuard] },
   { path: 'ajustes', component: AjustesMainComponent, children: [
     { path: 'nuevo-semestre', component: AjustesNuevoSemestreComponent },
     { path: 'consultar-asociacion', component: AjustesConsultarAsociacionComponent },

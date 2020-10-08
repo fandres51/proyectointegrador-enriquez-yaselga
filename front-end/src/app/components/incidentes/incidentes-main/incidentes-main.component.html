@@ -1,8 +1,8 @@
-<div fxLayout="row" fxLayoutAlign="space-around ">
+<div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-around ">
     <div fxFlex="20">
         <app-incidentes-filtros (onSearch)="mostrarElementos($event)"></app-incidentes-filtros>
     </div>
-    <div class="line"></div>
+    <div class="line" fxHide.lt-md></div>
     <div class="main-scr" fxFlex="70">
         <button (click)="nuevo()">Nuevo</button>
         <app-incidentes-listar [_incidentes]="incidentes"></app-incidentes-listar>

@@ -1,6 +1,6 @@
 <div>
     <div *ngFor="let incidente of incidentesPaginados" fxLayout="column">
-        <mat-card class="card" fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-card class="card" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between center">
             <div fxFlex="85" fxLayout="column" fxLayoutAlign=" start">
                 <div fxLayout="column" fxLayoutAlign=" start">
                     <div class="tit">{{incidente.nombre}}</div>
@@ -9,7 +9,7 @@
                     <div class="ly">Descripción: </div>
                     <div class="txt">{{incidente.descripcion}}</div>
                 </div>
-                <div fxLayout="row" fxLayoutAlign="space-between " style="width: 100%;">
+                <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between " style="width: 100%;">
                     <div fxLayout="column" fxLayoutAlign=" start">
                         <div class="ly">Fecha: </div>
                         <div class="txt">{{incidente.fecha.getDate() + '/' + incidente.fecha.getMonth() + '/' + incidente.fecha.getFullYear()}}</div>
