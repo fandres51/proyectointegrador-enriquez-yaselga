@@ -1,0 +1,89 @@
+<div fxLayout="column" fxLayoutAlign=" center">
+    <div class="add-title" fxLayout="row">
+        <button routerLink="/financiero" class="button-white" mat-button>
+            <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_back</mat-icon>
+        </button>
+        <h1>Nueva Transacción</h1>
+    </div>
+
+    <div>
+        <form #form="ngForm" (ngSubmit)="addTransaccion(transaccion)" fxLayout="column" fxLayoutAlign="center center" class="form">
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addMonto">Monto: </label>
+                <input 
+                    type="number" 
+                    min="0.05" 
+                    step=".01" 
+                    name="addMonto" 
+                    id="addMonto" 
+                    required
+                    [(ngModel)]="transaccion.Monto"
+                    #monto="ngModel"
+                >
+                <div class="err" *ngIf="monto.touched && monto.errors">
+                    Error, campo requerido
+                </div>
+            </div>
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addIngreso">Ingreso / Egreso: </label>
+                <select 
+                    name="addIngreso" 
+                    id="addIngreso" 
+                    [(ngModel)]="transaccion.Ingreso"
+                >
+                    <option value="true">Ingreso</option>
+                    <option value="false">Egreso</option>
+                </select>
+            </div>
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addFecha">Fecha: </label>
+                <div>
+                    <input 
+                        type="date" 
+                        id="addFecha"
+                        name="addFecha" 
+                        required
+                        [(ngModel)]="fecha"
+                        #fech="ngModel"
+                    >
+                    <div class="err" *ngIf="fech.touched && fech.errors">
+                        Error, campo requerido
+                    </div>
+                </div>
+            </div>
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addTipo">Tipo: </label>
+                <select 
+                    name="addTipo" 
+                    id="addTipo" 
+                    [(ngModel)]="transaccion.Tipo"
+                >
+                    <option value="Afiliacion">Afiliacion</option>
+                    <option value="Evento">Evento</option>
+                    <option value="Bar">Bar</option>
+                    <option value="Alquiler">Alquiler</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addDescripcion">Descripción: </label>
+                <input 
+                    type="text" 
+                    name="addDescripcion" 
+                    id="addDescripcion" 
+                    required
+                    [(ngModel)]="transaccion.Descripcion"
+                    #desc="ngModel"
+                >
+                <div class="err" *ngIf="desc.touched && desc.errors">
+                    Error, campo requerido
+                </div>
+            </div>
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <button mat-button [disabled]="!form.form.valid">
+                    Generar transacción
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+@import "../../../../assets/css/colors.scss";
+
+.line {
+    border-right: 1px solid #606060;
+}
+
+.but-cargar-estudiantes {
+    background-color: $MainColor;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.btn-dwn {
+    margin: 8px;
+    background-color: $MainDarkColor;
+    padding: 9px 15px;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+}
+
+.div-estudiantes {
+    margin: 2% 7%;
+}
+
+.top-bar {
+    padding: 0 7% 0 1%;
+    border-bottom: 1px #606060 solid;
+}
+
+.btn-cargararchivo {
+    margin: 8px;
+    background-color: $MainDarkColor;
+    padding: 8px 15px;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.registros-mostrados {
+    color: $MainDarkColor;
+    font-size: 110%;
+    font-weight: 500;
+}

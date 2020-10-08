@@ -1,2 +1,5 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
+<div class="main">
+    <div class="box" *ngFor="let modulo of modulos; let i = index">
+        <app-icon-box [route]="routes[i]" [text]="modulo" [icon]="icons[i]"></app-icon-box>
+    </div>
+</div>

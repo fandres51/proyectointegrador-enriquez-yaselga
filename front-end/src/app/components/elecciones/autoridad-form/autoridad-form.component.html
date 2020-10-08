@@ -1,0 +1,123 @@
+<div>
+    <app-titles text="Ingrese información de la autoridad" [regresarA]="rutaDeRegreso"></app-titles>
+</div>
+<div class="form">
+    <form #form="ngForm" (ngSubmit)="crear()">
+        
+        <div fxLayout="column">
+            <label for="NoUnico">Número único:</label>
+            <input 
+                type="text" 
+                id="NoUnico" 
+                name="NoUnico"
+                required
+                minlength="8"
+                maxlength="9"
+                pattern="^[0-9]*$"
+                [(ngModel)]="autoridad.NoUnico"
+                #noUni="ngModel"
+            >
+            <div class="err" *ngIf="noUni.touched && noUni.errors">
+                Error, campo requerido y en formato numérico
+            </div>
+        </div>
+        <div fxLayout="column">
+            <label for="CorreoInstitucional">Correo Institucional:</label>
+            <input 
+                type="text" 
+                id="CorreoInstitucional" 
+                name="CorreoInstitucional"
+                email 
+                [(ngModel)]="autoridad.CorreoInstitucional"
+                required
+                #corrInst="ngModel"
+            >
+            <div class="err" *ngIf="corrInst.touched && corrInst.errors">
+                Error, campo requerido y en formato de email
+            </div>
+        </div>
+        <div fxLayout="column">
+            <label for="Cargo">Cargo:</label>
+            <input 
+                type="text" 
+                id="Cargo" 
+                name="Cargo" 
+                required
+                [(ngModel)]="autoridad.Cargo"
+                #cargo="ngModel"
+            >
+            <div class="err" *ngIf="cargo.touched && cargo.errors">
+                Error, campo requerido
+            </div>
+        </div>
+        <div fxLayout="column">
+            <label for="Nombre">Nombre:</label>
+            <input 
+                type="text" 
+                id="Nombre" 
+                name="Nombre" 
+                required
+                min="2"
+                [(ngModel)]="autoridad.Nombre"
+                #nom="ngModel"
+            >
+            <div class="err" *ngIf="nom.touched && nom.errors">
+                Error, campo requerido
+            </div>
+
+        </div>
+        <div fxLayout="column">
+            <label for="Telefono">Teléfono:</label>
+            <input 
+                type="text" 
+                id="Telefono" 
+                name="Telefono" 
+                required
+                minlength="6"
+                maxlength="12"
+                pattern="^[0-9]*$"
+                [(ngModel)]="autoridad.Telefono"
+                #tel="ngModel"
+            >
+            <div class="err" *ngIf="tel.touched && tel.errors">
+                Error, campo requerido y solo numérico entre 6 y 12 dígitos
+            </div>
+        </div>
+        <div fxLayout="column">
+            <label for="CorreoPersonal">Correo Personal:</label>
+            <input 
+                type="text" 
+                id="CorreoPersonal" 
+                name="CorreoPersonal" 
+                email
+                required
+                [(ngModel)]="autoridad.CorreoPersonal"
+                #emailP="ngModel"
+            >
+            <div class="err" *ngIf="emailP.touched && emailP.errors">
+                Error, campo requerido y en formato email
+            </div>
+        </div>
+        <div fxLayout="column">
+            <label for="Cedula">Cedula:</label>
+            <input 
+                type="text" 
+                id="Cedula" 
+                name="Cedula" 
+                required
+                [(ngModel)]="autoridad.Cedula"
+                minlength="8"
+                maxlength="15"
+                pattern="^[0-9]*$"
+                #cedu="ngModel"
+            >
+            <div class="err" *ngIf="cedu.touched && cedu.errors">
+                Error, campo requerido y en formato numérico
+            </div>
+        </div>
+        
+        <div>
+            <button mat-button type="submit" [disabled]="!form.form.valid">Crear</button>
+        </div>
+    </form>
+</div>

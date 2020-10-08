@@ -1,0 +1,302 @@
+<div fxLayout="column" fxLayoutAlign=" center">
+    <div class="afiliar-title" fxLayout="row">
+        <button (click)="regresar()" class="button-white" mat-button>
+            <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_back</mat-icon>
+        </button>
+        <h1>Crear Evento</h1>
+    </div>
+    <div class="form">
+        <form fxLayout="column" (ngSubmit) = "crearEvento()" #form="ngForm"> 
+            <h2 class="tit1">Datos básicos: </h2>
+            <div fxLayout="column">
+                <label class="label" for="title">Titulo*</label>
+                <input 
+                    class="input" 
+                    id="title" 
+                    name="title" 
+                    type="text" 
+                    [(ngModel)]="nuevoEvento.title"
+                    required
+                    #tit="ngModel"
+                >
+                <div *ngIf="tit.touched && tit.errors">
+                    Error, campo requerido
+                </div>
+            </div>
+            <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between ">
+                <div fxLayout="column">
+                    <label class="label" for="allDay">¿Evento dura todo el día?:</label>
+                    <input 
+                        class="input" 
+                        id="allDay" 
+                        name="allDay" 
+                        type="checkbox" 
+                        [(ngModel)]="nuevoEvento.allDay"
+                        #allday="ngModel"
+                    >
+                </div>
+                <div fxLayout="column">
+                    <label class="label" for="color">Color</label>
+                    <input 
+                        class="input" 
+                        id="color" 
+                        name="color" 
+                        type="color" 
+                        [(ngModel)]="nuevoEvento.color"
+                    >
+                </div>
+            </div>
+            <div fxLayout="column">
+                <label class="label" for="descripcion">Descripción*</label>
+                <input 
+                    class="input" 
+                    id="descripcion" 
+                    name="descripcion" 
+                    type="text" 
+                    [(ngModel)]="nuevoEvento.descripcion"
+                    required
+                    #desc="ngModel"
+                >
+                <div *ngIf="desc.touched && desc.errors">
+                    Error, campo requerido
+                </div>
+            </div>
+            <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between ">
+                <div fxLayout="column" fxFlex="48">
+                    <label class="label" for="lugar">Lugar*</label>
+                    <input 
+                        class="input" 
+                        id="lugar" 
+                        name="lugar" 
+                        type="text" 
+                        [(ngModel)]="nuevoEvento.lugar"
+                        required
+                        #lugar="ngModel"
+                    >
+                    <div *ngIf="lugar.touched && lugar.errors">
+                        Error, campo requerido
+                    </div>
+                </div>
+                <div fxLayout="column" fxFlex="48">
+                    <label class="label" for="presupuesto">Presupuesto (genera una transacción)</label>
+                    <input 
+                        class="input" 
+                        id="presupuesto" 
+                        name="presupuesto" 
+                        type="number" 
+                        min="0" 
+                        step=".01" 
+                        [(ngModel)]="nuevoEvento.presupuesto"
+                    >
+                </div>
+            </div>
+            <h2 class="tit1 margin-top">Responsables: </h2>
+            <div fxLayout="column">
+                <label class="label" for="responsables">Responsable 1: </label>
+                <select name="responsables" id="responsables" [(ngModel)]="responsables.resp1">
+                    <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
+                </select>
+            </div>
+            <div fxLayout="column">
+                <label class="label" for="responsables">Responsable 2: </label>
+                <select name="responsables" id="responsables" [(ngModel)]="responsables.resp2">
+                    <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
+                </select>
+            </div>
+            <div fxLayout="column">
+                <label class="label" for="responsables">Responsable 3: </label>
+                <select name="responsables" id="responsables" [(ngModel)]="responsables.resp3">
+                    <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
+                </select>
+            </div>
+
+            <h2 class="tit1 margin-top">Horarios: </h2>
+            <div fxLayout="column">
+                <label class="label" for="responsables">Tipo: </label>
+                <select name="responsables" id="responsables" #responsable [(ngModel)]="nuevoEvento.tipo">
+                    <option value="Evento">Evento único</option>
+                    <option value="Recursivo">Evento recursivo</option>
+                    <option value="Club">Club</option>
+                    <option value="Curso">Curso</option>
+                </select>
+            </div>
+
+            <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between " *ngIf="nuevoEvento.tipo === 'Evento'">
+                <div fxLayout="column" fxFlex="48">
+                    <label class="label" for="start">Inicio*</label>
+                    <input 
+                        class="input" 
+                        id="start" 
+                        name="start" 
+                        type="datetime-local" 
+                        [max]="end.value"
+                        [(ngModel)]="nuevoEvento.start"
+                        required
+                        #inicio="ngModel"
+                    >
+                    <div *ngIf="inicio.touched && inicio.errors">
+                        Error, campo requerido
+                    </div>
+                </div>
+                <div fxLayout="column" fxFlex="48">
+                    <label class="label" for="end">Fin*</label>
+                    <input 
+                        class="input" 
+                        id="end" 
+                        name="end" 
+                        type="datetime-local" 
+                        [(ngModel)]="nuevoEvento.end"
+                        [min]="inicio.value"
+                        required
+                        #end="ngModel"
+                    >
+                    <div *ngIf="end.touched && end.errors">
+                        Error, campo requerido
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="nuevoEvento.tipo !== 'Evento'">
+                <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between ">
+                    <div fxLayout="column" fxFlex="48" >
+                        <label class="label" for="startRecur">Fecha de Inicio*</label>
+                        <input 
+                            class="input" 
+                            id="startRecur" 
+                            name="startRecur" 
+                            type="date" 
+                            [max]="endDate.value"
+                            [(ngModel)]="nuevoEvento.startRecur"
+                            #inicioDate="ngModel"
+                        >
+                        <div *ngIf="inicioDate.touched && inicioDate.errors">
+                            Error, campo requerido
+                        </div>
+                    </div>
+                    <div fxLayout="column" fxFlex="48">
+                        <label class="label" for="endRecur">Fecha del Fin*</label>
+                        <input 
+                            class="input" 
+                            id="endRecur" 
+                            name="endRecur" 
+                            type="date" 
+                            [(ngModel)]="nuevoEvento.endRecur"
+                            [min]="inicioDate.value"
+                            #endDate="ngModel"
+                        >
+                        <div *ngIf="endDate.touched && endDate.errors">
+                            Error, campo requerido
+                        </div>
+                    </div>
+                </div>
+                <div class="label">
+                    Días de la semana*: 
+                </div>
+                <div fxLayout="row" fxLayout.lt-md="column">
+                    <div class="group-day" fxLayout="column">
+                        <label class="label" for="lunes">Lunes</label>
+                        <input 
+                            id="lunes" 
+                            name="lunes" 
+                            type="checkbox" 
+                            [(ngModel)]="dias.lunes"
+                        >
+                    </div>
+                    <div class="group-day" fxLayout="column">
+                        <label class="label" for="martes">Martes</label>
+                        <input 
+                            id="martes" 
+                            name="martes" 
+                            type="checkbox" 
+                            [(ngModel)]="dias.martes"
+                        >
+                    </div>
+                    <div class="group-day" fxLayout="column">
+                        <label class="label" for="miercoles">Miercoles</label>
+                        <input 
+                            id="miercoles" 
+                            name="miercoles" 
+                            type="checkbox" 
+                            [(ngModel)]="dias.miercoles"
+                        >
+                    </div>
+                    <div class="group-day" fxLayout="column">
+                        <label class="label" for="jueves">Jueves</label>
+                        <input 
+                            id="jueves" 
+                            name="jueves" 
+                            type="checkbox" 
+                            [(ngModel)]="dias.jueves"
+                        >
+                    </div>
+                    <div class="group-day" fxLayout="column">
+                        <label class="label" for="viernes">Viernes</label>
+                        <input 
+                            id="viernes" 
+                            name="viernes" 
+                            type="checkbox" 
+                            [(ngModel)]="dias.viernes"
+                        >
+                    </div>
+                    <div class="group-day" fxLayout="column">
+                        <label class="label" for="sabado">Sabado</label>
+                        <input 
+                            id="sabado" 
+                            name="sabado" 
+                            type="checkbox" 
+                            [(ngModel)]="dias.sabado"
+                        >
+                    </div>
+                    <div class="group-day" fxLayout="column">
+                        <label class="label" for="domingo">Domingo</label>
+                        <input 
+                            id="domingo" 
+                            name="domingo" 
+                            type="checkbox" 
+                            [(ngModel)]="dias.domingo"
+                        >
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between " *ngIf="allday.value === false">
+                    <div fxLayout="column" fxFlex="48">
+                        <label class="label" for="startTime">Hora de Inicio*</label>
+                        <input 
+                            class="input" 
+                            id="startTime" 
+                            name="startTime" 
+                            type="time" 
+                            [(ngModel)]="nuevoEvento.startTime"
+                            [max]="endTime.value"
+                            required
+                            #startTime="ngModel"
+                        >
+                        <div *ngIf="startTime.touched && startTime.errors">
+                            Error, campo requerido
+                        </div>
+                    </div>
+                    <div fxLayout="column" fxFlex="48">
+                        <label class="label" for="endTime">Hora de Fin*</label>
+                        <input 
+                            class="input" 
+                            id="endTime" 
+                            name="endTime" 
+                            type="time" 
+                            [min]="startTime.value"
+                            [(ngModel)]="nuevoEvento.endTime"
+                            #endTime="ngModel"
+                        >
+                        <div *ngIf="endTime.touched && endTime.errors">
+                            Error, campo requerido
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button mat-button type="submit" class="button" [disabled]="!form.form.valid">
+                Crear Evento
+            </button>
+            
+        </form>
+    </div>
+    <div>
+        *Campos obligatorios
+    </div>

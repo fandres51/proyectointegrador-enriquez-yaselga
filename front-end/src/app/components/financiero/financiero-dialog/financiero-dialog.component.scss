@@ -1,0 +1,10 @@
+@import "../../../../assets/css/colors.scss";
+
+.button {
+    background-color: white;
+    color: $MainColor;
+}
+
+.button:focus {
+    outline: 0px;
+}

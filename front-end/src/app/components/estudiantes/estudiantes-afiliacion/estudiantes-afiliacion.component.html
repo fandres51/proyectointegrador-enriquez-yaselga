@@ -1,0 +1,96 @@
+<div fxLayout="column" fxLayoutAlign=" center">
+    <div class="afiliar-title" fxLayout="row">
+        <button (click)="regresar()" class="button-white" mat-button>
+            <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_back</mat-icon>
+        </button>
+        <h1>Afiliar</h1>
+    </div>
+
+    <div>
+        <form #form="ngForm" (ngSubmit)="afiliarEstudiante()" fxLayout="column" fxLayoutAlign="center center" class="form">
+            <div>
+                <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
+                    <div fxLayout="column" fxFlex=50 class="form-item">
+                        <label for="updateTelefono">Teléfono: </label>
+                        <input 
+                            type="text" 
+                            name="updateTelefono" 
+                            id="updateTelefono" 
+                            value={{estudiante.Telefono}} 
+                            [(ngModel)]="estudiante.Telefono"
+                            minlength="6"
+                            maxlength="12"
+                            pattern="^[0-9]*$"
+                            #tel="ngModel"
+                        >
+                        <div *ngIf="tel.touched && tel.errors">
+                            Error, campo solo numérico y requerido
+                        </div>
+                    </div>
+                    <div fxLayout="column" fxFlex=50 class="form-item">
+                        <label for="updateCorreoPersonal">Correo Personal: </label>
+                        <input 
+                            type="text" 
+                            name="updateCorreoPersonal" 
+                            id="updateCorreoPersonal" 
+                            value={{estudiante.CorreoPersonal}} 
+                            [(ngModel)]="estudiante.CorreoPersonal"
+                            email
+                            required
+                            #corr="ngModel"
+                        >
+                        <div *ngIf="corr.touched && corr.errors">
+                            Error, campo requerido y en formato email
+                        </div>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayout.lt-md="column" class="form-row">
+                    <div fxLayout="column" fxFlex=50 class="form-item">
+                        <label for="updateSectorDomiciliario">Sector Domiciliario: </label>
+                        <input 
+                            type="text" 
+                            name="updateSectorDomiciliario" 
+                            id="updateSectorDomiciliario" 
+                            value={{estudiante.SectorDomiciliario}} 
+                            [(ngModel)]="estudiante.SectorDomiciliario"
+                            required
+                            #sector="ngModel"
+                        >
+                        <div *ngIf="sector.touched && sector.errors">
+                            Error, campo requerido
+                        </div>
+                    </div>
+                    <div fxLayout="column" fxFlex=50 class="form-item">
+                        <label for="updateSemestreReferencial">Semestre Referencial: </label>
+                        <select 
+                            name="updateSemestreReferencial" 
+                            id="updateSemestreReferencial" 
+                            [(ngModel)]="estudiante.SemestreReferencial"
+                        >
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="Egresado">Egresado</option>
+                            <option value="Graduado">Graduado</option>
+                            <option value="Retirado">Retirado</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div fxLayout="column" fxFlex=100 class="form-item">
+                    <button [disabled]="!form.form.valid" mat-button>
+                        Confirmar Afiliación
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

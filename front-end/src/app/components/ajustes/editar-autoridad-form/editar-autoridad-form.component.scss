@@ -1,0 +1,36 @@
+@import "../../../../assets/css/colors.scss";
+
+.tit {
+    font-size: 130%;
+    color: $MainDarkColor;
+    font-weight: 500;
+    margin-top: 8px;
+}
+
+.label {
+    color: $MainDarkColor;
+    font-size: 110%;
+    font-weight: 500;
+    margin: 30px 0 15px 0;
+}
+
+.form {
+    width: 50%;
+}
+
+.permisos {
+    margin-top: 30px;
+    margin-right: 60px;
+}
+
+button {
+    margin: 50px 0;
+    background-color: $MainDarkColor;
+    color: white;
+}
+
+.retrun {
+    background-color: rgba(255, 255, 255, 0);
+    color: $MainDarkColor;
+    margin: 0;
+}

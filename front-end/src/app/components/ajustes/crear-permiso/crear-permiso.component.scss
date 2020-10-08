@@ -1,0 +1,23 @@
+@import "../../../../assets/css/colors.scss";
+
+button, input {
+    padding: 7px;
+}
+
+button {
+    border: $MainDarkColor solid 2px;
+    background-color: $MainDarkColor;
+    color: white;
+}
+
+label {
+    margin-bottom: 20px;
+}
+
+.label {
+    font-size: 130%;
+}
+
+.permisos {
+    margin-top: 40px;
+}

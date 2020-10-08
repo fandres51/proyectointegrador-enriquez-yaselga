@@ -1,13 +1,14 @@
+@import "../../../../assets/css/colors.scss";
+
 .header {
     height: 50px;
-    background-color: #294fd7;
+    background-color: $MainColor;
 
     .logo-user {
         div {
             a{
                 .imgLogo {
-                    width: 100px;
-                    margin: 0 15px;
+                    height: 50px;
                 }
             }
             div {
@@ -45,7 +46,7 @@
 
             button:hover,
             a:hover {
-                background-color: #0d288a;
+                background-color: $MainDarkColor;
                 text-decoration: none;
             }
 
@@ -65,7 +66,7 @@
 }
 
 .minibutton:hover {
-    background-color: #0d288a;
+    background-color: $MainDarkColor;
 }
 
 .menu-item:focus,
@@ -87,12 +88,12 @@ a:hover {
 
 .menu-size-small {
     position: absolute;
-    background-color: #294fd7;
+    background-color: $MainColor;
     width: 300px;
     z-index: 100;
     height: 100vh;
     div {
-        background-color: #0d288a;
+        background-color: $MainDarkColor;
         .imgAvatar {
             margin: 15px 20px 15px 50px;
             width: 40px;
@@ -107,7 +108,7 @@ a:hover {
         }
         a {
             button {
-                background-color: #294fd7;
+                background-color: $MainColor;
                 color: white;
                 mat-icon {
                     color: white;
@@ -126,4 +127,8 @@ a:hover {
 
 .mostrado {
     left: 0;
+}
+
+.nombre-usr {
+    margin-bottom: 3px;
 }
