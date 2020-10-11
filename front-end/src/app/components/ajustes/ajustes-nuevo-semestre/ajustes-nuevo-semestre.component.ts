@@ -22,6 +22,7 @@ export class AjustesNuevoSemestreComponent implements OnInit {
   reiniciarAportes() {
     this.asociacionService.updateAsociacion({PeriodoActual: this.periodoActual})
     this.estudianteService.crearAportesNuevoSemestre();
+    alert('Se han reiniciado los aprotes');
   }
 
 }

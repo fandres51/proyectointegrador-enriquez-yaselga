@@ -19,5 +19,6 @@ export class AjustesDefinirAporteComponent implements OnInit {
 
   cambiarAporte() {
     this.asociacionService.updateAsociacion({AporteActual: this.aporte});
+    alert('Aporte cambiado!');
   }
 }

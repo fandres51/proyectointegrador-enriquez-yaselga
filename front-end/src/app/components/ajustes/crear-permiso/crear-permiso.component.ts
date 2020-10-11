@@ -64,6 +64,7 @@ export class CrearPermisoComponent implements OnInit {
           modulo: n
         })
     })
+    alert('Permisos creados!');
   }
 
 }
