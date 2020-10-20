@@ -27,9 +27,6 @@ import { IncidentesMainComponent } from './components/incidentes/incidentes-main
 import { IncidentesCrearComponent } from './components/incidentes/incidentes-crear/incidentes-crear.component';
 import { EditarAutoridadesComponent } from './components/ajustes/editar-autoridades/editar-autoridades.component';
 import { EditarAutoridadFormComponent } from './components/ajustes/editar-autoridad-form/editar-autoridad-form.component';
-import { NotificacionesMainComponent } from './components/notificaciones/notificaciones-main/notificaciones-main.component';
-import { NotificacionesCrearComponent } from './components/notificaciones/notificaciones-crear/notificaciones-crear.component';
-import { NotificacionesEditComponent } from './components/notificaciones/notificaciones-edit/notificaciones-edit.component';
 import { EstudiantesGuard } from './services/guards/estudiantes.guard';
 import { AutoridadesGuard } from './services/guards/autoridades.guard';
 import { EventosGuard } from './services/guards/eventos.guard';
@@ -37,7 +34,6 @@ import { FinancieroGuard } from './services/guards/financiero.guard';
 import { EleccionesGuard } from './services/guards/elecciones.guard';
 import { ContratosGuard } from './services/guards/contratos.guard';
 import { IncidentesGuard } from './services/guards/incidentes.guard';
-import { NotificacionesGuard } from './services/guards/notificaciones.guard';
 import { AjustesGuard } from './services/guards/ajustes.guard';
 import { CrearPermisoComponent } from './components/ajustes/crear-permiso/crear-permiso.component';
 
@@ -62,9 +58,6 @@ const routes: Routes = [
   { path: 'contratos', component: ContratosMainComponent, canActivate: [ContratosGuard] },
   { path: 'contratos/nuevo', component: ContratosNuevoComponent, canActivate: [ContratosGuard] },
   { path: 'contratos/:contrato', component: ContratosDetalleComponent, canActivate: [ContratosGuard] },
-  // { path: 'notificaciones', component: NotificacionesMainComponent, canActivate: [NotificacionesGuard] },
-  // { path: 'notificaciones/nuevo', component: NotificacionesCrearComponent, canActivate: [NotificacionesGuard] },
-  // { path: 'notificaciones/editar/:nombre', component: NotificacionesEditComponent, canActivate: [NotificacionesGuard] },
   { path: 'ajustes', component: AjustesMainComponent, children: [
     { path: 'nuevo-semestre', component: AjustesNuevoSemestreComponent },
     { path: 'consultar-asociacion', component: AjustesConsultarAsociacionComponent },

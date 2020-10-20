@@ -15,15 +15,41 @@ export class CrearPermisoComponent implements OnInit {
 
   modulos = {
     Estudiantes:false,
+    Estudiantes_new:false,
+    Estudiantes_edit:false,
+    Estudiantes_delete:false,
     Financiero:false,
+    Financiero_new:false,
+    Financiero_edit:false,
+    Financiero_delete:false,
     Eventos:false,
+    Eventos_new:false,
+    Eventos_edit:false,
+    Eventos_delete:false,
     Filiales:false,
-    Notificaciones:false,
+    Filiales_new:false,
+    Filiales_edit:false,
+    Filiales_delete:false,
     Autoridades:false,
+    Autoridades_new:false,
+    Autoridades_edit:false,
+    Autoridades_delete:false,
     Recursos:false,
+    Recursos_new:false,
+    Recursos_edit:false,
+    Recursos_delete:false,
     Elecciones:false,
+    Elecciones_new:false,
+    Elecciones_edit:false,
+    Elecciones_delete:false,
     Contratos:false,
-    Incidentes:false
+    Contratos_new:false,
+    Contratos_edit:false,
+    Contratos_delete:false,
+    Incidentes:false,
+    Incidentes_new:false,
+    Incidentes_edit:false,
+    Incidentes_delete:false
   }
 
   constructor(
@@ -34,22 +60,16 @@ export class CrearPermisoComponent implements OnInit {
 
   cargarPermiso() {
     this.mostrarPermisos = true;
-    this.authService.getPermisos(this.email).subscribe(
-      permisos => {
-        this.permisos = permisos;
-        let modulosP = Object.keys(this.modulos);
-        modulosP.forEach( mod => {
-          if(permisos.some( n => n.modulo===mod )) {
-            this.modulos[mod] = true;
-          } else {
-            this.modulos[mod] = false;
-          }
-        })
-      },
-      error => {
-        console.error(error);
-      }
-    )
+    let permisosP = Object.keys(this.modulos);
+    this.authService.getPermisos(this.email).subscribe( permisos => {
+      this.permisos = permisos;
+    })
+    permisosP.forEach( n => {
+      this.authService.getPermiso(this.email, n).subscribe( permiso => {
+        if( permiso.length > 0 )
+          this.modulos[n] = true;
+      })
+    })
   }
 
   crearPermiso() {

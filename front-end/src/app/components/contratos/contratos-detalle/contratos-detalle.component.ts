@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Contrato } from 'src/app/models/contrato';
+import { AuthService } from 'src/app/services/auth.service';
 import { ContratoService } from 'src/app/services/contrato.service';
 
 @Component({
@@ -17,7 +18,9 @@ export class ContratosDetalleComponent implements OnInit {
 
   constructor(
     private readonly contratoService: ContratoService,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly router: Router,
+    private readonly authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -54,15 +57,44 @@ export class ContratosDetalleComponent implements OnInit {
   editar() {
     this.contrato.fechaInicial = new Date(this.fechaInicial);
     this.contrato.fechaFinal = new Date(this.fechaFinal);
-    const estaSeguro = confirm('¿Está seguro que desea editar la información de este contrato?');
-    if(estaSeguro) 
-      this.contratoService.addContrato(this.contrato);
-  }
-  
-  eliminar() {
-    const estaSeguro = confirm('¿Está seguro que desea eliminar este contrato?');
-    if(estaSeguro)
-      this.contratoService.deleteContrato(this.contrato);
+    this.authService.auth.user.subscribe(
+      user => {
+        this.authService.getPermiso(user.email, 'Contratos_edit').subscribe(
+          permiso => {
+            if (permiso.length > 0) {
+              const estaSeguro = confirm('¿Está seguro que desea editar la información de este contrato?');
+              if (estaSeguro) {
+                this.contratoService.addContrato(this.contrato);
+                alert('Contrato editado!')
+                this.router.navigate(['/Contratos']);
+              }
+            }
+            else
+              alert('Usted no tiene permiso para realizar esa acción');
+          }
+        )
+      }
+    )
   }
 
+  eliminar() {
+    this.authService.auth.user.subscribe(
+      user => {
+        this.authService.getPermiso(user.email, 'Contratos_delete').subscribe(
+          permiso => {
+            if (permiso.length > 0) {
+              const estaSeguro = confirm('¿Está seguro que desea eliminar este contrato?');
+              if (estaSeguro) {
+                this.contratoService.deleteContrato(this.contrato);
+                alert('Contrato eliminado!')
+                this.router.navigate(['/Contratos']);
+              }
+            }
+            else
+              alert('Usted no tiene permiso para realizar esa acción');
+          }
+        )
+      }
+    )
+  }
 }

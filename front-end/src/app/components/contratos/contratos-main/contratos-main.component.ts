@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Contrato } from 'src/app/models/contrato';
+import { AuthService } from 'src/app/services/auth.service';
 import { ContratoService } from 'src/app/services/contrato.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class ContratosMainComponent implements OnInit {
 
   constructor(
     private readonly contratoService: ContratoService,
+    private readonly authService: AuthService,
     private readonly router: Router
   ) { }
 
@@ -35,7 +37,19 @@ export class ContratosMainComponent implements OnInit {
   }
   
   nuevo() {
-    this.router.navigate(['/contratos', 'nuevo']);
+    this.authService.auth.user.subscribe(
+      user => {
+        this.authService.getPermiso(user.email, 'Contratos_new').subscribe(
+          permiso => {
+            if (permiso.length > 0) {
+              this.router.navigate(['/contratos', 'nuevo']);
+            }
+            else
+              alert('Usted no tiene permiso para realizar esa acción');
+          }
+        )
+      }
+    )
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Evento } from 'src/app/models/evento';
 import { AsociacionService } from 'src/app/services/asociacion.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { AutoridadesService } from 'src/app/services/autoridades.service';
 import { EventosService } from 'src/app/services/eventos.service';
 
@@ -46,6 +47,7 @@ export class EventosEditarComponent implements OnInit {
     public autoridadesService: AutoridadesService,
     private router: Router,
     private route: ActivatedRoute,
+    public authService: AuthService,
     private asociacionService: AsociacionService
   ) { }
 
@@ -67,13 +69,13 @@ export class EventosEditarComponent implements OnInit {
           if (evento.daysOfWeek.find(n => n === 6)) { this.dias.sabado = true }
         }
       },
+        error => {
+          console.error(error);
+        })
+    },
       error => {
         console.error(error);
-      })
-    },
-    error => {
-      console.error(error);
-    });
+      });
     this.asociacionService.getAsociacion().subscribe(
       asociacion => {
         this.autoridadesService.getAutoridadesActuales(asociacion.AsociacionActual).subscribe(
@@ -125,32 +127,46 @@ export class EventosEditarComponent implements OnInit {
   }
 
   editEvento() {
-    let validado = true;
-    this.evento.responsables = this.crearArregoResp();
-    if (this.evento.tipo !== 'Evento') {
-      this.evento.daysOfWeek = this.crearArregoDias();
-      if (this.evento.daysOfWeek.length < 1) {
-        alert('Debe ingresar al menos un día de la semana');
-        validado = false;
-      }
-      if (this.evento.startTime > this.evento.endTime) {
-        alert('Error: hora de inicio debe ser anterior a hora de finalización');
-        validado = false;
-      }
-    }
 
-    if (this.evento.tipo === 'Evento') {
-      if (this.evento.start > this.evento.end) {
-        alert('Error: hora de inicio debe ser anterior a hora de finalización');
-        validado = false;
-      }
-    }
+    this.authService.auth.user.subscribe(
+      user => {
+        this.authService.getPermiso(user.email, 'Eventos_edit').subscribe(
+          permiso => {
+            if (permiso.length > 0) {
 
-    if (validado) {
-      this.eventosService.updateEvento(this.evento);
-      alert('Evento editado');
-      this.router.navigate(['/eventos']);
-    }
+              let validado = true;
+              this.evento.responsables = this.crearArregoResp();
+              if (this.evento.tipo !== 'Evento') {
+                this.evento.daysOfWeek = this.crearArregoDias();
+                if (this.evento.daysOfWeek.length < 1) {
+                  alert('Debe ingresar al menos un día de la semana');
+                  validado = false;
+                }
+                if (this.evento.startTime > this.evento.endTime) {
+                  alert('Error: hora de inicio debe ser anterior a hora de finalización');
+                  validado = false;
+                }
+              }
+
+              if (this.evento.tipo === 'Evento') {
+                if (this.evento.start > this.evento.end) {
+                  alert('Error: hora de inicio debe ser anterior a hora de finalización');
+                  validado = false;
+                }
+              }
+
+              if (validado) {
+                this.eventosService.updateEvento(this.evento);
+                alert('Evento editado');
+                this.router.navigate(['/eventos']);
+              }
+            }
+            else
+              alert('Usted no tiene permiso para realizar esa acción');
+          }
+        )
+      }
+    )
   }
 
   cambiarEditable() {
@@ -162,10 +178,22 @@ export class EventosEditarComponent implements OnInit {
   }
 
   delete() {
-    let estaSeguro = confirm('¿Está seguro que desea eliminar este evento?');
-    if(estaSeguro) {
-      this.eventosService.deleteEvento(this.evento.id);
-      this.router.navigate(['/eventos']);
-    }
+    this.authService.auth.user.subscribe(
+      user => {
+        this.authService.getPermiso(user.email, 'Eventos_delete').subscribe(
+          permiso => {
+            if (permiso.length > 0) {
+              let estaSeguro = confirm('¿Está seguro que desea eliminar este evento?');
+              if (estaSeguro) {
+                this.eventosService.deleteEvento(this.evento.id);
+                this.router.navigate(['/eventos']);
+              }
+            }
+            else
+              alert('Usted no tiene permiso para realizar esa acción');
+          }
+        )
+      }
+    )
   }
 }

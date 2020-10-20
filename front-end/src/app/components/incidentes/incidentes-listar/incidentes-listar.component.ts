@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Incidente } from 'src/app/models/incidente';
+import { AuthService } from 'src/app/services/auth.service';
 import { IncidenteService } from 'src/app/services/incidente.service';
 
 @Component({
@@ -20,7 +21,8 @@ export class IncidentesListarComponent implements OnInit {
   public incidentesPaginados: Incidente[];
 
   constructor(
-    private readonly incidenteService: IncidenteService
+    private readonly incidenteService: IncidenteService,
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -31,14 +33,26 @@ export class IncidentesListarComponent implements OnInit {
     this.pageSize = $event.pageSize;
     this.changePagination();
   }
-  
+
   changePagination() {
-    this.incidentesPaginados = this.incidentes.slice(this.pageIndex*this.pageSize, this.pageIndex*this.pageSize + this.pageSize);
+    this.incidentesPaginados = this.incidentes.slice(this.pageIndex * this.pageSize, this.pageIndex * this.pageSize + this.pageSize);
   }
 
   eliminar(id: Incidente) {
-    const estaSeguro = confirm('¿Está seguro que desea eliminar el elemento sleccionado?');
-    if(estaSeguro)
-      this.incidenteService.deleteIncidente(id);
+    this.authService.auth.user.subscribe(
+      user => {
+        this.authService.getPermiso(user.email, 'Incidentes_delete').subscribe(
+          permiso => {
+            if (permiso.length > 0) {
+              const estaSeguro = confirm('¿Está seguro que desea eliminar el elemento sleccionado?');
+              if (estaSeguro)
+                this.incidenteService.deleteIncidente(id);
+            }
+            else
+              alert('Usted no tiene permiso para realizar esa acción');
+          }
+        )
+      }
+    )
   }
 }

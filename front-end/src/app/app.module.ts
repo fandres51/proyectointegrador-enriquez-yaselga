@@ -49,15 +49,12 @@ import { IncidentesMainComponent } from './components/incidentes/incidentes-main
 import { IncidentesFiltrosComponent } from './components/incidentes/incidentes-filtros/incidentes-filtros.component';
 import { IncidentesListarComponent } from './components/incidentes/incidentes-listar/incidentes-listar.component';
 import { IncidentesCrearComponent } from './components/incidentes/incidentes-crear/incidentes-crear.component';
-import { NotificacionesMainComponent } from './components/notificaciones/notificaciones-main/notificaciones-main.component';
 import { EditarAutoridadFormComponent } from './components/ajustes/editar-autoridad-form/editar-autoridad-form.component';
 import { AjustesConsultarAsociacionComponent } from './components/ajustes/ajustes-consultar-asociacion/ajustes-consultar-asociacion.component';
 import { AjustesDefinirAporteComponent } from './components/ajustes/ajustes-definir-aporte/ajustes-definir-aporte.component';
 import { AjustesMainComponent } from './components/ajustes/ajustes-main/ajustes-main.component';
 import { AjustesNuevoSemestreComponent } from './components/ajustes/ajustes-nuevo-semestre/ajustes-nuevo-semestre.component';
 import { EditarAutoridadesComponent } from './components/ajustes/editar-autoridades/editar-autoridades.component';
-import { NotificacionesCrearComponent } from './components/notificaciones/notificaciones-crear/notificaciones-crear.component';
-import { NotificacionesEditComponent } from './components/notificaciones/notificaciones-edit/notificaciones-edit.component';
 import { EstudiantesGuard } from './services/guards/estudiantes.guard';
 import { FilialesGuard } from './services/guards/filiales.guard';
 import { AjustesGuard } from './services/guards/ajustes.guard';
@@ -67,12 +64,10 @@ import { EventosGuard } from './services/guards/eventos.guard';
 import { EleccionesGuard } from './services/guards/elecciones.guard';
 import { FinancieroGuard } from './services/guards/financiero.guard';
 import { IncidentesGuard } from './services/guards/incidentes.guard';
-import { NotificacionesGuard } from './services/guards/notificaciones.guard';
 import { RecursosGuard } from './services/guards/recursos.guard';
 import { CrearPermisoComponent } from './components/ajustes/crear-permiso/crear-permiso.component';
 import { ContratoService } from './services/contrato.service';
 import { IncidenteService } from './services/incidente.service';
-import { NotificacionService } from './services/notificacion.service';
 import { IconBoxComponent } from './components/layouts/icon-box/icon-box.component';
 import { EstudiantesMainComponent } from './components/estudiantes/estudiantes-main/estudiantes-main.component';
 import { EstudiantesFiltrosComponent } from './components/estudiantes/estudiantes-filtros/estudiantes-filtros.component';
@@ -119,7 +114,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     IncidentesFiltrosComponent, 
     IncidentesListarComponent, 
     IncidentesCrearComponent, 
-    NotificacionesMainComponent,
     EditarAutoridadFormComponent,
     ListComponent,
     AjustesConsultarAsociacionComponent,
@@ -128,8 +122,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AjustesNuevoSemestreComponent,
     EditarAutoridadFormComponent,
     EditarAutoridadesComponent,
-    NotificacionesCrearComponent,
-    NotificacionesEditComponent,
     CrearPermisoComponent,
     IconBoxComponent,
     EstudiantesActualizacionComponent, 
@@ -170,7 +162,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     EstudiantesService,
     EventosService,
     IncidenteService,
-    NotificacionService,
     TransaccionesService,
     AjustesGuard,
     AutoridadesGuard,
@@ -181,7 +172,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FilialesGuard,
     FinancieroGuard,
     IncidentesGuard,
-    NotificacionesGuard,
     RecursosGuard
   ],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Estudiante } from 'src/app/models/estudiante';
+import { AuthService } from 'src/app/services/auth.service';
 import { EstudiantesService } from 'src/app/services/estudiantes.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class EstudiantesActualizacionComponent implements OnInit {
   constructor(
     public estudiantesService: EstudiantesService,
     private router: Router,
+    public authService: AuthService,
     private route: ActivatedRoute
   ) { }
 
@@ -57,9 +59,21 @@ export class EstudiantesActualizacionComponent implements OnInit {
   }
 
   editEstudiante(estudiante: Estudiante) {
-    this.estudiante.FechaNacimiento = new Date(this.date);
-    this.estudiantesService.updateEstudiante(estudiante);
-    this.router.navigateByUrl('/estudiantes');
+    this.authService.auth.user.subscribe(
+      user => {
+        this.authService.getPermiso(user.email, 'Estudiantes_edit').subscribe(
+          permiso => {
+            if (permiso.length > 0) {
+              this.estudiante.FechaNacimiento = new Date(this.date);
+              this.estudiantesService.updateEstudiante(estudiante);
+              this.router.navigateByUrl('/estudiantes');
+            }
+            else
+              alert('Usted no tiene permiso para realizar esa acción');
+          }
+        )
+      }
+    )
   }
 
   regresar() {

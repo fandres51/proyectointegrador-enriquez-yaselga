@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Estudiante } from 'src/app/models/estudiante';
 import { Transaccion } from 'src/app/models/transaccion';
+import { AuthService } from 'src/app/services/auth.service';
 import { EstudiantesService } from 'src/app/services/estudiantes.service';
 import { TransaccionesService } from 'src/app/services/transacciones.service';
 
@@ -17,6 +18,7 @@ export class EstudiantesAfiliacionComponent implements OnInit {
   constructor(
     private router: Router,
     private estudiantesService: EstudiantesService,
+    public authService: AuthService,
     private transaccionService: TransaccionesService,
     private route: ActivatedRoute
   ) { }
@@ -42,7 +44,19 @@ export class EstudiantesAfiliacionComponent implements OnInit {
   }
 
   afiliarEstudiante() {
-    this.estudiantesService.afiliarEstudiante( this.estudiante.NoUnico );
-    this.router.navigateByUrl('/estudiantes');
+    this.authService.auth.user.subscribe(
+      user => {
+        this.authService.getPermiso(user.email, 'Estudiantes_edit').subscribe(
+          permiso => {
+            if (permiso.length > 0) {
+              this.estudiantesService.afiliarEstudiante( this.estudiante.NoUnico );
+              this.router.navigateByUrl('/estudiantes');
+            }
+            else
+              alert('Usted no tiene permiso para realizar esa acción');
+          }
+        )
+      }
+    )
   }
 }
