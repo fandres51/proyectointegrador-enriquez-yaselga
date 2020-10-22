@@ -1,0 +1,17 @@
+.button {
+    background-color: white;
+    padding: 15px;
+    width: 100%;
+    border: none;
+    border-bottom: solid 1px #606060;
+    border-radius: 0;
+    font-size: 120%;
+}
+
+.apellido {
+    margin-left: 5px;
+}
+
+.button:focus {
+    outline: none;
+}

@@ -8,5 +8,5 @@ export interface Transaccion {
     Monto:number;
     PersonaID?:string;
     Tipo:string;
-    TipoMonetario:string;
+    TipoMonetario:string
 }

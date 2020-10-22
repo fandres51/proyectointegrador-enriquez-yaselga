@@ -1,0 +1,142 @@
+<div class="filters">
+    <h2 class="title">Búsqueda: </h2>
+    <h3 class="title">Buscar por nombre: </h3>
+    <div class="search-space">
+        <form (ngSubmit)="buscarPorNombre(nombreInput.value)" fxLayout="row">
+            <input fxFlex="85" class="input-search" id="porNombreInput" name="porNombreInput" type="text" #nombreInput>
+            <button fxFlex="15" class="button-search" mat-button>
+                <mat-icon aria-hidden="false" aria-label="Example home icon">search</mat-icon>
+            </button>
+        </form>
+    </div>
+    <h3 class="title">Buscar por cedula: </h3>
+    <div class="search-space">
+        <form (ngSubmit)="buscarPorCedula(inputCedula.value)" fxLayout="row">
+            <input fxFlex="85" class="input-search" id="porCedulaInput" name="porCedulaInput" type="text" #inputCedula>
+            <button fxFlex="15" class="button-search" mat-button>
+                <mat-icon aria-hidden="false" aria-label="Example home icon">search</mat-icon>
+            </button>
+        </form>
+    </div>
+    <hr>
+    <div fxHide.lt-md>
+        <h2 class="title">Filtros:</h2>
+        <div>
+            <h3 class="title">Por estado de la afiliación</h3>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroAfiliacion != 'Aportante', 
+                                    'selected': filtroAfiliacion == 'Aportante'
+                                }" mat-button (click)="filtrarPorAporte('Aportante')">Aporta</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroAfiliacion  != 'No aportante', 
+                                    'selected': filtroAfiliacion == 'No aportante'
+                                }" mat-button (click)="filtrarPorAporte('No aportante')">No Apo</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroAfiliacion  != 'No afiliado', 
+                                    'selected': filtroAfiliacion == 'No afiliado'
+                                }" mat-button (click)="filtrarPorAporte('No afiliado')">No Afi</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroAfiliacion  != '', 
+                                    'selected': filtroAfiliacion == ''
+                                }" mat-button (click)="filtrarPorAporte('')">Todos</button>
+        </div>
+        <div>
+            <h3 class="title">Por Carrera</h3>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroCarrera != 'Sistemas', 
+                                    'selected': filtroCarrera == 'Sistemas'
+                                }" mat-button (click)="filtrarPorCarrera('Sistemas')">Sistem</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroCarrera != 'Computacion', 
+                                    'selected': filtroCarrera == 'Computacion'
+                                }" mat-button (click)="filtrarPorCarrera('Computacion')">Comput</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroCarrera != 'Software', 
+                                    'selected': filtroCarrera == 'Software'
+                                }" mat-button (click)="filtrarPorCarrera('Software')">Softwa</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroCarrera != '', 
+                                    'selected': filtroCarrera == ''
+                                }" mat-button (click)="filtrarPorCarrera('')">Todos</button>
+        </div>
+        <div>
+            <h3 class="title">Por semestre</h3>
+
+            <button [ngClass]="{
+                                    'filtrosButton': filtroSemestre != '1', 
+                                    'selected': filtroSemestre == '1'
+                                }" mat-button (click)="filtrarPorSemestre('1')">1</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroSemestre != '2', 
+                                    'selected': filtroSemestre == '2'
+                                }" mat-button (click)="filtrarPorSemestre('2')">2</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroSemestre != '3', 
+                                    'selected': filtroSemestre == '3'
+                                }" mat-button (click)="filtrarPorSemestre('3')">3</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroSemestre != '4', 
+                                    'selected': filtroSemestre == '4'
+                                }" mat-button (click)="filtrarPorSemestre('4')">4</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroSemestre != '5', 
+                                    'selected': filtroSemestre == '5'
+                                }" mat-button (click)="filtrarPorSemestre('5')">5</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroSemestre != '6', 
+                                    'selected': filtroSemestre == '6'
+                                }" mat-button (click)="filtrarPorSemestre('6')">6</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroSemestre != '7', 
+                                    'selected': filtroSemestre == '7'
+                                }" mat-button (click)="filtrarPorSemestre('7')">7</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroSemestre != '8', 
+                                    'selected': filtroSemestre == '8'
+                                }" mat-button (click)="filtrarPorSemestre('8')">8</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroSemestre != '9', 
+                                    'selected': filtroSemestre == '9'
+                                }" mat-button (click)="filtrarPorSemestre('9')">9</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroSemestre != '10', 
+                                    'selected': filtroSemestre == '10'
+                                }" mat-button (click)="filtrarPorSemestre('10')">10</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroSemestre != 'Egresado', 
+                                    'selected': filtroSemestre == 'Egresado'
+                                }" mat-button (click)="filtrarPorSemestre('Egresado')">Egresa</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroSemestre != 'Graduado', 
+                                    'selected': filtroSemestre == 'Graduado'
+                                }" mat-button (click)="filtrarPorSemestre('Graduado')">Gradua</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroSemestre != 'Retirado', 
+                                    'selected': filtroSemestre == 'Retirado'
+                                }" mat-button (click)="filtrarPorSemestre('Retirado')">Retira</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroSemestre != '', 
+                                    'selected': filtroSemestre == ''
+                                }" mat-button (click)="filtrarPorSemestre('')">Todos</button>
+
+        </div>
+    </div>
+    <hr fxHide.lt-md>
+    <div fxHide.lt-md>
+        <h2 class="title">Ordenar por:</h2>
+        <!-- <div fxLayout="row"> -->
+        <button mat-button [ngClass]="{
+                                        'filtrosButton': tipoOrdenamiento != 'Apellido', 
+                                        'selected': tipoOrdenamiento == 'Apellido'
+                                    }" mat-button (click)="ordenar('Apellido')">Apellido</button>
+        <button mat-button [ngClass]="{
+                                        'filtrosButton': tipoOrdenamiento != 'Carrera', 
+                                        'selected': tipoOrdenamiento == 'Carrera'
+                                    }" mat-button (click)="ordenar('Carrera')">Carrera</button>
+        <button mat-button [ngClass]="{
+                                        'filtrosButton': tipoOrdenamiento != 'Semestre', 
+                                        'selected': tipoOrdenamiento == 'Semestre'
+                                    }" mat-button (click)="ordenar('Semestre')">Semest</button>
+        <!-- </div> -->
+    </div>
+</div>

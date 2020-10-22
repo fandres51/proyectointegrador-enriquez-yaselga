@@ -1,23 +1,15 @@
 export interface Estudiante {
-    id:string;
-    Apellido:string;
-    Cargo?:string;
-    Carrera?:string;
-    Cedula?:string;
-    CorreoInstitucional?:string;
-    CorreoPersonal?:string;
-    Descripcion?:string;
-    Deuda?:number;
-    Deudor?:boolean;
-    EsAutoridad:boolean;
-    EsEstudiante:boolean;
-    EstadoAfiliacion?:boolean;
+    
+    NoUnico: string;
+    Nombre?: string;
+    Apellido: string;
+    Cedula:string;
+    Carrera: 'Sistemas' | 'Computacion' | 'Software';
+    CorreoPersonal?: string;
+    CorreoInstitucional?: string;
+    Telefono?: string;
     FechaNacimiento?: firebase.firestore.Timestamp | Date;
-    Genero?:string;
-    NoUnico?:string;
-    Nombre:string;
-    SectorDomiciliario?:string;
-    SemestreReferencial?:string;
-    Sexo?:string;
-    Telefono?:string;
+    SectorDomiciliario?: string;
+    SemestreReferencial: '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | 'Egresado' | 'Graduado' | 'Retirado';
+    EstadoAfiliacion: 'No afiliado' | 'No aportante' | 'Aportante'
 }
