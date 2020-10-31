@@ -24,7 +24,8 @@ export class NotificacionesEditComponent implements OnInit {
     this.notificacion = {
       descripcion: '',
       nombre: '',
-      tiempo: new Date()
+      tiempo: new Date(),
+      tipo: 'Alerta'
     }
     this.route.paramMap.subscribe(
       params => {

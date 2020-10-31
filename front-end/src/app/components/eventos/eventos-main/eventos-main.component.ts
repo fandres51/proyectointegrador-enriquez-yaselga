@@ -32,6 +32,7 @@ export class EventosMainComponent implements OnInit {
     this.eventosService.getEventos().subscribe(
       eventos => {
         this.eventos = eventos;
+        
         this.generarCalendario(eventos);
       },
       error => {

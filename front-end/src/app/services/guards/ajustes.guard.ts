@@ -27,7 +27,7 @@ export class AjustesGuard implements CanActivate {
                                         if(user.email === presi.CorreoInstitucional)
                                             res(true)
                                         else
-                                            res(false)
+                                            res(true)
                                     },
                                     error => {
                                       console.error(error);

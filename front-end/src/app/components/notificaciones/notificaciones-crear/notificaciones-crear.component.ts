@@ -20,7 +20,8 @@ export class NotificacionesCrearComponent implements OnInit {
     this.notificacion = {
       descripcion: '',
       nombre: '',
-      tiempo: new Date()
+      tiempo: new Date(),
+      tipo: 'Aviso'
     }
   }
 

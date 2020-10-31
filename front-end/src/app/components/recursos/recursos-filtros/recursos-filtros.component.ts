@@ -12,9 +12,9 @@ export class RecursosFiltrosComponent implements OnInit {
   private recursos: Recurso[];
   @Output() private mostrarRecursos = new EventEmitter();
 
-  public tipoOrdenamiento: 'ID'| 'Nombre' | 'Estado' | 'Valor' | ''='';
-  public filtroEstado: 'Libre'|'Ocupado'|'Alquilado'|'Reservado'|'Baja';
-  public filtroCondicion: 'Nuevo'|'Usado'|'Averiado'|'Perdido'|'Roto'|'Reparacion';
+  public tipoOrdenamiento: 'ID'|'Nombre'|'Estado'|'Valor'|''='';
+  public filtroEstado: 'Libre'|'Ocupado'|'Alquilado'|'Reservado'|'Baja'|'Reparacion'|'' = '';
+  public filtroCondicion: 'Nuevo'|'Usado'|'Averiado'|'Perdido'|'' = '';
 
 
 

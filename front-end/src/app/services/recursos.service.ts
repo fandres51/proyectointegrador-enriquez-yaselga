@@ -4,6 +4,9 @@ import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Recurso } from '../models/recurso';
+import * as Papa from 'papaparse';
+import { MatExpansionPanelActionRow } from '@angular/material/expansion';
+import { id } from 'date-fns/locale';
 
 @Injectable({
   providedIn: 'root'
@@ -88,21 +91,118 @@ export class RecursosService {
 
   actualizarEstado(id: string, nuevoestado: string) {
     const recursoDoc: AngularFirestoreDocument<Recurso> = this.getCollection().doc(id);
-    recursoDoc.update({
-      estado: nuevoestado
-    });
+    switch(nuevoestado){
+      case 'Libre':
+        recursoDoc.update({estado: 'Libre'});
+        break;
+      case 'Ocupado':
+        recursoDoc.update({estado: 'Ocupado'});
+        break;
+      case 'Alquilado':
+        recursoDoc.update({estado: 'Alquilado'});
+        break;
+      case 'Reservado':
+        recursoDoc.update({estado: 'Reservado'});
+        break;
+      case 'Baja':
+        recursoDoc.update({estado: 'Baja'});
+        break;
+      case 'Reparacion':
+        recursoDoc.update({estado: 'Reparacion'});
+        break;
+    }
   }
 
   actualizarCondicion(id: string, nuevacondicion: string) {
     const recursoDoc: AngularFirestoreDocument<Recurso> = this.getCollection().doc(id);
-    recursoDoc.update({
-      condicion: nuevacondicion
-    });
+    switch(nuevacondicion){
+      case 'Nuevo':
+        recursoDoc.update({condicion: 'Nuevo'});
+        break;
+      case 'Usado':
+        recursoDoc.update({condicion: 'Usado'});
+        break;
+      case 'Averiado':
+        recursoDoc.update({condicion: 'Averiado'});
+        break;
+      case 'Perdido':
+        recursoDoc.update({condicion: 'Perdido'});
+        break;
+    }
+    
   }
   
   delete(recurso){
     this.recursoDoc = this.afs.doc<Recurso>(`items/${recurso.id}`);
     this.recursoDoc.delete();
+  }
+
+  cargaMasivaRecursos(file): Promise<string[]> {
+    return new Promise(
+      (resF) => {
+        Papa.parse(file, {
+          complete: res => {
+            this.firethisRecurso(res['data']).then(
+              recursosNoIngresados => resF(recursosNoIngresados)
+            ).catch (
+              e => console.error('Archivo no admitido')
+            )
+          },
+          header: true
+        });
+      }
+    )
+  }
+
+  private firethisRecurso(recursos: Recurso[]): Promise<string[]> {
+    const recursosNoIngresados: string[] = [];
+    return new Promise((resolve) => {
+      recursos.forEach((recurso) => {
+        //recurso.FechaNacimiento = new Date(recurso.FechaNacimiento);
+        //recurso.Apellido = recurso.Apellido.toUpperCase();
+        recurso.nombre = recurso.nombre.toUpperCase();
+        const razon = this.comprobarEstructura(recurso);
+        if (!razon) {
+          this.getCollection().doc(recurso.id).set(recurso);
+        } else {
+          recursosNoIngresados.push(
+            'id: ' + 
+            recurso.id + 
+            'Razón: ' + 
+            razon  
+          );
+        }
+      })
+      resolve(recursosNoIngresados);
+    })
+  }
+  
+
+  private comprobarEstructura(recurso: Recurso): string {
+    let razon: string = '';
+    if(recurso.espacio==null){
+      razon = 'espacio';
+    }
+    if (
+      recurso.estado !== 'Libre' &&
+      recurso.estado !== 'Ocupado' &&
+      recurso.estado !== 'Alquilado' &&
+      recurso.estado !== 'Reservado' &&
+      recurso.estado !== 'Baja' &&
+      recurso.estado !== 'Reparacion'
+    ) {
+      razon = 'estado';
+    }
+    
+    if (
+      recurso.condicion !== 'Nuevo' &&
+      recurso.condicion !== 'Usado' &&
+      recurso.condicion !== 'Averiado' &&
+      recurso.condicion !== 'Perdido'
+    ) {
+      razon = 'condicion';
+    }
+    return razon;
   }
   
 

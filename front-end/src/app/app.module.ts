@@ -87,6 +87,7 @@ import { EstudiantesListarComponent } from './components/estudiantes/estudiantes
 import { EstudiantesAfiliacionComponent } from './components/estudiantes/estudiantes-afiliacion/estudiantes-afiliacion.component';
 import { RecursosModule } from './components/recursos/recurso.module'
 
+
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
   interactionPlugin
@@ -160,10 +161,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FormsModule,
     NgbModalModule,
     FullCalendarModule,
-    EstudiantesModule,
-    AjustesModule,
-    FullCalendarModule,
-    FinancieroModule,
     RecursosModule,
   ],
   providers: [
