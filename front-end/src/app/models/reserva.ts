@@ -1,8 +1,9 @@
-export interface Asignacion{
+export interface Reserva{
     id: string;
     fechaInicio: Date;
     fechaFin?: Date;
     idRecurso:string;
-    idFilial:string;
+    idEstudiante?:string;
+    idEvento?:string;
     estado:boolean;
 }

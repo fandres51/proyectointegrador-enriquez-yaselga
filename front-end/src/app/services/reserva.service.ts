@@ -5,27 +5,27 @@ import { map } from 'rxjs/operators';
 import * as firebase from 'firebase';
 import { AsociacionService } from './asociacion.service';
 import { Contador } from '../models/contador';
-import { Alquiler } from '../models/alquiler';
+import { Reserva } from '../models/reserva'
 
 @Injectable({
   providedIn: 'root'
 })
-export class AlquileresService {
-  alquileresCollection: AngularFirestoreCollection<Alquiler>
+export class ReservaService {
+  reservasCollection: AngularFirestoreCollection<Reserva>
 
   constructor(
     private afs: AngularFirestore,
     private asociacionService: AsociacionService
   ) { }
 
-  getCollection(): AngularFirestoreCollection<Alquiler> {
-    return this.afs.collection<Alquiler>('Asociacion/AEIS/Alquiler');
+  getCollection(): AngularFirestoreCollection<Reserva> {
+    return this.afs.collection<Reserva>('Asociacion/AEIS/Reserva');
   }
 
-  getAlquileres(): Observable<Alquiler[]> {
+  getReservas(): Observable<Reserva[]> {
     return this.getCollection().snapshotChanges().pipe(
       map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as Alquiler;
+        const data = a.payload.doc.data() as Reserva;
         Object.keys(data).filter(
           key => data[key] instanceof firebase.firestore.Timestamp
         ).forEach(
@@ -36,10 +36,10 @@ export class AlquileresService {
     )
   }
 
-  getAlquiler(id: string): Observable<Alquiler> {
-    return this.getCollection().doc<Alquiler>(id).snapshotChanges().pipe(
+  getReserva(id: string): Observable<Reserva> {
+    return this.getCollection().doc<Reserva>(id).snapshotChanges().pipe(
       map( a => {
-        const data = a.payload.data() as Alquiler;
+        const data = a.payload.data() as Reserva;
 
         Object.keys(data).filter(
           key => data[key] instanceof firebase.firestore.Timestamp
@@ -52,18 +52,18 @@ export class AlquileresService {
     );
   }
 
-  updateAlquiler(alquiler: Alquiler) {
-    this.afs.collection('Asociacion/AEIS/Alquiler').doc(alquiler.id).set(alquiler)
+  updateReserva(transaccion: Reserva) {
+    this.afs.collection('Asociacion/AEIS/Reserva').doc(transaccion.id).set(transaccion)
   }
 
-  addAlquiler(nuevaAlquiler: Alquiler) {
+  addReserva(nuevaReserva: Reserva) {
     let bool = true; //eveita un bucle infinito X((
-    this.asociacionService.getContador('Alquiler').subscribe(
+    this.asociacionService.getContador('Reserva').subscribe(
       (contador: Contador) => {
         if (bool) {
-          nuevaAlquiler.id = 'ASG' + contador.contador;
-          this.getCollection().doc('ASG' + contador.contador).set(nuevaAlquiler);
-          this.asociacionService.increaseContador('Alquiler');
+          nuevaReserva.id = 'ASG' + contador.contador;
+          this.getCollection().doc('ASG' + contador.contador).set(nuevaReserva);
+          this.asociacionService.increaseContador('Reserva');
           bool = false
         }
       },
@@ -73,8 +73,18 @@ export class AlquileresService {
     )
   }
 
-  desalquilar(alquilerId: string){
-    this.getCollection().doc(alquilerId).update({fechaFin:new Date()})
+  finalizaReserva(reservaId: string){
+    this.getCollection().doc(reservaId).update({fechaFin:new Date(),estado:false});
   }
+
+  anularReserva(reservaId: string){
+    this.getCollection().doc(reservaId).update({estado:false});
+  }
+
+  borrarReserva(reservaId: string){
+    this.getCollection().doc(reservaId).delete();
+  }
+
+
 
 }

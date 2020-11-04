@@ -44,6 +44,10 @@ import { RecursosMainComponent } from './components/recursos/recursos-main/recur
 import { RecursoNuevoComponent } from './components/recursos/recurso-nuevo/recurso-nuevo.component';
 import { RecursosActualizacionComponent } from './components/recursos/recursos-actualizacion/recursos-actualizacion.component';
 import { RecursosGuard } from './services/guards/recursos.guard';
+import { FilialesMainComponent } from './components/filiales/filiales-main/filiales-main.component';
+import { FilialesEditarComponent } from './components/filiales/filiales-editar/filiales-editar.component';
+import { FilialesCrearComponent } from './components/filiales/filiales-crear/filiales-crear.component';
+import { FilialesGuard } from './services/guards/filiales.guard';
 
 const routes: Routes = [
   { path: '', component: MainScreenComponent },
@@ -72,6 +76,9 @@ const routes: Routes = [
   { path: 'recursos',component: RecursosMainComponent }, 
   { path: 'recursos/nuevo', component: RecursoNuevoComponent, canActivate: [RecursosGuard] },
   { path: 'recursos/actualizar/:id', component: RecursosActualizacionComponent, canActivate: [RecursosGuard] },
+  { path: 'filiales', component: FilialesMainComponent, canActivate: [FilialesGuard] },
+  { path: 'filiales/nuevo', component: FilialesCrearComponent, canActivate: [FilialesGuard] },
+  { path: 'filiales/actualizar/:id', component: FilialesEditarComponent, canActivate: [FilialesGuard] },
   { path: 'ajustes', component: AjustesMainComponent, children: [
     { path: 'nuevo-semestre', component: AjustesNuevoSemestreComponent },
     { path: 'consultar-asociacion', component: AjustesConsultarAsociacionComponent },
