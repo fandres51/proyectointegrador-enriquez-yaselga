@@ -44,10 +44,17 @@ import { RecursosMainComponent } from './components/recursos/recursos-main/recur
 import { RecursoNuevoComponent } from './components/recursos/recurso-nuevo/recurso-nuevo.component';
 import { RecursosActualizacionComponent } from './components/recursos/recursos-actualizacion/recursos-actualizacion.component';
 import { RecursosGuard } from './services/guards/recursos.guard';
+import { FilialComponent } from './components/filiales/filial/filial.component';
 import { FilialesMainComponent } from './components/filiales/filiales-main/filiales-main.component';
 import { FilialesEditarComponent } from './components/filiales/filiales-editar/filiales-editar.component';
 import { FilialesCrearComponent } from './components/filiales/filiales-crear/filiales-crear.component';
 import { FilialesGuard } from './services/guards/filiales.guard';
+import { ProductosMainComponent } from './components/productos/productos-main/productos-main.component';
+import { ProductosCrearComponent } from './components/productos/productos-crear/productos-crear.component';
+import { ProductosEditarComponent } from './components/productos/productos-editar/productos-editar.component';
+import { ProveedoresMainComponent } from './components/proveedores/proveedores-main/proveedores-main.component';
+import { ProveedoresCrearComponent } from './components/proveedores/proveedores-crear/proveedores-crear.component';
+import { ProveedoresEditarComponent } from './components/proveedores/proveedores-editar/proveedores-editar.component';
 
 const routes: Routes = [
   { path: '', component: MainScreenComponent },
@@ -77,8 +84,16 @@ const routes: Routes = [
   { path: 'recursos/nuevo', component: RecursoNuevoComponent, canActivate: [RecursosGuard] },
   { path: 'recursos/actualizar/:id', component: RecursosActualizacionComponent, canActivate: [RecursosGuard] },
   { path: 'filiales', component: FilialesMainComponent, canActivate: [FilialesGuard] },
+  { path: 'filiales/:id', component: FilialComponent, canActivate: [FilialesGuard] },
   { path: 'filiales/nuevo', component: FilialesCrearComponent, canActivate: [FilialesGuard] },
   { path: 'filiales/actualizar/:id', component: FilialesEditarComponent, canActivate: [FilialesGuard] },
+  { path: 'filiales/proveedores', component: ProveedoresMainComponent, canActivate: [FilialesGuard] },
+  { path: 'filiales/proveedores/nuevo', component: ProveedoresCrearComponent, canActivate: [FilialesGuard] },
+  { path: 'filiales/proveedores/actualizar/:id', component: ProveedoresEditarComponent, canActivate: [FilialesGuard] },
+  { path: 'filiales/productos', component: ProductosMainComponent, canActivate: [FilialesGuard] },
+  { path: 'filiales/productos/nuevo', component: ProductosCrearComponent, canActivate: [FilialesGuard] },
+  { path: 'filiales/productos/actualizar/:id', component: ProductosEditarComponent, canActivate: [FilialesGuard] },
+  
   { path: 'ajustes', component: AjustesMainComponent, children: [
     { path: 'nuevo-semestre', component: AjustesNuevoSemestreComponent },
     { path: 'consultar-asociacion', component: AjustesConsultarAsociacionComponent },
