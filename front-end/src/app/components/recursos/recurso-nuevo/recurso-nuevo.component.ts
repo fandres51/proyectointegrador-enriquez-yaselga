@@ -29,7 +29,7 @@ export class RecursoNuevoComponent implements OnInit {
   ngOnInit(): void {}
 
     addRecurso(recurso){
-      this.recursosService.crearRecurso1(recurso);
+      this.recursosService.crearRecurso(recurso);
       this.router.navigateByUrl('/recursos')
     }
 

@@ -4,4 +4,7 @@ export interface Alquiler{
     fechaFin: Date;
     Garantia?: string;
     Contrato?: string;        
+    idRecurso:string;
+    idEstudiante:string;
+    idEvento:string;
 }
