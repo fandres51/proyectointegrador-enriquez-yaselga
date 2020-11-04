@@ -86,6 +86,7 @@ import { FinancieroDialogComponent } from './components/financiero/financiero-di
 import { EstudiantesListarComponent } from './components/estudiantes/estudiantes-listar/estudiantes-listar.component';
 import { EstudiantesAfiliacionComponent } from './components/estudiantes/estudiantes-afiliacion/estudiantes-afiliacion.component';
 import { RecursosModule } from './components/recursos/recurso.module'
+import { RecursoNuevoComponent } from './components/recursos/recurso-nuevo/recurso-nuevo.component';
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -144,7 +145,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FinancieroMainComponent,
     FinancieroListarComponent,
     FinancieroCrearComponent,
-    FinancieroDialogComponent
+    FinancieroDialogComponent,
+    RecursoNuevoComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firabase),

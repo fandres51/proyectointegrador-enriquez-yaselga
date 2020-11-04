@@ -31,6 +31,7 @@ export class RecursosFiltrosComponent implements OnInit {
   /***Filtros***********************************************/
   public buscarPorNombre(input: string) {
     const recursosAMostrar = this.recursos.filter(recurso => {
+      console.error("valor encontrado nombre= ", recurso.nombre.search(input));
       return recurso.nombre.search(input) != -1 || recurso.descripcion.search(input) != -1;
     })
     this.enviarRecursos(recursosAMostrar);

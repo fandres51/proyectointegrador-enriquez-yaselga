@@ -3,7 +3,7 @@
     <h3 class="title">Buscar por nombre: </h3>
     <div class="search-space">
         <form (ngSubmit)="buscarPorNombre(nombreInput.value)" fxLayout="row">
-            <input fxFlex="85" class="input-search" id="porNombreInput" name="porNombreInput" type="text" #nombreInput>
+            <input fxFlex="85" class="input-search" id="porNombreInput" name="porNombreInput" type="text" maxlength="50" #nombreInput>
             <button fxFlex="15" class="button-search" mat-button>
                 <mat-icon aria-hidden="false" aria-label="Example home icon">search</mat-icon>
             </button>
@@ -52,7 +52,6 @@
                                     'selected': filtroEstado == ''
                                 }" mat-button (click)="filtrarPorEstado('')">Todos</button>
         </div>
-        
         <div>
             <h3 class="title">Condicion: </h3>
 
@@ -65,21 +64,13 @@
                                     'selected': filtroCondicion == 'Usado'
                                 }" mat-button (click)="filtrarPorCondicion('Usado')">Usado</button>
             <button [ngClass]="{
-                                    'filtrosButton': filtroCondicion != 'Alquilado', 
-                                    'selected': filtroCondicion == 'Alquilado'
-                                }" mat-button (click)="filtrarPorCondicion('Alquilado')">Alquilado</button>
-            <button [ngClass]="{
-                                    'filtrosButton': filtroCondicion != 'Perdido', 
-                                    'selected': filtroCondicion == 'Perdido'
-                                }" mat-button (click)="filtrarPorCondicion('Perdido')">Perdido</button>
-            <button [ngClass]="{
                                     'filtrosButton': filtroCondicion != 'Averiado', 
                                     'selected': filtroCondicion == 'Averiado'
                                 }" mat-button (click)="filtrarPorCondicion('Averiado')">Averiado</button>
             <button [ngClass]="{
-                                    'filtrosButton': filtroCondicion != 'Reparacion', 
-                                    'selected': filtroCondicion == 'Reparacion'
-                                }" mat-button (click)="filtrarPorCondicion('Reparacion')">Reparacion</button>
+                                    'filtrosButton': filtroCondicion != 'Perdido', 
+                                    'selected': filtroCondicion == 'Perdido'
+                                }" mat-button (click)="filtrarPorCondicion('Perdido')">Perdido</button>
             <button [ngClass]="{
                                     'filtrosButton': filtroCondicion != '', 
                                     'selected': filtroCondicion == ''

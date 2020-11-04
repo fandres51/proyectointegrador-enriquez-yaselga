@@ -71,6 +71,9 @@ export class RecursosService {
               res(true);
             else
               res(false)
+          },
+          error => {
+            console.error(error);
           }
         );
       }

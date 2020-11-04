@@ -9,14 +9,15 @@ import { RecursosListarComponent } from './recursos-listar/recursos-listar.compo
 import { DetalleRecursoComponent } from './detalle-recurso/detalle-recurso.component';
 import { RecursosDialogInfoComponent } from './recursos-dialog-info/recursos-dialog-info.component';
 import { RecursosFiltrosComponent } from './recursos-filtros/recursos-filtros.component';
-import { RecursosActualizacionComponent } from './recursos-actualizacion/recursos-actualizacion.component'
+import { RecursosActualizacionComponent } from './recursos-actualizacion/recursos-actualizacion.component';
+import { RecursoNuevoComponent } from './recurso-nuevo/recurso-nuevo.component'
 
 
 @NgModule({
   declarations: [ 
       RecursosMainComponent, 
       RecursosListarComponent, 
-      DetalleRecursoComponent, RecursosDialogInfoComponent, RecursosFiltrosComponent, RecursosActualizacionComponent,
+      DetalleRecursoComponent, RecursosDialogInfoComponent, RecursosFiltrosComponent, RecursosActualizacionComponent, RecursoNuevoComponent,
     ],
   imports: [
     CommonModule,

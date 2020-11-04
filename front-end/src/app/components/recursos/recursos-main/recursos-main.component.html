@@ -1,10 +1,20 @@
 <div fxLayout="column">
   <div fxFlex="10" fxLayout="row" fxLayoutAlign="space-between center" class="top-bar" fxHide.lt-md>
       <div class="registros-mostrados">Registros mostrados: {{recursos.length}}</div>
-      <div>
-          <label for="fileInput" class="btn-cargararchivo">Cargar Recursos</label>
-          <!-- <input id="fileInput" type="file" accept=".csv" (change)="cargaMasiva($event.target.files)" style="display: none;"> -->
-      </div>
+      
+      <div fxFlex="50" fxLayoutAlign="end center">
+        <button routerLink="/recursos/nuevo" class="but-cargar-recurso" mat-button fxLayoutAlign="center center">
+            Nuevo Recurso
+        </button>
+        <div fxLayoutAlign="center center">
+            <label for="fileInput" class="btn-cargararchivo">Cargar Recursos</label>
+            <input id="fileInput" type="file" accept=".csv" (change)="cargaMasiva($event.target.files)" style="display: none;">
+        </div>
+        <div fxHide.lt-md>
+            <a class="btn-dwn" href="https://drive.google.com/file/d/1R45QLLEwabX-cx8ZpR7qriCk8AIeA2qL/view?usp=sharing">Descargar formato de carga</a>
+        </div>
+       
+    </div>
   </div>
   <div fxFlex="90" fxFlex.lt-md="100" fxLayout="row" fxLayout.lt-md="column">
       <div fxFlex="20" fxFlex.md="30" fxFlex.lt-md="auto" fxLayout="row">

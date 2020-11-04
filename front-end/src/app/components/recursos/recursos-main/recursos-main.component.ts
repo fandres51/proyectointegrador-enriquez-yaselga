@@ -21,12 +21,13 @@ export class RecursosMainComponent implements OnInit {
       console.log(this.recursos);
     });
   }
-  /* cargaMasiva(event: FileList) {
+  
+   cargaMasiva(event: FileList) {
     const file = event.item(0);
     if (file.type.split('/')[1] !== 'csv') {
-      console.error('Unsupported file type!!');
+      console.error('¡Formato de archivo no soportado!');
     }
-    this.RecursosService.cargaMasivaEstudiantes(file).then(
+    this.RecursosService.cargaMasivaRecursos(file).then(
       eni => {
         if(eni.length > 0) {
           let registros: string = '';
@@ -37,7 +38,7 @@ export class RecursosMainComponent implements OnInit {
         }
       }
     ); 
-  } */
+  } 
 
 
 }

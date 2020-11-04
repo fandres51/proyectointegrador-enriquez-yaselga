@@ -1,18 +1,3 @@
-<!-- <div FxFlex="80" fxLayout="column" *ngFor="let recurso of recursos" class="card" style="width: 18rem;">
-    <img src="../../../assets/images/ejemploHD.jpg" class="card-img-top" alt="Ejemplo en HD">
-    <div class="card-body">
-      <h2 class="card-title">{{recurso.Nombre}}</h2>
-      <p class="card-text">{{recurso.id}}</p>
-    </div>
-    <div class="alert alert-primary" role="alert" *ngFor="let recurso of recursos">
-      <button class="btn btn-primary" mat-button fxLayoutAlign="start center">
-        Ver Detalles
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-        <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_drop_down</mat-icon>
-      </button>
-    </div>
-  </div> -->
-
   <div class="students-area">
     <div *ngFor="let recurso of recursosPaginados; let i = index" class="card">
         <mat-card fxLayout="row" fxLayoutAlign=" center">
@@ -21,46 +6,6 @@
                 <div class="nombre">{{recurso.Nombre}} </div>
                 <div>{{recurso.id}}</div>
             </div>
-
-            <!-- <div fxLayout="column" fxLayoutAlign="center end" fxFlex="20" fxHide.lt-lg>
-                <div *ngIf="recurso.Carrera">{{recurso.Carrera}}</div>
-                <div *ngIf="recurso.SemestreReferencial">Semestre: {{recurso.SemestreReferencial}}</div>
-            </div>
- -->
-<!--             <div fxLayout="column" fxLayoutAlign="center end" fxFlex="20" fxHide.lt-lg>
-                <div *ngIf="recurso.SectorDomiciliario">{{recurso.SectorDomiciliario}}</div>
-                <div *ngIf="recurso.Telefono">{{recurso.Telefono}}</div>
-            </div>
- -->
-            <!-- <div *ngIf="recurso.SemestreReferencial !== 'Graduado' && recurso.SemestreReferencial !== 'Retirado'" fxLayout="column" fxLayoutAlign="center end" fxFlex="20" fxHide.lt-lg>
-                <div *ngIf="recurso.EstadoAfiliacion === 'Aportante'; else noafiliado" fxLayout="row"
-                    fxLayoutAlign="end center">
-                    <div style="color: #37AA42;">Aportante</div>
-                    <mat-icon style="color: #37AA42;" class="add-circle-icon" aria-hidden="false"
-                        aria-label="Example home icon">check_circle</mat-icon>
-                </div>
-                <ng-template #noafiliado>
-                    <div *ngIf="recurso.EstadoAfiliacion === 'No afiliado'; else noaportante" fxLayout="row"
-                        fxLayoutAlign="end center">
-                        <a [routerLink]="['/recursos/afiliar', recurso.NoUnico]" class="a-afiliar" fxLayout="row"
-                            fxLayoutAlign="end center">
-                            <div style="color: #294FD7;">No Afiliado</div>
-                            <mat-icon style="color: #294FD7;" class="add-circle-icon" aria-hidden="false"
-                                aria-label="Example home icon">add_circle</mat-icon>
-                        </a>
-                    </div>
-                    <ng-template #noaportante>
-                        <div fxLayout="row" fxLayoutAlign="end center">
-                            <a [routerLink]="['/recursos/afiliar', recurso.NoUnico]" class="a-afiliar"
-                                fxLayout="row" fxLayoutAlign="end center">
-                                <div style="color: #294FD7;">No Aportante</div>
-                                <mat-icon style="color: #294FD7;" class="add-circle-icon" aria-hidden="false"
-                                    aria-label="Example home icon">add_circle</mat-icon>
-                            </a>
-                        </div>
-                    </ng-template>
-                </ng-template>
-            </div> -->
 
             <div fxLayoutAlign="end " fxFlex="auto">
                 <button fxLayoutAlign="center " class="button-add-icon" mat-button (click)="openDialog(i)">
