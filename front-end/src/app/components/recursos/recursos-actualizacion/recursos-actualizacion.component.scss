@@ -1,0 +1,63 @@
+@import "../../../../assets/css/colors.scss";
+
+.update-title {
+    background-color: $MainDarkColor;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    h1{
+        margin: 25px;
+        color: white;
+    }
+    .button-white{
+        color: white;
+    }
+}
+
+.form{
+    width: 100vw;
+    .form-row{
+        width: 60vw;
+        .form-item{
+            padding: 20px;
+            label {
+                font-size: 120%;
+                color: $MainDarkColor;
+            }
+            input, mat-select {
+                background-color: white;
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid #606060;
+            }
+            div{
+                background-color: white;
+                border-radius: 5px;
+                border: 1px solid #606060;
+                width: fit-content;
+                input{
+                    margin:0;
+                    border: none;
+                }
+            }
+            button{
+                padding: 10px;
+                border-radius: 5px;
+                border: none;
+                color: white;
+                background-color: $MainDarkColor;
+            }
+            button:focus{
+                outline: none;
+            }
+            button:disabled {
+                background-color:$DisabledColor;
+            }
+        }
+    }
+}
+
+.err{ 
+    background-color: none;
+    border: none;
+}

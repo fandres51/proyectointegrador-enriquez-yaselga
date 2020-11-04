@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{recurso.id}} {{recurso.nombre}}</h1>
+<h1 mat-dialog-title>{{recurso.id}} | {{recurso.nombre}}</h1>
 <div mat-dialog-content>
 
     <div fxLayout="row">
@@ -6,11 +6,12 @@
             <div class="titulo">Nombre </div>
             <div>{{recurso.nombre}}</div>
         </div>
-
+        
         <div class="dato">
             <div class="titulo">Id </div>
-            <div>{{recurso.id}}</div>
+            <div class="dato">{{recurso.id}}</div>
         </div>
+        
     </div>
 
     <div fxLayout="row">
@@ -18,7 +19,6 @@
             <div class="titulo">Estado </div>
             <div>{{recurso.estado}}</div>
         </div>
-
         <div *ngIf="recurso.descripcion" class="dato">
             <div class="titulo">Descripcion </div>
             <div>{{recurso.descripcion}}</div>
@@ -55,16 +55,11 @@
     </div>
 </div>
 <hr>
-<!-- <div mat-dialog-actions>
-    <button class="button" [routerLink]="['/recursos/afiliar', recurso.NoUnico]" (click)="cerrarDialog()" mat-button
-        [disabled]="recurso.EstadoAfiliacion === 'Aportante' || recurso.SemestreReferencial === 'Graduado' || recurso.SemestreReferencial === 'Retirado'">
-        <mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>
-    </button>
-    <button class="button" [routerLink]="['/recursos/actualizar', recurso.NoUnico]" (click)="cerrarDialog()" mat-button>
+<div mat-dialog-actions>
+    
+    <button class="button" [routerLink]="['/recursos/actualizar', recurso.id]" (click)="cerrarDialog()" mat-button>
         <mat-icon aria-hidden=" false" aria-label="Example home icon">edit</mat-icon>
     </button>
-    <button class="button red" mat-button (click)="alternarOcupadoLibre()">
-        Graduar
-    </button>
-    <button class="button red" mat-button (click)="darDeBaja()">
-</div> -->
+    <button class="button red" mat-button (click)="darDeBaja()">Baja</button>
+    
+</div>

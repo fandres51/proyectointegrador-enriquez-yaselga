@@ -40,8 +40,10 @@ import { IncidentesGuard } from './services/guards/incidentes.guard';
 import { NotificacionesGuard } from './services/guards/notificaciones.guard';
 import { AjustesGuard } from './services/guards/ajustes.guard';
 import { CrearPermisoComponent } from './components/ajustes/crear-permiso/crear-permiso.component';
-import { RecursosMainComponent } from './components/recursos/recursos-main/recursos-main.component'
-
+import { RecursosMainComponent } from './components/recursos/recursos-main/recursos-main.component';
+import { RecursoNuevoComponent } from './components/recursos/recurso-nuevo/recurso-nuevo.component';
+import { RecursosActualizacionComponent } from './components/recursos/recursos-actualizacion/recursos-actualizacion.component';
+import { RecursosGuard } from './services/guards/recursos.guard';
 
 const routes: Routes = [
   { path: '', component: MainScreenComponent },
@@ -68,6 +70,8 @@ const routes: Routes = [
   // { path: 'notificaciones/nuevo', component: NotificacionesCrearComponent, canActivate: [NotificacionesGuard] },
   // { path: 'notificaciones/editar/:nombre', component: NotificacionesEditComponent, canActivate: [NotificacionesGuard] },
   { path: 'recursos',component: RecursosMainComponent }, 
+  { path: 'recursos/nuevo', component: RecursoNuevoComponent, canActivate: [RecursosGuard] },
+  { path: 'recursos/actualizar/:id', component: RecursosActualizacionComponent, canActivate: [RecursosGuard] },
   { path: 'ajustes', component: AjustesMainComponent, children: [
     { path: 'nuevo-semestre', component: AjustesNuevoSemestreComponent },
     { path: 'consultar-asociacion', component: AjustesConsultarAsociacionComponent },

@@ -1,1 +1,163 @@
-<p>recursos-actualizacion works!</p>
+<div fxLayout="column" fxLayoutAlign=" center">
+    <div class="update-title" fxLayout="row">
+        <button routerLink="/recursos" class="button-white" mat-button>
+            <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_back</mat-icon>
+        </button>
+        <h1>Actualizar informacion de Recurso</h1>
+    </div>
+
+    <div>
+        <form #form="ngForm" (ngSubmit)="editRecurso(recurso)" fxLayout="column" fxLayoutAlign="center center" class="form">
+            <div fxLayout="column" fxFlex=100 class="form-row">
+                <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addNombre">Nombre: </label>
+                <input 
+                    type="text" 
+                    name="addNombre" 
+                    id="addNombre" 
+                    required
+                    [(ngModel)]="recurso.nombre"
+                    #nombre="ngModel"
+                    maxlength="50"
+                    minlength="2"
+                    value={{recurso.nombre}}
+                >
+                <div class="err" *ngIf="desc.touched && desc.errors">
+                    Error, campo requerido
+                </div>
+            </div>
+            </div>
+            <div fxLayout="column" fxFlex=100 class="form-row">
+                <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addDescripcion">Descripción: </label>
+                <input 
+                    type="text" 
+                    name="addDescripcion" 
+                    id="addDescripcion" 
+                    required
+                    [(ngModel)]="recurso.descripcion"
+                    #desc="ngModel"
+                    value={{recurso.descripcion}}
+                >
+                <div class="err" *ngIf="desc.touched && desc.errors">
+                    Error, campo requerido
+                </div>
+            </div>
+            </div>
+            <div fxLayout="column" fxFlex=100 class="form-row">
+                <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addEspacio">Es un espacio físico?: </label>
+                <select 
+                    name="addEspacio" 
+                    id="addEspacio" 
+                    [(ngModel)]="recurso.espacio"
+                    value={{recurso.espacio}}
+                >
+                    <option value="true">Si</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            </div>
+            <div fxLayout="column" fxFlex=100 class="form-row">
+                <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addTipo">Tipo: </label>
+                <input 
+                    type="text" 
+                    name="addTipo" 
+                    id="addTipo" 
+                    required
+                    [(ngModel)]="recurso.tipo"
+                    #tipo="ngModel"
+                    value={{recurso.tipo}}
+                >
+            </div>
+            </div>
+            <div fxLayout="column" fxFlex=100 class="form-row">
+                <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addEstado">Estado: </label>
+                <select 
+                    name="addEstado" 
+                    id="addEstado" 
+                    [(ngModel)]="recurso.estado"
+                    value={{recurso.estado}}
+                >
+                    <option value="Libre">Libre</option>
+                    <option value="Ocupado">Ocupado</option>
+                    <option value="Alquilado">Alquilado</option>
+                    <option value="Reservado">Reservado</option>
+                    <option value="Reparacion">En Reparacion</option>
+                    <option value="Baja">Dado de Baja</option>
+                </select>
+            </div>
+            </div>
+            <div fxLayout="column" fxFlex=100 class="form-row">
+                <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addCondicion">Condicion: </label>
+                <select 
+                    name="addCondicion" 
+                    id="addCondicion" 
+                    [(ngModel)]="recurso.condicion"
+                    value={{recurso.condicion}}
+                >
+                    <option value="Nuevo">Nuevo</option>
+                    <option value="Usado">Usado</option>
+                    <option value="Averiado">Averiado</option>
+                    <option value="Perdido">Perdido</option>
+                </select>
+            </div>
+            </div>
+            <div fxLayout="column" fx
+            Flex=100 class="form-row">
+                <label for="addValor">Valor: </label>
+                <input 
+                    type="number" 
+                    min="0.05" 
+                    step=".01" 
+                    name="addValor" 
+                    id="addValor" 
+                    required
+                    [(ngModel)]="recurso.valor"
+                    #valor="ngModel"
+                    value={{recurso.valor}}
+                >
+            </div>
+            
+            <!--div fxLayout="column" fxFlex=100 class="form-row">
+                <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addUbicacion">Ubicacion: </label>
+                <input 
+                    type="text" 
+                    name="addUbicacion" 
+                    id="addUbicacion" 
+                    required
+                    [(ngModel)]="recurso.ubicacion"
+                    #ubicacion="ngModel"
+                    value={{recurso.ubicacion}}
+                >
+                </div>
+            </div>
+            <div fxLayout="column" fxFlex=100 class="form-row">
+                <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addFotos">Fotos: </label>
+                <input 
+                    type="text" 
+                    name="addFotos" 
+                    id="addFotos" 
+                    required
+                    [(ngModel)]="recurso.fotos"
+                    #foto="ngModel"
+                    value={{recurso.fotos}}
+                >
+                </div>
+            </div-->
+            
+            <div fxLayout="column" fxFlex=100 class="form-row">
+                <div fxLayout="column" fxFlex=100 class="form-item">
+                <button mat-button [disabled]="!form.form.valid" #btn>
+                    Actualizar
+                </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

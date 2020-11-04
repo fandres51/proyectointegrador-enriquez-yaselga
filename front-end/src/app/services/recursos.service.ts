@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Recurso } from '../models/recurso';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Recurso } from '../models/recurso';
+import * as firebase from 'firebase';
+import { AsociacionService } from './asociacion.service';
+import { Contador } from '../models/contador';
 import * as Papa from 'papaparse';
-import { MatExpansionPanelActionRow } from '@angular/material/expansion';
-import { id } from 'date-fns/locale';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,8 @@ export class RecursosService {
   recursoDoc: AngularFirestoreDocument<Recurso>;
 
   constructor(
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private asociacionService: AsociacionService
   ){}
 
   getCollection(): AngularFirestoreCollection<Recurso> {
@@ -60,6 +63,24 @@ export class RecursosService {
 
   crearRecurso(recurso: Recurso) {
     this.getCollection().doc(recurso.id).set(recurso);
+  }
+
+  crearRecurso1(nuevoRecurso: Recurso){
+    let bool=true; //eveita un bucle infinito X((
+      console.log("Contador de recurso", this.asociacionService.getContador('Recurso'));
+    this.asociacionService.getContador('Recurso').subscribe(
+      (contador: Contador) => {
+        if(bool){
+          nuevoRecurso.id = 'REC' + contador.contador;
+          this.getCollection().doc('REC' + contador.contador).set(nuevoRecurso);
+          this.asociacionService.increaseContador('Recurso');
+          bool=false;
+        }
+      },
+      error => {
+        console.error(error);
+      }
+    )
   }
   
   existeRecurso(id: string): Promise<boolean> {

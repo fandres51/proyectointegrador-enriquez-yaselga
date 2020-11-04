@@ -1,1 +1,137 @@
-<p>recurso-nuevo works!</p>
+<div fxLayout="column" fxLayoutAlign=" center">
+    <div class="add-title" fxLayout="row">
+        <button routerLink="/recursos" class="button-white" mat-button>
+            <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_back</mat-icon>
+        </button>
+        <h1>Nuevo Recurso</h1>
+    </div>
+
+    <div>
+        <form #form="ngForm" (ngSubmit)="addRecurso(recurso)" fxLayout="column" fxLayoutAlign="center center" class="form">
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addNombre">Nombre: </label>
+                <input 
+                    type="text" 
+                    name="addNombre" 
+                    id="addNombre" 
+                    required
+                    [(ngModel)]="recurso.nombre"
+                    #nombre="ngModel"
+                    maxlength="50"
+                    minlength="2"
+                >
+                <div class="err" *ngIf="desc.touched && desc.errors">
+                    Error, campo requerido
+                </div>
+            </div>
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addDescripcion">Descripción: </label>
+                <input 
+                    type="text" 
+                    name="addDescripcion" 
+                    id="addDescripcion" 
+                    required
+                    [(ngModel)]="recurso.descripcion"
+                    #desc="ngModel"
+                >
+                <div class="err" *ngIf="desc.touched && desc.errors">
+                    Error, campo requerido
+                </div>
+            </div>
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addEspacio">Es un espacio físico?: </label>
+                <select 
+                    name="addEspacio" 
+                    id="addEspacio" 
+                    [(ngModel)]="recurso.espacio"
+                >
+                    <option value="true">Si</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addTipo">Tipo: </label>
+                <input 
+                    type="text" 
+                    name="addTipo" 
+                    id="addTipo" 
+                    required
+                    [(ngModel)]="recurso.tipo"
+                    #tipo="ngModel"
+                >
+            </div>
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addEstado">Estado: </label>
+                <select 
+                    name="addEstado" 
+                    id="addEstado" 
+                    [(ngModel)]="recurso.estado"
+                >
+                    <option value="Libre">Libre</option>
+                    <option value="Ocupado">Ocupado</option>
+                    <option value="Alquilado">Alquilado</option>
+                    <option value="Reservado">Reservado</option>
+                    <option value="Reparacion">En Reparacion</option>
+                    <option value="Baja">Dado de Baja</option>
+                </select>
+            </div>
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addCondicion">Condicion: </label>
+                <select 
+                    name="addCondicion" 
+                    id="addCondicion" 
+                    [(ngModel)]="recurso.condicion"
+                >
+                    <option value="Nuevo">Nuevo</option>
+                    <option value="Usado">Usado</option>
+                    <option value="Averiado">Averiado</option>
+                    <option value="Perdido">Perdido</option>
+                </select>
+            </div>
+            <div fxLayout="column" fx
+            Flex=100 class="form-item">
+                <label for="addValor">Valor: </label>
+                <input 
+                    type="number" 
+                    min="0.05" 
+                    step=".01" 
+                    name="addValor" 
+                    id="addValor" 
+                    required
+                    [(ngModel)]="recurso.valor"
+                    #valor="ngModel"
+                    valor=0
+                >
+            </div>
+            
+            <!--div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addUbicacion">Ubicacion: </label>
+                <input 
+                    type="text" 
+                    name="addUbicacion" 
+                    id="addUbicacion" 
+                    required
+                    [(ngModel)]="recurso.ubicacion"
+                    #ubicacion="ngModel"
+                >
+            </div>
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addFotos">Fotos: </label>
+                <input 
+                    type="text" 
+                    name="addFotos" 
+                    id="addFotos" 
+                    required
+                    [(ngModel)]="recurso.Fotos"
+                    #foto="ngModel"
+                >
+            </div-->
+            
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <button mat-button [disabled]="!form.form.valid">
+                    Guardar Recurso
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

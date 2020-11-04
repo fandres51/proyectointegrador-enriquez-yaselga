@@ -6,7 +6,6 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RecursosMainComponent } from './recursos-main/recursos-main.component';
 import { RecursosListarComponent } from './recursos-listar/recursos-listar.component'
-import { DetalleRecursoComponent } from './detalle-recurso/detalle-recurso.component';
 import { RecursosDialogInfoComponent } from './recursos-dialog-info/recursos-dialog-info.component';
 import { RecursosFiltrosComponent } from './recursos-filtros/recursos-filtros.component';
 import { RecursosActualizacionComponent } from './recursos-actualizacion/recursos-actualizacion.component';
@@ -17,7 +16,7 @@ import { RecursoNuevoComponent } from './recurso-nuevo/recurso-nuevo.component'
   declarations: [ 
       RecursosMainComponent, 
       RecursosListarComponent, 
-      DetalleRecursoComponent, RecursosDialogInfoComponent, RecursosFiltrosComponent, RecursosActualizacionComponent, RecursoNuevoComponent,
+      RecursosDialogInfoComponent, RecursosFiltrosComponent, RecursosActualizacionComponent, RecursoNuevoComponent,
     ],
   imports: [
     CommonModule,

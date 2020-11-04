@@ -52,4 +52,8 @@ export class RecursosDialogInfoComponent implements OnInit {
     }
   }
 
+  cerrarDialog() {
+    this.dialogRef.close();
+  }
+
 }
