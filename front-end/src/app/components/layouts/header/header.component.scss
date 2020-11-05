@@ -1,0 +1,134 @@
+@import "../../../../assets/css/colors.scss";
+
+.header {
+    height: 50px;
+    background-color: $MainColor;
+
+    .logo-user {
+        div {
+            a{
+                .imgLogo {
+                    height: 50px;
+                }
+            }
+            div {
+                .imgAvatar {
+                    margin: 0 20px 0 50px;
+                    width: 40px;
+                }
+                .nombre {
+                    color: white;
+                }
+                .cargo {
+                    color: white;
+                    font-size: 80%;
+                    top: -60px;
+                }
+            }
+        }
+    }
+
+    .menu {
+        div {
+            a {
+                color: white;
+                margin: 0 5px;
+                border-radius: 50px;
+                padding: 7px 15px;
+            }
+            button {
+                background: none;
+                border: none;
+                color: white;
+                border-radius: 50px;
+                padding: 7px 15px;
+            }
+
+            button:hover,
+            a:hover {
+                background-color: $MainDarkColor;
+                text-decoration: none;
+            }
+
+            button:focus {
+                outline: 0px;
+            }
+        }
+    }
+}
+
+.minibutton {
+    padding: 1px;
+    background: none;
+    border: none;
+    color: white;
+    border-radius: 50px;
+}
+
+.minibutton:hover {
+    background-color: $MainDarkColor;
+}
+
+.menu-item:focus,
+.minibutton {
+    outline: 0px;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.menu-icon {
+    padding: 15px;
+    color: white;
+    button:focus {
+        outline: none;
+    }
+}
+
+.menu-size-small {
+    position: absolute;
+    background-color: $MainColor;
+    width: 300px;
+    z-index: 100;
+    height: 100vh;
+    div {
+        background-color: $MainDarkColor;
+        .imgAvatar {
+            margin: 15px 20px 15px 50px;
+            width: 40px;
+        }
+        .nombre {
+            color: white;
+        }
+        .cargo {
+            color: white;
+            font-size: 80%;
+            top: -60px;
+        }
+        a {
+            button {
+                background-color: $MainColor;
+                color: white;
+                mat-icon {
+                    color: white;
+                }
+            }
+            button:focus {
+                outline: none;
+            }
+        }
+    }
+}
+
+.escondido {
+    left: -300px;
+}
+
+.mostrado {
+    left: 0;
+}
+
+.nombre-usr {
+    margin-bottom: 3px;
+}

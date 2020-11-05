@@ -1,0 +1,35 @@
+<div>
+    <div *ngFor="let incidente of incidentesPaginados" fxLayout="column">
+        <mat-card class="card" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between center">
+            <div fxFlex="85" fxLayout="column" fxLayoutAlign=" start">
+                <div fxLayout="column" fxLayoutAlign=" start">
+                    <div class="tit">{{incidente.nombre}}</div>
+                </div>
+                <div fxLayout="column" fxLayoutAlign=" start">
+                    <div class="ly">Descripción: </div>
+                    <div class="txt">{{incidente.descripcion}}</div>
+                </div>
+                <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between " style="width: 100%;">
+                    <div fxLayout="column" fxLayoutAlign=" start">
+                        <div class="ly">Fecha: </div>
+                        <div class="txt">{{incidente.fecha.getDate() + '/' + incidente.fecha.getMonth() + '/' + incidente.fecha.getFullYear()}}</div>
+                    </div>
+                    <div fxLayout="column" fxLayoutAlign=" start">
+                        <div class="ly">No. único de estudiante: </div>
+                        <div class="txt">{{incidente.estudiante}}</div>
+                    </div>
+                    <div fxLayout="column" fxLayoutAlign=" start">
+                        <div class="ly">Evento: </div>
+                        <div class="txt">{{incidente.evento}}</div>
+                    </div>
+                </div>
+            </div>
+            <div fxFlex="10">
+                <button mat-button class="delete" type="button" (click)="eliminar(incidente)">
+                    <mat-icon aria-hidden="false" aria-label="delete">delete</mat-icon>
+                </button>
+            </div>
+        </mat-card>
+    </div>
+    <mat-paginator (page)="onPageChange($event)" [length]="incidentes.length" [pageSize]="9" [pageSizeOptions]="[5, 9, 20]"></mat-paginator>
+</div>

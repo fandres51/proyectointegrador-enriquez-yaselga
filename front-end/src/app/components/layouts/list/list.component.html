@@ -1,0 +1,10 @@
+<div>
+    <div *ngFor="let listItem of list">
+        <button mat-button class="button" (click)="emitItem(listItem)">
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <div>{{ listItem }}</div>
+                <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_right</mat-icon>
+            </div>
+        </button>
+    </div>
+</div>

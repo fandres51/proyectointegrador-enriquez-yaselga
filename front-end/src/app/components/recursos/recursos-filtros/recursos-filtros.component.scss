@@ -1,0 +1,58 @@
+.filters {
+    padding: 25px;
+}
+
+.text {
+    font-size: 120%;
+    color: #0d288a;
+    font-weight: 500;
+}
+
+.filtrosButton {
+    border: none;
+    color: #0d288a;
+    background-color: white;
+    margin: 1px;
+    border-radius: 0;
+    padding: 0 10px;
+    width: 70px;
+}
+
+.selected {
+    border: none;
+    color: white;
+    background-color: #0d288a;
+    margin: 1px;
+    border-radius: 0;
+    padding: 0 10px;
+    width: 70px;
+}
+
+.filtrosButton:focus, .selected:focus {
+    outline: none;
+}
+
+.title {
+    color: #0d288a;
+    margin-top: 15px;
+}
+
+.search-space{
+    margin: 15px 0;
+    width: 100%;
+    form{
+        width: 100%;
+        .button-search {
+            background-color: #0d288a;
+            color: white;
+            height: 40px;
+            border-radius: 0;
+        }
+        
+        .input-search {
+            height: 40px;
+            padding-left: 15px;
+            border: none;
+        }
+    }
+}

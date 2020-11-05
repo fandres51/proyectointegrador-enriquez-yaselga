@@ -1,0 +1,101 @@
+<div class="filters">
+    <h2 class="title">Búsqueda: </h2>
+    <h3 class="title">Buscar por nombre: </h3>
+    <div class="search-space">
+        <form (ngSubmit)="buscarPorNombre(nombreInput.value)" fxLayout="row">
+            <input fxFlex="85" class="input-search" id="porNombreInput" name="porNombreInput" type="text" maxlength="50" #nombreInput>
+            <button fxFlex="15" class="button-search" mat-button>
+                <mat-icon aria-hidden="false" aria-label="Example home icon">search</mat-icon>
+            </button>
+        </form>
+    </div>
+    <h3 class="title">Buscar por id: </h3>
+    <div class="search-space">
+        <form (ngSubmit)="buscarPorID(inputID.value)" fxLayout="row">
+            <input fxFlex="85" class="input-search" id="porIDInput" name="porIDInput" type="text" #inputID>
+            <button fxFlex="15" class="button-search" mat-button>
+                <mat-icon aria-hidden="false" aria-label="Example home icon">search</mat-icon>
+            </button>
+        </form>
+    </div>
+    <hr>
+    <div fxHide.lt-md>
+        <h2 class="title">Filtros:</h2>
+        <div>
+            <h3 class="title">Estado: </h3>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroEstado != 'Libre', 
+                                    'selected': filtroEstado == 'Libre'
+                                }" mat-button (click)="filtrarPorEstado('Libre')">Libre</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroEstado  != 'Ocupado', 
+                                    'selected': filtroEstado == 'Ocupado'
+                                }" mat-button (click)="filtrarPorEstado('Ocupado')">Ocupado</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroEstado  != 'Alquilado', 
+                                    'selected': filtroEstado == 'Alquilado'
+                                }" mat-button (click)="filtrarPorEstado('Alquilado')">Alquilado</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroEstado  != 'Reservado', 
+                                    'selected': filtroEstado == 'Reservado'
+                                }" mat-button (click)="filtrarPorEstado('Reservado')">Reservado</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroEstado  != 'Reparacion', 
+                                    'selected': filtroEstado == 'Reparacion'
+                                }" mat-button (click)="filtrarPorEstado('Reparacion')">Reparacion</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroEstado  != 'Baja', 
+                                    'selected': filtroEstado == 'Baja'
+                                }" mat-button (click)="filtrarPorEstado('Baja')">Baja</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroEstado  != '', 
+                                    'selected': filtroEstado == ''
+                                }" mat-button (click)="filtrarPorEstado('')">Todos</button>
+        </div>
+        <div>
+            <h3 class="title">Condicion: </h3>
+
+            <button [ngClass]="{
+                                    'filtrosButton': filtroCondicion != 'Nuevo', 
+                                    'selected': filtroCondicion == 'Nuevo'
+                                }" mat-button (click)="filtrarPorCondicion('Nuevo')">Nuevo</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroCondicion != 'Usado', 
+                                    'selected': filtroCondicion == 'Usado'
+                                }" mat-button (click)="filtrarPorCondicion('Usado')">Usado</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroCondicion != 'Averiado', 
+                                    'selected': filtroCondicion == 'Averiado'
+                                }" mat-button (click)="filtrarPorCondicion('Averiado')">Averiado</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroCondicion != 'Perdido', 
+                                    'selected': filtroCondicion == 'Perdido'
+                                }" mat-button (click)="filtrarPorCondicion('Perdido')">Perdido</button>
+            <button [ngClass]="{
+                                    'filtrosButton': filtroCondicion != '', 
+                                    'selected': filtroCondicion == ''
+                                }" mat-button (click)="filtrarPorCondicion('')">Todos</button>
+
+        </div>
+    </div>
+    <hr fxHide.lt-md>
+     <div fxHide.lt-md>
+        <h2 class="title">Ordenar por:</h2>
+        <button mat-button [ngClass]="{
+                                        'filtrosButton': tipoOrdenamiento != 'ID', 
+                                        'selected': tipoOrdenamiento == 'ID'
+                                    }" mat-button (click)="ordenar('ID')">ID</button>
+        <button mat-button [ngClass]="{
+                                        'filtrosButton': tipoOrdenamiento != 'Nombre', 
+                                        'selected': tipoOrdenamiento == 'Nombre'
+                                    }" mat-button (click)="ordenar('Apellido')">Nombre</button>
+        <button mat-button [ngClass]="{
+                                        'filtrosButton': tipoOrdenamiento != 'Estado', 
+                                        'selected': tipoOrdenamiento == 'Estado'
+                                    }" mat-button (click)="ordenar('Estado')">Estado</button>
+        <button mat-button [ngClass]="{
+                                        'filtrosButton': tipoOrdenamiento != 'Valor', 
+                                        'selected': tipoOrdenamiento == 'Valor'
+                                    }" mat-button (click)="ordenar('Valor')">Valor</button>
+    </div> 
+</div>

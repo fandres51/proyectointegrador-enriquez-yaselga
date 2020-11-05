@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Descripción: </h1>
+<div mat-dialog-content>
+    {{transaccion.Descripcion}}
+</div>
+<hr>
+<div *ngIf="transaccion.PersonaID">
+    <h3>
+        No único de estudainte afiliado: {{transaccion.PersonaID}}
+    </h3>
+</div>
+<div *ngIf="transaccion.EventoID">
+    <h3>
+        Evento: {{transaccion.EventoID}}
+    </h3>
+</div>
+<div *ngIf="transaccion.FilialID">
+    <h3>
+        Filial: {{transaccion.FilialID}}
+    </h3>
+</div>
+<div mat-dialog-actions>
+    <button class="button" (click)="darDeBaja()" mat-button
+        [disabled]="!transaccion.Activa">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">remove</mat-icon>
+    </button>
+    <button class="button" (click)="reactivar()" mat-button
+        [disabled]="transaccion.Activa">
+        <mat-icon aria-hidden=" false" aria-label="Example home icon">add</mat-icon>
+    </button>
+</div>

@@ -1,0 +1,13 @@
+<div>
+    <app-titles regresarA="/" text="Filiales"></app-titles>
+    <div class="lista">
+        <app-basic-crud [listOfElements]="filialesNombres" (selectedItem)="irADetalle($event)" (newItem)="nuevo()"></app-basic-crud>
+    </div>
+</div> 
+<button (click)="probarProductoX()">PROBAR PRODUCTO</button>
+
+<!-- <div class="main">
+    <div class="box" *ngFor="let filial of filiales; let i = index">
+        <app-icon-box [route]="filialesNombresX[i]" [text]="filial.nombre" ></app-icon-box>
+    </div>
+</div> -->

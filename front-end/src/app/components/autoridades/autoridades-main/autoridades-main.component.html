@@ -1,0 +1,11 @@
+<div fxLayout="row">
+    <div class="block list" [ngClass]="{'mostrado': autoridadMostrada == null, 'escondido': autoridadMostrada != null}">
+        <app-autoridades-listar (devolverAutoridadSeleccionada)="cargarAutoridadMostrada($event)"></app-autoridades-listar>
+    </div>
+
+    <div class="linea" fxHide.lt-md></div>
+
+    <div class="block" [ngClass]="{'mostrado': autoridadMostrada != null, 'escondido': autoridadMostrada == null}">
+        <app-autoridades-detalle [_autoridadMostrada]="autoridadMostrada" (enviarNull)="autoridadMostrada=$event"></app-autoridades-detalle>
+    </div>
+</div>

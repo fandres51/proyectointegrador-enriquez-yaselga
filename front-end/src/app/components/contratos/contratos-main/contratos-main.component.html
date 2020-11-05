@@ -1,0 +1,6 @@
+<div>
+    <app-titles regresarA="/" text="Contratos"></app-titles>
+    <div class="lista">
+        <app-basic-crud [listOfElements]="contratosNombres" (selectedItem)="irADetalle($event)" (newItem)="nuevo()"></app-basic-crud>
+    </div>
+</div>

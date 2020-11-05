@@ -1,0 +1,54 @@
+<div>
+    <app-titles regresarA="/notificaciones" text="Crear notificacion"></app-titles>
+</div>
+<div>
+    <form class="form" (ngSubmit)="nueva()" #form="ngForm">
+        <div fxLayout="column">
+            <label for="nombre">Nombre: </label>
+            <input 
+                type="text" 
+                name="nombre" 
+                id="nombre" 
+                required
+                [(ngModel)]="notificacion.nombre"
+                #nom="ngModel"
+            >
+            <div class="err" *ngIf="nom.touched && nom.errors">
+                Error, campo requerido
+            </div>
+        </div>
+        <div fxLayout="column">
+            <label for="descripcion">Descripción: </label>
+            <input 
+                type="text" 
+                name="descripcion" 
+                id="descripcion" 
+                [(ngModel)]="notificacion.descripcion"
+                required
+                #desc="ngModel"
+            >
+            <div class="err" *ngIf="desc.touched && desc.errors">
+                Error, campo requerido
+            </div>
+        </div>
+        <div fxLayout="column">
+            <label for="fecha">Fecha y hora: </label>
+            <input 
+                type="datetime-local" 
+                name="fecha" 
+                id="fecha" 
+                [(ngModel)]="tiempo"
+                required
+                #fech="ngModel"
+            >
+            <div class="err" *ngIf="fech.touched && fech.errors">
+                Error, campo requerido
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center ">
+            <button [disabled]="!form.form.valid" fxLayout="row" fxLayoutAlign="center center" type="submit">
+                Crear
+            </button>
+        </div>
+    </form>
+</div>

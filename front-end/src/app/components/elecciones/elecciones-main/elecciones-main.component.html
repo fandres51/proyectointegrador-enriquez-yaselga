@@ -1,0 +1,6 @@
+<div>
+    <app-titles [regresarA]="rutaDeRegreso" [text]="texto"></app-titles>
+    <div class="lista">
+        <app-basic-crud [listOfElements]="elecciones" (selectedItem)="irAEleccion($event)" (newItem)="crearEleccion($event)"></app-basic-crud>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<div FxFlex="80" fxLayout="column" *ngFor="let recurso of recursos" class="card" style="width: 18rem;">
+  <img src="../../../assets/images/ejemploHD.jpg" class="card-img-top" alt="Ejemplo en HD">
+  <div class="card-body">
+    <h2 class="card-title">{{recurso.nombre}}</h2>
+    <p class="card-text">{{recurso.id}}</p>
+  </div>
+  <div class="alert alert-primary" role="alert" *ngFor="let recurso of recursos">
+    <button class="btn btn-primary" mat-button fxLayoutAlign="start center">
+      Ver Detalles
+      <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
+      <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_drop_down</mat-icon>
+    </button>
+  </div>
+</div>

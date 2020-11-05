@@ -1,0 +1,60 @@
+<div class="students-area">
+    <div *ngFor="let estudiante of estudiantesPaginados; let i = index" class="card">
+        <mat-card fxLayout="row" fxLayoutAlign=" center">
+
+            <div fxLayout="column" fxLayoutAlign="center start" fxFlex="30">
+                <div class="nombre">{{estudiante.Apellido}} {{estudiante.Nombre}} </div>
+                <div>{{estudiante.NoUnico}}</div>
+            </div>
+
+            <div fxLayout="column" fxLayoutAlign="center end" fxFlex="20" fxHide.lt-lg>
+                <div *ngIf="estudiante.Carrera">{{estudiante.Carrera}}</div>
+                <div *ngIf="estudiante.SemestreReferencial">Semestre: {{estudiante.SemestreReferencial}}</div>
+            </div>
+
+            <div fxLayout="column" fxLayoutAlign="center end" fxFlex="20" fxHide.lt-lg>
+                <div *ngIf="estudiante.SectorDomiciliario">{{estudiante.SectorDomiciliario}}</div>
+                <div *ngIf="estudiante.Telefono">{{estudiante.Telefono}}</div>
+            </div>
+
+            <div *ngIf="estudiante.SemestreReferencial !== 'Graduado' && estudiante.SemestreReferencial !== 'Retirado'" fxLayout="column" fxLayoutAlign="center end" fxFlex="20" fxHide.lt-lg>
+                <div *ngIf="estudiante.EstadoAfiliacion === 'Aportante'; else noafiliado" fxLayout="row"
+                    fxLayoutAlign="end center">
+                    <div class="green">Aportante</div>
+                    <mat-icon class="green add-circle-icon" aria-hidden="false"
+                        aria-label="Example home icon">check_circle</mat-icon>
+                </div>
+                <ng-template #noafiliado>
+                    <div *ngIf="estudiante.EstadoAfiliacion === 'No afiliado'; else noaportante" fxLayout="row"
+                        fxLayoutAlign="end center">
+                        <a [routerLink]="['/estudiantes/afiliar', estudiante.NoUnico]" class="a-afiliar" fxLayout="row"
+                            fxLayoutAlign="end center">
+                            <div class="main-color">No Afiliado</div>
+                            <mat-icon class="main-color" class="add-circle-icon" aria-hidden="false"
+                                aria-label="Example home icon">add_circle</mat-icon>
+                        </a>
+                    </div>
+                    <ng-template #noaportante>
+                        <div fxLayout="row" fxLayoutAlign="end center">
+                            <a [routerLink]="['/estudiantes/afiliar', estudiante.NoUnico]" class="a-afiliar"
+                                fxLayout="row" fxLayoutAlign="end center">
+                                <div class="main-color">No Aportante</div>
+                                <mat-icon class="main-color" class="add-circle-icon" aria-hidden="false"
+                                    aria-label="Example home icon">add_circle</mat-icon>
+                            </a>
+                        </div>
+                    </ng-template>
+                </ng-template>
+            </div>
+
+            <div fxLayoutAlign="end " fxFlex="auto">
+                <button fxLayoutAlign="center " class="button-add-icon" mat-button (click)="openDialog(i)">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_forward</mat-icon>
+                </button>
+            </div>
+        </mat-card>
+    </div>
+
+    <mat-paginator (page)="onPageChange($event)" [length]="estudiantes.length" [pageSize]="9" [pageSizeOptions]="[5, 9, 20]"></mat-paginator>
+
+</div>
