@@ -3,5 +3,4 @@ export interface Proveedor{
     nombre: string;
     contacto: string;
     descripcion: string;
-    idFilial: string[];
 }

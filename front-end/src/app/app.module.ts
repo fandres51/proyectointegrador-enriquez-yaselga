@@ -86,6 +86,12 @@ import { FinancieroDialogComponent } from './components/financiero/financiero-di
 import { EstudiantesListarComponent } from './components/estudiantes/estudiantes-listar/estudiantes-listar.component';
 import { EstudiantesAfiliacionComponent } from './components/estudiantes/estudiantes-afiliacion/estudiantes-afiliacion.component';
 import { RecursosModule } from './components/recursos/recurso.module'
+//import { FilialesModule } from './components/filiales/filiales.module'
+import { FilialesMainComponent } from './components/filiales/filiales-main/filiales-main.component';
+import { FilialesCrearComponent } from './components/filiales/filiales-crear/filiales-crear.component';
+import { FilialesEditarComponent } from './components/filiales/filiales-editar/filiales-editar.component';
+import { FilialComponent } from './components/filiales/filial/filial.component';
+
 
 
 
@@ -146,6 +152,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FinancieroListarComponent,
     FinancieroCrearComponent,
     FinancieroDialogComponent,
+    FilialesMainComponent, FilialesCrearComponent, FilialesEditarComponent, FilialComponent,
     
   ],
   imports: [

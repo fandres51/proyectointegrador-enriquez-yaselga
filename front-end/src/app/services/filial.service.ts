@@ -72,7 +72,7 @@ export class FilialService {
         if (bool) {
           nuevaFilial.id = 'FIL' + contador.contador;
           this.getCollection().doc('FIL' + contador.contador).set(nuevaFilial);
-          this.asociacionService.increaseContador('FIL');
+          this.asociacionService.increaseContador('Filial');
           bool = false
         }
       },
@@ -100,5 +100,15 @@ export class FilialService {
       this.asignacionService.desasignar(element.id);
     });
   }
+
+  getContador(parametro: string,idFilial:string) {
+    return this.afs.doc<Contador>(`/Asociacion/AEIS/Filial/${idFilial}/Parametros/Contadores/${parametro}`).valueChanges();
+  }
+  increaseContador(parametro: string,idFilial:string) {
+    const increment = firebase.firestore.FieldValue.increment(1);
+    const contador = this.afs.doc(`/Asociacion/AEIS/Filial/${idFilial}/Parametros/Contadores/${parametro}`);
+    contador.update({contador: increment})
+  }
+
 
 }

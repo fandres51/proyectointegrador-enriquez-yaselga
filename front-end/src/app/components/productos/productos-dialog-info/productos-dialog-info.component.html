@@ -1,0 +1,66 @@
+<p>productos-dialog-info works!</p>
+<h1 mat-dialog-title>{{producto.id}} | {{producto.nombre}}</h1>
+<div mat-dialog-content>
+
+    <div fxLayout="row">
+        <div fxFlex="50" class="dato">
+            <div class="titulo">Nombre </div>
+            <div>{{producto.nombre}}</div>
+        </div>
+        
+        <div class="dato">
+            <div class="titulo">Id </div>
+            <div class="dato">{{producto.id}}</div>
+        </div>
+        
+    </div>
+
+    <div fxLayout="row">
+        <div *ngIf="producto.estado" fxFlex="50" class="dato">
+            <div class="titulo">Estado </div>
+            <div>{{producto.estado}}</div>
+        </div>
+        <div *ngIf="producto.descripcion" class="dato">
+            <div class="titulo">Descripcion </div>
+            <div>{{producto.descripcion}}</div>
+        </div>
+    </div>
+
+    <div fxLayout="row">
+        <div *ngIf="producto.condicion" fxFlex="50" class="dato">
+            <div class="titulo">Condicion </div>
+            <div>{{producto.condicion}}</div>
+        </div>
+
+        <div *ngIf="producto.tipo" class="dato">
+            <div class="titulo">Tipo </div>
+            <div>{{producto.tipo}}</div>
+        </div>
+    </div>
+
+    <div fxLayout="row">
+        <div *ngIf="producto.ubicacion" fxFlex="50" class="dato">
+            <div class="titulo">Ubicacion </div>
+            <div>{{producto.ubicacion}}</div>
+        </div>
+
+        <div *ngIf="producto.valor" class="dato">
+            <div class="titulo">Valor</div>
+            <div>{{producto.valor}}</div>
+        </div>
+    </div>
+
+    <div *ngIf="producto.fotos" class="dato">
+        <div class="titulo">Fotos </div>
+        <div>{{producto.fotos}}</div>
+    </div>
+</div>
+<hr>
+<div mat-dialog-actions>
+    
+    <button class="button" [routerLink]="['/productos/actualizar', producto.id]" (click)="cerrarDialog()" mat-button>
+        <mat-icon aria-hidden=" false" aria-label="Example home icon">edit</mat-icon>
+    </button>
+    <button class="button red" mat-button (click)="darDeBaja()">Baja</button>
+    
+</div>
