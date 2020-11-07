@@ -12,8 +12,7 @@ import * as Papa from 'papaparse';
   providedIn: 'root'
 })
 export class ProductosService {
-  productoesCollection: AngularFirestoreCollection<Producto>
-  idfilial:string;
+  productoCollection: AngularFirestoreCollection<Producto>
   productoPrueba: Producto;
 
   constructor(
@@ -21,26 +20,33 @@ export class ProductosService {
     private filialService: FilialService
   ) { }
 
-  getCollection(idFilial:string): AngularFirestoreCollection<Producto> {
-    return this.afs.collection<Producto>('Asociacion/AEIS/Filial/'+idFilial+'/Producto');
+  getCollection(): AngularFirestoreCollection<Producto> {
+    return this.afs.collection<Producto>('Asociacion/AEIS/Filial');
+  }
+  getCollectionID(idFilial: string): AngularFirestoreCollection<Producto> {
+    //console.log(">>>Path: Asociacion/AEIS/Filial/"+idFilial+"/Producto");
+    return this.afs.collection<Producto>('Asociacion/AEIS/Filial/'+idFilial+"/Producto");
   }
 
   getProductos(idFilial:string): Observable<Producto[]> {
-    return this.getCollection(idFilial).snapshotChanges().pipe(
+    console.log(">>>Llego: ");
+    return this.getCollectionID(idFilial).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Producto;
+        console.log(">>>Productos1: ",data);
         Object.keys(data).filter(
           key => data[key] instanceof firebase.firestore.Timestamp
         ).forEach(
           key => data[key] = data[key].toDate()
         ) //convierte todos los objetos Timestamp a Date
+        console.log(">>>Productos2: ",data);
         return data;
       }))
     )
   }
 
-  getProducto(id: string, idFilial:string): Observable<Producto> {
-    return this.getCollection(idFilial).doc<Producto>(id).snapshotChanges().pipe(
+  getProducto(id: string ): Observable<Producto> {
+    return this.getCollection().doc<Producto>(id).snapshotChanges().pipe(
       map( a => {
         const data = a.payload.data() as Producto;
 
@@ -55,9 +61,13 @@ export class ProductosService {
     );
   }
 
-  updateProducto(producto: Producto, idfilial: string) {
-    this.afs.collection('Asociacion/AEIS/Filial/'+idfilial+'/Producto').doc(producto.id).set(producto)
+  updateProducto(producto: Producto, idFilial: string) {
+    this.afs.collection('Asociacion/AEIS/Filial/'+idFilial+'/Producto').doc(producto.id).set(producto)
   }
+
+  deleteProducto(idproducto: string, idFilial: string) {
+    return this.getCollection().doc('/'+idFilial+'/Producto/'+idproducto).delete();
+}
 
   addProducto(nuevaProducto: Producto, idFilial:string) {
     let producto:Producto;
@@ -85,12 +95,15 @@ export class ProductosService {
     return this.afs.collection<Producto>('Asociacion/AEIS/Filial');
   }
 
-  addProductoX(productoPrueba:Producto, idparametro:string) {
-    this.getCollectionX().doc('/'+idparametro+'/Producto/'+'PRD1').set(productoPrueba);
+  addProductoX(productoPrueba:Producto, idFilial:string) {
+    this.getCollectionX().doc('/'+idFilial+'/Producto/'+'PRD1').set(productoPrueba);
   }
 
-  asignarProducto(productoId: string, idFilial: string ){
-    this.getCollection(idFilial).doc(productoId).update({idFilial:idFilial})
+  darDeBaja(id: string, idFilial:string) {
+    const recursoDoc: AngularFirestoreDocument<Producto> = this.getCollection().doc('/'+idFilial+'/Producto/'+id);
+    recursoDoc.update({
+      estado: false
+    });
   }
 
   cargaMasivaProductos(file,idFilial:string): Promise<string[]> {
@@ -98,7 +111,7 @@ export class ProductosService {
       (resF) => {
         Papa.parse(file, {
           complete: res => {
-            this.firethisProducto(res['data'],idFilial).then(
+            this.firethisProducto(res['data'], idFilial).then(
               productosNoIngresados => resF(productosNoIngresados)
             ).catch (
               e => console.error('Archivo no admitido')
@@ -109,7 +122,7 @@ export class ProductosService {
       }
     )
   }
-  private firethisProducto(productos: Producto[], idFilial:string): Promise<string[]> {
+  private firethisProducto(productos: Producto[], idFilial: string): Promise<string[]> {
     const productosNoIngresados: string[] = [];
     return new Promise((resolve) => {
       productos.forEach((producto) => {
@@ -119,7 +132,7 @@ export class ProductosService {
         producto.nombre = producto.nombre.toUpperCase();
         const razon = this.comprobarEstructura(producto);
         if (!razon) {
-          this.getCollection(idFilial).doc(producto.id).set(producto);
+          this.getCollection().doc('/'+idFilial+'/Producto/'+producto.id).set(producto);
         } else {
           productosNoIngresados.push(
             'ID: ' + 
@@ -136,9 +149,9 @@ export class ProductosService {
   private comprobarEstructura(producto: Producto): string {
     let razon: string = '';
     if (
-      producto.precio < -1
+      producto.precio < 0
     ) {
-      razon = 'precio';
+      razon = 'precio menor que 0';
     }
     return razon;
   }

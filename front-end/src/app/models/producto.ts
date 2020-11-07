@@ -5,4 +5,6 @@ export interface Producto{
     idproveedor?: string;
     precio: number;
     fotos?: string[];
+    categoria?: string;
+    estado: boolean;
 }

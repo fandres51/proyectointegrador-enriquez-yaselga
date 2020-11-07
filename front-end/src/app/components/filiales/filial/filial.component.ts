@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FilialService} from 'src/app/services/filial.service'
+import { Filial } from 'src/app/models/filial'
 
 @Component({
   selector: 'app-filial',
@@ -8,21 +10,35 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class FilialComponent implements OnInit {
   
+  @Output() private id = new EventEmitter<any>();
   idFilial:string;
-
-  iconos = ['store', 'account_box', 'calendar_today', 'attach_money', 'dns'];
-  modulos = ['Productos','Proveedores','Alquileres', 'Finanzas','Parametros'];
+  filial:Filial={
+    id:"0",
+    nombre:""
+  };
+  iconos = ['store', 'account_box', 'calendar_today', 'attach_money', 'dns','edit'];
+  modulos = ['Productos','Proveedores','Alquileres', 'Finanzas','Parametros','Actualizar'];
   rutas:string[];
   
 
   constructor(
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private filialService:FilialService,
+    private readonly router: Router
   ) { }
 
   ngOnInit(): void {
     this.idFilial = this.route.snapshot.params['id'];
-    this.rutas = ['filiales/filial/'+this.idFilial+'/productos', 'filiales/filial/'+this.idFilial+'/proveedores', 'filiales/filial/'+this.idFilial+'/finanzas', 'filiales/filial/'+this.idFilial+'/alquileres','filiales/filial/'+this.idFilial+'/parametros'];
+    this.filialService.getFilial(this.idFilial).subscribe(item=>{this.filial=item})
+    this.rutas = ['filiales/filial/'+this.idFilial+'/productos', 'filiales/filial/'+this.idFilial+'/proveedores', 'filiales/filial/'+this.idFilial+'/finanzas', 'filiales/filial/'+this.idFilial+'/alquileres','filiales/filial/'+this.idFilial+'/parametros','/filiales/actualizar/'+this.idFilial];
     
   }
+  navigate(i) {
+    //this.id.emit({idfilialactual: this.filial.id, nombrefilialactual:this.filial.nombre});
+    let ruta = this.rutas[i];
+    this.router.navigateByUrl(ruta);
+  }
+
+
 
 }

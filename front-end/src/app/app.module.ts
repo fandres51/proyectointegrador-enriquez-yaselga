@@ -85,12 +85,23 @@ import { FinancieroCrearComponent } from './components/financiero/financiero-cre
 import { FinancieroDialogComponent } from './components/financiero/financiero-dialog/financiero-dialog.component';
 import { EstudiantesListarComponent } from './components/estudiantes/estudiantes-listar/estudiantes-listar.component';
 import { EstudiantesAfiliacionComponent } from './components/estudiantes/estudiantes-afiliacion/estudiantes-afiliacion.component';
-import { RecursosModule } from './components/recursos/recurso.module'
 //import { FilialesModule } from './components/filiales/filiales.module'
 import { FilialesMainComponent } from './components/filiales/filiales-main/filiales-main.component';
 import { FilialesCrearComponent } from './components/filiales/filiales-crear/filiales-crear.component';
 import { FilialesEditarComponent } from './components/filiales/filiales-editar/filiales-editar.component';
 import { FilialComponent } from './components/filiales/filial/filial.component';
+import { ProductosCrearComponent } from './components/productos/productos-crear/productos-crear.component';
+import { ProductosEditarComponent } from './components/productos/productos-editar/productos-editar.component';
+import { ProductosMainComponent } from './components/productos/productos-main/productos-main.component';
+import { ProductosListarComponent } from './components/productos/productos-listar/productos-listar.component';
+import { ProductosDialogInfoComponent } from './components/productos/productos-dialog-info/productos-dialog-info.component';
+import { ProductosFiltrosComponent } from './components/productos/productos-filtros/productos-filtros.component';
+import { RecursosMainComponent } from './components/recursos/recursos-main/recursos-main.component';
+import { RecursosListarComponent } from './components/recursos/recursos-listar/recursos-listar.component'
+import { RecursosDialogInfoComponent } from './components/recursos/recursos-dialog-info/recursos-dialog-info.component';
+import { RecursosFiltrosComponent } from './components/recursos/recursos-filtros/recursos-filtros.component';
+import { RecursosActualizacionComponent } from './components/recursos/recursos-actualizacion/recursos-actualizacion.component';
+import { RecursoNuevoComponent } from './components/recursos/recurso-nuevo/recurso-nuevo.component'
 
 
 
@@ -153,7 +164,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FinancieroCrearComponent,
     FinancieroDialogComponent,
     FilialesMainComponent, FilialesCrearComponent, FilialesEditarComponent, FilialComponent,
-    
+    ProductosCrearComponent, ProductosEditarComponent, ProductosMainComponent, ProductosListarComponent, ProductosDialogInfoComponent, ProductosFiltrosComponent,
+    RecursosMainComponent, RecursosListarComponent, RecursosDialogInfoComponent, RecursosFiltrosComponent, RecursosActualizacionComponent, RecursoNuevoComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firabase),
@@ -170,7 +182,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FormsModule,
     NgbModalModule,
     FullCalendarModule,
-    RecursosModule,
   ],
   providers: [
     AsociacionService,
