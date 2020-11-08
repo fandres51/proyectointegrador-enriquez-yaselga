@@ -24,22 +24,22 @@ export class ProductosService {
     return this.afs.collection<Producto>('Asociacion/AEIS/Filial');
   }
   getCollectionID(idFilial: string): AngularFirestoreCollection<Producto> {
-    //console.log(">>>Path: Asociacion/AEIS/Filial/"+idFilial+"/Producto");
+    ////console.log(">>>Path: Asociacion/AEIS/Filial/"+idFilial+"/Producto");
     return this.afs.collection<Producto>('Asociacion/AEIS/Filial/'+idFilial+"/Producto");
   }
 
   getProductos(idFilial:string): Observable<Producto[]> {
-    //console.log(">>>Llego: ");
+    ////console.log(">>>Llego: ");
     return this.getCollectionID(idFilial).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Producto;
-        //console.log(">>>Productos1: ",data);
+        ////console.log(">>>Productos1: ",data);
         Object.keys(data).filter(
           key => data[key] instanceof firebase.firestore.Timestamp
         ).forEach(
           key => data[key] = data[key].toDate()
         ) //convierte todos los objetos Timestamp a Date
-        //console.log(">>>Productos2: ",data);
+        ////console.log(">>>Productos2: ",data);
         return data;
       }))
     )
@@ -71,7 +71,7 @@ export class ProductosService {
       (contador: Contador) => {
         if (bool) {        
           this.getCollection().doc('/'+idFilial+'/Producto/'+'PRD' + contador.contador).delete();
-          this.filialService.decreaseContador('Producto',idFilial);
+          //this.filialService.decreaseContador('Producto',idFilial);
           bool = false
         }
       },
@@ -85,24 +85,43 @@ export class ProductosService {
     let idcontador: number;
     let bool = true; //eveita un bucle infinito X((
     this.filialService.getContador('Producto',idFilial).subscribe(
-      (contador: Contador) => {
-        if(contador.contador>=1){
-          idcontador=contador.contador+1;
-        }else{
-          idcontador=1
-        }
-        if (bool) {
-          nuevaProducto.id = 'PRD' + idcontador;
-          this.getCollection().doc('/'+idFilial+'/Producto/'+'PRD' + idcontador).set(nuevaProducto);
-          if(idcontador==1){
-            this.filialService.createContador('Producto',idFilial);
-          }else{
-            this.filialService.increaseContador('Producto',idFilial);
-          }
+      result=>{
+        if(result){
+            if(result.contador>=1){
+              idcontador=result.contador+1;
+            }else{
+              idcontador=1
+            }
+            if (bool) {
+              nuevaProducto.id = 'PRD' + idcontador;
+              this.getCollection().doc('/'+idFilial+'/Producto/'+'PRD' + idcontador).set(nuevaProducto);
+              if(idcontador==1){
+                this.filialService.createContador('Producto',idFilial);
+              }else{
+                this.filialService.increaseContador('Producto',idFilial);
+              }
+              
+              bool = false
+            }
           
-          bool = false
+
+        }else{
+           idcontador=1
+          if (bool) {
+            nuevaProducto.id = 'PRD' + idcontador;
+            this.getCollection().doc('/'+idFilial+'/Producto/'+'PRD' + idcontador).set(nuevaProducto);
+            if(idcontador==1){
+              this.filialService.createContador('Producto',idFilial);
+            }else{
+              this.filialService.increaseContador('Producto',idFilial);
+            }
+            
+            bool = false
+          }
+
         }
-      },
+      }
+      ,
       error => {
         console.error(error);
       }

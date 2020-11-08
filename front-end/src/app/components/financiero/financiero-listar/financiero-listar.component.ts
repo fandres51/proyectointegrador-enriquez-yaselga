@@ -10,7 +10,9 @@ import { FinancieroDialogComponent } from '../financiero-dialog/financiero-dialo
 })
 export class FinancieroListarComponent implements OnInit {
 
+
   @Input() set _transacciones(transacciones: Transaccion[]) {
+    //console.log(">>>>recibe:",transacciones);
     this.transacciones = transacciones;
     this.changePagination();
   }
@@ -32,7 +34,7 @@ export class FinancieroListarComponent implements OnInit {
       data: this.transacciones[index]
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      //console.log('The dialog was closed');
     },
     error => {
       console.error(error);

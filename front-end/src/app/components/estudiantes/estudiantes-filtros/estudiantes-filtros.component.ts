@@ -66,6 +66,7 @@ export class EstudiantesFiltrosComponent implements OnInit {
 
   private filtrar() {
     const estudiantesAMostrar = this.estudiantes.filter( estudiante => {
+      //console.log(">>>valor",estudiante.Carrera.search(this.filtroCarrera) + 1);
       return (estudiante.Carrera.search(this.filtroCarrera) + 1) && 
              (estudiante.EstadoAfiliacion.search(this.filtroAfiliacion) + 1) && 
              (estudiante.SemestreReferencial.search(this.filtroSemestre) + 1);

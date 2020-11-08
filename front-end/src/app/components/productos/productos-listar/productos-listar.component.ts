@@ -25,6 +25,7 @@ export class ProductosListarComponent implements OnInit {
   //@Input() _idFilial 
 
   @Input() set _productos(productos: Producto[]){    
+    ////console.log(">>>>recibe:",productos);
     this.productos = productos;
     this.changePagination();
   }
@@ -64,7 +65,7 @@ export class ProductosListarComponent implements OnInit {
       data: this.productos[index]
     }); */ 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      //console.log('The dialog was closed');
     })
   } 
 
@@ -75,6 +76,7 @@ export class ProductosListarComponent implements OnInit {
   }
   changePagination() {
     this.productosPaginados = this.productos.slice(this.pageIndex*this.pageSize, this.pageIndex*this.pageSize + this.pageSize);
+    //console.log(">>>paginados",this.productosPaginados);
   }
   
 }

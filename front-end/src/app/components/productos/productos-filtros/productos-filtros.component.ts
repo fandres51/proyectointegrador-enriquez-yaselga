@@ -10,22 +10,24 @@ import { ProductosService } from 'src/app/services/productos.service'
 })
 export class ProductosFiltrosComponent implements OnInit {
 
-  private produtos: Producto[];
+  private productos: Producto[];
+  private productosAMostrar:Producto[];
   idFilial:string;
   @Output() private mostrarProductos = new EventEmitter();
 
   public tipoOrdenamiento: 'Nombre' | 'Precio' | 'Codigo' | '' = '';
+  EstadoFiltro: boolean=null;
 
   constructor(
-    private produtosService: ProductosService,
+    private productosService: ProductosService,
     private route:ActivatedRoute,
   ) { }
 
   ngOnInit() {
     this.idFilial = this.route.snapshot.params['id'];
-    this.produtosService.getProductos(this.idFilial).subscribe(produtos => {
-      this.produtos = produtos;
-      this.enviarProductos(this.produtos);
+    this.productosService.getProductos(this.idFilial).subscribe(productos => {
+      this.productos = productos;
+      this.enviarProductos(this.productos);
     },
     error => {
       console.error(error);
@@ -35,26 +37,34 @@ export class ProductosFiltrosComponent implements OnInit {
   /***Filtros*******************************************/
 
   public buscarPorNombre(input: string) {
-    const produtosAMostrar = this.produtos.filter(produto => {
+    this.productosAMostrar = this.productos.filter(produto => {
       return produto.nombre.search(input) != -1 || produto.categoria.search(input) != -1;
     })
-    this.enviarProductos(produtosAMostrar);
+    
+    this.enviarProductos(this.productosAMostrar);
   }
 
   public buscarPorCedula(input: string) {
-    const produtosAMostrar = this.produtos.filter(produto => {
+    this.productosAMostrar = this.productos.filter(produto => {
       return produto.id.search(input) != -1;
     })
-    this.enviarProductos(produtosAMostrar);
+    
+    this.enviarProductos(this.productosAMostrar);
   }
 
   /***Filtros*******************************************/
   
-  /* public filtrarPorCarrera(carrera) {
-    this.filtroCarrera = carrera;
+   public filtroEstado(estado) {
+    if(estado=='Activo'){
+      this.EstadoFiltro = true;
+    }else if(estado==''){
+      this.EstadoFiltro = null;
+    }else{
+      this.EstadoFiltro=false;
+    }
     this.filtrar();
   }
-  
+  /*
   public filtrarPorSemestre(semestre) {
     this.filtroSemestre = semestre;
     this.filtrar();
@@ -66,17 +76,19 @@ export class ProductosFiltrosComponent implements OnInit {
   }
  
   private filtrar() {
-    const produtosAMostrar = this.produtos.filter( produto => {
+    const productosAMostrar = this.productos.filter( produto => {
       return (produto.Carrera.search(this.filtroCarrera) + 1) && 
              (produto.EstadoAfiliacion.search(this.filtroAfiliacion) + 1) && 
              (produto.SemestreReferencial.search(this.filtroSemestre) + 1);
     })
-    this.enviarProductos(produtosAMostrar);
+    this.enviarProductos(productosAMostrar);
   }
  */
+
   /***Ordenamiento*******************************************/
 
   compararPorCodigo(a, b) {
+    ////console.log(">>>ordenando>> a:", a.id ," - b:", b.id);
     if (a.id < b.id) {
       return -1;
     }
@@ -87,7 +99,7 @@ export class ProductosFiltrosComponent implements OnInit {
   }
 
   compararPorPrecio(a, b) {
-    //console.log(">>>ordenando>> a:", a.precio ," - b:", b.precio);
+    ////console.log(">>>ordenando>> a:", a.precio ," - b:", b.precio);
     if (a.precio < b.precio) {
       return -1;
     }
@@ -98,6 +110,7 @@ export class ProductosFiltrosComponent implements OnInit {
   }
 
   compararPorNombre(a, b) {
+    ////console.log(">>>ordenando>> a:", a.nombre ," - b:", b.nombre);
     if (a.nombre < b.nombre) {
       return -1;
     }
@@ -111,26 +124,46 @@ export class ProductosFiltrosComponent implements OnInit {
     this.tipoOrdenamiento = tipo
     switch(this.tipoOrdenamiento) {
       case 'Nombre':
-        this.enviarProductos(this.produtos.sort(this.compararPorNombre));
+        this.productos.sort(this.compararPorNombre);
         break;
       case 'Precio':
-        this.enviarProductos(this.produtos.sort(this.compararPorPrecio));
+        this.productos.sort(this.compararPorPrecio);
         break;
       case 'Codigo':
-        this.enviarProductos(this.produtos.sort(this.compararPorCodigo));
+        this.productos.sort(this.compararPorCodigo);
         break;
       default:
         break;    
     }
-    //this.enviarProductos(this.produtos);
-    //this.filtrar()
+    this.filtrar();
   }
 
+  /*******Filtrar******************************************/
+  filtrar() {
+    this.productosAMostrar = this.productos.filter( producto => {
+      ////console.log("estado:", this.EstadoFiltro)
+      if(this.EstadoFiltro!=null)
+      {
+        if(this.EstadoFiltro&&producto.estado){
+          return 1
+        }
+        else if(this.EstadoFiltro&&!producto.estado){
+          return 0
+        }
+        return ( producto.estado==this.EstadoFiltro);
+      }else{
+        return ( 1 );
+      }
+      
+    })
+  
+    this.enviarProductos(this.productosAMostrar);
+  }
   /***Enviar****************************************** */
 
-  private enviarProductos(produtosAMostrar: Producto[]) {
-    //console.log(">>>envia: ",produtosAMostrar);
-    this.mostrarProductos.emit(produtosAMostrar);
+  private enviarProductos(productosAMostrar: Producto[]) {
+    ////console.log(">>>envia: ",productosAMostrar);
+    this.mostrarProductos.emit(productosAMostrar);
   }
 
 }

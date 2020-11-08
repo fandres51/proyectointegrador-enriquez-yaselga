@@ -64,7 +64,7 @@ export class AutoridadesService {
       this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Contratos'})
       this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Incidentes'})
     } else {
-      console.log('Estudainte no existe: ', autoridad.NoUnico);
+      //console.log('Estudainte no existe: ', autoridad.NoUnico);
     }
   }
 

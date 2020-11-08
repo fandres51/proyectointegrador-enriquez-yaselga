@@ -38,7 +38,7 @@ export class RecursosListarComponent implements OnInit {
       data: this.recursos[index]
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      //console.log('The dialog was closed');
     })
   } 
 

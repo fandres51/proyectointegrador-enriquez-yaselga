@@ -24,22 +24,22 @@ export class ProveedoresService {
     return this.afs.collection<Proveedor>('Asociacion/AEIS/Filial');
   }
   getCollectionID(idFilial: string): AngularFirestoreCollection<Proveedor> {
-    //console.log(">>>Path: Asociacion/AEIS/Filial/"+idFilial+"/Proveedor");
+    ////console.log(">>>Path: Asociacion/AEIS/Filial/"+idFilial+"/Proveedor");
     return this.afs.collection<Proveedor>('Asociacion/AEIS/Filial/'+idFilial+"/Proveedor");
   }
 
   getProveedores(idFilial:string): Observable<Proveedor[]> {
-    //console.log(">>>Llego: ");
+    ////console.log(">>>Llego: ");
     return this.getCollectionID(idFilial).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Proveedor;
-        //console.log(">>>Proveedores1: ",data);
+        ////console.log(">>>Proveedores1: ",data);
         Object.keys(data).filter(
           key => data[key] instanceof firebase.firestore.Timestamp
         ).forEach(
           key => data[key] = data[key].toDate()
         ) //convierte todos los objetos Timestamp a Date
-        //console.log(">>>Proveedores2: ",data);
+        ////console.log(">>>Proveedores2: ",data);
         return data;
       }))
     )
@@ -71,7 +71,7 @@ export class ProveedoresService {
       (contador: Contador) => {
         if (bool) {        
           this.getCollection().doc('/'+idFilial+'/Proveedor/'+'PRD' + contador.contador).delete();
-          this.filialService.decreaseContador('Proveedor',idFilial);
+          //this.filialService.decreaseContador('Proveedor',idFilial);
           bool = false
         }
       },
@@ -84,29 +84,49 @@ export class ProveedoresService {
   addProveedor(nuevaProveedor: Proveedor, idFilial:string) {
     let idcontador: number;
     let bool = true; //eveita un bucle infinito X((
-    this.filialService.getContador('Proveedor',idFilial).subscribe(
-      (contador: Contador) => {
-        if(contador.contador>=1){
-          idcontador=contador.contador+1;
-        }else{
-          idcontador=1
-        }
-        if (bool) {
-          nuevaProveedor.id = 'PRD' + idcontador;
-          this.getCollection().doc('/'+idFilial+'/Proveedor/'+'PRD' + idcontador).set(nuevaProveedor);
-          if(idcontador==1){
-            this.filialService.createContador('Proveedor',idFilial);
-          }else{
-            this.filialService.increaseContador('Proveedor',idFilial);
+      this.filialService.getContador('Proveedor',idFilial).subscribe(
+        result=>{
+          if(result){
+              if(result.contador>=1){
+                idcontador=result.contador+1;
+              }else{
+                idcontador=1
+              }
+              if (bool) {
+                nuevaProveedor.id = 'PRD' + idcontador;
+                this.getCollection().doc('/'+idFilial+'/Proveedor/'+'PRD' + idcontador).set(nuevaProveedor);
+                if(idcontador==1){
+                  this.filialService.createContador('Proveedor',idFilial);
+                }else{
+                  this.filialService.increaseContador('Proveedor',idFilial);
+                }
+                bool = false
+              }
+            
+            
           }
-          
-          bool = false
+          else{//console.log("llegoResultIfNo");
+            idcontador=1;
+            if (bool) {
+              nuevaProveedor.id = 'PRD' + idcontador;
+              this.getCollection().doc('/'+idFilial+'/Proveedor/'+'PRD' + idcontador).set(nuevaProveedor);
+              if(idcontador==1){
+                this.filialService.createContador('Proveedor',idFilial);
+              }else{
+                this.filialService.increaseContador('Proveedor',idFilial);
+              }
+              
+              bool = false
+            }
+          }
         }
-      },
-      error => {
-        console.error(error);
-      }
-    )
+        ,
+        error => {
+          console.error("EE:",error);
+        }
+      )
+   
+    
   }
 
   getCollectionX(): AngularFirestoreCollection<Proveedor> {

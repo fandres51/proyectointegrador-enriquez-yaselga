@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Proveedor } from 'src/app/models/proveedor'
+import { ProveedoresService } from 'src/app/services/proveedores.service'
 
 @Component({
   selector: 'app-proveedores-filtros',
@@ -7,9 +10,137 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProveedoresFiltrosComponent implements OnInit {
 
-  constructor() { }
+  private proveedores: Proveedor[];
+  proveedoresAMostrar:Proveedor[];
+  idFilial:string;
+  @Output() private mostrarProveedores = new EventEmitter();
 
-  ngOnInit(): void {
+  public tipoOrdenamiento: 'Nombre' | 'Contacto' | 'Codigo' | '' = '';
+  EstadoFiltro: boolean=null;
+  constructor(
+    private proveedoresService: ProveedoresService,
+    private route:ActivatedRoute,
+  ) { }
+
+  ngOnInit() {
+    this.idFilial = this.route.snapshot.params['id'];
+    this.proveedoresService.getProveedores(this.idFilial).subscribe(proveedores => {
+      this.proveedores = proveedores;
+      this.enviarProveedores(this.proveedores);
+    },
+    error => {
+      console.error(error);
+    })
+  }
+
+  /***Filtros*******************************************/
+
+  public buscarPorNombre(input: string) {
+    this.proveedoresAMostrar = this.proveedores.filter(proveedor => {
+      return proveedor.nombre.search(input) != -1 ;
+    })
+    this.enviarProveedores(this.proveedoresAMostrar);
+  }
+
+  public buscarPorCedula(input: string) {
+    this.proveedoresAMostrar = this.proveedores.filter(proveedor => {
+      return proveedor.id.search(input) != -1;
+    })
+    this.enviarProveedores(this.proveedoresAMostrar);
+  }
+
+  public filtroEstado(estado) {
+    if(estado=='Activo'){
+      this.EstadoFiltro = true;
+    }else if(estado==''){
+      this.EstadoFiltro = null;
+    }else{
+      this.EstadoFiltro=false;
+    }
+    this.filtrar();
+  }
+
+  /***Ordenamiento*******************************************/
+
+  compararPorCodigo(a, b) {
+    if (a.id < b.id) {
+      return -1;
+    }
+    if (a.id > b.id) {
+      return 1;
+    }
+    return 0;
+  }
+
+  compararPorContacto(a, b) {
+    ////console.log(">>>ordenando>> a:", a.contacto ," - b:", b.contacto);
+    if (a.contacto < b.contacto) {
+      return -1;
+    }
+    if (a.contacto > b.contacto) {
+      return 1;
+    }
+    return 0;
+  }
+
+  compararPorNombre(a, b) {
+    
+    if (a.nombre < b.nombre) {
+      return -1;
+    }
+    if (a.nombre > b.nombre) {
+      return 1;
+    }
+    return 0;
+  }
+
+  ordenar(tipo) {
+    this.tipoOrdenamiento = tipo
+    ////console.log(">>>Tipo>> a:", this.tipoOrdenamiento);
+    switch(this.tipoOrdenamiento) {
+      case 'Nombre':
+        ////console.log(">>>Nombre>> a:", this.proveedores);
+        this.enviarProveedores(this.proveedores.sort(this.compararPorNombre));
+        break;
+      case 'Contacto':
+        this.enviarProveedores(this.proveedores.sort(this.compararPorContacto));
+        break;
+      case 'Codigo':
+        this.enviarProveedores(this.proveedores.sort(this.compararPorCodigo));
+        break;
+      default:
+        break;    
+    }
+    //this.enviarProveedores(this.proveedores);
+    //this.filtrar()
+  }
+
+  filtrar() {
+    this.proveedoresAMostrar = this.proveedores.filter( proveedor => {
+      ////console.log("estado:", this.EstadoFiltro)
+      if(this.EstadoFiltro!=null)
+      {
+        if(this.EstadoFiltro&&proveedor.estado){
+          return 1
+        }
+        else if(this.EstadoFiltro&&!proveedor.estado){
+          return 0
+        }
+        return ( proveedor.estado==this.EstadoFiltro);
+      }else{
+        return ( 1 );
+      }
+      
+    })
+  
+    this.enviarProveedores(this.proveedoresAMostrar);
+  }
+
+  /***Enviar****************************************** */
+
+  private enviarProveedores(proveedoresAMostrar: Proveedor[]) {
+    ////console.log(">>>envia: ",proveedoresAMostrar);
+    this.mostrarProveedores.emit(proveedoresAMostrar);
   }
 
 }

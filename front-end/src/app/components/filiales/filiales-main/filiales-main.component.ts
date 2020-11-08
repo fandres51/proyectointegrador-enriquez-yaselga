@@ -37,7 +37,7 @@ export class FilialesMainComponent implements OnInit {
       filiales => {
         
         this.filiales = filiales;
-        //console.log(">>>>Filiales: ",filiales);
+        ////console.log(">>>>Filiales: ",filiales);
         this.filialesNombres = filiales.map(n=>n.id);
         //this.filialesNombres = filiales.map(n=>n.id);
         

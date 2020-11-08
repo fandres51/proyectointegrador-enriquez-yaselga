@@ -18,14 +18,14 @@
     </div>
      <div fxFlex="90" fxFlex.lt-md="100" fxLayout="row" fxLayout.lt-md="column">
         <div fxFlex="20" fxFlex.md="30" fxFlex.lt-md="auto" fxLayout="row">
-            <!-- <app-proveedores-filtros (mostrarProveedores)="proveedores=$event"></app-proveedores-filtros>  -->
+            <app-proveedores-filtros (mostrarProveedores)="proveedores=$event"></app-proveedores-filtros> 
         </div>
   
         <div class="line" fxHide.lt-md></div>
   
         <div fxFlex="80" fxFlex.md="70" fxFlex.lt-md="auto" fxLayout="column" class="div-proveedores">
             <div fxLayout="column">
-              <!-- <app-proveedores-listar [_proveedores]="proveedores"></app-proveedores-listar> -->
+              <app-proveedores-listar [_proveedores]="proveedores"></app-proveedores-listar>
             </div>
         </div>
     </div> 

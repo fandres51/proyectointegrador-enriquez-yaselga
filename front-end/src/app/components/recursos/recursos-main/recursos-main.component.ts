@@ -18,7 +18,7 @@ export class RecursosMainComponent implements OnInit {
     this.RecursosService.getRecursos().subscribe(recurso =>{
       this.recursos = recurso;
       this.recursosMostrados = recurso;
-      console.log(this.recursos);
+      //console.log(this.recursos);
     });
   }
   

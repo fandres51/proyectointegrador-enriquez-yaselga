@@ -41,7 +41,7 @@ export class ProductosDialogInfoComponent implements OnInit {
   ngOnInit(): void {
     
     //this.idFilial = this.route.snapshot.params['id'];
-    //console.log("<<<>>>filialid: ",this.idFilial);
+    ////console.log("<<<>>>filialid: ",this.idFilial);
     this.filialService.getFilial(this.idFilial).subscribe(item=>{this.filial=item})
     
   }

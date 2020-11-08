@@ -1,7 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MainScreenComponent } from './components/layouts/main-screen/main-screen.component';
-import { PageNotFoundComponent } from './components/layouts/page-not-found/page-not-found.component';
+import { MainScreenComponent } from './components/templates/main-screen/main-screen.component';
+import { PageNotFoundComponent } from './components/templates/page-not-found/page-not-found.component';
 import { EstudiantesMainComponent } from './components/estudiantes/estudiantes-main/estudiantes-main.component';
 import { EstudiantesActualizacionComponent } from './components/estudiantes/estudiantes-actualizacion/estudiantes-actualizacion.component';
 import { EstudiantesAfiliacionComponent } from './components/estudiantes/estudiantes-afiliacion/estudiantes-afiliacion.component';

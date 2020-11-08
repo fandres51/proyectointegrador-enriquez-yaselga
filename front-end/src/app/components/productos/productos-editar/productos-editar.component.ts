@@ -28,16 +28,16 @@ export class ProductosEditarComponent implements OnInit {
       precio:0,
     }
     this.route.params.subscribe(params =>{
-      //console.log(">>>idproducto>>>: ",params['idproducto']);
-      //console.log(">>>idFilial>>>: ", this.idFilial);
+      ////console.log(">>>idproducto>>>: ",params['idproducto']);
+      ////console.log(">>>idFilial>>>: ", this.idFilial);
       const noUnicoParam = params['idproducto'];
       this.productosService.getProducto(noUnicoParam, this.idFilial).subscribe(recurso =>{
         if(recurso!=null){
-          //console.log("Recurso : ", recurso);
+          ////console.log("Recurso : ", recurso);
           this.producto = recurso;
         }
         else{
-          console.log("no hay recurso disponible: ", recurso);
+          //console.log("no hay recurso disponible: ", recurso);
         }
         
       },

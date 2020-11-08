@@ -18,7 +18,7 @@
     </div>
      <div fxFlex="90" fxFlex.lt-md="100" fxLayout="row" fxLayout.lt-md="column">
         <div fxFlex="20" fxFlex.md="30" fxFlex.lt-md="auto" fxLayout="row">
-            <app-productos-filtros (mostrarProductos)="productos=$event"></app-productos-filtros> 
+            <app-productos-filtros (mostrarProductos)="refrescar($event)"></app-productos-filtros> 
         </div>
   
         <div class="line" fxHide.lt-md></div>

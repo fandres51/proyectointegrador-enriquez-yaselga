@@ -36,6 +36,25 @@
     <hr>
     <hr fxHide.lt-md>
     <div fxHide.lt-md>
+        <div>
+            <h3 class="title">Filtar por Estado</h3>
+            <button [ngClass]="{
+                                    'filtrosButton': EstadoFiltro != 'Activo', 
+                                    'selected': EstadoFiltro == true
+                                }" mat-button (click)="filtroEstado('Activo')">Activo</button>
+            <button [ngClass]="{
+                                    'filtrosButton': EstadoFiltro != 'Inactivo', 
+                                    'selected': EstadoFiltro == false
+                                }" mat-button (click)="filtroEstado('Inactivo')">Inactivo</button>
+            <button [ngClass]="{
+                                    'filtrosButton': EstadoFiltro != '', 
+                                    'selected': EstadoFiltro == null
+                                }" mat-button (click)="filtroEstado('')">Todos</button>
+                                
+        </div>
+
+    </div>
+    <div fxHide.lt-md>
         <h2 class="title">Ordenar por:</h2>
         <button mat-button [ngClass]="{
                                         'filtrosButton': tipoOrdenamiento != 'Codigo', 

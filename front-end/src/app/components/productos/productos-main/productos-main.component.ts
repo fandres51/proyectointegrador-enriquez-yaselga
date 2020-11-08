@@ -31,7 +31,7 @@ export class ProductosMainComponent implements OnInit {
     this.productosService.getProductos(this.idFilial).subscribe(producto =>{
       this.productos = producto;
       this.productosMostrados = producto;
-      //console.log(this.productos);
+      ////console.log(this.productos);
     });
   }
   
@@ -51,7 +51,12 @@ export class ProductosMainComponent implements OnInit {
         }
       }
     ); 
-  } 
+  }
+  
+  refrescar(event){
+    ////console.log(">>>recibido:",event);
+    this.productos=event;
+  }
   
 
 

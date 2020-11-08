@@ -32,7 +32,7 @@ export class ProveedoresMainComponent implements OnInit {
     this.proveedoresService.getProveedores(this.idFilial).subscribe(proveedor =>{
       this.proveedores = proveedor;
       this.proveedoresMostrados = proveedor;
-      //console.log(this.proveedores);
+      ////console.log(this.proveedores);
     });
   }
   

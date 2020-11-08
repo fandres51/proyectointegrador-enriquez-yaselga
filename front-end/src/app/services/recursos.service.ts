@@ -63,7 +63,7 @@ export class RecursosService {
 
   crearRecurso(nuevoRecurso: Recurso){
     let bool=true; //eveita un bucle infinito X((
-      console.log("Contador de recurso", this.asociacionService.getContador('Recurso'));
+      //console.log("Contador de recurso", this.asociacionService.getContador('Recurso'));
     this.asociacionService.getContador('Recurso').subscribe(
       (contador: Contador) => {
         if(bool){

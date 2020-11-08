@@ -27,7 +27,7 @@
     </div>
 
     <div fxLayout="row">
-        <div *ngIf="producto.idproveedor" fxFlex="50" class="dato">
+        <div fxFlex="50" class="dato">
             <div class="titulo">Proveedor </div>
             <div>{{producto.idproveedor}}</div>
         </div>
@@ -37,7 +37,16 @@
             <div>{{producto.descripcion}}</div>
         </div>
     </div>
+</div>
+<div fxLayout="row">
+    <div class="dato">
+        <div class="titulo">Estado </div>
+        <div>{{producto.estado?'Activo':'Inactivo'}}</div>
+    </div>
 
+</div>
+<div fxLayout="row">
+   
     <div *ngIf="producto.fotos" class="dato">
         <div class="titulo">Fotos </div>
         <div>{{producto.fotos}}</div>
