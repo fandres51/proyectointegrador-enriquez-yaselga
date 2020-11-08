@@ -4,8 +4,12 @@ Productos Listar funciona filial: {{idFilial}}
         <mat-card fxLayout="row" fxLayoutAlign=" center">
 
             <div fxLayout="column" fxLayoutAlign="center start" fxFlex="30">
-                <div class="nombre">{{producto.Nombre}} </div>
+                <div class="nombre">{{producto.nombre}} </div>
                 <div>{{producto.id}}</div>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center start" fxFlex="30">
+                <div class="nombre">Precio: {{producto.precio}} </div>
+                <div>{{producto.descripcion}}</div>
             </div>
 
             <div fxLayoutAlign="end " fxFlex="auto">

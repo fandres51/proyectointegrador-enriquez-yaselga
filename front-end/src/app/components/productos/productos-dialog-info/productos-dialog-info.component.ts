@@ -13,7 +13,7 @@ import { ProductosService } from 'src/app/services/productos.service';
 })
 export class ProductosDialogInfoComponent implements OnInit {
 
-  idFilial:string="FIL0";
+  idFilial:string;
   filial:Filial={
     id:"0",
     nombre:""
@@ -23,21 +23,25 @@ export class ProductosDialogInfoComponent implements OnInit {
   public productoAEditar: Producto;
   public productoAFiltrar: Producto;
   public dateString: String="";
+  public producto: Producto; // --->> donde debe estar
   
   constructor(
     private route:ActivatedRoute,
     public productosService: ProductosService,
-    
-    public dialogRef: MatDialogRef<ProductosDialogInfoComponent>,
-    @Inject(MAT_DIALOG_DATA) public producto: Producto,
-    private filialService:FilialService
-  ) {
+    private filialService:FilialService,
+    //public producto: Producto, -->>donde estaba
+    @Inject(MAT_DIALOG_DATA) datos: any,
+    public dialogRef: MatDialogRef<ProductosDialogInfoComponent>) {
+      if(datos){
+        this.producto=datos.producto;
+        this.idFilial=datos.id;
+      }
     }
 
   ngOnInit(): void {
     
     //this.idFilial = this.route.snapshot.params['id'];
-    console.log("<<<>>>filialid: ",this.idFilial);
+    //console.log("<<<>>>filialid: ",this.idFilial);
     this.filialService.getFilial(this.idFilial).subscribe(item=>{this.filial=item})
     
   }

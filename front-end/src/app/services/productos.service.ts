@@ -29,27 +29,26 @@ export class ProductosService {
   }
 
   getProductos(idFilial:string): Observable<Producto[]> {
-    console.log(">>>Llego: ");
+    //console.log(">>>Llego: ");
     return this.getCollectionID(idFilial).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Producto;
-        console.log(">>>Productos1: ",data);
+        //console.log(">>>Productos1: ",data);
         Object.keys(data).filter(
           key => data[key] instanceof firebase.firestore.Timestamp
         ).forEach(
           key => data[key] = data[key].toDate()
         ) //convierte todos los objetos Timestamp a Date
-        console.log(">>>Productos2: ",data);
+        //console.log(">>>Productos2: ",data);
         return data;
       }))
     )
   }
 
-  getProducto(id: string ): Observable<Producto> {
-    return this.getCollection().doc<Producto>(id).snapshotChanges().pipe(
+  getProducto(id: string, idFilial: string ): Observable<Producto> {
+    return this.getCollection().doc<Producto>('/'+idFilial+'/Producto/'+id).snapshotChanges().pipe(
       map( a => {
         const data = a.payload.data() as Producto;
-
         Object.keys(data).filter(
           key => data[key] instanceof firebase.firestore.Timestamp
         ).forEach(
@@ -66,22 +65,41 @@ export class ProductosService {
   }
 
   deleteProducto(idproducto: string, idFilial: string) {
-    return this.getCollection().doc('/'+idFilial+'/Producto/'+idproducto).delete();
-}
+    this.getCollection().doc('/'+idFilial+'/Producto/'+idproducto).delete();
+    let bool = true; 
+    this.filialService.getContador('Producto',idFilial).subscribe(
+      (contador: Contador) => {
+        if (bool) {        
+          this.getCollection().doc('/'+idFilial+'/Producto/'+'PRD' + contador.contador).delete();
+          this.filialService.decreaseContador('Producto',idFilial);
+          bool = false
+        }
+      },
+      error => {
+        console.error(error);
+      }
+    )
+    }
 
   addProducto(nuevaProducto: Producto, idFilial:string) {
-    let producto:Producto;
-    producto.id='PRD';
-    producto.nombre='producto quemado de prueba';
-    producto.precio=5;
-
+    let idcontador: number;
     let bool = true; //eveita un bucle infinito X((
     this.filialService.getContador('Producto',idFilial).subscribe(
       (contador: Contador) => {
+        if(contador.contador>=1){
+          idcontador=contador.contador+1;
+        }else{
+          idcontador=1
+        }
         if (bool) {
-          nuevaProducto.id = 'PRD' + contador.contador;
-          this.getCollectionX().doc('/'+idFilial+'/Producto/'+'PRD' + contador.contador).set(nuevaProducto);
-          this.filialService.increaseContador('Producto',idFilial);
+          nuevaProducto.id = 'PRD' + idcontador;
+          this.getCollection().doc('/'+idFilial+'/Producto/'+'PRD' + idcontador).set(nuevaProducto);
+          if(idcontador==1){
+            this.filialService.createContador('Producto',idFilial);
+          }else{
+            this.filialService.increaseContador('Producto',idFilial);
+          }
+          
           bool = false
         }
       },

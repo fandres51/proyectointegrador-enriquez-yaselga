@@ -85,7 +85,6 @@ import { FinancieroCrearComponent } from './components/financiero/financiero-cre
 import { FinancieroDialogComponent } from './components/financiero/financiero-dialog/financiero-dialog.component';
 import { EstudiantesListarComponent } from './components/estudiantes/estudiantes-listar/estudiantes-listar.component';
 import { EstudiantesAfiliacionComponent } from './components/estudiantes/estudiantes-afiliacion/estudiantes-afiliacion.component';
-//import { FilialesModule } from './components/filiales/filiales.module'
 import { FilialesMainComponent } from './components/filiales/filiales-main/filiales-main.component';
 import { FilialesCrearComponent } from './components/filiales/filiales-crear/filiales-crear.component';
 import { FilialesEditarComponent } from './components/filiales/filiales-editar/filiales-editar.component';
@@ -101,7 +100,13 @@ import { RecursosListarComponent } from './components/recursos/recursos-listar/r
 import { RecursosDialogInfoComponent } from './components/recursos/recursos-dialog-info/recursos-dialog-info.component';
 import { RecursosFiltrosComponent } from './components/recursos/recursos-filtros/recursos-filtros.component';
 import { RecursosActualizacionComponent } from './components/recursos/recursos-actualizacion/recursos-actualizacion.component';
-import { RecursoNuevoComponent } from './components/recursos/recurso-nuevo/recurso-nuevo.component'
+import { RecursoNuevoComponent } from './components/recursos/recurso-nuevo/recurso-nuevo.component';
+import { ProveedoresMainComponent } from './components/proveedores/proveedores-main/proveedores-main.component';
+import { ProveedoresCrearComponent } from './components/proveedores/proveedores-crear/proveedores-crear.component';
+import { ProveedoresEditarComponent } from './components/proveedores/proveedores-editar/proveedores-editar.component';
+import { ProveedoresDialogInfoComponent } from './components/proveedores/proveedores-dialog-info/proveedores-dialog-info.component';
+import { ProveedoresFiltrosComponent } from './components/proveedores/proveedores-filtros/proveedores-filtros.component';
+import { ProveedoresListarComponent } from './components/proveedores/proveedores-listar/proveedores-listar.component';
 
 
 
@@ -166,6 +171,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FilialesMainComponent, FilialesCrearComponent, FilialesEditarComponent, FilialComponent,
     ProductosCrearComponent, ProductosEditarComponent, ProductosMainComponent, ProductosListarComponent, ProductosDialogInfoComponent, ProductosFiltrosComponent,
     RecursosMainComponent, RecursosListarComponent, RecursosDialogInfoComponent, RecursosFiltrosComponent, RecursosActualizacionComponent, RecursoNuevoComponent,
+    ProveedoresMainComponent, ProveedoresCrearComponent, ProveedoresEditarComponent, ProveedoresDialogInfoComponent, ProveedoresFiltrosComponent, ProveedoresListarComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firabase),
