@@ -39,15 +39,15 @@
         <div>
             <h3 class="title">Filtar por Estado</h3>
             <button [ngClass]="{
-                                    'filtrosButton': EstadoFiltro != 'Activo', 
+                                    'filtrosButton': EstadoFiltroString != 'Activo', 
                                     'selected': EstadoFiltro == true
                                 }" mat-button (click)="filtroEstado('Activo')">Activo</button>
             <button [ngClass]="{
-                                    'filtrosButton': EstadoFiltro != 'Inactivo', 
+                                    'filtrosButton': EstadoFiltroString != 'Inactivo', 
                                     'selected': EstadoFiltro == false
                                 }" mat-button (click)="filtroEstado('Inactivo')">Inactivo</button>
             <button [ngClass]="{
-                                    'filtrosButton': EstadoFiltro != '', 
+                                    'filtrosButton': EstadoFiltroString != '', 
                                     'selected': EstadoFiltro == null
                                 }" mat-button (click)="filtroEstado('')">Todos</button>
                                 

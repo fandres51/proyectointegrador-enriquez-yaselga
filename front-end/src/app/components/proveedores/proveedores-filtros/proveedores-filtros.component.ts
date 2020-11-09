@@ -17,6 +17,7 @@ export class ProveedoresFiltrosComponent implements OnInit {
 
   public tipoOrdenamiento: 'Nombre' | 'Contacto' | 'Codigo' | '' = '';
   EstadoFiltro: boolean=null;
+  EstadoFiltroString: 'Activo'|'Inactivo'|''='';
   constructor(
     private proveedoresService: ProveedoresService,
     private route:ActivatedRoute,
@@ -51,10 +52,13 @@ export class ProveedoresFiltrosComponent implements OnInit {
 
   public filtroEstado(estado) {
     if(estado=='Activo'){
+      this.EstadoFiltroString="Activo";
       this.EstadoFiltro = true;
     }else if(estado==''){
+      this.EstadoFiltroString="";
       this.EstadoFiltro = null;
     }else{
+      this.EstadoFiltroString="Inactivo";
       this.EstadoFiltro=false;
     }
     this.filtrar();

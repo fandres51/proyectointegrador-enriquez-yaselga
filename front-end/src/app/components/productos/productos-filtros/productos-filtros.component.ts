@@ -17,6 +17,7 @@ export class ProductosFiltrosComponent implements OnInit {
 
   public tipoOrdenamiento: 'Nombre' | 'Precio' | 'Codigo' | '' = '';
   EstadoFiltro: boolean=null;
+  EstadoFiltroString: 'Activo'|'Inactivo'|''='';
 
   constructor(
     private productosService: ProductosService,
@@ -54,12 +55,15 @@ export class ProductosFiltrosComponent implements OnInit {
 
   /***Filtros*******************************************/
   
-   public filtroEstado(estado) {
+  public filtroEstado(estado) {
     if(estado=='Activo'){
+      this.EstadoFiltroString="Activo";
       this.EstadoFiltro = true;
     }else if(estado==''){
+      this.EstadoFiltroString="";
       this.EstadoFiltro = null;
     }else{
+      this.EstadoFiltroString="Inactivo";
       this.EstadoFiltro=false;
     }
     this.filtrar();
