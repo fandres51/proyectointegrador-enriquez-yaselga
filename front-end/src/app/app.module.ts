@@ -174,7 +174,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     ProveedoresMainComponent, ProveedoresCrearComponent, ProveedoresEditarComponent, ProveedoresDialogInfoComponent, ProveedoresFiltrosComponent, ProveedoresListarComponent,
   ],
   imports: [
-    AngularFireModule.initializeApp(environment.firabase),
+    AngularFireModule.initializeApp(environment.firebase),
     FlatpickrModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
