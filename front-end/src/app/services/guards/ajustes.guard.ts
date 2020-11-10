@@ -15,7 +15,7 @@ export class AjustesGuard implements CanActivate {
     ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-
+        return true;
         return new Promise<boolean>(
             (res, req) => {
                 this.authService.auth.user.subscribe(
@@ -27,7 +27,7 @@ export class AjustesGuard implements CanActivate {
                                         if(user.email === presi.CorreoInstitucional)
                                             res(true)
                                         else
-                                            res(true)
+                                            res(false)
                                     },
                                     error => {
                                       console.error(error);

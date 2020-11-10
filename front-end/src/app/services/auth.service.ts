@@ -24,9 +24,12 @@ export class AuthService {
   }
 
   getPermiso(email: string, modulo: string): Observable<Permiso[]> {
+    console.log(">>>Permisos: ",this.afs.collection('Asociacion/AEIS/Permisos', ref => ref.where('email','==',email)).snapshotChanges());
     return this.afs.collection('Asociacion/AEIS/Permisos', ref => ref.where('email','==',email).where('modulo','==',modulo)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
+        console.log("actions:", actions);
         const data = a.payload.doc.data() as Permiso;
+        console.log("datos:", data);
         data.id = a.payload.doc.id;
         return data;
       }))

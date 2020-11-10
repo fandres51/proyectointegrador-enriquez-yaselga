@@ -1,9 +1,9 @@
 {
   "targets": {
-    "asociaciones-2": {
+    "asociaciones-5b17b": {
       "hosting": {
         "front-end": [
-          "asociaciones-2"
+          "asociaciones-5b17b"
         ]
       }
     }
