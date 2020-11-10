@@ -4,6 +4,14 @@
 }
 
 .main {
-    margin-top: 100px;
     text-align: center;
+    height: 90vh;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 1700px) {
+    .main {
+        max-width: 70%;
+    }
 }
