@@ -12,7 +12,7 @@ export const environment = {
     measurementId: "G-4Z1TK5XZF0"
   }
   ///SITIO DE CIVIL
- /*  firebase: {
+  /* firebase: {
   apiKey: "AIzaSyBDvm-wm2VOKxS8JRe8nadViI4wpuC_7AE",
     authDomain: "asociaciones-2.firebaseapp.com",
     databaseURL: "https://asociaciones-2.firebaseio.com/",
@@ -21,6 +21,6 @@ export const environment = {
     messagingSenderId: "705889851394",
     appId: "1:705889851394:web:3e758fbcd8c3a4b93def1b",
     measurementId: "G-QRZLCXZE8T"
-  } */
- 
+  }
+  */
 };
