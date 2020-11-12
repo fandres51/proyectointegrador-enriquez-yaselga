@@ -15,7 +15,7 @@ export class AjustesGuard implements CanActivate {
     ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-        return true;
+        
         return new Promise<boolean>(
             (res, req) => {
                 this.authService.auth.user.subscribe(
