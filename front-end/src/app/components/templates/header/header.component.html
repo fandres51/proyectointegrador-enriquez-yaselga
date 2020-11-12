@@ -1,0 +1,61 @@
+<div class="header" fxLayout="row">
+    <div class="logo-user" fxFlex="40" fxFlex.lt-md="100" fxLayoutAlign="start center" fxLayout="Row">
+        <div class="menu-icon" (click)="mostrarMenu()" fxHide.gt-sm>
+            <button mat-button>
+                <mat-icon aria-hidden="false" aria-label="Example home icon">menu</mat-icon>
+            </button>
+        </div>
+        <div>
+            <a routerLink="/">
+                <img class="imgLogo" src="assets/images/LogoAEIS-Vertical.png" alt="Logo AEIS">
+            </a>
+        </div>
+        <div fxLayout="row" fxLayoutAlign=" center" fxHide.lt-md>
+            <div>
+                <img class="imgAvatar" src="assets/images/Avatar.png" alt="Avatar">
+            </div>
+            <div>
+                <div class="nombre" fxLayout="row" fxLayoutAlign=" center">
+                    <div class="nombre-usr">
+                        {{nombreUsuario}}
+                    </div>
+                    <button class="minibutton" fxLayoutAlign=" center" [matMenuTriggerFor]="minibutton">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_drop_down</mat-icon>
+                    </button>
+                    <mat-menu #minibutton="matMenu">
+                        <a routerLink="/ajustes">
+                            <button mat-menu-item class="menu-item">Configuración</button>
+                        </a>
+                        <a>
+                            <button (click)="logout()" mat-menu-item class="menu-item">Cerrar Sesión</button>
+                        </a>
+                    </mat-menu>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="menu" fxFlex="60" fxLayoutAlign="end center" fxHide.lt-md>
+        <div>
+            <button fxLayoutAlign=" center" [matMenuTriggerFor]="menuAso">
+                Asociaciones
+                <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_drop_down</mat-icon>
+            </button>
+            <mat-menu #menuAso="matMenu">
+                <a routerLink="/autoridades"><button mat-menu-item class="menu-item">Autoridades</button></a>
+                <a routerLink="/recursos"><button mat-menu-item class="menu-item">Recursos</button></a>
+                <a routerLink="/elecciones"><button mat-menu-item class="menu-item">Elecciones</button></a>
+                <a routerLink="/contratos"><button mat-menu-item class="menu-item">Contratos</button></a>
+                <a routerLink="/incidentes"><button mat-menu-item class="menu-item">Incidentes</button></a>
+            </mat-menu>
+        </div>
+        <div><a fxLayoutAlign=" center" routerLink="/estudiantes">Estudiantes</a></div>
+        <div><a fxLayoutAlign=" center" routerLink="/filiales">Filiales</a></div>
+        <div><a fxLayoutAlign=" center" routerLink="/financiero">Financiero</a></div>
+        <div><a fxLayoutAlign=" center" routerLink="/eventos">Eventos</a></div>
+        <!-- <div>
+            <a fxLayoutAlign=" center" routerLink="/notificaciones">
+                <mat-icon aria-hidden="false" aria-label="Example home icon">notifications</mat-icon>
+            </a>
+        </div> -->
+    </div>
+</div>

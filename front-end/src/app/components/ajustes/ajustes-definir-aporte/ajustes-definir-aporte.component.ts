@@ -9,16 +9,21 @@ import { AsociacionService } from 'src/app/services/asociacion.service';
 export class AjustesDefinirAporteComponent implements OnInit {
   
   public aporte;
+  public aporteAnterior;
 
   constructor(
     private readonly asociacionService: AsociacionService
   ) { }
 
   ngOnInit(): void {
+    this.asociacionService.getAsociacion().subscribe(
+      asociacion => {
+        this.aporteAnterior = asociacion.AporteActual;
+      }
+    )
   }
 
   cambiarAporte() {
     this.asociacionService.updateAsociacion({AporteActual: this.aporte});
-    alert('Aporte cambiado!');
   }
 }

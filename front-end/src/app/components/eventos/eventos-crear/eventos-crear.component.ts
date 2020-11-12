@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Evento } from 'src/app/models/evento';
 import { AsociacionService } from 'src/app/services/asociacion.service';
-import { AuthService } from 'src/app/services/auth.service';
 import { AutoridadesService } from 'src/app/services/autoridades.service';
 import { EventosService } from 'src/app/services/eventos.service';
 
@@ -41,10 +40,9 @@ export class EventosCrearComponent implements OnInit {
     resp3: ""
   }
 
-  constructor(
+  constructor (
     private autoridadService: AutoridadesService,
     private asociacionService: AsociacionService,
-    public authService: AuthService,
     private eventoService: EventosService,
     private router: Router
   ) { }
@@ -54,7 +52,7 @@ export class EventosCrearComponent implements OnInit {
       asociacion => {
         this.autoridadService.getAutoridadesActuales(asociacion.AsociacionActual).subscribe(
           autoridades => {
-            this.autoridades = autoridades.map(n => n.Nombre);
+            this.autoridades = autoridades.map(n=>n.Nombre);
           },
           error => {
             console.error(error);
@@ -85,7 +83,7 @@ export class EventosCrearComponent implements OnInit {
       arregloDias.push(6);
     return arregloDias;
   }
-
+  
   crearArregoResp(): string[] {
     const arregloResp: string[] = [];
     if (this.responsables.resp1)
@@ -94,51 +92,39 @@ export class EventosCrearComponent implements OnInit {
       arregloResp.push(this.responsables.resp2);
     if (this.responsables.resp3)
       arregloResp.push(this.responsables.resp3);
-    return arregloResp.filter((n, i) => {
-      if (arregloResp.indexOf(n) === i)
+    return arregloResp.filter( (n, i) => {
+      if(arregloResp.indexOf(n) === i)
         return n
     })
   }
 
   crearEvento() {
-    this.authService.auth.user.subscribe(
-      user => {
-        this.authService.getPermiso(user.email, 'Eventos_new').subscribe(
-          permiso => {
-            if (permiso.length > 0) {
-              let validado = true;
-              this.nuevoEvento.responsables = this.crearArregoResp();
-              if (this.nuevoEvento.tipo !== 'Evento') {
-                this.nuevoEvento.daysOfWeek = this.crearArregoDias();
-                if (this.nuevoEvento.daysOfWeek.length < 1) {
-                  alert('Debe ingresar al menos un día de la semana');
-                  validado = false;
-                }
-                if (this.nuevoEvento.startTime > this.nuevoEvento.endTime) {
-                  alert('Error: hora de inicio debe ser anterior a hora de finalización');
-                  validado = false;
-                }
-              }
-
-              if (this.nuevoEvento.tipo === 'Evento') {
-                if (this.nuevoEvento.start > this.nuevoEvento.end) {
-                  alert('Error: hora de inicio debe ser anterior a hora de finalización');
-                  validado = false;
-                }
-              }
-
-              if (validado) {
-                this.eventoService.addEvento(this.nuevoEvento);
-                alert('Evento creado');
-                this.router.navigate(['/eventos']);
-              }
-            }
-            else
-              alert('Usted no tiene permiso para realizar esa acción');
-          }
-        )
+    let validado = true;
+    this.nuevoEvento.responsables = this.crearArregoResp();
+    if(this.nuevoEvento.tipo !== 'Evento') {
+      this.nuevoEvento.daysOfWeek = this.crearArregoDias();
+      if(this.nuevoEvento.daysOfWeek.length < 1) {
+        alert('Debe ingresar al menos un día de la semana');
+        validado = false;
       }
-    )
+      if(this.nuevoEvento.startTime > this.nuevoEvento.endTime) {
+        alert('Error: hora de inicio debe ser anterior a hora de finalización');
+        validado = false;
+      }
+    }
+
+    if(this.nuevoEvento.tipo === 'Evento') {
+      if(this.nuevoEvento.start > this.nuevoEvento.end) {
+        alert('Error: hora de inicio debe ser anterior a hora de finalización');
+        validado = false;
+      }
+    }
+
+    if(validado) {
+      this.eventoService.addEvento(this.nuevoEvento);
+      alert('Evento creado');
+      this.router.navigate(['/eventos']);
+    }
   }
 
   regresar() {

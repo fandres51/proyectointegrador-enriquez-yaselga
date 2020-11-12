@@ -1,0 +1,60 @@
+<div>
+    <app-titles text="Nuevo Proveedor" regresarA="/filiales/filial/{{idFilial}}/proveedores"></app-titles>
+</div>
+<div class="form">
+    <form #form="ngForm" (ngSubmit)="nuevo()">
+        <div fxLayout="column">
+            <label for="nombre">Nombre:</label>
+            <input 
+                type="text" 
+                nombre="nombre" 
+                name="nombre" 
+                maxlength="50" 
+                required
+                [(ngModel)]="proveedor.nombre"
+                #nomb="ngModel"
+            >
+            <div class="err" *ngIf="nomb.touched && nomb.errors">
+                Error, campo requerido
+            </div>
+        </div>
+        <div fxLayout="column">
+            <label for="descripcion">Descripción:</label>
+            <input 
+                type="text" 
+                id="descripcion" 
+                name="descripcion" 
+                
+                [(ngModel)]="proveedor.descripcion"
+                #desc="ngModel"
+            >
+            <div class="err" *ngIf="desc.touched && desc.errors">
+                Error, campo requerido
+            </div>
+        </div>
+        <div fxLayout="column">
+            <label for="contacto">Contacto:</label>
+            <input 
+                type="text" 
+                id="contacto" 
+                name="contacto" 
+                [(ngModel)]="proveedor.contacto"
+                required
+                #inter="ngModel"
+            >
+        </div>
+        <div fxLayout="column">
+            <input type="radio" id="activo" name="gender" value="true" [(ngModel)]="proveedor.estado" #inter="ngModel" required>
+            <label for="activo">Activo</label>
+            <input type="radio" id="inactivo" name="gender" value="false" [(ngModel)]="proveedor.estado" #inter="ngModel" required>
+            <label for="inactivo">Inactivo</label>
+        </div>
+                
+        <div class="butt-box">
+            <button mat-button type="submit" [disabled]="!form.form.valid">
+                Nuevo
+                <mat-icon aria-hidden="false" aria-label="Edit">new</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>

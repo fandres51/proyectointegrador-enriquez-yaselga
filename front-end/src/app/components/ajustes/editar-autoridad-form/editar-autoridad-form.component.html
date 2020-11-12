@@ -1,3 +1,4 @@
+
 <div>
     <div class="form">
         <form (ngSubmit)="editar()">
@@ -55,121 +56,53 @@
 </div>
 <div *ngIf="autoridadCargo !== 'Presidente'">
     <form fxLayout="column" (ngSubmit)="cambiarPermisos()">
-        <h2>Módulo estudiantes: </h2>
-        <div>
-            <label for="estudiante">Ver módulo:</label>
-            <input type="checkbox" name="estudiante" id="estudiante" [(ngModel)]="modulos.Estudiantes">
-        </div>
-        <div>
-            <label for="estudiante">Cargar estudiantes:</label>
-            <input type="checkbox" name="estudiante" id="estudiante" [(ngModel)]="modulos.Estudiantes_new">
-        </div>
-        <div>
-            <label for="estudiante">Actualizar estudiante y afiliar:</label>
-            <input type="checkbox" name="estudiante" id="estudiante" [(ngModel)]="modulos.Estudiantes_edit">
-        </div>
-        <div>
-            <label for="estudiante">Dar de baja y graduar:</label>
-            <input type="checkbox" name="estudiante" id="estudiante" [(ngModel)]="modulos.Estudiantes_delete">
-        </div>
-        <h2>Módulo financiero: </h2>
-        <div>
-            <label for="financiero">Ver módulo: </label>
-            <input type="checkbox" name="financiero" id="financiero" [(ngModel)]="modulos.Financiero">
-        </div>
-        <div>
-            <label for="financiero">Crear o cargar transacción: </label>
-            <input type="checkbox" name="financiero" id="financiero" [(ngModel)]="modulos.Financiero_new">
-        </div>
-        <div>
-            <label for="financiero">Dar de baja: </label>
-            <input type="checkbox" name="financiero" id="financiero" [(ngModel)]="modulos.Financiero_delete">
-        </div>
-        <h2>Módulo eventos: </h2>
-        <div>
-            <label for="eventos">Ver módulo:</label>
-            <input type="checkbox" name="eventos" id="eventos" [(ngModel)]="modulos.Eventos">
-        </div>
-        <div>
-            <label for="eventos">Crear evento:</label>
-            <input type="checkbox" name="eventos" id="eventos" [(ngModel)]="modulos.Eventos_new">
-        </div>
-        <div>
-            <label for="eventos">Actualizar evento:</label>
-            <input type="checkbox" name="eventos" id="eventos" [(ngModel)]="modulos.Eventos_edit">
-        </div>
-        <div>
-            <label for="eventos">Elimnar evento:</label>
-            <input type="checkbox" name="eventos" id="eventos" [(ngModel)]="modulos.Eventos_delete">
-        </div>
-        <h2>Módulo filiales: </h2>
-        <div>
-            <label for="filiales">Ver módulo:</label>
-            <input type="checkbox" name="filiales" id="filiales" [(ngModel)]="modulos.Filiales">
-        </div>
-        <h2>Módulo autoridades: </h2>
-        <div>
-            <label for="autoridades">Ver módulo:</label>
-            <input type="checkbox" name="autoridades" id="autoridades" [(ngModel)]="modulos.Autoridades">
-        </div>
-        <h2>Módulo recursos: </h2>
-        <div>
-            <label for="recursos">Ver módulo:</label>
-            <input type="checkbox" name="recursos" id="recursos" [(ngModel)]="modulos.Recursos">
-        </div>
-        <h2>Módulo elecciones: </h2>
-        <div>
-            <label for="elecciones">Ver módulo: </label>
-            <input type="checkbox" name="elecciones" id="elecciones" [(ngModel)]="modulos.Elecciones">
-        </div>
-        <div>
-            <label for="elecciones">Crear elección, lista y candidatos:</label>
-            <input type="checkbox" name="elecciones" id="elecciones" [(ngModel)]="modulos.Elecciones_new">
-        </div>
-        <div>
-            <label for="elecciones">Eliminar elección:</label>
-            <input type="checkbox" name="elecciones" id="elecciones" [(ngModel)]="modulos.Elecciones_delete">
-        </div>
-        <div>
-            <label for="elecciones">Editar elección (listas y candidatos):</label>
-            <input type="checkbox" name="elecciones" id="elecciones" [(ngModel)]="modulos.Elecciones_edit">
-        </div>
-        <div>
-            <label for="contratos">Establecer lista ganadora (cambia autoridades del sistema):</label>
-            <input type="checkbox" name="contratos" id="contratos" [(ngModel)]="modulos.Autoridades_new">
-        </div>
-        <h2>Módulo contratos: </h2>
-        <div>
-            <label for="incidentes">Ver módulo: </label>
-            <input type="checkbox" name="incidentes" id="incidentes" [(ngModel)]="modulos.Incidentes">
-        </div>
-        <div>
-            <label for="incidentes">Crear contrato: </label>
-            <input type="checkbox" name="incidentes" id="incidentes" [(ngModel)]="modulos.Incidentes_new">
-        </div>
-        <div>
-            <label for="incidentes">Editar contrato: </label>
-            <input type="checkbox" name="incidentes" id="incidentes" [(ngModel)]="modulos.Incidentes_edit">
-        </div>
-        <div>
-            <label for="incidentes">Eliminar contrato: </label>
-            <input type="checkbox" name="incidentes" id="incidentes" [(ngModel)]="modulos.Incidentes_delete">
-        </div>
-        <h2>Módulo incidentes: </h2>
-        <div>
-            <label for="incidentes">Ver módulo: </label>
-            <input type="checkbox" name="incidentes" id="incidentes" [(ngModel)]="modulos.Incidentes">
-        </div>
-        <div>
-            <label for="incidentes">Crear incidente:</label>
-            <input type="checkbox" name="incidentes" id="incidentes" [(ngModel)]="modulos.Incidentes_new">
-        </div>
-        <div>
-            <label for="incidentes">Eliminar incidente:</label>
-            <input type="checkbox" name="incidentes" id="incidentes" [(ngModel)]="modulos.Incidentes_delete">
-        </div>
-        <div>
-            <button type="submit">Cambiar permisos</button>
+        <div fxLayout="row">
+            <div class="permisos" fxLayout="column">
+                <div>
+                    <label for="estudiante">Módulo estudiantes:</label>
+                    <input type="checkbox" name="estudiante" id="estudiante" [(ngModel)]="modulos.Estudiantes">
+                </div>
+                <div>
+                    <label for="financiero">Módulo financiero:</label>
+                    <input type="checkbox" name="financiero" id="financiero" [(ngModel)]="modulos.Financiero">
+                </div>
+                <div>
+                    <label for="eventos">Módulo eventos:</label>
+                    <input type="checkbox" name="eventos" id="eventos" [(ngModel)]="modulos.Eventos">
+                </div>
+                <div>
+                    <label for="filiales">Módulo filiales:</label>
+                    <input type="checkbox" name="filiales" id="filiales" [(ngModel)]="modulos.Filiales">
+                </div>
+            </div>
+            <div class="permisos" fxLayout="column">
+                <div>
+                    <label for="notificaciones">Módulo notificaciones:</label>
+                    <input type="checkbox" name="notificaciones" id="notificaciones" [(ngModel)]="modulos.Notificaciones">
+                </div>
+                <div>
+                    <label for="autoridades">Módulo autoridades:</label>
+                    <input type="checkbox" name="autoridades" id="autoridades" [(ngModel)]="modulos.Autoridades">
+                </div>
+                <div>
+                    <label for="recursos">Módulo recursos:</label>
+                    <input type="checkbox" name="recursos" id="recursos" [(ngModel)]="modulos.Recursos">
+                </div>
+            </div>
+            <div class="permisos" fxLayout="column">
+                <div>
+                    <label for="elecciones">Módulo elecciones:</label>
+                    <input type="checkbox" name="elecciones" id="elecciones" [(ngModel)]="modulos.Elecciones">
+                </div>
+                <div>
+                    <label for="contratos">Módulo contratos:</label>
+                    <input type="checkbox" name="contratos" id="contratos" [(ngModel)]="modulos.Contratos">
+                </div>
+                <div>
+                    <label for="incidentes">Módulo incidentes:</label>
+                    <input type="checkbox" name="incidentes" id="incidentes" [(ngModel)]="modulos.Incidentes">
+                </div>
+            </div>
         </div>
         <div>
             <button mat-button type="submit">Cambiar permisos</button>

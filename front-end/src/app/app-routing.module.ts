@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MainScreenComponent } from './components/layouts/main-screen/main-screen.component';
-import { PageNotFoundComponent } from './components/layouts/page-not-found/page-not-found.component';
+import { MainScreenComponent } from './components/templates/main-screen/main-screen.component';
+import { PageNotFoundComponent } from './components/templates/page-not-found/page-not-found.component';
 import { EstudiantesMainComponent } from './components/estudiantes/estudiantes-main/estudiantes-main.component';
 import { EstudiantesActualizacionComponent } from './components/estudiantes/estudiantes-actualizacion/estudiantes-actualizacion.component';
 import { EstudiantesAfiliacionComponent } from './components/estudiantes/estudiantes-afiliacion/estudiantes-afiliacion.component';
@@ -27,6 +27,9 @@ import { IncidentesMainComponent } from './components/incidentes/incidentes-main
 import { IncidentesCrearComponent } from './components/incidentes/incidentes-crear/incidentes-crear.component';
 import { EditarAutoridadesComponent } from './components/ajustes/editar-autoridades/editar-autoridades.component';
 import { EditarAutoridadFormComponent } from './components/ajustes/editar-autoridad-form/editar-autoridad-form.component';
+import { NotificacionesMainComponent } from './components/notificaciones/notificaciones-main/notificaciones-main.component';
+import { NotificacionesCrearComponent } from './components/notificaciones/notificaciones-crear/notificaciones-crear.component';
+import { NotificacionesEditComponent } from './components/notificaciones/notificaciones-edit/notificaciones-edit.component';
 import { EstudiantesGuard } from './services/guards/estudiantes.guard';
 import { AutoridadesGuard } from './services/guards/autoridades.guard';
 import { EventosGuard } from './services/guards/eventos.guard';
@@ -34,8 +37,24 @@ import { FinancieroGuard } from './services/guards/financiero.guard';
 import { EleccionesGuard } from './services/guards/elecciones.guard';
 import { ContratosGuard } from './services/guards/contratos.guard';
 import { IncidentesGuard } from './services/guards/incidentes.guard';
+import { NotificacionesGuard } from './services/guards/notificaciones.guard';
 import { AjustesGuard } from './services/guards/ajustes.guard';
 import { CrearPermisoComponent } from './components/ajustes/crear-permiso/crear-permiso.component';
+import { RecursosMainComponent } from './components/recursos/recursos-main/recursos-main.component';
+import { RecursoNuevoComponent } from './components/recursos/recurso-nuevo/recurso-nuevo.component';
+import { RecursosActualizacionComponent } from './components/recursos/recursos-actualizacion/recursos-actualizacion.component';
+import { RecursosGuard } from './services/guards/recursos.guard';
+import { FilialComponent } from './components/filiales/filial/filial.component';
+import { FilialesMainComponent } from './components/filiales/filiales-main/filiales-main.component';
+import { FilialesEditarComponent } from './components/filiales/filiales-editar/filiales-editar.component';
+import { FilialesCrearComponent } from './components/filiales/filiales-crear/filiales-crear.component';
+import { FilialesGuard } from './services/guards/filiales.guard';
+import { ProductosMainComponent } from './components/productos/productos-main/productos-main.component';
+import { ProductosCrearComponent } from './components/productos/productos-crear/productos-crear.component';
+import { ProductosEditarComponent } from './components/productos/productos-editar/productos-editar.component';
+import { ProveedoresMainComponent } from './components/proveedores/proveedores-main/proveedores-main.component';
+import { ProveedoresCrearComponent } from './components/proveedores/proveedores-crear/proveedores-crear.component';
+import { ProveedoresEditarComponent } from './components/proveedores/proveedores-editar/proveedores-editar.component';
 
 const routes: Routes = [
   { path: '', component: MainScreenComponent },
@@ -58,6 +77,23 @@ const routes: Routes = [
   { path: 'contratos', component: ContratosMainComponent, canActivate: [ContratosGuard] },
   { path: 'contratos/nuevo', component: ContratosNuevoComponent, canActivate: [ContratosGuard] },
   { path: 'contratos/:contrato', component: ContratosDetalleComponent, canActivate: [ContratosGuard] },
+  // { path: 'notificaciones', component: NotificacionesMainComponent, canActivate: [NotificacionesGuard] },
+  // { path: 'notificaciones/nuevo', component: NotificacionesCrearComponent, canActivate: [NotificacionesGuard] },
+  // { path: 'notificaciones/editar/:nombre', component: NotificacionesEditComponent, canActivate: [NotificacionesGuard] },
+  { path: 'recursos',component: RecursosMainComponent }, 
+  { path: 'recursos/nuevo', component: RecursoNuevoComponent, canActivate: [RecursosGuard] },
+  { path: 'recursos/actualizar/:id', component: RecursosActualizacionComponent, canActivate: [RecursosGuard] },
+  { path: 'filiales', component: FilialesMainComponent, canActivate: [FilialesGuard] },
+  { path: 'filiales/filial/:id', component: FilialComponent, canActivate: [FilialesGuard] },
+  { path: 'filiales/nuevo', component: FilialesCrearComponent, canActivate: [FilialesGuard] },
+  { path: 'filiales/actualizar/:id', component: FilialesEditarComponent, canActivate: [FilialesGuard] },
+  { path: 'filiales/filial/:id/proveedores', component: ProveedoresMainComponent, canActivate: [FilialesGuard] },
+  { path: 'filiales/filial/:id/proveedores/nuevo', component: ProveedoresCrearComponent, canActivate: [FilialesGuard] },
+  { path: 'filiales/filial/:id/proveedores/actualizar/:idproveedor', component: ProveedoresEditarComponent, canActivate: [FilialesGuard] },
+  { path: 'filiales/filial/:id/productos', component: ProductosMainComponent, canActivate: [FilialesGuard] },
+  { path: 'filiales/filial/:id/productos/nuevo', component: ProductosCrearComponent, canActivate: [FilialesGuard] },
+  { path: 'filiales/filial/:id/productos/actualizar/:idproducto', component: ProductosEditarComponent, canActivate: [FilialesGuard] },
+  
   { path: 'ajustes', component: AjustesMainComponent, children: [
     { path: 'nuevo-semestre', component: AjustesNuevoSemestreComponent },
     { path: 'consultar-asociacion', component: AjustesConsultarAsociacionComponent },

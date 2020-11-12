@@ -78,6 +78,19 @@
                 </div>
             </div>
         </div>
+        <div fxLayout="column">
+            <label for="prioridad">Prioridad:</label>
+            <select 
+                name="prioridad" 
+                id="prioridad"
+                [(ngModel)]="contrato.prioridad"
+            >
+                <option value="Alta">Alta</option>
+                <option value="Media">Media</option>
+                <option value="Baja">Baja</option>
+                <option value="Finalizado">Finalizado</option>
+            </select>
+        </div>
         
         <div class="butt-box">
             <button mat-button type="submit" [disabled]="!form.form.valid">

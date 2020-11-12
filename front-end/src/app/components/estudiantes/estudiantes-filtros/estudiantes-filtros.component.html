@@ -17,7 +17,7 @@
             </button>
         </form>
     </div>
-    <h3 class="title">Buscar por cedula: </h3>
+    <h3 class="title">Buscar por No. Único: </h3>
     <div class="search-space">
         <form (ngSubmit)="buscarPorCedula(inputCedula.value)" fxLayout="row">
             <input 
@@ -33,6 +33,7 @@
             </button>
         </form>
     </div>
+    <button mat-button (click)="clnSrch(nombreInput, inputCedula)">Limpiar búsqueda</button>
     <hr>
     <div fxHide.lt-md>
         <h2 class="title">Filtros:</h2>

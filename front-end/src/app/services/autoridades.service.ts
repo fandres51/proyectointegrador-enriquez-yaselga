@@ -54,43 +54,17 @@ export class AutoridadesService {
     if(this.estudianteService.existeEstudiante(autoridad.NoUnico)) {
       this.afs.collection(`Asociacion/AEIS/Consejo/${this.asociacionActual}/Autoridad`).doc(autoridad.Cargo).set(autoridad);
       this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Estudiantes'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Estudiantes_new'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Estudiantes_edit'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Estudiantes_delete'})
       this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Financiero'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Financiero_new'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Financiero_edit'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Financiero_delete'})
       this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Eventos'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Eventos_new'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Eventos_edit'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Eventos_delete'})
       this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Filiales'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Filiales_new'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Filiales_edit'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Filiales_delete'})
+      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Notificaciones'})
       this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Autoridades'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Autoridades_new'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Autoridades_edit'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Autoridades_delete'})
       this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Recursos'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Recursos_new'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Recursos_edit'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Recursos_delete'})
       this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Elecciones'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Elecciones_new'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Elecciones_edit'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Elecciones_delete'})
       this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Contratos'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Contratos_new'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Contratos_edit'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Contratos_delete'})
       this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Incidentes'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Incidentes_new'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Incidentes_edit'})
-      this.authService.createPermiso({email: autoridad.CorreoInstitucional, modulo: 'Incidentes_delete'})
     } else {
-      console.log('Estudainte no existe: ', autoridad.NoUnico);
+      //console.log('Estudainte no existe: ', autoridad.NoUnico);
     }
   }
 

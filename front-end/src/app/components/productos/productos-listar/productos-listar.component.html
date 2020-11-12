@@ -1,0 +1,24 @@
+<div class="students-area">
+    <div *ngFor="let producto of productosPaginados; let i = index" class="card">
+        <mat-card fxLayout="row" fxLayoutAlign=" center">
+
+            <div fxLayout="column" fxLayoutAlign="center start" fxFlex="30">
+                <div class="nombre">{{producto.nombre}} </div>
+                <div>{{producto.id}}</div>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center start" fxFlex="30">
+                <div class="nombre">Precio: {{producto.precio}} </div>
+                <div>{{producto.descripcion}}</div>
+            </div>
+
+            <div fxLayoutAlign="end " fxFlex="auto">
+                <button fxLayoutAlign="center " class="button-add-icon" mat-button (click)="openDialog(i,idFilial)">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_forward</mat-icon>
+                </button>
+            </div>
+        </mat-card>
+    </div>
+
+    <mat-paginator (page)="onPageChange($event)" [length]="productos.length" [pageSize]="9" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+
+</div>

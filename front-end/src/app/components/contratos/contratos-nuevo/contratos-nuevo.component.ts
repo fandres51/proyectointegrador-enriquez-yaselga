@@ -23,7 +23,8 @@ export class ContratosNuevoComponent implements OnInit {
       descripcion: '',
       fechaFinal: new Date(),
       fechaInicial: new Date(),
-      interesados: ''
+      interesados: '',
+      prioridad: 'Baja'
     }
   }
 
@@ -32,6 +33,7 @@ export class ContratosNuevoComponent implements OnInit {
     this.contrato.fechaFinal = new Date(this.fechaFinal);
 
     this.contratoService.addContrato(this.contrato);
+    
   }
 
 }

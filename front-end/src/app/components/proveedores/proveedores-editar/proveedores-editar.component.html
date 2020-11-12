@@ -1,0 +1,64 @@
+<div>
+    <app-titles text="Actualizar Proveedor" regresarA="/filiales/filial/{{idFilial}}/proveedor"></app-titles>
+</div>
+<div class="form">
+    <form #form="ngForm" (ngSubmit)="guardar()">
+        <div fxLayout="column">
+            <label for="nombre">Nombre:</label>
+            <input 
+                type="text" 
+                nombre="nombre" 
+                name="nombre" 
+                maxlength="50" 
+                required
+                value={{proveedor.nombre}}
+                [(ngModel)]="proveedor.nombre"
+                #nomb="ngModel"
+            >
+            <div class="err" *ngIf="nomb.touched && nomb.errors">
+                Error, campo requerido
+            </div>
+        </div>
+        <div fxLayout="column">
+            <label for="descripcion">Descripción:</label>
+            <input 
+                type="text" 
+                id="descripcion" 
+                name="descripcion" 
+                value={{proveedor.descripcion}}
+                [(ngModel)]="proveedor.descripcion"
+                #desc="ngModel"
+            >
+            <div class="err" *ngIf="desc.touched && desc.errors">
+                Error, campo requerido
+            </div>
+        </div>
+        
+        <div fxLayout="column">
+            <label for="contacto">Contacto:</label>
+            <input 
+                type="text" 
+                id="contacto" 
+                name="contacto" 
+                [(ngModel)]="proveedor.contacto"
+                value={{proveedor.contacto}}
+                required
+                #inter="ngModel"
+            >
+        </div>
+        <div fxLayout="column">
+            <label class="label" for="responsables">Estado: </label>
+            <select name="responsables" id="responsables" #responsable [(ngModel)]="proveedor.estado" required value={{proveedor.estado}}>
+                <option value="true">Activo</option>
+                <option value="false">Inactivo</option>
+            </select>
+        </div>
+        
+        <div class="butt-box">
+            <button mat-button type="submit" [disabled]="!form.form.valid">
+                Guardar
+                <mat-icon aria-hidden="false" aria-label="Edit">new</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>

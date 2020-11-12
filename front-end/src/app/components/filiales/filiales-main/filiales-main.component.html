@@ -1,0 +1,27 @@
+<div>
+    <app-titles regresarA="/" text="Filiales"></app-titles>
+    <div class="lista">
+        <div class="crud" fxLayout="column">
+            <div class="top-bar" fxLayout="row" fxLayoutAlign="space-between center">
+                <div class="new-button">
+                    <button mat-flat-button fxLayout="row" fxLayoutAlign="space-between center" (click)="nuevo()">
+                        Nuevo
+                        <mat-icon aria-hidden="false" aria-label="New">add</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="list-of-elements">
+                <div>
+                    <div *ngFor="let listItem of filiales">
+                        <button mat-button class="button" (click)="irADetalle(listItem)">
+                            <div fxLayout="row" fxLayoutAlign="space-between center">
+                                <div>{{ listItem.nombre }}</div>
+                                <mat-icon aria-hidden="false" aria-label="Example home icon">keyboard_arrow_right</mat-icon>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

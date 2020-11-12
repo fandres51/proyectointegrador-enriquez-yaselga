@@ -1,4 +1,27 @@
+@import '../../../../assets/css/colors.scss';
+
 .lista {
     width: 75%;
     margin: 50px auto;
+}
+
+.card {
+    margin: 20px 0;
+}
+
+.green {
+    color: $GreenColor;
+}
+
+.red {
+    color: $RedColor;
+}
+
+.yellow {
+    color: rgb(214, 182, 0);
+}
+
+.btn-nuevo {
+    background-color: $MainDarkColor;
+    color: white;
 }

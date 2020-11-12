@@ -32,6 +32,7 @@ export class EventosMainComponent implements OnInit {
     this.eventosService.getEventos().subscribe(
       eventos => {
         this.eventos = eventos;
+        
         this.generarCalendario(eventos);
       },
       error => {
@@ -118,6 +119,7 @@ export class EventosMainComponent implements OnInit {
   public openEventWindow(event) {
     this.router.navigate(['/eventos', 'actualizar', event.event.id]);
   }
+
 
   irANuevoEvento() {
     this.router.navigateByUrl('/eventos/nuevo');

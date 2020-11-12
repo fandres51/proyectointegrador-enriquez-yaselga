@@ -2,7 +2,7 @@
     <div *ngFor="let estudiante of estudiantesPaginados; let i = index" class="card">
         <mat-card fxLayout="row" fxLayoutAlign=" center">
 
-            <div fxLayout="column" fxLayoutAlign="center start" fxFlex="30">
+            <div fxLayout="column" fxLayoutAlign="center start" fxFlex="30" fxFlex.lt-lg="80">
                 <div class="nombre">{{estudiante.Apellido}} {{estudiante.Nombre}} </div>
                 <div>{{estudiante.NoUnico}}</div>
             </div>

@@ -1,0 +1,17 @@
+.box {
+    margin: 10px;
+    display: inline-block;
+}
+
+.main {
+    text-align: center;
+    height: 90vh;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 1700px) {
+    .main {
+        max-width: 70%;
+    }
+}

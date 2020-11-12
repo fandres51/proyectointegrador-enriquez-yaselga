@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Autoridad } from 'src/app/models/autoridad';
-import { AuthService } from 'src/app/services/auth.service';
 import { EleccionService } from 'src/app/services/eleccion.service';
 
 @Component({
@@ -20,9 +19,7 @@ export class AutoridadEditComponent implements OnInit {
   constructor(
     public eleccionService: EleccionService,
     public route: ActivatedRoute,
-    public router: Router,
-    public authService: AuthService,
-
+    public router: Router
   ) { }
 
   ngOnInit(): void {
@@ -57,40 +54,15 @@ export class AutoridadEditComponent implements OnInit {
   }
 
   editar() {
-    this.authService.auth.user.subscribe(
-      user => {
-        this.authService.getPermiso(user.email, 'Elecciones_edit').subscribe(
-          permiso => {
-            if (permiso.length > 0) {
-              const estaSeguro = confirm('¿Está seguro que desea editar los datos de esta dignidad?');
-              if (estaSeguro)
-                this.eleccionService.updateDignidad(this.autoridad, this.lista, this.eleccion);
-            }
-            else
-              alert('Usted no tiene permiso para realizar esa acción');
-          }
-        )
-      }
-    )
-
+    const estaSeguro = confirm('¿Está seguro que desea editar los datos de esta dignidad?');
+    if(estaSeguro)
+      this.eleccionService.updateDignidad(this.autoridad, this.lista, this.eleccion);
   }
 
   eliminar() {
-    this.authService.auth.user.subscribe(
-      user => {
-        this.authService.getPermiso(user.email, 'Elecciones_edit').subscribe(
-          permiso => {
-            if (permiso.length > 0) {
-              const estaSeguro = confirm('¿Está seguro que desea elliminar esta dignidad?');
-              if (estaSeguro)
-                this.eleccionService.deleteDignidad(this.autoridad, this.lista, this.eleccion);
-            }
-            else
-              alert('Usted no tiene permiso para realizar esa acción');
-          }
-        )
-      }
-    )
+    const estaSeguro = confirm('¿Está seguro que desea elliminar esta dignidad?');
+    if(estaSeguro)
+      this.eleccionService.deleteDignidad(this.autoridad, this.lista, this.eleccion);
   }
 
 }

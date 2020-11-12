@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Contrato } from 'src/app/models/contrato';
-import { AuthService } from 'src/app/services/auth.service';
 import { ContratoService } from 'src/app/services/contrato.service';
 
 @Component({
@@ -16,14 +15,13 @@ export class ContratosMainComponent implements OnInit {
 
   constructor(
     private readonly contratoService: ContratoService,
-    private readonly authService: AuthService,
     private readonly router: Router
   ) { }
 
   ngOnInit(): void {
     this.contratoService.getContratos().subscribe(
       contratos => {
-        this.contratos = contratos;
+        this.contratos = contratos.sort(this.compareFunction);
         this.contratosNombres = contratos.map(n=>n.id);
       },
       error => {
@@ -37,19 +35,41 @@ export class ContratosMainComponent implements OnInit {
   }
   
   nuevo() {
-    this.authService.auth.user.subscribe(
-      user => {
-        this.authService.getPermiso(user.email, 'Contratos_new').subscribe(
-          permiso => {
-            if (permiso.length > 0) {
-              this.router.navigate(['/contratos', 'nuevo']);
-            }
-            else
-              alert('Usted no tiene permiso para realizar esa acción');
-          }
-        )
-      }
-    )
+    this.router.navigate(['/contratos', 'nuevo']);
   }
+
+  finalizarContrato(id) {
+    const estaSeguro = confirm('¿Está seguro de querer marcar este contrato como finalizado?');
+    if(estaSeguro) {
+      this.contratoService.updateContrato({
+        id: id,
+        fechaFinal: new Date(),
+        prioridad: 'Finalizado'
+      })
+    }
+  }
+
+  compareFunction(a, b) {
+    if(a.prioridad === 'Alta' && b.prioridad !== 'Alta')
+      return -1;
+    if(a.prioridad !== 'Alta' && b.prioridad === 'Alta')
+      return 1;
+    if(a.prioridad === 'Alta' && b.prioridad === 'Alta')
+      return 0;
+    if(a.prioridad === 'Media' && b.prioridad !== 'Media')
+      return -1;
+    if(a.prioridad !== 'Media' && b.prioridad === 'Media')
+      return 1;
+    if(a.prioridad === 'Media' && b.prioridad === 'Media')
+      return 0;
+    if(a.prioridad === 'Baja' && b.prioridad !== 'Baja')
+      return -1;
+    if(a.prioridad !== 'Baja' && b.prioridad === 'Baja')
+      return 1;
+    if(a.prioridad === 'Baja' && b.prioridad === 'Baja')
+      return 0;   
+  }
+
+
 
 }

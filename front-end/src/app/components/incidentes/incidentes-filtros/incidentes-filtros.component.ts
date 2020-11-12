@@ -27,6 +27,7 @@ export class IncidentesFiltrosComponent implements OnInit {
     )
   }
 
+
   buscarPorNoUnico(busqueda: string) {
     let incidentesAMostrar = this.incidentes.filter( n => {
       return n.estudiante.includes(busqueda);

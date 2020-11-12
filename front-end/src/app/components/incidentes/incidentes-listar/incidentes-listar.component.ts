@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Incidente } from 'src/app/models/incidente';
-import { AuthService } from 'src/app/services/auth.service';
 import { IncidenteService } from 'src/app/services/incidente.service';
 
 @Component({
@@ -21,8 +20,7 @@ export class IncidentesListarComponent implements OnInit {
   public incidentesPaginados: Incidente[];
 
   constructor(
-    private readonly incidenteService: IncidenteService,
-    public authService: AuthService
+    private readonly incidenteService: IncidenteService
   ) { }
 
   ngOnInit(): void {
@@ -33,26 +31,34 @@ export class IncidentesListarComponent implements OnInit {
     this.pageSize = $event.pageSize;
     this.changePagination();
   }
-
+  
   changePagination() {
-    this.incidentesPaginados = this.incidentes.slice(this.pageIndex * this.pageSize, this.pageIndex * this.pageSize + this.pageSize);
+    this.incidentesPaginados = this.incidentes.slice(this.pageIndex*this.pageSize, this.pageIndex*this.pageSize + this.pageSize);
   }
 
   eliminar(id: Incidente) {
-    this.authService.auth.user.subscribe(
-      user => {
-        this.authService.getPermiso(user.email, 'Incidentes_delete').subscribe(
-          permiso => {
-            if (permiso.length > 0) {
-              const estaSeguro = confirm('¿Está seguro que desea eliminar el elemento sleccionado?');
-              if (estaSeguro)
-                this.incidenteService.deleteIncidente(id);
-            }
-            else
-              alert('Usted no tiene permiso para realizar esa acción');
-          }
-        )
-      }
-    )
+    const estaSeguro = confirm('¿Está seguro que desea eliminar el elemento sleccionado?');
+    if(estaSeguro)
+      this.incidenteService.deleteIncidente(id);
   }
+
+  resolver(id) {
+    const estaSeguro = confirm('¿Está seguro que desea marcar este incidente como resuelto?');
+    if(estaSeguro)
+      this.incidenteService.updateIncidente({
+        id: id,
+        resuelto: true
+    });
+  }
+
+  noResuelto(id) {
+    const estaSeguro = confirm('¿Está seguro que desea marcar este incidente como no resuelto?');
+    if(estaSeguro)
+      this.incidenteService.updateIncidente({
+        id: id,
+        resuelto: false
+    });
+  }
+
+
 }
