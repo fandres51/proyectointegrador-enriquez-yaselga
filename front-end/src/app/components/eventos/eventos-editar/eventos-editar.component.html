@@ -111,37 +111,42 @@
             <label class="label" for="responsables">Responsable 1: </label>
             <select 
                 name="responsables" 
-                
                 id="responsables" 
                 [(ngModel)]="responsables.resp1"
                 [disabled]="!editable"
+                #resp1
             >
+                <option value=""> </option>
                 <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
             </select>
         </div>
-        <div fxLayout="column">
-            <label class="label" for="responsables">Responsable 2: </label>
-            <select 
-                name="responsables" 
-                
-                id="responsables" 
-                [(ngModel)]="responsables.resp2"
-                [disabled]="!editable"
-            >
-                <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
-            </select>
-        </div>
-        <div fxLayout="column">
-            <label class="label" for="responsables">Responsable 3: </label>
-            <select 
-                
-                name="responsables" 
-                id="responsables" 
-                [(ngModel)]="responsables.resp3"
-                [disabled]="!editable"
-            >
-                <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
-            </select>
+        <div *ngIf="resp1.value !== ''">
+            <div fxLayout="column">
+                <label class="label" for="responsables">Responsable 2: </label>
+                <select 
+                    name="responsables" 
+                    id="responsables" 
+                    [(ngModel)]="responsables.resp2"
+                    [disabled]="!editable"
+                    #resp2
+                >
+                    <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
+                    <option value=""> </option>
+                </select>
+            </div>
+            <div fxLayout="column" *ngIf="resp2.value !== ''">
+                <label class="label" for="responsables">Responsable 3: </label>
+                <select 
+                    
+                    name="responsables" 
+                    id="responsables" 
+                    [(ngModel)]="responsables.resp3"
+                    [disabled]="!editable"
+                >
+                    <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
+                    <option value=""> </option>
+                </select>
+            </div>
         </div>
 
         <h2 class="tit1 margin-top">Horarios: </h2>

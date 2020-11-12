@@ -26,7 +26,8 @@ export class ContratosDetalleComponent implements OnInit {
       descripcion: '',
       fechaFinal: new Date(),
       fechaInicial: new Date(),
-      interesados: ''
+      interesados: '',
+      prioridad: 'Baja'
     }
     this.route.paramMap.subscribe(
       contrato => {
@@ -55,8 +56,10 @@ export class ContratosDetalleComponent implements OnInit {
     this.contrato.fechaInicial = new Date(this.fechaInicial);
     this.contrato.fechaFinal = new Date(this.fechaFinal);
     const estaSeguro = confirm('¿Está seguro que desea editar la información de este contrato?');
-    if(estaSeguro) 
+    if(estaSeguro) {
       this.contratoService.addContrato(this.contrato);
+      this.editable = false;
+    }
   }
   
   eliminar() {

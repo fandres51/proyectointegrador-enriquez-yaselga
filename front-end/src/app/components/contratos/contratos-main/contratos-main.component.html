@@ -1,6 +1,38 @@
 <div>
     <app-titles regresarA="/" text="Contratos"></app-titles>
     <div class="lista">
-        <app-basic-crud [listOfElements]="contratosNombres" (selectedItem)="irADetalle($event)" (newItem)="nuevo()"></app-basic-crud>
+        <!-- <app-basic-crud [listOfElements]="contratosNombres" (selectedItem)="irADetalle($event)" (newItem)="nuevo()"></app-basic-crud> -->
+        <button mat-button (click)="nuevo()" class="btn-nuevo">
+            Nuevo
+            <mat-icon aria-hidden="false" aria-label="">add</mat-icon>
+        </button>
+        <div *ngFor="let contrato of contratos">
+            <mat-card class="card" fxLayout="row" fxLayoutAlign="space-between center">
+                <div fxFlex="40" fxFlex.lt-md="75">
+                    {{contrato.id}}
+                </div>
+                <div *ngIf="contrato.prioridad === 'Alta'" fxFlex="20" fxHide.lt-md class="red">
+                    Prioridad: {{contrato.prioridad}}
+                </div>
+                <div *ngIf="contrato.prioridad === 'Media'" fxFlex="20" fxHide.lt-md class="yellow">
+                    Prioridad: {{contrato.prioridad}}
+                </div>
+                <div *ngIf="contrato.prioridad === 'Baja'" fxFlex="20" fxHide.lt-md class="green">
+                    Prioridad: {{contrato.prioridad}}
+                </div>
+                <div *ngIf="contrato.prioridad === 'Finalizado'" fxFlex="20" fxHide.lt-md>
+                    Contrato finalizado
+                </div>
+
+                <div>
+                    <button mat-button (click)="finalizarContrato(contrato.id)">
+                        <mat-icon aria-hidden="false" aria-label="">check</mat-icon>
+                    </button>
+                    <button mat-button (click)="irADetalle(contrato.id)">
+                        <mat-icon aria-hidden="false" aria-label="">keyboard_arrow_right</mat-icon>
+                    </button>
+                </div>
+            </mat-card>
+        </div>
     </div>
 </div>

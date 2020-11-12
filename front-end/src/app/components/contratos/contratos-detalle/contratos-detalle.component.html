@@ -1,8 +1,13 @@
 <div>
     <app-titles [text]="contrato.id" regresarA="/contratos"></app-titles>
 </div>
-
 <div class="form">
+    <div class="btn-edit-box">
+        <button class="btn-edit" mat-button type="button" (click)="cambiarEditable()">
+            Editar
+            <mat-icon aria-hidden="false" aria-label="Edit">edit</mat-icon>
+        </button>
+    </div>
     <form #form="ngForm" (ngSubmit)="editar()">
         <div fxLayout="column">
             <label for="id">Nombre:</label>
@@ -84,11 +89,25 @@
                 </div>
             </div>
         </div>
+        <div fxLayout="column">
+            <label for="prioridad">Prioridad:</label>
+            <select 
+                name="prioridad" 
+                id="prioridad"
+                [(ngModel)]="contrato.prioridad"
+                [disabled]=!editable
+            >
+                <option value="Alta">Alta</option>
+                <option value="Media">Media</option>
+                <option value="Baja">Baja</option>
+                <option value="Finalizado">Finalizado</option>
+            </select>
+        </div>
         
         <div fxLayout="row" fxLayoutAlign="end ">
             <div class="butt-box" *ngIf="editable">
                 <button mat-button type="submit" [disabled]="!form.form.valid">
-                    Editar
+                    Confirmar edición
                     <mat-icon aria-hidden="false" aria-label="Edit">new</mat-icon>
                 </button>
             </div>
@@ -97,10 +116,4 @@
             </div>
         </div>
     </form>
-    <div class="btn-edit-box">
-        <button class="btn-edit" mat-button type="button" (click)="cambiarEditable()">
-            Editar
-            <mat-icon aria-hidden="false" aria-label="Edit">edit</mat-icon>
-        </button>
-    </div>
 </div>

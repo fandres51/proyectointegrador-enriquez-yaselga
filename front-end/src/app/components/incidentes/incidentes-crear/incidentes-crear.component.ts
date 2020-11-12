@@ -22,6 +22,7 @@ export class IncidentesCrearComponent implements OnInit {
 
   ngOnInit(): void {
     this.incidente = {
+      resuelto: false,
       descripcion: '',
       estudiante: '',
       evento: '',

@@ -54,8 +54,8 @@ export class IncidenteService {
         this.getIncidenteCollection().add(incidente);
     }
 
-    public updateIncidente(incidente: Incidente) {
-        return this.getIncidenteCollection().doc(incidente.id).set(incidente);
+    public updateIncidente(incidente) {
+        return this.getIncidenteCollection().doc(incidente.id).update(incidente);
     }
 
     public deleteIncidente(incidente: Incidente) {

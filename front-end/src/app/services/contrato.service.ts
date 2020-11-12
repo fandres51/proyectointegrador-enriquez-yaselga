@@ -54,8 +54,8 @@ import { Contrato } from '../models/contrato';
         this.getContratoCollection().doc(contrato.id).set(contrato);
     }
 
-    public updateContrato(contrato: Contrato) {
-        return this.getContratoCollection().doc(contrato.id).set(contrato);
+    public updateContrato(contrato) {
+        return this.getContratoCollection().doc(contrato.id).update(contrato);
     }
 
     public deleteContrato(contrato: Contrato) {

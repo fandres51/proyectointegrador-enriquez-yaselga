@@ -20,7 +20,6 @@ export class AuthService {
 
   login() {
     this.auth.signInWithPopup(new auth.OAuthProvider('microsoft.com'));
-    
   }
 
   getPermiso(email: string, modulo: string): Observable<Permiso[]> {
