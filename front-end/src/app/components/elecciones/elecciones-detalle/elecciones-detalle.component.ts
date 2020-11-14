@@ -57,29 +57,14 @@ export class EleccionesDetalleComponent implements OnInit {
   }
 
   nuevaLista() {
-    const nombreLista = prompt("Ingrese el nombre de la nueva lista");
-    if(nombreLista !== null || nombreLista !== "") {
-        const lista: Lista = { nombre: nombreLista }
-        this.eleccionService.createLista(lista, this.fechaEleccion)
-    }
-  }
-
-  definirListaGanadora(lista: string) {
-    const estaSeguro = confirm('¿Está seguro que desea definir esta lista como ganadora? \nEsta acción generará un nuevo consejo de autoridades y eliminará todas las actividades del consejo anterior');
-    if(estaSeguro) {
-      const estaSeguro2 = confirm('¿Está seguro de proceder? \nEsta acción no se puede deshacer');
-      if(estaSeguro && estaSeguro2) {
-        this.asociacionService.updateAsociacion({AsociacionActual: 'AEIS'+(new Date()).getFullYear()});
-        this.eleccionService.definirListaGanadora(lista, this.fechaEleccion);
-        this.eleccionService.getDignidadesDeLista(lista, this.fechaEleccion).subscribe(
-          dignidades => {
-            this.autoridadService.cambiarAsociacion(dignidades);
-          },
-          error => {
-            console.error(error);
-          }
-        )
+    if(!this.eleccion.listaGanadora) {
+      const nombreLista = prompt("Ingrese el nombre de la nueva lista");
+      if(nombreLista !== null || nombreLista !== "") {
+          const lista: Lista = { nombre: nombreLista }
+          this.eleccionService.createLista(lista, this.fechaEleccion)
       }
+    } else {
+      alert('No puede crear nuevas listas para una elección ya finalizada');
     }
   }
 

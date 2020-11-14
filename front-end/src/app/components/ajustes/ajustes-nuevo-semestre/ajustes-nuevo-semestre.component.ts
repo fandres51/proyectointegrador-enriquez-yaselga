@@ -20,8 +20,12 @@ export class AjustesNuevoSemestreComponent implements OnInit {
   }
 
   reiniciarAportes() {
-    this.asociacionService.updateAsociacion({PeriodoActual: this.periodoActual})
-    this.estudianteService.crearAportesNuevoSemestre();
+    const estaSeguro = confirm(`¿Está seguro de querer iniciar un nuevo semestre con el nombre ${this.periodoActual}? Esta acción reiniciará los aportes de todos los estudiantes aportantes`);
+    if(estaSeguro) {
+      this.asociacionService.updateAsociacion({PeriodoActual: this.periodoActual})
+      this.estudianteService.crearAportesNuevoSemestre();
+      alert('Acción realizada');
+    }
   }
 
 }

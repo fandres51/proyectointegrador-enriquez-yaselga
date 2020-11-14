@@ -55,6 +55,7 @@ import { ProductosEditarComponent } from './components/productos/productos-edita
 import { ProveedoresMainComponent } from './components/proveedores/proveedores-main/proveedores-main.component';
 import { ProveedoresCrearComponent } from './components/proveedores/proveedores-crear/proveedores-crear.component';
 import { ProveedoresEditarComponent } from './components/proveedores/proveedores-editar/proveedores-editar.component';
+import { AjustesTerminarPeriodoComponent } from './components/ajustes/ajustes-terminar-periodo/ajustes-terminar-periodo.component';
 
 const routes: Routes = [
   { path: '', component: MainScreenComponent },
@@ -100,6 +101,7 @@ const routes: Routes = [
     { path: 'definir-aporte', component: AjustesDefinirAporteComponent },
     { path: 'editar-autoridades', component: EditarAutoridadesComponent },
     { path: 'crear-permiso', component: CrearPermisoComponent },
+    { path: 'terminar-periodo', component: AjustesTerminarPeriodoComponent },
     { path: ':cargo', component: EditarAutoridadFormComponent }
   ], canActivate: [AjustesGuard] },
   { path: '**', component: PageNotFoundComponent }
