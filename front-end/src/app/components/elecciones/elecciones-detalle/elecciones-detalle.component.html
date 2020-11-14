@@ -9,14 +9,13 @@
         <app-basic-crud [listOfElements]=listas (selectedItem)="irALista($event)" (newItem)="nuevaLista()">
         </app-basic-crud>
     </div>
-    <div>
-        <h2>Definir lista ganadora:</h2>
-    </div>
-    <div>
-        <app-list [list]=listas (selectedItem)="definirListaGanadora($event)"></app-list>
+    <br>
+    <br>
+    <div *ngIf="eleccion.listaGanadora">
+        Lista ganadora: {{eleccion.listaGanadora}}
     </div>
     <div class="delete">
-        <button mat-button (click)="deleteElection()">
+        <button mat-button (click)="deleteElection()" *ngIf="!eleccion.listaGanadora">
             Eliminar elección
             <mat-icon aria-hidden="false" aria-label="trash">delete</mat-icon>
         </button>

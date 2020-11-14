@@ -101,17 +101,21 @@ export class EditarAutoridadFormComponent implements OnInit {
   }
 
   cambiarPermisos() {
-    let modulosNombres = Object.keys(this.modulos);
-    this.permisos.forEach( n => {
-      this.authService.deletePermiso(n);
-    })
-    modulosNombres.forEach( n => {
-      if(this.modulos[n])
-        this.authService.createPermiso({
-          email: this.autoridad.CorreoInstitucional,
-          modulo: n
-        })
-    })
+    const estaSeguro = confirm('¿Está seguro de querer cambiar los permisos de esta autoridad?');
+    if(estaSeguro) {
+      let modulosNombres = Object.keys(this.modulos);
+      this.permisos.forEach( n => {
+        this.authService.deletePermiso(n);
+      })
+      modulosNombres.forEach( n => {
+        if(this.modulos[n])
+          this.authService.createPermiso({
+            email: this.autoridad.CorreoInstitucional,
+            modulo: n
+          })
+      })
+      alert('Permisos cambiados');
+    }
   }
 
   crearPermiso(modulo: string) {

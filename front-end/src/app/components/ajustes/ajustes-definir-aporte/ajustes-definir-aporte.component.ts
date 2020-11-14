@@ -24,6 +24,10 @@ export class AjustesDefinirAporteComponent implements OnInit {
   }
 
   cambiarAporte() {
-    this.asociacionService.updateAsociacion({AporteActual: this.aporte});
+    const estaSeguro = confirm('¿Está seguro de querer cambiar el aporte actual?');
+    if(estaSeguro) {
+      this.asociacionService.updateAsociacion({AporteActual: this.aporte});
+      alert('Aporte cambiado');
+    }
   }
 }

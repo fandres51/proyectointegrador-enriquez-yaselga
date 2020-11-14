@@ -1,0 +1,18 @@
+<div *ngIf="elecciones">
+    <h1>Terminar período</h1>
+    Seleccione la elección que contenga la última lista ganadora para definir asociación:
+    <br>
+    <br>
+    <div>
+        <app-list [list]="elecciones" (selectedItem)="mostrarListas($event)"></app-list>
+    </div>
+    <br>
+    <br>
+    <div *ngIf="mostrarListasBool">
+        <h2>Definir lista ganadora: </h2>
+        <app-list [list]="listas" (selectedItem)="definirListaGanadora($event)"></app-list>
+    </div>
+</div>
+<div *ngIf="!elecciones">
+    No existen elecciones no terminadas por mostrar
+</div>
