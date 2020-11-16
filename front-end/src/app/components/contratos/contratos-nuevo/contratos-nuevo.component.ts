@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Contrato } from 'src/app/models/contrato';
 import { ContratoService } from 'src/app/services/contrato.service';
 
@@ -15,6 +16,7 @@ export class ContratosNuevoComponent implements OnInit {
 
   constructor(
     private readonly contratoService: ContratoService,
+    private readonly router: Router
   ) { }
 
   ngOnInit(): void {
@@ -29,10 +31,14 @@ export class ContratosNuevoComponent implements OnInit {
   }
 
   nuevo() {
-    this.contrato.fechaInicial = new Date(this.fechaInicial);
-    this.contrato.fechaFinal = new Date(this.fechaFinal);
-
-    this.contratoService.addContrato(this.contrato);
+    let estaSeguro = confirm('¿Está seguro de querer crear un nuevo contrato con estos datos?');
+    if(estaSeguro) {
+      this.contrato.fechaInicial = new Date(this.fechaInicial);
+      this.contrato.fechaFinal = new Date(this.fechaFinal);
+      this.contratoService.addContrato(this.contrato);
+      alert('Contrato creado');
+      this.router.navigate(['/contratos']);
+    } 
     
   }
 
