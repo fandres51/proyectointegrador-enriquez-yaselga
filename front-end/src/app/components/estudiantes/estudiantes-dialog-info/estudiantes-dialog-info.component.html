@@ -51,7 +51,7 @@
 
     <div *ngIf="estudiante.FechaNacimiento" class="dato">
         <div class="titulo">Fecha de Nacimiento </div>
-        <div>{{estudiante.FechaNacimiento}}</div>
+        <div>{{estudiante.FechaNacimiento.getDate() + '/' + estudiante.FechaNacimiento.getMonth() + '/' + estudiante.FechaNacimiento.getFullYear()}}</div>
     </div>
 
 </div>

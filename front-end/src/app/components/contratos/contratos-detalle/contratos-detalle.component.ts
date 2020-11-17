@@ -24,6 +24,7 @@ export class ContratosDetalleComponent implements OnInit {
   ngOnInit(): void {
     this.contrato = {
       id: '',
+      nombre: '',
       descripcion: '',
       fechaFinal: new Date(),
       fechaInicial: new Date(),

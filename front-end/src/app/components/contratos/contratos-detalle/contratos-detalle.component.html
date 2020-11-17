@@ -1,5 +1,5 @@
 <div>
-    <app-titles [text]="contrato.id" regresarA="/contratos"></app-titles>
+    <app-titles [text]="contrato.nombre" regresarA="/contratos"></app-titles>
 </div>
 <div class="form">
     <div class="btn-edit-box">
@@ -17,7 +17,7 @@
                 name="id" 
                 maxlength="50" 
                 required
-                [(ngModel)]="contrato.id"
+                [(ngModel)]="contrato.nombre"
                 #nomb="ngModel"
                 [disabled]=!editable
             >

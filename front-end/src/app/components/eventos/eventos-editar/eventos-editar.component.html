@@ -116,11 +116,11 @@
                 [disabled]="!editable"
                 #resp1
             >
-                <option value=""> </option>
+                <option value=""></option>
                 <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
             </select>
         </div>
-        <div *ngIf="resp1.value !== ''">
+        <!-- <div *ngIf="resp1.value !== ''">
             <div fxLayout="column">
                 <label class="label" for="responsables">Responsable 2: </label>
                 <select 
@@ -147,7 +147,7 @@
                     <option value=""> </option>
                 </select>
             </div>
-        </div>
+        </div> -->
 
         <h2 class="tit1 margin-top">Horarios: </h2>
         <div fxLayout="column">

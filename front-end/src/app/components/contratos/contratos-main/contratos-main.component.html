@@ -9,7 +9,7 @@
         <div *ngFor="let contrato of contratos">
             <mat-card class="card" fxLayout="row" fxLayoutAlign="space-between center">
                 <div fxFlex="40" fxFlex.lt-md="75">
-                    {{contrato.id}}
+                    {{contrato.nombre}}
                 </div>
                 <div *ngIf="contrato.prioridad === 'Alta'" fxFlex="20" fxHide.lt-md class="red">
                     Prioridad: {{contrato.prioridad}}

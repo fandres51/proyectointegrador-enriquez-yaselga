@@ -22,6 +22,7 @@ export class ContratosNuevoComponent implements OnInit {
   ngOnInit(): void {
     this.contrato = {
       id: '',
+      nombre: '',
       descripcion: '',
       fechaFinal: new Date(),
       fechaInicial: new Date(),
@@ -39,7 +40,5 @@ export class ContratosNuevoComponent implements OnInit {
       alert('Contrato creado');
       this.router.navigate(['/contratos']);
     } 
-    
   }
-
 }
