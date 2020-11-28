@@ -41,6 +41,23 @@ export class TransaccionesService {
     )
   }
 
+  getTransaccionesPorFilial(filialID:string): Observable<Transaccion[]> {
+    return this.afs.collection(
+      'Asociacion/AEIS/Transaccion',
+      ref => ref.where('FilialID', '==', filialID)
+    ).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Transaccion;
+        Object.keys(data).filter(
+          key => data[key] instanceof firebase.firestore.Timestamp
+        ).forEach(
+          key => data[key] = data[key].toDate()
+        ) //convierte todos los objetos Timestamp a Date
+        return data;
+      }))
+    )
+  }
+
   getTransaccion(id: string): Observable<Transaccion> {
     return this.getCollection().doc<Transaccion>(id).snapshotChanges().pipe(
       map( a => {
