@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Contrato } from 'src/app/models/contrato';
 import { ContratoService } from 'src/app/services/contrato.service';
 
@@ -17,12 +17,14 @@ export class ContratosDetalleComponent implements OnInit {
 
   constructor(
     private readonly contratoService: ContratoService,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly router: Router
   ) { }
 
   ngOnInit(): void {
     this.contrato = {
       id: '',
+      nombre: '',
       descripcion: '',
       fechaFinal: new Date(),
       fechaInicial: new Date(),
@@ -57,15 +59,17 @@ export class ContratosDetalleComponent implements OnInit {
     this.contrato.fechaFinal = new Date(this.fechaFinal);
     const estaSeguro = confirm('¿Está seguro que desea editar la información de este contrato?');
     if(estaSeguro) {
-      this.contratoService.addContrato(this.contrato);
+      this.contratoService.updateContrato(this.contrato);
       this.editable = false;
     }
   }
   
   eliminar() {
     const estaSeguro = confirm('¿Está seguro que desea eliminar este contrato?');
-    if(estaSeguro)
+    if(estaSeguro) {  	
       this.contratoService.deleteContrato(this.contrato);
+      this.router.navigate(['/contratos']);
+    }
   }
 
 }

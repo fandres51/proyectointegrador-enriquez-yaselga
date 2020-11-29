@@ -69,7 +69,4 @@ export class ContratosMainComponent implements OnInit {
     if(a.prioridad === 'Baja' && b.prioridad === 'Baja')
       return 0;   
   }
-
-
-
 }

@@ -29,6 +29,7 @@ import { Contrato } from '../models/contrato';
                     key => data[key] = data[key].toDate()
                   ) //convierte todos los objetos Timestamp a Date
 
+                data.id = a.payload.doc.id;
                 return data;
             }))
         )
@@ -45,13 +46,14 @@ import { Contrato } from '../models/contrato';
                 key => data[key] = data[key].toDate()
               ) //convierte todos los objetos Timestamp a Date
       
+              data.id = a.payload.id;
               return data;
               })
         )
     }
     
     public addContrato(contrato: Contrato) {
-        this.getContratoCollection().doc(contrato.id).set(contrato);
+        this.getContratoCollection().add(contrato);
     }
 
     public updateContrato(contrato) {
