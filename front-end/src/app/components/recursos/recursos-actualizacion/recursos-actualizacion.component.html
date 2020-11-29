@@ -117,8 +117,8 @@
                     value={{recurso.idfilial}}
                 >
                     
-                    <option value="FIL0"></option>
-                    <option value="FIL0">BAR</option>
+                    <option value="">ninguna</option>
+                    <option *ngFor="let filial of filiales;" value={{filial.id}} >{{filial.nombre}}</option>
                 </select>
             </div>
         </div>

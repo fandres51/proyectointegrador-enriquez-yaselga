@@ -1,8 +1,9 @@
 <div fxLayout="column">
     <div fxLayout="row" fxLayoutAlign=" center" class="top-bar">
         <div fxFlex="50" fxLayout="row" fxLayoutAlign=" center" fxHide.lt-md>
+            
             <div class="ingresos">
-                Datos mostrados:
+                Datos mostrados de la filial {{filial.nombre}}:
             </div>
             <div class="ingresos">
                 Registros: {{transacciones.length}} 
@@ -15,7 +16,7 @@
             </div>
         </div>
         <div fxFlex="50" fxLayoutAlign="end center">
-            <button routerLink="/financiero/nuevo" class="but-cargar-financiero" mat-button fxLayoutAlign="center center">
+            <button routerLink="nuevo" class="but-cargar-financiero" mat-button fxLayoutAlign="center center">
                 Nueva Transaccion
             </button>
             <div fxLayoutAlign="center center">
