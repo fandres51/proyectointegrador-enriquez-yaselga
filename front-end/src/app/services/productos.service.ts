@@ -168,7 +168,7 @@ export class ProductosService {
         producto.estado = Boolean(producto.estado);
         const respuesta = this.comprobarEstructura(producto);
         if (!respuesta) {
-        this.getCollectionID(filialID).add(producto)
+          this.getCollectionID(filialID).add(producto)
         } else {
           productosNoIngresados.push(
             'Nombre' +

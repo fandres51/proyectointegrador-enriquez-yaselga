@@ -168,7 +168,7 @@ export class ProveedoresService {
         proveedor.estado = Boolean(proveedor.estado);
         const respuesta = this.comprobarEstructura(proveedor);
         if (!respuesta) {
-        this.getCollectionID(filialID).add(proveedor)
+          this.getCollectionID(filialID).add(proveedor)
         } else {
           proveedoresNoIngresados.push(
             'Nombre: ' +

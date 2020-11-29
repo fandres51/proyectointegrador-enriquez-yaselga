@@ -183,13 +183,7 @@ export class RecursosService {
         
         const respuesta = this.comprobarEstructura(recurso);
         if (!respuesta) {
-          this.asociacionService.getContador('Recurso').subscribe(
-            (contador: Contador) => {
-              recurso.id = 'REC' + contador.contador;
-              console.log(recurso.id);
-              this.getCollection().doc(recurso.id).set(recurso);
-            }
-          )
+          this.getCollection().add(recurso);
         } else {
           recursosNoIngresadas.push(
             'Recurso: ' + 
