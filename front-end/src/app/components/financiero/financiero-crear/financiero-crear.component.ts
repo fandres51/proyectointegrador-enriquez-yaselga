@@ -29,7 +29,8 @@ export class FinancieroCrearComponent implements OnInit {
     Ingreso: false,
     Tipo: 'Otro',
     id: "",
-    Activa: true
+    Activa: true,
+    FilialID :""
   };
 
   constructor(
@@ -42,7 +43,7 @@ export class FinancieroCrearComponent implements OnInit {
 
   ngOnInit() {
     if(this.route.snapshot.params['id']){
-      this.idFilial = this.route.snapshot.params['id'];
+      this.transaccion.FilialID = this.idFilial = this.route.snapshot.params['id'];
       this.filialService.getFilial(this.idFilial).subscribe(item=>{this.filial=item})
       this.rutaNuevo="/filiales/filial/"+this.idFilial;
     }
