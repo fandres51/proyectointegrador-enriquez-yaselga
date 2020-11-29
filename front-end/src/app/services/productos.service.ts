@@ -184,6 +184,9 @@ export class ProductosService {
 
   private comprobarEstructura(producto: Producto): string {
     let razon: string = '';
+    if(!producto.nombre) {
+      razon = 'Sin nombre';
+    }
     if (
       producto.precio < 0
     ) {

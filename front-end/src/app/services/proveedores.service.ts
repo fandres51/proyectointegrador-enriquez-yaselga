@@ -184,6 +184,9 @@ export class ProveedoresService {
 
   private comprobarEstructura(proveedor: Proveedor): string {
     let razon: string = '';
+    if (!proveedor.nombre) {
+      razon = 'No existe nombre';
+    }
     if (
       proveedor.contacto === "" || proveedor.contacto.length > 10
     ) {
