@@ -108,7 +108,7 @@ export class TransaccionesService {
       (resF) => {
         Papa.parse(file, {
           complete: res => {
-            this.firethisEstudiante(res['data']).then(
+            this.firethisTransaccion(res['data']).then(
               transaccionesNoIngresadas => resF(transaccionesNoIngresadas)
             ).catch (
               e => console.error('Archivo no admitido')
@@ -120,7 +120,7 @@ export class TransaccionesService {
     )
   }
 
-  private firethisEstudiante(transacciones: Transaccion[]): Promise<string[]> {
+  private firethisTransaccion(transacciones: Transaccion[]): Promise<string[]> {
     const transaccionesNoIngresadas: string[] = [];
     return new Promise((resolve) => {
       transacciones.forEach((transaccion) => {

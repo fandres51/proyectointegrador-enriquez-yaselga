@@ -36,12 +36,12 @@ export class ProveedoresMainComponent implements OnInit {
     });
   }
   
-   cargaMasiva(event: FileList, idFilial:string) {
+   cargaMasiva(event: FileList) {
     const file = event.item(0);
     if (file.type.split('/')[1] !== 'csv') {
       console.error('¡Formato de archivo no soportado!');
     }
-    this.proveedoresService.cargaMasivaProveedores(file,idFilial).then(
+    this.proveedoresService.cargaMasivaProveedores(file, this.idFilial).then(
       eni => {
         if(eni.length > 0) {
           let registros: string = '';

@@ -44,7 +44,7 @@ export class RecursosService {
       }))
     )
   }
-  
+
   getRecurso(id: string): Observable<Recurso> {
     return this.afs.doc<Recurso>(`Asociacion/AEIS/Recurso/${id}`).snapshotChanges().pipe(
       map(a => {
@@ -78,7 +78,7 @@ export class RecursosService {
       }
     )
   }
-  
+
   existeRecurso(id: string): Promise<boolean> {
     return new Promise(
       (res) => {
@@ -150,9 +150,9 @@ export class RecursosService {
         recursoDoc.update({condicion: 'Perdido'});
         break;
     }
-    
+
   }
-  
+
   delete(idrecurso:string){
     //return this.getContratoCollection().doc(contrato.id).delete();
     /* this.recursoDoc = this.afs.doc<Recurso>(`items/${idrecurso}`);
@@ -166,7 +166,7 @@ export class RecursosService {
         Papa.parse(file, {
           complete: res => {
             this.firethisRecurso(res['data']).then(
-              recursosNoIngresados => resF(recursosNoIngresados)
+              recursosNoIngresadas => resF(recursosNoIngresadas)
             ).catch (
               e => console.error('Archivo no admitido')
             )
@@ -178,28 +178,27 @@ export class RecursosService {
   }
 
   private firethisRecurso(recursos: Recurso[]): Promise<string[]> {
-    const recursosNoIngresados: string[] = [];
+    const recursosNoIngresadas: string[] = [];
     return new Promise((resolve) => {
       recursos.forEach((recurso) => {
-        //recurso.FechaNacimiento = new Date(recurso.FechaNacimiento);
-        //recurso.Apellido = recurso.Apellido.toUpperCase();
-        recurso.nombre = recurso.nombre.toUpperCase();
-        const razon = this.comprobarEstructura(recurso);
-        if (!razon) {
-          this.getCollection().doc(recurso.id).set(recurso);
+        recurso.valor = Number(recurso.valor)
+        recurso.espacio = Boolean(recurso.espacio);
+
+        const respuesta = this.comprobarEstructura(recurso);
+        if (!respuesta) {
+          this.getCollection().add(recurso);
         } else {
-          recursosNoIngresados.push(
-            'id: ' + 
-            recurso.id + 
-            'Razón: ' + 
-            razon  
+          recursosNoIngresadas.push(
+            'Recurso: ' +
+            recurso.nombre +
+            'Razón: ' +
+            respuesta
           );
         }
       })
-      resolve(recursosNoIngresados);
+      resolve(recursosNoIngresadas);
     })
   }
-  
 
   private comprobarEstructura(recurso: Recurso): string {
     let razon: string = '';
@@ -216,7 +215,6 @@ export class RecursosService {
     ) {
       razon = 'estado';
     }
-    
     if (
       recurso.condicion !== 'Nuevo' &&
       recurso.condicion !== 'Usado' &&
@@ -232,5 +230,5 @@ export class RecursosService {
     const recursoDoc: AngularFirestoreDocument<Recurso> = this.getCollection().doc(id);
     recursoDoc.update({idfilial: idFilial});
   }
-  
+
 }
