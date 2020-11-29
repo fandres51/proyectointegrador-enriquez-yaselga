@@ -144,13 +144,13 @@ export class ProveedoresService {
     });
   }
 
-  cargaMasivaProveedores(file,idFilial:string): Promise<string[]> {
+  cargaMasivaProveedores(file, filialID: string): Promise<string[]> {
     return new Promise(
       (resF) => {
         Papa.parse(file, {
           complete: res => {
-            this.firethisProveedor(res['data'], idFilial).then(
-              proveedoresNoIngresados => resF(proveedoresNoIngresados)
+            this.firethisProveedor(res['data'], filialID).then(
+              proveedoresNoIngresadas => resF(proveedoresNoIngresadas)
             ).catch (
               e => console.error('Archivo no admitido')
             )
@@ -160,33 +160,32 @@ export class ProveedoresService {
       }
     )
   }
-  private firethisProveedor(proveedores: Proveedor[], idFilial: string): Promise<string[]> {
+
+  private firethisProveedor(proveedores: Proveedor[], filialID: string): Promise<string[]> {
     const proveedoresNoIngresados: string[] = [];
     return new Promise((resolve) => {
       proveedores.forEach((proveedor) => {
-        
-        if(proveedor.descripcion!= null)proveedor.descripcion = proveedor.descripcion.toUpperCase();
-        proveedor.nombre = proveedor.nombre.toUpperCase();
-        const razon = this.comprobarEstructura(proveedor);
-        if (!razon) {
-          this.getCollection().doc('/'+idFilial+'/Proveedor/'+proveedor.id).set(proveedor);
+        proveedor.estado = Boolean(proveedor.estado);
+        const respuesta = this.comprobarEstructura(proveedor);
+        if (!respuesta) {
+        this.getCollectionID(filialID).add(proveedor)
         } else {
           proveedoresNoIngresados.push(
-            'ID: ' + 
-            proveedor.id + 
+            'Nombre: ' +
+            proveedor.nombre + 
             'Razón: ' + 
-            razon  
+            respuesta
           );
         }
       })
       resolve(proveedoresNoIngresados);
     })
-  }
+  } 
 
   private comprobarEstructura(proveedor: Proveedor): string {
     let razon: string = '';
     if (
-      proveedor.contacto != ""||proveedor.contacto.length>10
+      proveedor.contacto === "" || proveedor.contacto.length > 10
     ) {
       razon = 'Telefono De Contacto No Admitido';
     }

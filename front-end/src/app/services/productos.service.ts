@@ -143,13 +143,13 @@ export class ProductosService {
     });
   }
 
-  cargaMasivaProductos(file,idFilial:string): Promise<string[]> {
+  cargaMasivaProductos(file, filialID): Promise<string[]> {
     return new Promise(
       (resF) => {
         Papa.parse(file, {
           complete: res => {
-            this.firethisProducto(res['data'], idFilial).then(
-              productosNoIngresados => resF(productosNoIngresados)
+            this.firethisProducto(res['data'], filialID).then(
+              productosNoIngresadas => resF(productosNoIngresadas)
             ).catch (
               e => console.error('Archivo no admitido')
             )
@@ -159,29 +159,28 @@ export class ProductosService {
       }
     )
   }
-  private firethisProducto(productos: Producto[], idFilial: string): Promise<string[]> {
+
+  private firethisProducto(productos: Producto[], filialID: string): Promise<string[]> {
     const productosNoIngresados: string[] = [];
     return new Promise((resolve) => {
       productos.forEach((producto) => {
-        
-        if(producto.descripcion!= null)producto.descripcion = producto.descripcion.toUpperCase();
-        if(producto.idproveedor!=null)producto.idproveedor = producto.idproveedor.toUpperCase();
-        producto.nombre = producto.nombre.toUpperCase();
-        const razon = this.comprobarEstructura(producto);
-        if (!razon) {
-          this.getCollection().doc('/'+idFilial+'/Producto/'+producto.id).set(producto);
+        producto.precio = Number(producto.precio)
+        producto.estado = Boolean(producto.estado);
+        const respuesta = this.comprobarEstructura(producto);
+        if (!respuesta) {
+        this.getCollectionID(filialID).add(producto)
         } else {
           productosNoIngresados.push(
-            'ID: ' + 
-            producto.id + 
+            'Nombre' +
+            producto.nombre +
             'Razón: ' + 
-            razon  
+            respuesta
           );
         }
       })
       resolve(productosNoIngresados);
     })
-  }
+  } 
 
   private comprobarEstructura(producto: Producto): string {
     let razon: string = '';

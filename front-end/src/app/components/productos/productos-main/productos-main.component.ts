@@ -35,12 +35,12 @@ export class ProductosMainComponent implements OnInit {
     });
   }
   
-   cargaMasiva(event: FileList, idFilial:string) {
+   cargaMasiva(event: FileList) {
     const file = event.item(0);
     if (file.type.split('/')[1] !== 'csv') {
       console.error('¡Formato de archivo no soportado!');
     }
-    this.productosService.cargaMasivaProductos(file,idFilial).then(
+    this.productosService.cargaMasivaProductos(file, this.idFilial).then(
       eni => {
         if(eni.length > 0) {
           let registros: string = '';

@@ -163,7 +163,7 @@ export class RecursosService {
         Papa.parse(file, {
           complete: res => {
             this.firethisRecurso(res['data']).then(
-              recursosNoIngresados => resF(recursosNoIngresados)
+              recursosNoIngresadas => resF(recursosNoIngresadas)
             ).catch (
               e => console.error('Archivo no admitido')
             )
@@ -175,28 +175,26 @@ export class RecursosService {
   }
 
   private firethisRecurso(recursos: Recurso[]): Promise<string[]> {
-    const recursosNoIngresados: string[] = [];
+    const recursosNoIngresadas: string[] = [];
     return new Promise((resolve) => {
       recursos.forEach((recurso) => {
-        //recurso.FechaNacimiento = new Date(recurso.FechaNacimiento);
-        //recurso.Apellido = recurso.Apellido.toUpperCase();
-        recurso.nombre = recurso.nombre.toUpperCase();
-        const razon = this.comprobarEstructura(recurso);
-        if (!razon) {
-          this.getCollection().doc(recurso.id).set(recurso);
+        recurso.valor = Number(recurso.valor)
+        recurso.espacio = Boolean(recurso.espacio);
+        const respuesta = this.comprobarEstructura(recurso);
+        if (!respuesta) {
+        this.getCollection().add(recurso)
         } else {
-          recursosNoIngresados.push(
-            'id: ' + 
-            recurso.id + 
+          recursosNoIngresadas.push(
+            'Recurso: ' + 
+            recurso.nombre +
             'Razón: ' + 
-            razon  
+            respuesta
           );
         }
       })
-      resolve(recursosNoIngresados);
+      resolve(recursosNoIngresadas);
     })
-  }
-  
+  } 
 
   private comprobarEstructura(recurso: Recurso): string {
     let razon: string = '';
@@ -213,7 +211,6 @@ export class RecursosService {
     ) {
       razon = 'estado';
     }
-    
     if (
       recurso.condicion !== 'Nuevo' &&
       recurso.condicion !== 'Usado' &&
@@ -224,6 +221,4 @@ export class RecursosService {
     }
     return razon;
   }
-  
-
 }
