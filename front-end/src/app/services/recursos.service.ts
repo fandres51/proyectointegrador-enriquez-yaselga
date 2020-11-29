@@ -180,9 +180,16 @@ export class RecursosService {
       recursos.forEach((recurso) => {
         recurso.valor = Number(recurso.valor)
         recurso.espacio = Boolean(recurso.espacio);
+        
         const respuesta = this.comprobarEstructura(recurso);
         if (!respuesta) {
-        this.getCollection().add(recurso)
+          this.asociacionService.getContador('Recurso').subscribe(
+            (contador: Contador) => {
+              recurso.id = 'REC' + contador.contador;
+              console.log(recurso.id);
+              this.getCollection().doc(recurso.id).set(recurso);
+            }
+          )
         } else {
           recursosNoIngresadas.push(
             'Recurso: ' + 
