@@ -102,6 +102,7 @@ export class RecursosService {
     recursoDoc.update(recurso);
   }
 
+
   darDeBaja(id: string) {
     const recursoDoc: AngularFirestoreDocument<Recurso> = this.getCollection().doc(id);
     recursoDoc.update({
@@ -152,9 +153,11 @@ export class RecursosService {
     
   }
   
-  delete(recurso){
-    this.recursoDoc = this.afs.doc<Recurso>(`items/${recurso.id}`);
-    this.recursoDoc.delete();
+  delete(idrecurso:string){
+    //return this.getContratoCollection().doc(contrato.id).delete();
+    /* this.recursoDoc = this.afs.doc<Recurso>(`items/${idrecurso}`);
+    this.recursoDoc.delete(); */
+    return this.getCollection().doc(idrecurso).delete();
   }
 
   cargaMasivaRecursos(file): Promise<string[]> {
@@ -224,6 +227,10 @@ export class RecursosService {
     }
     return razon;
   }
-  
 
+  AsignarFilial(id: string, idFilial: string) {
+    const recursoDoc: AngularFirestoreDocument<Recurso> = this.getCollection().doc(id);
+    recursoDoc.update({idfilial: idFilial});
+  }
+  
 }

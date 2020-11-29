@@ -22,17 +22,7 @@ export class RecursosActualizacionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.recurso ={
-      id : "",
-      descripcion : "",
-      espacio : false,
-      estado :'Libre',
-      nombre : "",
-      tipo : "",
-      ubicacion : "",
-      valor : 0,
-      condicion : 'Nuevo'
-    }
+    
     this.route.params.subscribe(params =>{
       const noUnicoParam = params['id'];
       this.recursosService.getRecurso(noUnicoParam).subscribe(recurso =>{
@@ -51,5 +41,15 @@ export class RecursosActualizacionComponent implements OnInit {
     this.recursosService.update(recurso);
     this.router.navigateByUrl('/recursos');
   }
+
+  eliminar() {
+    const estaSeguro = confirm('¿Está seguro que desea eliminar este recurso?');
+    if(estaSeguro){
+      this.recursosService.delete(this.recurso.id);
+      this.router.navigateByUrl('/recursos');
+    }
+      
+  }
+
 
 }

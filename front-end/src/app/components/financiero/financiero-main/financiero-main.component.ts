@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Transaccion } from 'src/app/models/transaccion';
 import { TransaccionesService } from 'src/app/services/transacciones.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-financiero-main',
@@ -15,7 +16,8 @@ export class FinancieroMainComponent implements OnInit {
   public egresos: number = 0;
 
   constructor(
-    public transaccionService:TransaccionesService
+    public transaccionService:TransaccionesService,
+    private readonly router: Router
   ) { }
 
   ngOnInit() { }

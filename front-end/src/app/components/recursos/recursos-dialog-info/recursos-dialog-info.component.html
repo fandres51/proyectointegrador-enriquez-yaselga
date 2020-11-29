@@ -19,7 +19,7 @@
             <div class="titulo">Estado </div>
             <div>{{recurso.estado}}</div>
         </div>
-        <div *ngIf="recurso.descripcion" class="dato">
+        <div *ngIf="recurso.descripcion" fxFlex="50" class="dato">
             <div class="titulo">Descripcion </div>
             <div>{{recurso.descripcion}}</div>
         </div>
@@ -38,14 +38,19 @@
     </div>
 
     <div fxLayout="row">
-        <div *ngIf="recurso.ubicacion" fxFlex="50" class="dato">
+        <!-- <div *ngIf="recurso.ubicacion" fxFlex="50" class="dato">
             <div class="titulo">Ubicacion </div>
             <div>{{recurso.ubicacion}}</div>
+        </div> -->
+
+        <div *ngIf="recurso.valor" fxFlex="50" class="dato">
+            <div class="titulo">Valor</div>
+            <div>{{recurso.valor}}</div>
         </div>
 
         <div *ngIf="recurso.valor" class="dato">
-            <div class="titulo">Valor</div>
-            <div>{{recurso.valor}}</div>
+            <div class="titulo">Filial</div>
+            <div>{{recurso.idfilial}}</div>
         </div>
     </div>
 
