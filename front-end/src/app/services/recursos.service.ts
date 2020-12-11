@@ -7,6 +7,7 @@ import * as firebase from 'firebase';
 import { AsociacionService } from './asociacion.service';
 import { Contador } from '../models/contador';
 import * as Papa from 'papaparse';
+import { DateAdapter } from '@angular/material/core';
 
 
 
@@ -56,6 +57,7 @@ export class RecursosService {
           key => data[key] = data[key].toDate()
         ) //convierte todos los objetos Timestamp a Date
 
+        data.id = a.payload.id;
         return data;
       })
     );
@@ -186,7 +188,7 @@ export class RecursosService {
 
         const respuesta = this.comprobarEstructura(recurso);
         if (!respuesta) {
-          this.getCollection().add(recurso);
+          this.crearRecurso(recurso);
         } else {
           recursosNoIngresadas.push(
             'Recurso: ' +

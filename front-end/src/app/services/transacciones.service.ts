@@ -175,15 +175,6 @@ export class TransaccionesService {
     ) {
       respuesta = 'tipo activa/inactiva';
     }
-    if (
-      transaccion.Tipo !== 'Afiliacion' &&
-      transaccion.Tipo !== 'Otro' &&
-      transaccion.Tipo !== 'Bar' &&
-      transaccion.Tipo !== 'Alquiler' &&
-      transaccion.Tipo !== 'Evento'
-    ) {
-      respuesta = 'tipo';
-    }
     return respuesta;
   }
 }

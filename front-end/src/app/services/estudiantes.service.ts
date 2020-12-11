@@ -208,6 +208,13 @@ export class EstudiantesService {
         estudiante.Apellido = estudiante.Apellido.toUpperCase();
         estudiante.Nombre = estudiante.Nombre.toUpperCase();
         const razon = this.comprobarEstructura(estudiante);
+        if (
+          estudiante.EstadoAfiliacion !== 'Aportante' &&
+          estudiante.EstadoAfiliacion !== 'No aportante' &&
+          estudiante.EstadoAfiliacion !== 'No afiliado'
+        ) {
+          estudiante.EstadoAfiliacion = 'No afiliado';
+        }
         if (!razon) {
           this.getCollection().doc(estudiante.NoUnico).set(estudiante);
         } else {
@@ -237,13 +244,6 @@ export class EstudiantesService {
       estudiante.Carrera !== 'Software'
     ) {
       razon = 'carrera';
-    }
-    if (
-      estudiante.EstadoAfiliacion !== 'Aportante' &&
-      estudiante.EstadoAfiliacion !== 'No aportante' &&
-      estudiante.EstadoAfiliacion !== 'No afiliado'
-    ) {
-      razon = 'aporte';
     }
     if (
       estudiante.SemestreReferencial !== '1' &&

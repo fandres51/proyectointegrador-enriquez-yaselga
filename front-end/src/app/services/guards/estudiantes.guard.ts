@@ -15,19 +15,16 @@ export class EstudiantesGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
         
         return new Promise<boolean>(
-            (res, req) => {
-                
+            (res) => {
                 this.authService.auth.user.subscribe(
                     user => {
-                        //console.log(">>>user: ",user.email, "verif: ",user.emailVerified,"username: ", user.displayName);
-                        //console.log("permisos:",this.authService.getPermiso(user.email, 'Estudiantes').subscribe(permisos=>{this.var= permisos}));
                         this.authService.getPermiso(user.email, 'Estudiantes').subscribe(
                             permisos => {
-                                console.log(">>>permisos de:",user,"\n estudiantes: ",permisos);
-                                if(permisos.length>0)
+                                if(permisos.length>0) {
                                     res(true);
-                                else
+                                } else {
                                     res(false)
+                                }
                             },
                             error => {
                               console.error(error);
