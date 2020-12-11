@@ -56,6 +56,7 @@ import { ProveedoresMainComponent } from './components/proveedores/proveedores-m
 import { ProveedoresCrearComponent } from './components/proveedores/proveedores-crear/proveedores-crear.component';
 import { ProveedoresEditarComponent } from './components/proveedores/proveedores-editar/proveedores-editar.component';
 import { AjustesTerminarPeriodoComponent } from './components/ajustes/ajustes-terminar-periodo/ajustes-terminar-periodo.component';
+import { AlquileresMainComponent } from './components/alquileres/alquileres-main/alquileres-main.component';
 
 const routes: Routes = [
   { path: '', component: MainScreenComponent },
@@ -94,6 +95,9 @@ const routes: Routes = [
   { path: 'filiales/filial/:id/productos', component: ProductosMainComponent, canActivate: [FilialesGuard] },
   { path: 'filiales/filial/:id/productos/nuevo', component: ProductosCrearComponent, canActivate: [FilialesGuard] },
   { path: 'filiales/filial/:id/productos/actualizar/:idproducto', component: ProductosEditarComponent, canActivate: [FilialesGuard] },
+  { path: 'filiales/filial/:id/financiero', component: FinancieroMainComponent, canActivate: [FilialesGuard]},
+  { path: 'filiales/filial/:id/financiero/nuevo', component: FinancieroCrearComponent, canActivate: [FilialesGuard]},
+  { path: 'filiales/filial/:id/alquiler', component: AlquileresMainComponent, canActivate: [FilialesGuard]},
   
   { path: 'ajustes', component: AjustesMainComponent, children: [
     { path: 'nuevo-semestre', component: AjustesNuevoSemestreComponent },

@@ -108,6 +108,9 @@ import { ProveedoresDialogInfoComponent } from './components/proveedores/proveed
 import { ProveedoresFiltrosComponent } from './components/proveedores/proveedores-filtros/proveedores-filtros.component';
 import { ProveedoresListarComponent } from './components/proveedores/proveedores-listar/proveedores-listar.component';
 import { AjustesTerminarPeriodoComponent } from './components/ajustes/ajustes-terminar-periodo/ajustes-terminar-periodo.component';
+import { AlquileresMainComponent } from './components/alquileres/alquileres-main/alquileres-main.component';
+import { AlquileresCrearComponent } from './components/alquileres/alquileres-crear/alquileres-crear.component';
+import { AlquileresEditarComponent } from './components/alquileres/alquileres-editar/alquileres-editar.component';
 
 
 
@@ -173,6 +176,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     ProductosCrearComponent, ProductosEditarComponent, ProductosMainComponent, ProductosListarComponent, ProductosDialogInfoComponent, ProductosFiltrosComponent,
     RecursosMainComponent, RecursosListarComponent, RecursosDialogInfoComponent, RecursosFiltrosComponent, RecursosActualizacionComponent, RecursoNuevoComponent,
     ProveedoresMainComponent, ProveedoresCrearComponent, ProveedoresEditarComponent, ProveedoresDialogInfoComponent, ProveedoresFiltrosComponent, ProveedoresListarComponent, AjustesTerminarPeriodoComponent,
+    AlquileresMainComponent, AlquileresCrearComponent, AlquileresEditarComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

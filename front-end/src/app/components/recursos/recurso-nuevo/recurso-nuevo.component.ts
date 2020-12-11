@@ -19,6 +19,7 @@ export class RecursoNuevoComponent implements OnInit {
     ubicacion : "",
     valor : 0,
     condicion : 'Nuevo'
+    
   };
 
   constructor(

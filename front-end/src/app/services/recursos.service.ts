@@ -44,7 +44,7 @@ export class RecursosService {
       }))
     )
   }
-  
+
   getRecurso(id: string): Observable<Recurso> {
     return this.afs.doc<Recurso>(`Asociacion/AEIS/Recurso/${id}`).snapshotChanges().pipe(
       map(a => {
@@ -78,7 +78,7 @@ export class RecursosService {
       }
     )
   }
-  
+
   existeRecurso(id: string): Promise<boolean> {
     return new Promise(
       (res) => {
@@ -101,6 +101,7 @@ export class RecursosService {
     const recursoDoc: AngularFirestoreDocument<Recurso> = this.afs.collection('Asociacion/AEIS/Recurso').doc(recurso.id);
     recursoDoc.update(recurso);
   }
+
 
   darDeBaja(id: string) {
     const recursoDoc: AngularFirestoreDocument<Recurso> = this.getCollection().doc(id);
@@ -149,12 +150,14 @@ export class RecursosService {
         recursoDoc.update({condicion: 'Perdido'});
         break;
     }
-    
+
   }
-  
-  delete(recurso){
-    this.recursoDoc = this.afs.doc<Recurso>(`items/${recurso.id}`);
-    this.recursoDoc.delete();
+
+  delete(idrecurso:string){
+    //return this.getContratoCollection().doc(contrato.id).delete();
+    /* this.recursoDoc = this.afs.doc<Recurso>(`items/${idrecurso}`);
+    this.recursoDoc.delete(); */
+    return this.getCollection().doc(idrecurso).delete();
   }
 
   cargaMasivaRecursos(file): Promise<string[]> {
@@ -180,22 +183,22 @@ export class RecursosService {
       recursos.forEach((recurso) => {
         recurso.valor = Number(recurso.valor)
         recurso.espacio = Boolean(recurso.espacio);
-        
+
         const respuesta = this.comprobarEstructura(recurso);
         if (!respuesta) {
           this.getCollection().add(recurso);
         } else {
           recursosNoIngresadas.push(
-            'Recurso: ' + 
+            'Recurso: ' +
             recurso.nombre +
-            'Razón: ' + 
+            'Razón: ' +
             respuesta
           );
         }
       })
       resolve(recursosNoIngresadas);
     })
-  } 
+  }
 
   private comprobarEstructura(recurso: Recurso): string {
     let razon: string = '';
@@ -222,4 +225,10 @@ export class RecursosService {
     }
     return razon;
   }
+
+  AsignarFilial(id: string, idFilial: string) {
+    const recursoDoc: AngularFirestoreDocument<Recurso> = this.getCollection().doc(id);
+    recursoDoc.update({idfilial: idFilial});
+  }
+
 }

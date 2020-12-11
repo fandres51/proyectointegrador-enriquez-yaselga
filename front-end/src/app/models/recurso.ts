@@ -9,4 +9,5 @@ export interface Recurso{
     ubicacion?: string;
     valor?: number;
     condicion: 'Nuevo'|'Usado'|'Averiado'|'Perdido';
+    idfilial?: string;
 }

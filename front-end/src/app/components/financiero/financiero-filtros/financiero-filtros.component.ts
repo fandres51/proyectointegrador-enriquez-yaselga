@@ -1,6 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Transaccion } from 'src/app/models/transaccion';
 import { TransaccionesService } from 'src/app/services/transacciones.service';
+import { ActivatedRoute } from '@angular/router';
+import { Filial } from 'src/app/models/filial';
+import { FilialService } from 'src/app/services/filial.service';
 
 @Component({
   selector: 'app-financiero-filtros',
@@ -8,6 +11,12 @@ import { TransaccionesService } from 'src/app/services/transacciones.service';
   styleUrls: ['./financiero-filtros.component.scss']
 })
 export class FinancieroFiltrosComponent implements OnInit {
+
+  idFilial:string;
+  filial:Filial={
+    id:"0",
+    nombre:""
+  };
 
   private transacciones: Transaccion[];
   @Output() public listaAMostrarEmitter = new EventEmitter();
@@ -21,19 +30,36 @@ export class FinancieroFiltrosComponent implements OnInit {
   public tipoFiltro: string = '';
 
   constructor(
-    private transaccionesService: TransaccionesService
+    private transaccionesService: TransaccionesService,
+    private route:ActivatedRoute,
+    private filialService:FilialService,
   ) { }
 
   ngOnInit(): void {
-    this.transaccionesService.getTransacciones().subscribe(
-      transacciones => {
-        this.transacciones = transacciones;
-        this.enviarTransacciones(this.transacciones)
-      },
-      error => {
-        console.error(error);
-      }
-    )
+    if(this.route.snapshot.params['id']){
+      this.idFilial = this.route.snapshot.params['id'];
+      this.filialService.getFilial(this.idFilial).subscribe(item=>{this.filial=item})
+      this.transaccionesService.getTransaccionesPorFilial(this.idFilial).subscribe(
+        transacciones => {
+          this.transacciones = transacciones;
+          this.enviarTransacciones(this.transacciones)
+        },
+        error => {
+          console.error(error);
+        }
+      )
+    }
+    else{
+      this.transaccionesService.getTransacciones().subscribe(
+        transacciones => {
+          this.transacciones = transacciones;
+          this.enviarTransacciones(this.transacciones)
+        },
+        error => {
+          console.error(error);
+        }
+      )
+    }
   }
 
   /***Filtros****************************************** */

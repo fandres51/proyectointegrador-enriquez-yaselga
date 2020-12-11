@@ -3,6 +3,9 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Router } from '@angular/router';
 import { Transaccion } from 'src/app/models/transaccion';
 import { TransaccionesService } from 'src/app/services/transacciones.service';
+import { ActivatedRoute } from '@angular/router';
+import { Filial } from 'src/app/models/filial';
+import { FilialService } from 'src/app/services/filial.service';
 
 @Component({
   selector: 'app-financiero-crear',
@@ -11,6 +14,12 @@ import { TransaccionesService } from 'src/app/services/transacciones.service';
 })
 export class FinancieroCrearComponent implements OnInit {
 
+  idFilial:string;
+  filial:Filial={
+    id:"0",
+    nombre:""
+  };
+  rutaNuevo="";
   public fecha;
 
   public transaccion: Transaccion = {
@@ -20,20 +29,34 @@ export class FinancieroCrearComponent implements OnInit {
     Ingreso: false,
     Tipo: 'Otro',
     id: "",
-    Activa: true
+    Activa: true,
+    FilialID :""
   };
 
   constructor(
     public transaccionService:TransaccionesService,
-    private router: Router
+    private router: Router,
+    private route:ActivatedRoute,
+    private filialService:FilialService,
+    private transaccionesService: TransaccionesService,
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit() {
+    if(this.route.snapshot.params['id']){
+      this.transaccion.FilialID = this.idFilial = this.route.snapshot.params['id'];
+      this.filialService.getFilial(this.idFilial).subscribe(item=>{this.filial=item})
+      this.rutaNuevo="/filiales/filial/"+this.idFilial;
+    }
+   }
 
   addTransaccion(transaccion) {
     this.transaccion.Fecha = new Date(this.fecha);
     this.transaccionService.addTransaccion(transaccion);
-    this.router.navigateByUrl('/financiero')
+    this.router.navigateByUrl(this.rutaNuevo+'/financiero')
+  }
+
+  volver(){
+    this.router.navigateByUrl(this.rutaNuevo+'/financiero')
   }
 
 }
