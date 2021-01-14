@@ -7,21 +7,28 @@ import * as firebase from 'firebase';
 import { AsociacionService } from './asociacion.service';
 import { Contador } from '../models/contador';
 import * as Papa from 'papaparse';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransaccionesService {
 
-  transaccionesCollection: AngularFirestoreCollection<Transaccion>;
-  transacciones: Observable<Transaccion[]>;
-  transaccionDoc: AngularFirestoreDocument<Transaccion>;
-
+  nombreUsuario: string;
 
   constructor(
     private afs: AngularFirestore,
-    private asociacionService: AsociacionService
-  ) { }
+    private authService: AuthService
+  ) { 
+    this.authService.auth.user.subscribe(
+      user => {
+        this.nombreUsuario = user.displayName;
+      },
+      error => {
+        console.error(error);
+      }
+    )
+  }
 
   getCollection(): AngularFirestoreCollection<Transaccion> {
     return this.afs.collection<Transaccion>('Asociacion/AEIS/Transaccion');
@@ -36,6 +43,7 @@ export class TransaccionesService {
         ).forEach(
           key => data[key] = data[key].toDate()
         ) //convierte todos los objetos Timestamp a Date
+        data.id = a.payload.doc.id;
         return data;
       }))
     )
@@ -53,6 +61,8 @@ export class TransaccionesService {
         ).forEach(
           key => data[key] = data[key].toDate()
         ) //convierte todos los objetos Timestamp a Date
+
+        data.id = a.payload.doc.id;
         return data;
       }))
     )
@@ -69,6 +79,7 @@ export class TransaccionesService {
           key => data[key] = data[key].toDate()
         ) //convierte todos los objetos Timestamp a Date
 
+        data.id = a.payload.id;
         return data;
       })
     );
@@ -79,20 +90,9 @@ export class TransaccionesService {
   }
 
   addTransaccion(nuevaTransaccion: Transaccion) {
-    let bool = true; //eveita un bucle infinito X((
-    this.asociacionService.getContador('Transaccion').subscribe(
-      (contador: Contador) => {
-        if (bool) {
-          nuevaTransaccion.id = 'TRN' + contador.contador;
-          this.getCollection().doc('TRN' + contador.contador).set(nuevaTransaccion);
-          this.asociacionService.increaseContador('Transaccion');
-          bool = false
-        }
-      },
-      error => {
-        console.error(error);
-      }
-    )
+    nuevaTransaccion.PersonaIngreso = this.nombreUsuario;
+    nuevaTransaccion.FechaIngreso = new Date();
+    this.getCollection().add(nuevaTransaccion);
   }
 
   darDeBajaTransaccion(transaccionId: string) {
@@ -130,7 +130,7 @@ export class TransaccionesService {
         transaccion.Ingreso = Boolean(transaccion.Ingreso);
         const respuesta = this.comprobarEstructura(transaccion);
         if (!respuesta) {
-          this.getCollection().add(transaccion)
+          this.addTransaccion(transaccion);
         } else {
           transaccionesNoIngresadas.push(
             'Fecha: ' + 

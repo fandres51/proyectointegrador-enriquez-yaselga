@@ -176,7 +176,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     ProductosCrearComponent, ProductosEditarComponent, ProductosMainComponent, ProductosListarComponent, ProductosDialogInfoComponent, ProductosFiltrosComponent,
     RecursosMainComponent, RecursosListarComponent, RecursosDialogInfoComponent, RecursosFiltrosComponent, RecursosActualizacionComponent, RecursoNuevoComponent,
     ProveedoresMainComponent, ProveedoresCrearComponent, ProveedoresEditarComponent, ProveedoresDialogInfoComponent, ProveedoresFiltrosComponent, ProveedoresListarComponent, AjustesTerminarPeriodoComponent,
-    AlquileresMainComponent, AlquileresCrearComponent, AlquileresEditarComponent,
+    AlquileresMainComponent, AlquileresCrearComponent, AlquileresEditarComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

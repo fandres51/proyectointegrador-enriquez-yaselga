@@ -31,10 +31,10 @@
             </div>
             <div fxLayout="column" fxFlex="10">
                 <button *ngIf="!incidente.resuelto" mat-button class="delete" type="button" (click)="resolver(incidente.id)">
-                    <mat-icon aria-hidden="false" aria-label="resolver" class="green">check</mat-icon>
+                    <mat-icon aria-hidden="false" aria-label="resolver">check</mat-icon>
                 </button>
                 <button *ngIf="incidente.resuelto" mat-button class="delete" type="button" (click)="noResuelto(incidente.id)">
-                    <mat-icon aria-hidden="false" aria-label="resolver" class="red">close</mat-icon>
+                    <mat-icon aria-hidden="false" aria-label="resolver">close</mat-icon>
                 </button>
                 <button mat-button class="delete" type="button" (click)="eliminar(incidente)">
                     <mat-icon aria-hidden="false" aria-label="delete">delete</mat-icon>

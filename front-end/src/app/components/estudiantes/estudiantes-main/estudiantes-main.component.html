@@ -12,13 +12,13 @@
         </div>
     </div>
     <div fxFlex="90" fxFlex.lt-md="100" fxLayout="row" fxLayout.lt-md="column">
-        <div fxFlex="20" fxFlex.md="30" fxFlex.lt-md="auto" fxLayout="row">
+        <div fxFlex="25" fxFlex.md="30" fxFlex.lt-md="auto" fxLayout="row">
             <app-estudiantes-filtros (mostrarEstudiantes)="estudiantes=$event"></app-estudiantes-filtros>
         </div>
 
         <div class="line" fxHide.lt-md></div>
 
-        <div fxFlex="80" fxFlex.md="70" fxFlex.lt-md="auto" fxLayout="column" class="div-estudiantes">
+        <div fxFlex="75" fxFlex.md="70" fxFlex.lt-md="auto" fxLayout="column" class="div-estudiantes">
             <div fxLayout="column">
                 <app-estudiantes-listar [_estudiantes]="estudiantes"></app-estudiantes-listar>
             </div>

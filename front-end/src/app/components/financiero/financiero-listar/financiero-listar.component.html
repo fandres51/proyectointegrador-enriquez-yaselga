@@ -12,10 +12,11 @@
                 <div>{{transaccion.Fecha.getDate()}}/{{
                     transaccion.Fecha.getMonth()+1}}/{{transaccion.Fecha.getFullYear()}} </div>
             </div>
-            
+
             <div fxLayout="column" fxLayoutAlign="center start" fxFlex="20" fxHide.lt-lg>
-                <div class="nombre">Hora</div>
-                <div>{{transaccion.Fecha.getHours()}}:{{transaccion.Fecha.getMinutes()}}</div>
+                <div class="nombre">Fech.Ingreso</div>
+                <div>{{transaccion.FechaIngreso.getDate()}}/{{
+                    transaccion.FechaIngreso.getMonth()+1}}/{{transaccion.FechaIngreso.getFullYear()}} </div>
             </div>
 
             <div fxLayout="column" fxLayoutAlign="center start" fxFlex="10" fxHide.lt-lg>

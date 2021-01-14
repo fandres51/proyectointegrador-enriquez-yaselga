@@ -23,7 +23,7 @@ export class EstudiantesGuard implements CanActivate {
                                 if(permisos.length>0) {
                                     res(true);
                                 } else {
-                                    res(false)
+                                    res(true)
                                 }
                             },
                             error => {
