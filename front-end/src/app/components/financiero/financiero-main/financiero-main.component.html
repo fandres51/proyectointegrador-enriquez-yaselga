@@ -6,13 +6,19 @@
                 Datos mostrados de la filial {{filial.nombre}}:
             </div>
             <div class="ingresos">
-                Registros: {{transacciones.length}} 
+                Registros: 
+                <br>
+                {{transacciones.length}} 
             </div>
             <div class="ingresos">
-                Ingresos: <span class="verde">{{ingresos}} $</span>
+                Ingresos: 
+                <br>
+                <span class="verde">{{ingresos}} $</span>
             </div>
             <div class="ingresos">
-                Egresos: <span class="rojo">{{egresos}} $</span>
+                Egresos: 
+                <br>
+                <span class="rojo">{{egresos}} $</span>
             </div>
         </div>
         <div fxFlex="50" fxLayoutAlign="end center">
@@ -31,13 +37,13 @@
     </div>
 
     <div fxLayout="row" fxLayout.lt-md="column">
-        <div fxFlex="20" fxFlex.md="30" fxFlex.lt-md="auto" fxLayout="column">
+        <div fxFlex="25" fxFlex.md="30" fxFlex.lt-md="auto" fxLayout="column">
             <app-financiero-filtros (listaAMostrarEmitter)="crearIngresosYEgresos($event)"></app-financiero-filtros>
         </div>
 
         <div class="line" fxHide.lt-md></div>
 
-        <div fxFlex="80" fxFlex.md="70" fxFlex.lt-md="auto" fxLayout="column" class="div-financiero">
+        <div fxFlex="75" fxFlex.md="70" fxFlex.lt-md="auto" fxLayout="column" class="div-financiero">
             <div fxLayout="column">
                 <app-financiero-listar [_transacciones]="transacciones"></app-financiero-listar>
             </div>

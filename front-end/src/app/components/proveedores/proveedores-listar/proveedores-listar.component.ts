@@ -53,6 +53,7 @@ export class ProveedoresListarComponent implements OnInit {
     };
 
     const dialogRef = this.dialog.open(ProveedoresDialogInfoComponent, {
+      width: '500px',
       data:{
         proveedor: this.proveedores[index], 
         id:filial

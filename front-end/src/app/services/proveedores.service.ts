@@ -7,6 +7,7 @@ import { FilialService } from './filial.service';
 import { Contador } from '../models/contador';
 import { Proveedor } from '../models/proveedor';
 import * as Papa from 'papaparse';
+import { AsociacionService } from './asociacion.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class ProveedoresService {
 
   constructor(
     private afs: AngularFirestore,
-    private filialService: FilialService
+    private filialService: FilialService,
+    private asociacionService: AsociacionService
   ) { }
 
   getCollection(): AngularFirestoreCollection<Proveedor> {
@@ -40,6 +42,7 @@ export class ProveedoresService {
           key => data[key] = data[key].toDate()
         ) //convierte todos los objetos Timestamp a Date
         ////console.log(">>>Proveedores2: ",data);
+        data.id = a.payload.doc.id;
         return data;
       }))
     )
@@ -55,6 +58,7 @@ export class ProveedoresService {
           key => data[key] = data[key].toDate()
         ) //convierte todos los objetos Timestamp a Date
 
+        data.id = a.payload.id;
         return data;
       })
     );
@@ -81,52 +85,21 @@ export class ProveedoresService {
     )
     }
 
-  addProveedor(nuevaProveedor: Proveedor, idFilial:string) {
-    let idcontador: number;
+  addProveedor(nuevoProveedor: Proveedor, idFilial:string) {
     let bool = true; //eveita un bucle infinito X((
-      this.filialService.getContador('Proveedor',idFilial).subscribe(
-        result=>{
-          if(result){
-              if(result.contador>=1){
-                idcontador=result.contador+1;
-              }else{
-                idcontador=1
-              }
-              if (bool) {
-                nuevaProveedor.id = 'PRD' + idcontador;
-                this.getCollection().doc('/'+idFilial+'/Proveedor/'+'PRD' + idcontador).set(nuevaProveedor);
-                if(idcontador==1){
-                  this.filialService.createContador('Proveedor',idFilial);
-                }else{
-                  this.filialService.increaseContador('Proveedor',idFilial);
-                }
-                bool = false
-              }
-            
-            
+    this.asociacionService.getContador('Proveedor').subscribe(
+      (contador: Contador) => {
+          if(bool) {
+            nuevoProveedor.id = 'PROV' + contador.contador;
+            this.getCollectionID(idFilial).doc('PROV' + contador.contador).set(nuevoProveedor);
+            this.asociacionService.increaseContador('Proveedor');
+            bool = false
           }
-          else{//console.log("llegoResultIfNo");
-            idcontador=1;
-            if (bool) {
-              nuevaProveedor.id = 'PRD' + idcontador;
-              this.getCollection().doc('/'+idFilial+'/Proveedor/'+'PRD' + idcontador).set(nuevaProveedor);
-              if(idcontador==1){
-                this.filialService.createContador('Proveedor',idFilial);
-              }else{
-                this.filialService.increaseContador('Proveedor',idFilial);
-              }
-              
-              bool = false
-            }
-          }
-        }
-        ,
-        error => {
-          console.error("EE:",error);
-        }
-      )
-   
-    
+      },
+      error => {
+        console.error(error);
+      }
+    )
   }
 
   getCollectionX(): AngularFirestoreCollection<Proveedor> {
@@ -168,7 +141,7 @@ export class ProveedoresService {
         proveedor.estado = Boolean(proveedor.estado);
         const respuesta = this.comprobarEstructura(proveedor);
         if (!respuesta) {
-          this.getCollectionID(filialID).add(proveedor)
+          this.addProveedor(proveedor, filialID);
         } else {
           proveedoresNoIngresados.push(
             'Nombre: ' +

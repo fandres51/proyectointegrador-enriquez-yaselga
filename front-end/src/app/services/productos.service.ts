@@ -7,6 +7,7 @@ import { FilialService } from './filial.service';
 import { Contador } from '../models/contador';
 import { Producto } from '../models/producto';
 import * as Papa from 'papaparse';
+import { AsociacionService } from './asociacion.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class ProductosService {
 
   constructor(
     private afs: AngularFirestore,
-    private filialService: FilialService
+    private filialService: FilialService,
+    private asociacionService: AsociacionService
   ) { }
 
   getCollection(): AngularFirestoreCollection<Producto> {
@@ -81,47 +83,17 @@ export class ProductosService {
     )
     }
 
-  addProducto(nuevaProducto: Producto, idFilial:string) {
-    let idcontador: number;
+  addProducto(nuevoProducto: Producto, idFilial:string) {
     let bool = true; //eveita un bucle infinito X((
-    this.filialService.getContador('Producto',idFilial).subscribe(
-      result=>{
-        if(result){
-            if(result.contador>=1){
-              idcontador=result.contador+1;
-            }else{
-              idcontador=1
-            }
-            if (bool) {
-              nuevaProducto.id = 'PRD' + idcontador;
-              this.getCollection().doc('/'+idFilial+'/Producto/'+'PRD' + idcontador).set(nuevaProducto);
-              if(idcontador==1){
-                this.filialService.createContador('Producto',idFilial);
-              }else{
-                this.filialService.increaseContador('Producto',idFilial);
-              }
-              
-              bool = false
-            }
-          
-
-        }else{
-           idcontador=1
-          if (bool) {
-            nuevaProducto.id = 'PRD' + idcontador;
-            this.getCollection().doc('/'+idFilial+'/Producto/'+'PRD' + idcontador).set(nuevaProducto);
-            if(idcontador==1){
-              this.filialService.createContador('Producto',idFilial);
-            }else{
-              this.filialService.increaseContador('Producto',idFilial);
-            }
-            
+    this.asociacionService.getContador('Producto').subscribe(
+      (contador: Contador) => {
+          if(bool) {
+            nuevoProducto.id = 'PROD' + contador.contador;
+            this.getCollectionID(idFilial).doc('PROD' + contador.contador).set(nuevoProducto);
+            this.asociacionService.increaseContador('Producto');
             bool = false
           }
-
-        }
-      }
-      ,
+      },
       error => {
         console.error(error);
       }
@@ -168,7 +140,7 @@ export class ProductosService {
         producto.estado = Boolean(producto.estado);
         const respuesta = this.comprobarEstructura(producto);
         if (!respuesta) {
-          this.getCollectionID(filialID).add(producto)
+          this.addProducto(producto, filialID);
         } else {
           productosNoIngresados.push(
             'Nombre' +
