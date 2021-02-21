@@ -16,8 +16,8 @@ export class FilialComponent implements OnInit {
     id:"0",
     nombre:""
   };
-  iconos = ['store', 'account_box', 'attach_money', 'calendar_today', 'edit'];
-  modulos = ['Productos','Proveedores', 'Finanzas', 'Alquileres', 'Actualizar'];
+  iconos = ['store', 'account_box', 'attach_money', 'edit'];
+  modulos = ['Productos','Proveedores', 'Finanzas', 'Actualizar'];
   rutas:string[];
   
 

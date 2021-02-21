@@ -21,7 +21,7 @@ export class RecursosGuard implements CanActivate {
                                 if(permisos.length>0)
                                     res(true);
                                 else
-                                    res(true)
+                                    res(false)
                             },
                             error => {
                               console.error(error);
