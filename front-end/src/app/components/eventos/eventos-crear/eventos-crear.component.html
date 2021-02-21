@@ -93,27 +93,41 @@
             <h2 class="tit1 margin-top">Responsables: </h2>
             <div fxLayout="column">
                 <label class="label" for="responsables">Responsable 1: </label>
-                <select name="responsables" id="responsables" [(ngModel)]="responsables.resp1">
+                <select name="responsables" id="responsables" [(ngModel)]="responsables.resp1" #resp1>
+                    <option value=""> </option>
                     <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
                 </select>
             </div>
-            <div fxLayout="column">
-                <label class="label" for="responsables">Responsable 2: </label>
-                <select name="responsables" id="responsables" [(ngModel)]="responsables.resp2">
-                    <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
-                </select>
+            <div *ngIf="resp1.value !== ''">
+                <div fxLayout="column">
+                    <label class="label" for="responsables2">Responsable 2: </label>
+                    <select 
+                        name="responsables2" 
+                        id="responsables2" 
+                        [(ngModel)]="responsables.resp2"
+                        #resp2
+                    >
+                        <option value=""> </option>
+                        <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
+                    </select>
+                </div>
+                <div fxLayout="column" *ngIf="resp2.value !== ''">
+                    <label class="label" for="responsables3">Responsable 3: </label>
+                    <select 
+                        
+                        name="responsables3" 
+                        id="responsables3" 
+                        [(ngModel)]="responsables.resp3"
+                    >
+                        <option value=""> </option>
+                        <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
+                    </select>
+                </div>
             </div>
-            <div fxLayout="column">
-                <label class="label" for="responsables">Responsable 3: </label>
-                <select name="responsables" id="responsables" [(ngModel)]="responsables.resp3">
-                    <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
-                </select>
-            </div>
-
             <h2 class="tit1 margin-top">Horarios: </h2>
             <div fxLayout="column">
-                <label class="label" for="responsables">Tipo: </label>
-                <select name="responsables" id="responsables" #responsable [(ngModel)]="nuevoEvento.tipo">
+                <label class="label" for="tipo">Tipo: </label>
+                <select name="tipo" id="tipo" #tipo [(ngModel)]="nuevoEvento.tipo">
                     <option value="Evento">Evento único</option>
                     <option value="Recursivo">Evento recursivo</option>
                     <option value="Club">Club</option>
