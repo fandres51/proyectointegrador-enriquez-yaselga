@@ -91,6 +91,16 @@ export class EventosEditarComponent implements OnInit {
     )
   }
 
+  comprobarValor() {
+    if(!this.responsables.resp1) {
+      this.responsables.resp2 = '';
+      this.responsables.resp3 = '';
+    }
+    if(!this.responsables.resp2) {
+      this.responsables.resp3 = '';
+    }
+  }
+
   crearArregoDias(): number[] {
     const arregloDias: number[] = [];
     if (this.dias.domingo)

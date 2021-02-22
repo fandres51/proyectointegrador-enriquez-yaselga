@@ -93,7 +93,13 @@
             <h2 class="tit1 margin-top">Responsables: </h2>
             <div fxLayout="column">
                 <label class="label" for="responsables">Responsable 1: </label>
-                <select name="responsables" id="responsables" [(ngModel)]="responsables.resp1" #resp1>
+                <select 
+                    name="responsables" 
+                    id="responsables" 
+                    [(ngModel)]="responsables.resp1" 
+                    #resp1
+                    (change)="comprobarValor()"    
+                >
                     <option value=""> </option>
                     <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
                 </select>
@@ -106,6 +112,7 @@
                         id="responsables2" 
                         [(ngModel)]="responsables.resp2"
                         #resp2
+                        (change)="comprobarValor()"
                     >
                         <option value=""> </option>
                         <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>

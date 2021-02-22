@@ -93,16 +93,16 @@
                 </div>
             </div>
             <div fxLayout="column" fxFlex="48">
-                <label class="label" for="presupuesto">Presupuesto (genera una transacción)</label>
+                <label class="label" for="presupuesto">Presupuesto</label>
                 <input 
                     class="input" 
-                    [disabled]="!editable"
                     id="presupuesto" 
                     name="presupuesto" 
                     type="number" 
                     min="0" 
                     step=".01" 
                     [(ngModel)]="evento.presupuesto"
+                    disabled
                 >
             </div>
         </div>
@@ -110,6 +110,7 @@
         <div fxLayout="column">
             <label class="label" for="responsables">Responsable 1: </label>
             <select 
+                (change)="comprobarValor()"
                 name="responsables" 
                 id="responsables" 
                 [(ngModel)]="responsables.resp1"
@@ -124,6 +125,7 @@
             <div fxLayout="column">
                 <label class="label" for="responsables2">Responsable 2: </label>
                 <select 
+                    (change)="comprobarValor()"
                     name="responsables2" 
                     id="responsables2" 
                     [(ngModel)]="responsables.resp2"
@@ -352,7 +354,7 @@
         <div fxLayout="row" fxLayoutAlign="end ">
             <div *ngIf="editable" fxFlex="50">
                 <button mat-button type="submit" class="button" [disabled]="!form.form.valid">
-                    Editar evento
+                    Confirmar
                 </button>
             </div>
             <div>
