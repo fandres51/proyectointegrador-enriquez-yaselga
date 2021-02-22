@@ -27,10 +27,10 @@ export class ProductosService {
   }
   getCollectionID(idFilial: string): AngularFirestoreCollection<Producto> {
     ////console.log(">>>Path: Asociacion/AEIS/Filial/"+idFilial+"/Producto");
-    return this.afs.collection<Producto>('Asociacion/AEIS/Filial/'+idFilial+"/Producto");
+    return this.afs.collection<Producto>('Asociacion/AEIS/Filial/' + idFilial + "/Producto");
   }
 
-  getProductos(idFilial:string): Observable<Producto[]> {
+  getProductos(idFilial: string): Observable<Producto[]> {
     ////console.log(">>>Llego: ");
     return this.getCollectionID(idFilial).snapshotChanges().pipe(
       map(actions => actions.map(a => {
@@ -47,9 +47,9 @@ export class ProductosService {
     )
   }
 
-  getProducto(id: string, idFilial: string ): Observable<Producto> {
-    return this.getCollection().doc<Producto>('/'+idFilial+'/Producto/'+id).snapshotChanges().pipe(
-      map( a => {
+  getProducto(id: string, idFilial: string): Observable<Producto> {
+    return this.getCollection().doc<Producto>('/' + idFilial + '/Producto/' + id).snapshotChanges().pipe(
+      map(a => {
         const data = a.payload.data() as Producto;
         Object.keys(data).filter(
           key => data[key] instanceof firebase.firestore.Timestamp
@@ -63,16 +63,16 @@ export class ProductosService {
   }
 
   updateProducto(producto: Producto, idFilial: string) {
-    this.afs.collection('Asociacion/AEIS/Filial/'+idFilial+'/Producto').doc(producto.id).set(producto)
+    this.afs.collection('Asociacion/AEIS/Filial/' + idFilial + '/Producto').doc(producto.id).set(producto)
   }
 
   deleteProducto(idproducto: string, idFilial: string) {
-    this.getCollection().doc('/'+idFilial+'/Producto/'+idproducto).delete();
-    let bool = true; 
-    this.filialService.getContador('Producto',idFilial).subscribe(
+    this.getCollection().doc('/' + idFilial + '/Producto/' + idproducto).delete();
+    let bool = true;
+    this.filialService.getContador('Producto', idFilial).subscribe(
       (contador: Contador) => {
-        if (bool) {        
-          this.getCollection().doc('/'+idFilial+'/Producto/'+'PRD' + contador.contador).delete();
+        if (bool) {
+          this.getCollection().doc('/' + idFilial + '/Producto/' + 'PRD' + contador.contador).delete();
           //this.filialService.decreaseContador('Producto',idFilial);
           bool = false
         }
@@ -81,18 +81,20 @@ export class ProductosService {
         console.error(error);
       }
     )
-    }
+  }
 
-  addProducto(nuevoProducto: Producto, idFilial:string) {
+  addProducto(nuevoProducto: Producto, idFilial: string) {
     let bool = true; //eveita un bucle infinito X((
     this.asociacionService.getContador('Producto').subscribe(
       (contador: Contador) => {
-          if(bool) {
-            nuevoProducto.id = 'PROD' + contador.contador;
-            this.getCollectionID(idFilial).doc('PROD' + contador.contador).set(nuevoProducto);
-            this.asociacionService.increaseContador('Producto');
-            bool = false
-          }
+        if (bool) {
+          nuevoProducto.id = 'PROD' + contador.contador;
+          this.getCollectionID(idFilial).doc('PROD' + contador.contador).set(nuevoProducto);
+          //console.log("Preducto ", nuevoProducto.id ," : ",nuevoProducto)
+          this.asociacionService.increaseContador('Producto');
+          //console.log("Contador: ",contador.contador);
+          bool = false
+        }
       },
       error => {
         console.error(error);
@@ -100,16 +102,18 @@ export class ProductosService {
     )
   }
 
+
+
   getCollectionX(): AngularFirestoreCollection<Producto> {
     return this.afs.collection<Producto>('Asociacion/AEIS/Filial');
   }
 
-  addProductoX(productoPrueba:Producto, idFilial:string) {
-    this.getCollectionX().doc('/'+idFilial+'/Producto/'+'PRD1').set(productoPrueba);
+  addProductoX(productoPrueba: Producto, idFilial: string) {
+    this.getCollectionX().doc('/' + idFilial + '/Producto/' + 'PRD1').set(productoPrueba);
   }
 
-  darDeBaja(id: string, idFilial:string) {
-    const recursoDoc: AngularFirestoreDocument<Producto> = this.getCollection().doc('/'+idFilial+'/Producto/'+id);
+  darDeBaja(id: string, idFilial: string) {
+    const recursoDoc: AngularFirestoreDocument<Producto> = this.getCollection().doc('/' + idFilial + '/Producto/' + id);
     recursoDoc.update({
       estado: false
     });
@@ -122,7 +126,7 @@ export class ProductosService {
           complete: res => {
             this.firethisProducto(res['data'], filialID).then(
               productosNoIngresadas => resF(productosNoIngresadas)
-            ).catch (
+            ).catch(
               e => console.error('Archivo no admitido')
             )
           },
@@ -134,29 +138,50 @@ export class ProductosService {
 
   private firethisProducto(productos: Producto[], filialID: string): Promise<string[]> {
     const productosNoIngresados: string[] = [];
+
     return new Promise((resolve) => {
-      productos.forEach((producto) => {
+      productos.forEach((producto, i) => {
         producto.precio = Number(producto.precio)
         producto.estado = Boolean(producto.estado);
         const respuesta = this.comprobarEstructura(producto);
         if (!respuesta) {
-          this.addProducto(producto, filialID);
+          const x = this;
+          setTimeout(function () {
+            let bool = true; //eveita un bucle infinito X((
+              x.asociacionService.getContador('Producto').subscribe(
+              (contador: Contador) => {
+                if (bool) {
+                  producto.id = 'PROD' + contador.contador;
+                  x.getCollectionID(filialID).doc('PROD' + contador.contador).set(producto);
+                  //console.log("Preducto ", nuevoProducto.id ," : ",nuevoProducto)
+                  x.asociacionService.increaseContador('Producto');
+                  //console.log("Contador: ",contador.contador);
+                  bool = false
+                }
+              },
+              error => {
+                console.error(error);
+              }
+            )
+          }, 400 * i);
+
         } else {
           productosNoIngresados.push(
             'Nombre' +
             producto.nombre +
-            'Razón: ' + 
+            'Razón: ' +
             respuesta
           );
         }
+
       })
       resolve(productosNoIngresados);
     })
-  } 
+  }
 
   private comprobarEstructura(producto: Producto): string {
     let razon: string = '';
-    if(!producto.nombre) {
+    if (!producto.nombre) {
       razon = 'Sin nombre';
     }
     if (
