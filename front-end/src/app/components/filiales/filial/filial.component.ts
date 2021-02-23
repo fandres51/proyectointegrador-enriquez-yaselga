@@ -30,7 +30,7 @@ export class FilialComponent implements OnInit {
   ngOnInit(): void {
     this.idFilial = this.route.snapshot.params['id'];
     this.filialService.getFilial(this.idFilial).subscribe(item=>{this.filial=item})
-    this.rutas = ['filiales/filial/'+this.idFilial+'/productos', 'filiales/filial/'+this.idFilial+'/proveedores', 'filiales/filial/'+this.idFilial+'/financiero', 'filiales/filial/'+this.idFilial+'/alquileres','/filiales/actualizar/'+this.idFilial];
+    this.rutas = ['filiales/filial/'+this.idFilial+'/productos', 'filiales/filial/'+this.idFilial+'/proveedores', 'filiales/filial/'+this.idFilial+'/financiero', '/filiales/actualizar/'+this.idFilial,'filiales/filial/'+this.idFilial+'/alquileres'];
     
   }
   navigate(i) {
