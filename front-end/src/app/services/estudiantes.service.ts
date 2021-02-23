@@ -191,7 +191,7 @@ export class EstudiantesService {
             this.firethisEstudiante(res['data']).then(
               estudiantesNoIngresados => resF(estudiantesNoIngresados)
             ).catch (
-              e => console.error('Archivo no admitido')
+              e => console.error(e)
             )
           },
           header: true
@@ -204,7 +204,8 @@ export class EstudiantesService {
     const estudiantesNoIngresados: string[] = [];
     return new Promise((resolve) => {
       estudiantes.forEach((estudiante) => {
-        estudiante.FechaNacimiento = new Date(estudiante.FechaNacimiento);
+        if(estudiante.FechaNacimiento)
+          estudiante.FechaNacimiento = new Date(estudiante.FechaNacimiento);
         estudiante.Apellido = estudiante.Apellido.toUpperCase();
         estudiante.Nombre = estudiante.Nombre.toUpperCase();
         const razon = this.comprobarEstructura(estudiante);
@@ -233,7 +234,7 @@ export class EstudiantesService {
   private comprobarEstructura(estudiante: Estudiante): string {
     let razon: string = '';
     if (
-      !estudiante.FechaNacimiento ||
+      estudiante.FechaNacimiento &&
       !(estudiante.FechaNacimiento instanceof Date)
     ) {
       razon = 'fecha';
