@@ -20,7 +20,7 @@
                     maxlength="50"
                     minlength="2"
                 >
-                <div class="err" *ngIf="desc.touched && desc.errors">
+                <div class="err" *ngIf="nombre.touched && nombre.errors">
                     Error, campo requerido
                 </div>
             </div>
@@ -30,13 +30,10 @@
                     type="text" 
                     name="addDescripcion" 
                     id="addDescripcion" 
-                    required
+                    
                     [(ngModel)]="recurso.descripcion"
                     #desc="ngModel"
                 >
-                <div class="err" *ngIf="desc.touched && desc.errors">
-                    Error, campo requerido
-                </div>
             </div>
             <div fxLayout="column" fxFlex=100 class="form-item">
                 <label for="addEspacio">Es un espacio físico?: </label>
@@ -59,6 +56,9 @@
                     [(ngModel)]="recurso.tipo"
                     #tipo="ngModel"
                 >
+                <div class="err" *ngIf="tipo.touched && tipo.errors">
+                    Error, campo requerido
+                </div>
             </div>
             <div fxLayout="column" fxFlex=100 class="form-item">
                 <label for="addEstado">Estado: </label>
@@ -88,8 +88,7 @@
                     <option value="Perdido">Perdido</option>
                 </select>
             </div>
-            <div fxLayout="column" fx
-            Flex=100 class="form-item">
+            <div fxLayout="column" fxFlex=100 class="form-item">
                 <label for="addValor">Valor: </label>
                 <input 
                     type="number" 
@@ -100,8 +99,10 @@
                     required
                     [(ngModel)]="recurso.valor"
                     #valor="ngModel"
-                    valor=0
                 >
+                <div class="err" *ngIf="valor.touched && valor.errors">
+                    Error, campo requerido
+                </div>
             </div>
             
             <!--div fxLayout="column" fxFlex=100 class="form-item">

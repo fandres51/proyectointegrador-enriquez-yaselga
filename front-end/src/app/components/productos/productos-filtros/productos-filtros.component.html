@@ -33,6 +33,7 @@
             </button>
         </form>
     </div>
+    <button mat-button (click)="clnSrch(nombreInput, inputCedula)">Limpiar búsqueda</button>
     <hr>
     <hr fxHide.lt-md>
     <div fxHide.lt-md>
@@ -59,7 +60,7 @@
         <button mat-button [ngClass]="{
                                         'filtrosButton': tipoOrdenamiento != 'Codigo', 
                                         'selected': tipoOrdenamiento == 'Codigo'
-                                    }" mat-button (click)="ordenar('Codigo')">Codigo</button>
+                                    }" mat-button (click)="ordenar('Codigo')">Ingreso</button>
         <button mat-button [ngClass]="{
                                         'filtrosButton': tipoOrdenamiento != 'Precio', 
                                         'selected': tipoOrdenamiento == 'Precio'

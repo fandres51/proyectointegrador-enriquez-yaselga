@@ -26,7 +26,6 @@ export class ProductosMainComponent implements OnInit {
   ) { }
 
   ngOnInit(){
-    
 
     this.idFilial = this.route.snapshot.params['id'];
     this.filialService.getFilial(this.idFilial).subscribe(item=>{this.filial=item})

@@ -34,13 +34,16 @@ export class EstudiantesFiltrosComponent implements OnInit {
   /***Filtros*******************************************/
 
   public buscarPorNombre(input: string) {
+    input = input.toUpperCase().trim();
+
     const estudiantesAMostrar = this.estudiantes.filter(estudiante => {
-      return estudiante.Nombre.search(input) != -1 || estudiante.Apellido.search(input) != -1;
+      return estudiante.Nombre.toUpperCase().search(input.toUpperCase()) != -1 || estudiante.Apellido.toUpperCase().search(input.toUpperCase()) != -1;
     })
     this.enviarEstudiantes(estudiantesAMostrar);
   }
 
   public buscarPorCedula(input: string) {
+    input = input.trim();
     const estudiantesAMostrar = this.estudiantes.filter(estudiante => {
       return estudiante.NoUnico.search(input) != -1;
     })

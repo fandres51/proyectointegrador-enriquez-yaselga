@@ -177,8 +177,6 @@ export class EstudiantesService {
     ) //cambia el estado de cada estudiante a 'No aportante' y crea un Aporte vacío
   }
 
-
-
   desafiliarEstudiante(noUnico: string) {
     this.afs.doc<Estudiante>(`Asociacion/AEIS/Persona/${noUnico}`).update({ EstadoAfiliacion: 'No afiliado' });
   }
@@ -209,21 +207,19 @@ export class EstudiantesService {
         estudiante.Apellido = estudiante.Apellido.toUpperCase();
         estudiante.Nombre = estudiante.Nombre.toUpperCase();
         const razon = this.comprobarEstructura(estudiante);
-        if (
-          estudiante.EstadoAfiliacion !== 'Aportante' &&
-          estudiante.EstadoAfiliacion !== 'No aportante' &&
-          estudiante.EstadoAfiliacion !== 'No afiliado'
-        ) {
-          estudiante.EstadoAfiliacion = 'No afiliado';
+        
+        if(estudiante.EstadoAfiliacion && estudiante.EstadoAfiliacion === 'Aportante') {
+          this.afiliarEstudiante(estudiante.NoUnico);
+        } else {
+          estudiante.EstadoAfiliacion = 'No aportante';
         }
+        
+       
         if (!razon) {
           this.getCollection().doc(estudiante.NoUnico).set(estudiante);
         } else {
           estudiantesNoIngresados.push(
-            'No único: ' + 
-            estudiante.NoUnico + 
-            'Razón: ' + 
-            razon  
+            'No único: ' + estudiante.NoUnico + 'Razón: ' + razon
           );
         }
       })
@@ -242,7 +238,8 @@ export class EstudiantesService {
     if (
       estudiante.Carrera !== 'Sistemas' &&
       estudiante.Carrera !== 'Computacion' &&
-      estudiante.Carrera !== 'Software'
+      estudiante.Carrera !== 'Software' &&
+      estudiante.Carrera !== 'n/a'
     ) {
       razon = 'carrera';
     }
@@ -257,7 +254,8 @@ export class EstudiantesService {
       estudiante.SemestreReferencial !== '8' &&
       estudiante.SemestreReferencial !== '9' &&
       estudiante.SemestreReferencial !== '10' &&
-      estudiante.SemestreReferencial !== 'Egresado'
+      estudiante.SemestreReferencial !== 'Egresado' &&
+      estudiante.SemestreReferencial !== 'n/a'
     ) {
       razon = 'semestre';
     }

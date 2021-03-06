@@ -38,7 +38,7 @@ export class ProveedoresFiltrosComponent implements OnInit {
 
   public buscarPorNombre(input: string) {
     this.proveedoresAMostrar = this.proveedores.filter(proveedor => {
-      return proveedor.nombre.search(input) != -1 ;
+      return proveedor.nombre.toUpperCase().search(input.toUpperCase()) != -1 ;
     })
     this.enviarProveedores(this.proveedoresAMostrar);
   }
@@ -48,6 +48,12 @@ export class ProveedoresFiltrosComponent implements OnInit {
       return proveedor.id.search(input) != -1;
     })
     this.enviarProveedores(this.proveedoresAMostrar);
+  }
+
+  clnSrch(val1, val2) {
+    val1.value = '';
+    val2.value = '';
+    this.enviarProveedores(this.proveedores);
   }
 
   public filtroEstado(estado) {
@@ -68,10 +74,10 @@ export class ProveedoresFiltrosComponent implements OnInit {
 
   compararPorCodigo(a, b) {
     if (a.id < b.id) {
-      return -1;
+      return 1;
     }
     if (a.id > b.id) {
-      return 1;
+      return -1;
     }
     return 0;
   }

@@ -39,7 +39,7 @@ export class ProductosFiltrosComponent implements OnInit {
 
   public buscarPorNombre(input: string) {
     this.productosAMostrar = this.productos.filter(produto => {
-      return produto.nombre.search(input) != -1 || produto.categoria.search(input) != -1;
+      return produto.nombre.toUpperCase().search(input.toUpperCase()) != -1 || produto.categoria.toUpperCase().search(input.toUpperCase()) != -1;
     })
     
     this.enviarProductos(this.productosAMostrar);
@@ -51,6 +51,12 @@ export class ProductosFiltrosComponent implements OnInit {
     })
     
     this.enviarProductos(this.productosAMostrar);
+  }
+
+  clnSrch(val1, val2) {
+    val1.value = '';
+    val2.value = '';
+    this.enviarProductos(this.productos);
   }
 
   /***Filtros*******************************************/
@@ -94,10 +100,10 @@ export class ProductosFiltrosComponent implements OnInit {
   compararPorCodigo(a, b) {
     ////console.log(">>>ordenando>> a:", a.id ," - b:", b.id);
     if (a.id < b.id) {
-      return -1;
+      return 1;
     }
     if (a.id > b.id) {
-      return 1;
+      return -1;
     }
     return 0;
   }

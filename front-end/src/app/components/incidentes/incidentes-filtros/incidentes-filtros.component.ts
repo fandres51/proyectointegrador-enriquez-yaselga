@@ -37,14 +37,14 @@ export class IncidentesFiltrosComponent implements OnInit {
   
   buscarPorNombre(busqueda: string) {
     let incidentesAMostrar = this.incidentes.filter( n => {
-      return n.nombre.includes(busqueda);
+      return n.nombre.toUpperCase().includes(busqueda.toUpperCase());
     })
     this.onSearch.emit(incidentesAMostrar);
   }
   
   buscarPorEvento(busqueda: string) {
     let incidentesAMostrar = this.incidentes.filter( n => {
-      return n.evento.includes(busqueda);
+      return n.evento.toUpperCase().includes(busqueda.toUpperCase());
     })
     this.onSearch.emit(incidentesAMostrar);
   }

@@ -24,13 +24,10 @@
                 type="text" 
                 id="descripcion" 
                 name="descripcion" 
-                
                 [(ngModel)]="proveedor.descripcion"
                 #desc="ngModel"
             >
-            <div class="err" *ngIf="desc.touched && desc.errors">
-                Error, campo requerido
-            </div>
+            
         </div>
         <div fxLayout="column">
             <label for="contacto">Contacto:</label>
@@ -42,12 +39,15 @@
                 required
                 #inter="ngModel"
             >
+            <div class="err" *ngIf="inter.touched && inter.errors">
+                Error, campo requerido
+            </div>
         </div>
-        <div fxLayout="column">
-            <input type="radio" id="activo" name="gender" value="true" [(ngModel)]="proveedor.estado" #inter="ngModel" required>
+        <div fxLayout="row" class="active-box">
             <label for="activo">Activo</label>
-            <input type="radio" id="inactivo" name="gender" value="false" [(ngModel)]="proveedor.estado" #inter="ngModel" required>
+            <input type="radio" id="activo" name="gender" value="true" [(ngModel)]="proveedor.estado" #inter="ngModel" required>
             <label for="inactivo">Inactivo</label>
+            <input type="radio" id="inactivo" name="gender" value="false" [(ngModel)]="proveedor.estado" #inter="ngModel" required>
         </div>
                 
         <div class="butt-box">

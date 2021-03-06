@@ -1,6 +1,6 @@
 <div fxLayout="column">
     <div fxFlex="10" fxLayout="row" fxLayoutAlign="space-between center" class="top-bar" fxHide.lt-md>
-        <div class="registros-mostrados">Registros mostrados: {{proveedores.length}} de la filial {{filial.nombre}}</div>
+        <div class="registros-mostrados">Registros mostrados en {{filial.nombre}}: {{proveedores.length}}</div>
         
         <div fxFlex="50" fxLayoutAlign="end center">
           <button routerLink="/filiales/filial/{{idFilial}}/proveedores/nuevo" class="but-cargar-proveedor" mat-button fxLayoutAlign="center center">

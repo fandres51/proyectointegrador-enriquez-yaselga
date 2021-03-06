@@ -28,9 +28,6 @@
                 [(ngModel)]="producto.descripcion"
                 #desc="ngModel"
             >
-            <div class="err" *ngIf="desc.touched && desc.errors">
-                Error, campo requerido
-            </div>
         </div>
         <div fxLayout="column">
             <label for="idproveedor">Proveedor:</label>
@@ -50,26 +47,30 @@
                 id="categoria" 
                 name="categoria" 
                 [(ngModel)]="producto.categoria"
-                
+                required
                 #inter="ngModel"
             >
+            <div class="err" *ngIf="inter.touched && inter.errors">
+                Error, campo requerido
+            </div>
         </div>
         <div fxLayout="column">
             <label for="precio">Precio:</label>
             <input 
-                type="text" 
+                type="number" 
                 id="precio" 
                 name="precio" 
                 [(ngModel)]="producto.precio"
                 required
                 #inter="ngModel"
+                step=".01"
             >
         </div>
-        <div fxLayout="column">
+        <div class="active-box" fxLayout="row" fxJustifyItems="center">
+            <label for="activo">Activo: </label>
             <input type="radio" id="activo" name="gender" value="true" [(ngModel)]="producto.estado" #inter="ngModel" required>
-            <label for="activo">Activo</label>
+            <label for="inactivo">Inactivo: </label>
             <input type="radio" id="inactivo" name="gender" value="false" [(ngModel)]="producto.estado" #inter="ngModel" required>
-            <label for="inactivo">Inactivo</label>
         </div>
                 
         <div class="butt-box">
