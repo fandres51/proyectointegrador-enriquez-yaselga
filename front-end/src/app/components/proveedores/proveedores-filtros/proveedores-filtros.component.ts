@@ -15,9 +15,9 @@ export class ProveedoresFiltrosComponent implements OnInit {
   idFilial:string;
   @Output() private mostrarProveedores = new EventEmitter();
 
-  public tipoOrdenamiento: 'Nombre' | 'Contacto' | 'Codigo' | '' = '';
+  public tipoOrdenamiento: 'Nombre' | 'Contacto' | 'Codigo' | '';
   EstadoFiltro: boolean=null;
-  EstadoFiltroString: 'Activo'|'Inactivo'|''='';
+  EstadoFiltroString: 'Activo' | 'Inactivo' | '';
   constructor(
     private proveedoresService: ProveedoresService,
     private route:ActivatedRoute,
@@ -73,6 +73,10 @@ export class ProveedoresFiltrosComponent implements OnInit {
   /***Ordenamiento*******************************************/
 
   compararPorCodigo(a, b) {
+    if(a.id.length < b.id.length)
+      return 1
+    if(a.id.length > b.id.length)
+      return -1
     if (a.id < b.id) {
       return 1;
     }
@@ -96,10 +100,10 @@ export class ProveedoresFiltrosComponent implements OnInit {
   compararPorNombre(a, b) {
     
     if (a.nombre < b.nombre) {
-      return -1;
+      return 1;
     }
     if (a.nombre > b.nombre) {
-      return 1;
+      return -1;
     }
     return 0;
   }

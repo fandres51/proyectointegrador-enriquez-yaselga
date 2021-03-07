@@ -23,7 +23,7 @@
                     minlength="2"
                     value={{recurso.nombre}}
                 >
-                <div class="err" *ngIf="desc.touched && desc.errors">
+                <div class="err" *ngIf="nombre.touched && nombre.errors">
                     Error, campo requerido
                 </div>
             </div>
@@ -35,14 +35,10 @@
                     type="text" 
                     name="addDescripcion" 
                     id="addDescripcion" 
-                    required
                     [(ngModel)]="recurso.descripcion"
                     #desc="ngModel"
                     value={{recurso.descripcion}}
                 >
-                <div class="err" *ngIf="desc.touched && desc.errors">
-                    Error, campo requerido
-                </div>
             </div>
             </div>
             <div fxLayout="column" fxFlex=100 class="form-row">
@@ -66,7 +62,6 @@
                     type="text" 
                     name="addTipo" 
                     id="addTipo" 
-                    required
                     [(ngModel)]="recurso.tipo"
                     #tipo="ngModel"
                     value={{recurso.tipo}}

@@ -87,10 +87,6 @@
                                         'selected': tipoOrdenamiento == 'ID'
                                     }" mat-button (click)="ordenar('ID')">Ingreso</button>
         <button mat-button [ngClass]="{
-                                        'filtrosButton': tipoOrdenamiento != 'Nombre', 
-                                        'selected': tipoOrdenamiento == 'Nombre'
-                                    }" mat-button (click)="ordenar('Apellido')">Nombre</button>
-        <button mat-button [ngClass]="{
                                         'filtrosButton': tipoOrdenamiento != 'Estado', 
                                         'selected': tipoOrdenamiento == 'Estado'
                                     }" mat-button (click)="ordenar('Estado')">Estado</button>

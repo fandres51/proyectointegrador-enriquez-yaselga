@@ -183,52 +183,26 @@ export class RecursosService {
     const recursosNoIngresadas: string[] = [];
     return new Promise((resolve) => {
       recursos.forEach((recurso, i) => {
-        recurso.valor = Number(recurso.valor)
-        recurso.espacio = Boolean(recurso.espacio);
 
-        const respuesta = this.comprobarEstructura(recurso);
-        if (!respuesta) {
+        recurso.valor = Number(recurso.valor);
+        recurso.espacio = true;
+        recurso.condicion = 'Nuevo';
+        recurso.estado= 'Libre';
+
+        if (recurso.nombre && recurso.valor) {
           const x = this;
           setTimeout(function () {
-            this.crearRecurso(recurso);
+            x.crearRecurso(recurso);
           }, 400 * i);
         } else {
           recursosNoIngresadas.push(
             'Recurso: ' +
-            recurso.nombre +
-            'Razón: ' +
-            respuesta
+            recurso.nombre
           );
         }
       })
       resolve(recursosNoIngresadas);
     })
-  }
-
-  private comprobarEstructura(recurso: Recurso): string {
-    let razon: string = '';
-    if (recurso.espacio == null) {
-      razon = 'espacio';
-    }
-    if (
-      recurso.estado !== 'Libre' &&
-      recurso.estado !== 'Ocupado' &&
-      recurso.estado !== 'Alquilado' &&
-      recurso.estado !== 'Reservado' &&
-      recurso.estado !== 'Baja' &&
-      recurso.estado !== 'Reparacion'
-    ) {
-      razon = 'estado';
-    }
-    if (
-      recurso.condicion !== 'Nuevo' &&
-      recurso.condicion !== 'Usado' &&
-      recurso.condicion !== 'Averiado' &&
-      recurso.condicion !== 'Perdido'
-    ) {
-      razon = 'condicion';
-    }
-    return razon;
   }
 
   AsignarFilial(id: string, idFilial: string) {

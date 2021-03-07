@@ -136,14 +136,15 @@ export class ProveedoresService {
 
   private firethisProveedor(proveedores: Proveedor[], filialID: string): Promise<string[]> {
     const proveedoresNoIngresados: string[] = [];
+    
     return new Promise((resolve) => {
       proveedores.forEach((proveedor, i) => {
-        proveedor.estado = Boolean(proveedor.estado);
+        proveedor.estado = true;
         const respuesta = this.comprobarEstructura(proveedor);
-        if (!respuesta) {
+        if (proveedor.nombre && proveedor.contacto) {
           const x = this;
           setTimeout(function () {
-            this.addProveedor(proveedor, filialID);
+            x.addProveedor(proveedor, filialID);
           }, 400 * i);
         } else {
           proveedoresNoIngresados.push(

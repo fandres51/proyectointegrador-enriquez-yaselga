@@ -188,7 +188,7 @@ export class EstudiantesService {
           complete: res => {
             this.firethisEstudiante(res['data']).then(
               estudiantesNoIngresados => resF(estudiantesNoIngresados)
-            ).catch (
+            ).catch(
               e => console.error(e)
             )
           },
@@ -202,24 +202,49 @@ export class EstudiantesService {
     const estudiantesNoIngresados: string[] = [];
     return new Promise((resolve) => {
       estudiantes.forEach((estudiante) => {
-        if(estudiante.FechaNacimiento)
+        if (estudiante.FechaNacimiento && (estudiante.FechaNacimiento instanceof Date))
           estudiante.FechaNacimiento = new Date(estudiante.FechaNacimiento);
+
         estudiante.Apellido = estudiante.Apellido.toUpperCase();
         estudiante.Nombre = estudiante.Nombre.toUpperCase();
-        const razon = this.comprobarEstructura(estudiante);
-        
-        if(estudiante.EstadoAfiliacion && estudiante.EstadoAfiliacion === 'Aportante') {
-          this.afiliarEstudiante(estudiante.NoUnico);
-        } else {
-          estudiante.EstadoAfiliacion = 'No aportante';
+
+        if (estudiante.Carrera && estudiante.Carrera !== 'Sistemas' && estudiante.Carrera !== 'Computacion' && estudiante.Carrera !== 'Software')
+          estudiante.Carrera = 'n/a';
+        if (!estudiante.Carrera)
+          estudiante.Carrera = 'n/a';
+
+        estudiante.EstadoAfiliacion = 'No aportante';
+
+        if (
+          estudiante.SemestreReferencial &&
+          estudiante.SemestreReferencial !== '1' &&
+          estudiante.SemestreReferencial !== '2' &&
+          estudiante.SemestreReferencial !== '3' &&
+          estudiante.SemestreReferencial !== '4' &&
+          estudiante.SemestreReferencial !== '5' &&
+          estudiante.SemestreReferencial !== '6' &&
+          estudiante.SemestreReferencial !== '7' &&
+          estudiante.SemestreReferencial !== '8' &&
+          estudiante.SemestreReferencial !== '9' &&
+          estudiante.SemestreReferencial !== '10' &&
+          estudiante.SemestreReferencial !== 'Egresado'
+        ) {
+          estudiante.SemestreReferencial = 'n/a';
         }
-        
-       
-        if (!razon) {
+
+        if (!estudiante.SemestreReferencial)
+          estudiante.SemestreReferencial = 'n/a';
+
+        if (estudiante.Nombre &&
+          estudiante.Apellido &&
+          estudiante.NoUnico &&
+          estudiante.NoUnico.match(/^[0-9]+$/) &&
+          estudiante.NoUnico.length === 9
+        ) {
           this.getCollection().doc(estudiante.NoUnico).set(estudiante);
         } else {
           estudiantesNoIngresados.push(
-            'No único: ' + estudiante.NoUnico + 'Razón: ' + razon
+            'No único: ' + estudiante.NoUnico
           );
         }
       })
@@ -227,38 +252,38 @@ export class EstudiantesService {
     })
   }
 
-  private comprobarEstructura(estudiante: Estudiante): string {
-    let razon: string = '';
-    if (
-      estudiante.FechaNacimiento &&
-      !(estudiante.FechaNacimiento instanceof Date)
-    ) {
-      razon = 'fecha';
-    }
-    if (
-      estudiante.Carrera !== 'Sistemas' &&
-      estudiante.Carrera !== 'Computacion' &&
-      estudiante.Carrera !== 'Software' &&
-      estudiante.Carrera !== 'n/a'
-    ) {
-      razon = 'carrera';
-    }
-    if (
-      estudiante.SemestreReferencial !== '1' &&
-      estudiante.SemestreReferencial !== '2' &&
-      estudiante.SemestreReferencial !== '3' &&
-      estudiante.SemestreReferencial !== '4' &&
-      estudiante.SemestreReferencial !== '5' &&
-      estudiante.SemestreReferencial !== '6' &&
-      estudiante.SemestreReferencial !== '7' &&
-      estudiante.SemestreReferencial !== '8' &&
-      estudiante.SemestreReferencial !== '9' &&
-      estudiante.SemestreReferencial !== '10' &&
-      estudiante.SemestreReferencial !== 'Egresado' &&
-      estudiante.SemestreReferencial !== 'n/a'
-    ) {
-      razon = 'semestre';
-    }
-    return razon;
-  }
+  //   private comprobarEstructura(estudiante: Estudiante): string {
+  //     let razon: string = '';
+  //     if (
+  //       estudiante.FechaNacimiento &&
+  //       !(estudiante.FechaNacimiento instanceof Date)
+  //     ) {
+  //       razon = 'fecha';
+  //     }
+  //     if (
+  //       estudiante.Carrera !== 'Sistemas' &&
+  //       estudiante.Carrera !== 'Computacion' &&
+  //       estudiante.Carrera !== 'Software' &&
+  //       estudiante.Carrera !== 'n/a'
+  //     ) {
+  //       razon = 'carrera';
+  //     }
+  //     if (
+  //       estudiante.SemestreReferencial !== '1' &&
+  //       estudiante.SemestreReferencial !== '2' &&
+  //       estudiante.SemestreReferencial !== '3' &&
+  //       estudiante.SemestreReferencial !== '4' &&
+  //       estudiante.SemestreReferencial !== '5' &&
+  //       estudiante.SemestreReferencial !== '6' &&
+  //       estudiante.SemestreReferencial !== '7' &&
+  //       estudiante.SemestreReferencial !== '8' &&
+  //       estudiante.SemestreReferencial !== '9' &&
+  //       estudiante.SemestreReferencial !== '10' &&
+  //       estudiante.SemestreReferencial !== 'Egresado' &&
+  //       estudiante.SemestreReferencial !== 'n/a'
+  //     ) {
+  //       razon = 'semestre';
+  //     }
+  //     return razon;
+  //   }
 }

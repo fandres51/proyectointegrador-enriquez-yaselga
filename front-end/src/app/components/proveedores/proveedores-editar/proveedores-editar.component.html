@@ -29,9 +29,6 @@
                 [(ngModel)]="proveedor.descripcion"
                 #desc="ngModel"
             >
-            <div class="err" *ngIf="desc.touched && desc.errors">
-                Error, campo requerido
-            </div>
         </div>
         
         <div fxLayout="column">
@@ -45,6 +42,9 @@
                 required
                 #inter="ngModel"
             >
+            <div class="err" *ngIf="inter.touched && inter.errors">
+                Error, campo requerido
+            </div>
         </div>
         <div fxLayout="column">
             <label class="label" for="responsables">Estado: </label>

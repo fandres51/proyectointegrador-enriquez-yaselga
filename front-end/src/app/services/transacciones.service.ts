@@ -103,12 +103,12 @@ export class TransaccionesService {
     this.getCollection().doc(transaccionId).update({Activa: true})
   }
 
-  cargaMasivaTransaccion(file): Promise<string[]> {
+  cargaMasivaTransaccion(file, tipo='n/a'): Promise<string[]> {
     return new Promise(
       (resF) => {
         Papa.parse(file, {
           complete: res => {
-            this.firethisTransaccion(res['data']).then(
+            this.firethisTransaccion(res['data'], tipo).then(
               transaccionesNoIngresadas => resF(transaccionesNoIngresadas)
             ).catch (
               e => console.error('Archivo no admitido')
@@ -120,14 +120,15 @@ export class TransaccionesService {
     )
   }
 
-  private firethisTransaccion(transacciones: Transaccion[]): Promise<string[]> {
+  private firethisTransaccion(transacciones: Transaccion[], tipo='n/a'): Promise<string[]> {
     const transaccionesNoIngresadas: string[] = [];
     return new Promise((resolve) => {
       transacciones.forEach((transaccion) => {
         transaccion.Fecha = new Date(transaccion.Fecha);
         transaccion.Monto = Number(transaccion.Monto)
-        transaccion.Activa = Boolean(transaccion.Activa);
-        transaccion.Ingreso = Boolean(transaccion.Ingreso);
+        transaccion.Ingreso = true;
+        transaccion.Activa = true;
+        transaccion.Tipo = tipo;
         const respuesta = this.comprobarEstructura(transaccion);
         if (!respuesta) {
           this.addTransaccion(transaccion);
@@ -170,11 +171,7 @@ export class TransaccionesService {
     ) {
       respuesta = 'tipo ingreso/egreso';
     }
-    if (
-      typeof transaccion.Activa !== 'boolean'
-    ) {
-      respuesta = 'tipo activa/inactiva';
-    }
+
     return respuesta;
   }
 }

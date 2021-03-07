@@ -9,6 +9,6 @@ export interface Transaccion {
     Ingreso: boolean;
     Monto:number;
     PersonaID?:string;
-    Tipo: 'Afiliacion' | 'Evento' | 'Bar' | 'Alquiler' | 'Otro';
+    Tipo: string;
     Activa: boolean;
 }

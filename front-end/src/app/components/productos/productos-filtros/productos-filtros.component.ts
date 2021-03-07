@@ -99,6 +99,10 @@ export class ProductosFiltrosComponent implements OnInit {
 
   compararPorCodigo(a, b) {
     ////console.log(">>>ordenando>> a:", a.id ," - b:", b.id);
+    if(a.id.length < b.id.length) 
+      return 1;
+    if(a.id.length > b.id.length)
+      return -1;
     if (a.id < b.id) {
       return 1;
     }

@@ -52,13 +52,9 @@
                     type="text" 
                     name="addTipo" 
                     id="addTipo" 
-                    required
                     [(ngModel)]="recurso.tipo"
                     #tipo="ngModel"
                 >
-                <div class="err" *ngIf="tipo.touched && tipo.errors">
-                    Error, campo requerido
-                </div>
             </div>
             <div fxLayout="column" fxFlex=100 class="form-item">
                 <label for="addEstado">Estado: </label>

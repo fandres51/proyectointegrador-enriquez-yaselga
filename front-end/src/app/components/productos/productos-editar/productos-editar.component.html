@@ -29,9 +29,6 @@
                 [(ngModel)]="producto.descripcion"
                 #desc="ngModel"
             >
-            <div class="err" *ngIf="desc.touched && desc.errors">
-                Error, campo requerido
-            </div>
         </div>
         <div fxLayout="column">
             <label for="idproveedor">Proveedor:</label>
@@ -58,7 +55,7 @@
         <div fxLayout="column">
             <label for="precio">Precio:</label>
             <input 
-                type="text" 
+                type="number" 
                 id="precio" 
                 name="precio" 
                 [(ngModel)]="producto.precio"
@@ -74,17 +71,7 @@
                 <option value="false">Inactivo</option>
             </select>
         </div>
-        <div fxLayout="column">
-            <label for="fotos">Fotos:</label>
-            <input 
-                type="text" 
-                id="fotos" 
-                name="fotos" 
-                [(ngModel)]="producto.fotos"
-                value={{producto.fotos}}
-                #inter="ngModel"
-            >
-        </div>
+        
     
         <div class="butt-box">
             <button mat-button type="submit" [disabled]="!form.form.valid">

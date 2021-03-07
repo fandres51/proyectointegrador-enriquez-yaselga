@@ -11,19 +11,19 @@
             <input id="fileInput" type="file" accept=".csv" (change)="cargaMasiva($event.target.files)" style="display: none;">
         </div>
         <div fxHide.lt-md>
-            <a class="btn-dwn" href="https://drive.google.com/file/d/1R45QLLEwabX-cx8ZpR7qriCk8AIeA2qL/view?usp=sharing">Descargar formato de carga</a>
+            <a class="btn-dwn" target="_blank" href="https://drive.google.com/file/d/1tikF_6xdclNlJfu4uRgmldbDzZz3flyl/view?usp=sharing">Descargar formato de carga</a>
         </div>
        
     </div>
   </div>
   <div fxFlex="90" fxFlex.lt-md="100" fxLayout="row" fxLayout.lt-md="column">
-      <div fxFlex="20" fxFlex.md="30" fxFlex.lt-md="auto" fxLayout="row">
+      <div fxFlex="25" fxFlex.md="30" fxFlex.lt-md="auto" fxLayout="row">
           <app-recursos-filtros (mostrarRecursos)="recursos=$event"></app-recursos-filtros> 
       </div>
 
       <div class="line" fxHide.lt-md></div>
 
-      <div fxFlex="80" fxFlex.md="70" fxFlex.lt-md="auto" fxLayout="column" class="div-recursos">
+      <div fxFlex="75" fxFlex.md="70" fxFlex.lt-md="auto" fxLayout="column" class="div-recursos">
           <div fxLayout="column">
             <app-recursos-listar [_recursos]="recursos"></app-recursos-listar>
           </div>

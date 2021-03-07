@@ -55,19 +55,5 @@
         </div>
 
     </div>
-    <div fxHide.lt-md>
-        <h2 class="title">Ordenar por:</h2>
-        <button type="button" mat-button [ngClass]="{
-                                        'filtrosButton': tipoOrdenamiento != 'Codigo', 
-                                        'selected': tipoOrdenamiento == 'Codigo'
-                                    }" mat-button (click)="ordenar('Codigo')">Ingreso</button>
-        <button type="button" mat-button [ngClass]="{
-                                        'filtrosButton': tipoOrdenamiento != 'Contacto', 
-                                        'selected': tipoOrdenamiento == 'Contacto'
-                                    }" mat-button (click)="ordenar('Contacto')">Contacto</button>
-        <button type="button" mat-button [ngClass]="{
-                                        'filtrosButton': tipoOrdenamiento != 'Nombre', 
-                                        'selected': tipoOrdenamiento == 'Nombre'
-                                    }" mat-button (click)="ordenar('Nombre')">Nombre</button>
-    </div>
+   
 </div>

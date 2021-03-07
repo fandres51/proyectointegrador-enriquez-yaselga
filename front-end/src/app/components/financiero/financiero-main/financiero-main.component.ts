@@ -64,7 +64,12 @@ export class FinancieroMainComponent implements OnInit {
     if (file.type.split('/')[1] !== 'csv') {
       console.error('Unsupported file type!!');
     }
-    this.transaccionService.cargaMasivaTransaccion(file).then(
+   
+    let tipo = prompt('Ingrese un tipo \n(se puede dejar vacío)');
+    if(!tipo) {
+      tipo = 'n/a';
+    }
+    this.transaccionService.cargaMasivaTransaccion(file, tipo).then(
       noingresados => {
         if(noingresados.length > 0) {
           let registros: string = '';

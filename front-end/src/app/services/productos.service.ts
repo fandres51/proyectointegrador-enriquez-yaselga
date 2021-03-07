@@ -142,9 +142,10 @@ export class ProductosService {
     return new Promise((resolve) => {
       productos.forEach((producto, i) => {
         producto.precio = Number(producto.precio)
-        producto.estado = Boolean(producto.estado);
-        const respuesta = this.comprobarEstructura(producto);
-        if (!respuesta) {
+        producto.estado = true;
+        // const respuesta = this.comprobarEstructura(producto);
+        console.log('Nom>>', producto.nombre, '\nPre>>', producto.precio);
+        if (producto.nombre && producto.precio) {
           const x = this;
           setTimeout(function () {
             let bool = true; //eveita un bucle infinito X((
@@ -168,9 +169,7 @@ export class ProductosService {
         } else {
           productosNoIngresados.push(
             'Nombre' +
-            producto.nombre +
-            'Razón: ' +
-            respuesta
+            producto.nombre
           );
         }
 
