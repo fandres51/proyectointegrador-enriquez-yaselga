@@ -13,7 +13,7 @@ import { FilialService } from 'src/app/services/filial.service';
 })
 export class FinancieroMainComponent implements OnInit {
 
-  idFilial:string;
+  idFilial:string='';
   filial:Filial={
     id:"0",
     nombre:""
@@ -69,7 +69,7 @@ export class FinancieroMainComponent implements OnInit {
     if(!tipo) {
       tipo = 'n/a';
     }
-    this.transaccionService.cargaMasivaTransaccion(file, tipo).then(
+    this.transaccionService.cargaMasivaTransaccion(file, tipo, this.idFilial).then(
       noingresados => {
         if(noingresados.length > 0) {
           let registros: string = '';
