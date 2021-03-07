@@ -103,12 +103,12 @@ export class TransaccionesService {
     this.getCollection().doc(transaccionId).update({Activa: true})
   }
 
-  cargaMasivaTransaccion(file, tipo='n/a'): Promise<string[]> {
+  cargaMasivaTransaccion(file, tipo='n/a', FilialID=''): Promise<string[]> {
     return new Promise(
       (resF) => {
         Papa.parse(file, {
           complete: res => {
-            this.firethisTransaccion(res['data'], tipo).then(
+            this.firethisTransaccion(res['data'], tipo,FilialID).then(
               transaccionesNoIngresadas => resF(transaccionesNoIngresadas)
             ).catch (
               e => console.error('Archivo no admitido')
@@ -120,7 +120,7 @@ export class TransaccionesService {
     )
   }
 
-  private firethisTransaccion(transacciones: Transaccion[], tipo='n/a'): Promise<string[]> {
+  private firethisTransaccion(transacciones: Transaccion[], tipo='n/a',FilialID=''): Promise<string[]> {
     const transaccionesNoIngresadas: string[] = [];
     return new Promise((resolve) => {
       transacciones.forEach((transaccion) => {
@@ -129,6 +129,7 @@ export class TransaccionesService {
         transaccion.Ingreso = true;
         transaccion.Activa = true;
         transaccion.Tipo = tipo;
+        transaccion.FilialID = FilialID;
         const respuesta = this.comprobarEstructura(transaccion);
         if (!respuesta) {
           this.addTransaccion(transaccion);
