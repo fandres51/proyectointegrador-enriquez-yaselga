@@ -4,6 +4,7 @@ import { MatRipple } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Recurso } from 'src/app/models/recurso';
 import { RecursosService } from 'src/app/services/recursos.service';
+import { RecursosAlquilerComponent } from '../recursos-alquiler/recursos-alquiler.component';
 import { RecursosDialogInfoComponent } from '../recursos-dialog-info/recursos-dialog-info.component';
 
 @Component({
@@ -34,6 +35,15 @@ export class RecursosListarComponent implements OnInit {
 
   public openDialog(index:number):void {
     const dialogRef = this.dialog.open( RecursosDialogInfoComponent, {
+      width: '500px',
+      data: this.recursos[index]
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      //console.log('The dialog was closed');
+    })
+  } 
+  public openDialogRent(index:number):void {
+    const dialogRef = this.dialog.open( RecursosAlquilerComponent, {
       width: '500px',
       data: this.recursos[index]
     });

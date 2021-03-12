@@ -1,0 +1,70 @@
+<h1>
+<div fxLayout="row">
+    <div fxFlex="100" class="dato">
+        <div class="titulo">Alquilar: {{recurso.nombre}}</div>
+    </div>
+</div>
+</h1> 
+
+<div mat-dialog-content>
+        <form #form="ngForm" (ngSubmit)="addTransaccion(transaccion)" fxLayout="column" class="form">
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addMonto">Monto: </label>
+                <input 
+                    type="number" 
+                    min="0.05" 
+                    step=".01" 
+                    name="addMonto" 
+                    id="addMonto" 
+                    required
+                    [(ngModel)]="transaccion.Monto"
+                    #monto="ngModel"
+                >
+                <div class="err" *ngIf="monto.touched && monto.errors">
+                    Error, campo requerido
+                </div>
+            </div>
+
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addFecha">Fecha y hora: </label>
+                <div>
+                    <input 
+                        type="datetime-local"    
+                        id="addFecha"
+                        name="addFecha" 
+                        required
+                        [(ngModel)]="fecha"
+                        #fech="ngModel"
+                    >
+                    <div class="err" *ngIf="fech.touched && fech.errors">
+                        Error, campo requerido
+                    </div>
+                </div>
+            </div>
+  
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addDescripcion">Descripción: </label>
+                <div>
+                <input 
+                    type="text" 
+                    name="addDescripcion" 
+                    id="addDescripcion" 
+                    required
+                    [(ngModel)]="transaccion.Descripcion"
+                    #desc="ngModel"
+                >
+                <div class="err" *ngIf="desc.touched && desc.errors">
+                    Error, campo requerido
+                </div>
+            </div>
+            </div>
+            <div mat-dialog-actions>
+                <div fxLayout="column" fxFlex=100 class="form-item">
+                    <button mat-button [disabled]="!form.form.valid">
+                        Generar transacción
+                    </button>
+                </div>
+            </div>
+        </form>
+</div>
+
