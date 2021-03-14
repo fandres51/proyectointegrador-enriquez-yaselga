@@ -1,1 +1,83 @@
-<p>productos-editar works!</p>
+<div>
+    <app-titles text="Actualizar Producto" regresarA="/filiales/filial/{{idFilial}}/productos"></app-titles>
+</div>
+<div class="form">
+    <form #form="ngForm" (ngSubmit)="guardar()">
+        <div fxLayout="column">
+            <label for="nombre">Nombre:</label>
+            <input 
+                type="text" 
+                nombre="nombre" 
+                name="nombre" 
+                maxlength="50" 
+                required
+                value={{producto.nombre}}
+                [(ngModel)]="producto.nombre"
+                #nomb="ngModel"
+            >
+            <div class="err" *ngIf="nomb.touched && nomb.errors">
+                Error, campo requerido
+            </div>
+        </div>
+        <div fxLayout="column">
+            <label for="descripcion">Descripción:</label>
+            <input 
+                type="text" 
+                id="descripcion" 
+                name="descripcion" 
+                value={{producto.descripcion}}
+                [(ngModel)]="producto.descripcion"
+                #desc="ngModel"
+            >
+        </div>
+        <div fxLayout="column">
+            <label for="idproveedor">Proveedor:</label>
+            <input 
+                type="text" 
+                id="idproveedor" 
+                name="idproveedor" 
+                [(ngModel)]="producto.idproveedor"
+                value={{producto.idproveedor}}
+                #inter="ngModel"
+            >
+        </div>
+        <div fxLayout="column">
+            <label for="categoria">Categoria:</label>
+            <input 
+                type="text" 
+                id="categoria" 
+                name="categoria" 
+                [(ngModel)]="producto.categoria"
+                value={{producto.categoria}}
+                #inter="ngModel"
+            >
+        </div>
+        <div fxLayout="column">
+            <label for="precio">Precio:</label>
+            <input 
+                type="number" 
+                id="precio" 
+                name="precio" 
+                [(ngModel)]="producto.precio"
+                value={{producto.precio}}
+                required
+                #inter="ngModel"
+            >
+        </div>
+        <div fxLayout="column">
+            <label class="label" for="responsables">Estado: </label>
+            <select name="responsables" id="responsables" #responsable [(ngModel)]="producto.estado" required value={{producto.estado}}>
+                <option value="true">Activo</option>
+                <option value="false">Inactivo</option>
+            </select>
+        </div>
+        
+    
+        <div class="butt-box">
+            <button mat-button type="submit" [disabled]="!form.form.valid">
+                Guardar
+                <mat-icon aria-hidden="false" aria-label="Edit">new</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>

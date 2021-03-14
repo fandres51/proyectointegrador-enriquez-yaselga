@@ -10,7 +10,7 @@
             <app-basic-crud [listOfElements]="dignidadesNombres" (selectedItem)="irADignidad($event)" (newItem)="newDignidad()"></app-basic-crud>
         </div>
     </div>
-    <div class="delete">
+    <div class="delete" *ngIf="!eleccion.listaGanadora">
         <button mat-button (click)="deleteList()">
             Eliminar lista
             <mat-icon aria-hidden="false" aria-label="trash">delete</mat-icon>

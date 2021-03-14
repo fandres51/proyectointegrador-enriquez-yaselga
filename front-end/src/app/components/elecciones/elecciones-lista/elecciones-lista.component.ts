@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Autoridad } from 'src/app/models/autoridad';
+import { Eleccion } from 'src/app/models/eleccion';
 import { Lista } from 'src/app/models/lista';
 import { EleccionService } from 'src/app/services/eleccion.service';
 
@@ -14,6 +15,7 @@ export class EleccionesListaComponent implements OnInit {
   public lista: Lista = {nombre:""};
   public listaParam: string;
   public eleccionParam: string;
+  public eleccion: Eleccion;
   public dignidades: Autoridad[] = []; 
   public dignidadesNombres: string[] = [];
   public rutaDeRegreso: string = "/elecciones";
@@ -46,6 +48,11 @@ export class EleccionesListaComponent implements OnInit {
           console.error(error);
         }
       )
+      this.eleccionService.getEleccion(this.eleccionParam).subscribe(
+        eleccion => {
+          this.eleccion = eleccion;
+        }
+      )
     },
     error => {
       console.error(error);
@@ -53,11 +60,17 @@ export class EleccionesListaComponent implements OnInit {
   }
 
   irADignidad(dignidad: string) {
-    this.router.navigate(['/elecciones', this.eleccionParam, this.listaParam, dignidad]);
+    if(!this.eleccion.listaGanadora)
+      this.router.navigate(['/elecciones', this.eleccionParam, this.listaParam, dignidad]);
+    else
+      alert('No puede editar listas de una elección finalizada');
   }
 
   newDignidad() {
-    this.router.navigate(['/elecciones', this.eleccionParam, this.listaParam, 'crear']);
+    if(!this.eleccion.listaGanadora)
+      this.router.navigate(['/elecciones', this.eleccionParam, this.listaParam, 'crear']);
+    else
+      alert('No puede editar listas de una elección finalizada');
   }
 
   deleteList() {

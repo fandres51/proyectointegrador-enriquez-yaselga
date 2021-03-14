@@ -20,10 +20,10 @@ export class AuthService {
 
   login() {
     this.auth.signInWithPopup(new auth.OAuthProvider('microsoft.com'));
-    
   }
 
   getPermiso(email: string, modulo: string): Observable<Permiso[]> {
+    // console.log(">>>Permisos: ",this.afs.collection('Asociacion/AEIS/Permisos', ref => ref.where('email','==',email)).snapshotChanges());
     return this.afs.collection('Asociacion/AEIS/Permisos', ref => ref.where('email','==',email).where('modulo','==',modulo)).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Permiso;

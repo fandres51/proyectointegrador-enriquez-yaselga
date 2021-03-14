@@ -58,4 +58,10 @@ hr {
     cursor: pointer;
     border: none;
     border-radius: 4px;
+    a {
+        color: white;
+    }
+    a:hover {
+        text-decoration: none;
+    }
 }

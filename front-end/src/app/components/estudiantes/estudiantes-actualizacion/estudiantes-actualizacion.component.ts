@@ -34,18 +34,20 @@ export class EstudiantesActualizacionComponent implements OnInit {
       SemestreReferencial: '1',
       CorreoInstitucional: '',
       CorreoPersonal: '',
-      FechaNacimiento: new Date(),
       Nombre: '',
       SectorDomiciliario: '',
-      Telefono: ''
+      Telefono: '',
+      FechaNacimiento: null
     }
     this.route.params.subscribe(params => {
       const noUnicoParam = params['id'];
       this.estudiantesService.getEstudiante(noUnicoParam).subscribe(estudiante => {
         this.estudiante = estudiante;
-        let estFecha: Date = estudiante.FechaNacimiento;
-        estFecha = new Date(estFecha);
-        this.date = estFecha.getFullYear() +'-'+ ('0' + estFecha.getMonth()).slice(-2) + '-' + ('0' + estFecha.getDate()).slice(-2);
+        if(estudiante.FechaNacimiento) {
+          let estFecha = estudiante.FechaNacimiento;
+          estFecha = new Date(estFecha);
+          this.date = estFecha.getFullYear() +'-'+ ('0' + estFecha.getMonth()).slice(-2) + '-' + ('0' + estFecha.getDate()).slice(-2);
+        }
       },
       error => {
         console.error(error);
@@ -57,7 +59,8 @@ export class EstudiantesActualizacionComponent implements OnInit {
   }
 
   editEstudiante(estudiante: Estudiante) {
-    this.estudiante.FechaNacimiento = new Date(this.date);
+    if(estudiante.FechaNacimiento)
+      this.estudiante.FechaNacimiento = new Date(this.date);
     this.estudiantesService.updateEstudiante(estudiante);
     this.router.navigateByUrl('/estudiantes');
   }

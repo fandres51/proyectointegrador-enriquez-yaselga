@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Filial } from 'src/app/models/filial';
 import { FilialService } from 'src/app/services/filial.service';
@@ -13,6 +13,8 @@ import { Producto } from 'src/app/models/producto';
 })
 export class FilialesMainComponent implements OnInit {
 
+
+
   filialesNombres: string[]; 
   filialesNombresX: string[]; 
   filiales: Filial[];
@@ -20,7 +22,8 @@ export class FilialesMainComponent implements OnInit {
   productoprueba:Producto={
     id:'',
     nombre:'',
-    precio:0
+    precio:0,
+    estado:true,
   }
 
   constructor(
@@ -32,9 +35,11 @@ export class FilialesMainComponent implements OnInit {
   ngOnInit(): void {
     this.filialService.getFiliales().subscribe(
       filiales => {
+        
         this.filiales = filiales;
-        this.filialesNombresX = filiales.map(n=>'/filiales/filial/'+n.nombre);
-        this.filialesNombres = filiales.map(n=>n.nombre);
+        ////console.log(">>>>Filiales: ",filiales);
+        this.filialesNombres = filiales.map(n=>n.id);
+        //this.filialesNombres = filiales.map(n=>n.id);
         
       },
       error => {
@@ -50,11 +55,12 @@ export class FilialesMainComponent implements OnInit {
     this.productosService.addProductoX(this.productoprueba,'FIL1');
   }
 
-  irADetalle(id:string) {
-    this.router.navigate(['/filiales/filial', id]);
+  irADetalle(filial:Filial) {
+    this.router.navigate(['/filiales/filial', filial.id]);
   }
   
   nuevo() {
     this.router.navigate(['/filiales', 'nuevo']);
   }
+  
 }

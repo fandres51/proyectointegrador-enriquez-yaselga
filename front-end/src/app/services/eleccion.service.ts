@@ -39,6 +39,7 @@ export class EleccionService {
                 key => data[key] = data[key].toDate()
               ) //convierte todos los objetos Timestamp a Date
 
+              data.id = a.payload.doc.id;
               return data;
             }))
         )
@@ -55,6 +56,7 @@ export class EleccionService {
                 key => data[key] = data[key].toDate()
               ) //convierte todos los objetos Timestamp a Date
       
+              data.id = a.payload.id;
               return data;
             })
         )

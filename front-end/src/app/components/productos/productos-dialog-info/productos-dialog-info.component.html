@@ -4,52 +4,49 @@
 
     <div fxLayout="row">
         <div fxFlex="50" class="dato">
-            <div class="titulo">Nombre </div>
-            <div>{{producto.nombre}}</div>
+            <div class="titulo">Id </div>
+            <div class="dato">{{producto.id}}</div>
         </div>
         
         <div class="dato">
-            <div class="titulo">Id </div>
-            <div class="dato">{{producto.id}}</div>
+            <div class="titulo">Nombre </div>
+            <div>{{producto.nombre}}</div>
         </div>
         
     </div>
 
     <div fxLayout="row">
-        <div *ngIf="producto.estado" fxFlex="50" class="dato">
-            <div class="titulo">Estado </div>
-            <div>{{producto.estado}}</div>
+        <div *ngIf="producto.categoria" fxFlex="50" class="dato">
+            <div class="titulo">Categoria </div>
+            <div>{{producto.categoria}}</div>
         </div>
+        <div *ngIf="producto.precio" class="dato">
+            <div class="titulo">Precio </div>
+            <div>{{producto.precio}}</div>
+        </div>
+    </div>
+
+    <div fxLayout="row">
+        <div fxFlex="50" class="dato">
+            <div class="titulo">Proveedor </div>
+            <div>{{producto.idproveedor}}</div>
+        </div>
+
         <div *ngIf="producto.descripcion" class="dato">
             <div class="titulo">Descripcion </div>
             <div>{{producto.descripcion}}</div>
         </div>
     </div>
-
-    <div fxLayout="row">
-        <div *ngIf="producto.condicion" fxFlex="50" class="dato">
-            <div class="titulo">Condicion </div>
-            <div>{{producto.condicion}}</div>
-        </div>
-
-        <div *ngIf="producto.tipo" class="dato">
-            <div class="titulo">Tipo </div>
-            <div>{{producto.tipo}}</div>
-        </div>
+</div>
+<div fxLayout="row">
+    <div class="dato">
+        <div class="titulo">Estado </div>
+        <div>{{producto.estado?'Activo':'Inactivo'}}</div>
     </div>
 
-    <div fxLayout="row">
-        <div *ngIf="producto.ubicacion" fxFlex="50" class="dato">
-            <div class="titulo">Ubicacion </div>
-            <div>{{producto.ubicacion}}</div>
-        </div>
-
-        <div *ngIf="producto.valor" class="dato">
-            <div class="titulo">Valor</div>
-            <div>{{producto.valor}}</div>
-        </div>
-    </div>
-
+</div>
+<div fxLayout="row">
+   
     <div *ngIf="producto.fotos" class="dato">
         <div class="titulo">Fotos </div>
         <div>{{producto.fotos}}</div>
@@ -58,9 +55,10 @@
 <hr>
 <div mat-dialog-actions>
     
-    <button class="button" [routerLink]="['/productos/actualizar', producto.id]" (click)="cerrarDialog()" mat-button>
+    <button class="button" [routerLink]="['/filiales/filial/'+filial.id+'/productos/actualizar', producto.id]" (click)="cerrarDialog()" mat-button>
         <mat-icon aria-hidden=" false" aria-label="Example home icon">edit</mat-icon>
     </button>
     <button class="button red" mat-button (click)="darDeBaja()">Baja</button>
+    <button class="button red" mat-button (click)="eliminar()">Eliminar</button>
     
 </div>

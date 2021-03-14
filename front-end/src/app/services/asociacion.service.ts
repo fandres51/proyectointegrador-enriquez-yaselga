@@ -31,5 +31,6 @@ export class AsociacionService {
     const increment = firebase.firestore.FieldValue.increment(1);
     const contador = this.afs.doc(`Asociacion/AEIS/Parametros/${parametro}`);
     contador.update({contador: increment})
+    console.log("ContadorS: ",contador);
   }
 }

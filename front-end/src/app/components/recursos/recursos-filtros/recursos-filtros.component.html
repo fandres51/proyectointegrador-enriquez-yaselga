@@ -18,6 +18,7 @@
             </button>
         </form>
     </div>
+    <button mat-button (click)="clnSrch(nombreInput, inputID)">Limpiar búsqueda</button>
     <hr>
     <div fxHide.lt-md>
         <h2 class="title">Filtros:</h2>
@@ -30,19 +31,19 @@
             <button [ngClass]="{
                                     'filtrosButton': filtroEstado  != 'Ocupado', 
                                     'selected': filtroEstado == 'Ocupado'
-                                }" mat-button (click)="filtrarPorEstado('Ocupado')">Ocupado</button>
+                                }" mat-button (click)="filtrarPorEstado('Ocupado')">Ocupad</button>
             <button [ngClass]="{
                                     'filtrosButton': filtroEstado  != 'Alquilado', 
                                     'selected': filtroEstado == 'Alquilado'
-                                }" mat-button (click)="filtrarPorEstado('Alquilado')">Alquilado</button>
+                                }" mat-button (click)="filtrarPorEstado('Alquilado')">Alquil</button>
             <button [ngClass]="{
                                     'filtrosButton': filtroEstado  != 'Reservado', 
                                     'selected': filtroEstado == 'Reservado'
-                                }" mat-button (click)="filtrarPorEstado('Reservado')">Reservado</button>
+                                }" mat-button (click)="filtrarPorEstado('Reservado')">Reserv</button>
             <button [ngClass]="{
                                     'filtrosButton': filtroEstado  != 'Reparacion', 
                                     'selected': filtroEstado == 'Reparacion'
-                                }" mat-button (click)="filtrarPorEstado('Reparacion')">Reparacion</button>
+                                }" mat-button (click)="filtrarPorEstado('Reparacion')">Repara</button>
             <button [ngClass]="{
                                     'filtrosButton': filtroEstado  != 'Baja', 
                                     'selected': filtroEstado == 'Baja'
@@ -84,11 +85,7 @@
         <button mat-button [ngClass]="{
                                         'filtrosButton': tipoOrdenamiento != 'ID', 
                                         'selected': tipoOrdenamiento == 'ID'
-                                    }" mat-button (click)="ordenar('ID')">ID</button>
-        <button mat-button [ngClass]="{
-                                        'filtrosButton': tipoOrdenamiento != 'Nombre', 
-                                        'selected': tipoOrdenamiento == 'Nombre'
-                                    }" mat-button (click)="ordenar('Apellido')">Nombre</button>
+                                    }" mat-button (click)="ordenar('ID')">Ingreso</button>
         <button mat-button [ngClass]="{
                                         'filtrosButton': tipoOrdenamiento != 'Estado', 
                                         'selected': tipoOrdenamiento == 'Estado'

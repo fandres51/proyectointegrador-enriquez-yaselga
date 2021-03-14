@@ -26,20 +26,35 @@
             </select>
         </div>
         <div>
-            <h3 class="title">Por fecha</h3>
+            <h3 class="title">Por fecha de ingreso</h3>
             <div>
+                Fecha inicial:
+                <input type="date" name="fechaInicialIn" [(ngModel)]="startDateFiltroIn">
+            </div>
+            <div>
+                Fecha final:
+                <input type="date" name="fechaFinalIn" [(ngModel)]="endDateFiltroIn">
+            </div>
+        </div>
+        <div>
+            <h3 class="title">Por fecha de realización</h3>
+            <div>
+                Fecha inicial:
                 <input type="date" name="fechaInicial" [(ngModel)]="startDateFiltro">
             </div>
             <div>
+                Fecha final:
                 <input type="date" name="fechaFinal" [(ngModel)]="endDateFiltro">
             </div>
         </div>
         <div>
             <h3 class="title">Por Monto</h3>
             <div>
+                Mínimo:
                 <input type="number" step="0.01" min="0" [(ngModel)]="startMontoFiltro">
             </div>
             <div>
+                Máximo:
                 <input type="number" step="0.01" min="0" [(ngModel)]="endMontoFiltro">
             </div>
         </div>
@@ -51,6 +66,10 @@
     <hr fxHide.lt-md>
     <div fxHide.lt-md>
         <h2 class="title">Ordenar por:</h2>
+        <button mat-button [ngClass]="{
+                                        'filtrosButton': tipoDeOrdenamiento != 'fecha2', 
+                                        'selected': tipoDeOrdenamiento == 'fecha2'
+                                    }" mat-button (click)="ordenar('fecha2')">F.Ingreso</button>
         <button mat-button [ngClass]="{
                                         'filtrosButton': tipoDeOrdenamiento != 'fecha', 
                                         'selected': tipoDeOrdenamiento == 'fecha'

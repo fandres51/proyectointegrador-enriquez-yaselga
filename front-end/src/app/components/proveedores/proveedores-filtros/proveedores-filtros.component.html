@@ -1,0 +1,59 @@
+<div class="filters">
+    <h2 class="title">Búsqueda: </h2>
+    <h3 class="title">Buscar por Nombre: </h3>
+    <div class="search-space">
+        <form (ngSubmit)="buscarPorNombre(nombreInput.value)" fxLayout="row">
+            <input 
+                fxFlex="85" 
+                class="input-search" 
+                id="porNombreInput" 
+                name="porNombreInput" 
+                type="text" 
+                maxlength="50"
+                #nombreInput
+            >
+            <button fxFlex="15" class="button-search" mat-button>
+                <mat-icon aria-hidden="false" aria-label="Example home icon">search</mat-icon>
+            </button>
+        </form>
+    </div>
+    <h3 class="title">Buscar por id: </h3>
+    <div class="search-space">
+        <form (ngSubmit)="buscarPorCedula(inputCedula.value)" fxLayout="row">
+            <input 
+                fxFlex="85" 
+                class="input-search" 
+                id="porCedulaInput" 
+                name="porCedulaInput" 
+                type="text" 
+                maxlength="12"
+                #inputCedula>
+            <button fxFlex="15" class="button-search" mat-button>
+                <mat-icon aria-hidden="false" aria-label="Example home icon">search</mat-icon>
+            </button>
+        </form>
+    </div>
+    <button mat-button (click)="clnSrch(nombreInput, inputCedula)">Limpiar búsqueda</button>
+    <hr>
+    <hr fxHide.lt-md>
+    <div fxHide.lt-md>
+        <div>
+            <h3 class="title">Filtar por Estado</h3>
+            <button [ngClass]="{
+                                    'filtrosButton': EstadoFiltroString != 'Activo', 
+                                    'selected': EstadoFiltro == true
+                                }" mat-button (click)="filtroEstado('Activo')">Activo</button>
+            <button [ngClass]="{
+                                    'filtrosButton': EstadoFiltroString != 'Inactivo', 
+                                    'selected': EstadoFiltro == false
+                                }" mat-button (click)="filtroEstado('Inactivo')">Inactivo</button>
+            <button [ngClass]="{
+                                    'filtrosButton': EstadoFiltroString != '', 
+                                    'selected': EstadoFiltro == null
+                                }" mat-button (click)="filtroEstado('')">Todos</button>
+                                
+        </div>
+
+    </div>
+   
+</div>

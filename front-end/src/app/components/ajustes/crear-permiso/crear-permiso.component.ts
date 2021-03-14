@@ -53,17 +53,21 @@ export class CrearPermisoComponent implements OnInit {
   }
 
   crearPermiso() {
-    let modulosNombres = Object.keys(this.modulos);
-    this.permisos.forEach( n => {
-      this.authService.deletePermiso(n);
-    })
-    modulosNombres.forEach( n => {
-      if(this.modulos[n])
-        this.authService.createPermiso({
-          email: this.email,
-          modulo: n
-        })
-    })
+    const estaSeguro = confirm('¿Está seguro de querer cambiar los permisos de este correo?');
+    if(estaSeguro) {
+      let modulosNombres = Object.keys(this.modulos);
+      this.permisos.forEach( n => {
+        this.authService.deletePermiso(n);
+      })
+      modulosNombres.forEach( n => {
+        if(this.modulos[n])
+          this.authService.createPermiso({
+            email: this.email,
+            modulo: n
+          })
+      });
+      alert('Permisos cambiados');
+    }
   }
 
 }

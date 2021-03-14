@@ -34,17 +34,26 @@ export class EstudiantesFiltrosComponent implements OnInit {
   /***Filtros*******************************************/
 
   public buscarPorNombre(input: string) {
+    input = input.toUpperCase().trim();
+
     const estudiantesAMostrar = this.estudiantes.filter(estudiante => {
-      return estudiante.Nombre.search(input) != -1 || estudiante.Apellido.search(input) != -1;
+      return estudiante.Nombre.toUpperCase().search(input.toUpperCase()) != -1 || estudiante.Apellido.toUpperCase().search(input.toUpperCase()) != -1;
     })
     this.enviarEstudiantes(estudiantesAMostrar);
   }
 
   public buscarPorCedula(input: string) {
+    input = input.trim();
     const estudiantesAMostrar = this.estudiantes.filter(estudiante => {
-      return estudiante.Cedula.search(input) != -1;
+      return estudiante.NoUnico.search(input) != -1;
     })
     this.enviarEstudiantes(estudiantesAMostrar);
+  }
+
+  clnSrch(val1, val2) {
+    val1.value = '';
+    val2.value = '';
+    this.enviarEstudiantes(this.estudiantes);
   }
 
   /***Filtros*******************************************/
@@ -66,6 +75,7 @@ export class EstudiantesFiltrosComponent implements OnInit {
 
   private filtrar() {
     const estudiantesAMostrar = this.estudiantes.filter( estudiante => {
+      //console.log(">>>valor",estudiante.Carrera.search(this.filtroCarrera) + 1);
       return (estudiante.Carrera.search(this.filtroCarrera) + 1) && 
              (estudiante.EstadoAfiliacion.search(this.filtroAfiliacion) + 1) && 
              (estudiante.SemestreReferencial.search(this.filtroSemestre) + 1);
@@ -128,5 +138,7 @@ export class EstudiantesFiltrosComponent implements OnInit {
   private enviarEstudiantes(estudiantesAMostrar: Estudiante[]) {
     this.mostrarEstudiantes.emit(estudiantesAMostrar);
   }
+
+  
 
 }

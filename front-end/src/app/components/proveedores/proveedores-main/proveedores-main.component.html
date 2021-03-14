@@ -1,1 +1,34 @@
-<p>proveedores-main works!</p>
+<div fxLayout="column">
+    <div fxFlex="10" fxLayout="row" fxLayoutAlign="space-between center" class="top-bar" fxHide.lt-md>
+        <div class="registros-mostrados">Registros mostrados en {{filial.nombre}}: {{proveedores.length}}</div>
+        
+        <div fxFlex="50" fxLayoutAlign="end center">
+          <button routerLink="/filiales/filial/{{idFilial}}/proveedores/nuevo" class="but-cargar-proveedor" mat-button fxLayoutAlign="center center">
+              Nuevo Proveedor
+          </button>
+          <div fxLayoutAlign="center center">
+              <label for="fileInput" class="btn-cargararchivo">Cargar Proveedores</label>
+              <input id="fileInput" type="file" accept=".csv" (change)="cargaMasiva($event.target.files)" style="display: none;">
+          </div>
+          <div fxHide.lt-md>
+              <a class="btn-dwn" target="_blank" href="https://drive.google.com/file/d/1CQAnK2siP-TUdqeEagZ621N2A-MVPRdB/view?usp=sharing">Descargar formato de carga</a>
+          </div>
+         
+      </div>
+    </div>
+     <div fxFlex="90" fxFlex.lt-md="100" fxLayout="row" fxLayout.lt-md="column">
+        <div fxFlex="25" fxFlex.md="30" fxFlex.lt-md="auto" fxLayout="row">
+            <app-proveedores-filtros (mostrarProveedores)="proveedores=$event"></app-proveedores-filtros> 
+        </div>
+  
+        <div class="line" fxHide.lt-md></div>
+  
+        <div fxFlex="75" fxFlex.md="70" fxFlex.lt-md="auto" fxLayout="column" class="div-proveedores">
+            <div fxLayout="column">
+              <app-proveedores-listar [_proveedores]="proveedores"></app-proveedores-listar>
+            </div>
+        </div>
+    </div> 
+  </div>
+        
+  

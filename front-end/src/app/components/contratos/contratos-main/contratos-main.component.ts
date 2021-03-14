@@ -21,7 +21,7 @@ export class ContratosMainComponent implements OnInit {
   ngOnInit(): void {
     this.contratoService.getContratos().subscribe(
       contratos => {
-        this.contratos = contratos;
+        this.contratos = contratos.sort(this.compareFunction);
         this.contratosNombres = contratos.map(n=>n.id);
       },
       error => {
@@ -38,4 +38,35 @@ export class ContratosMainComponent implements OnInit {
     this.router.navigate(['/contratos', 'nuevo']);
   }
 
+  finalizarContrato(id) {
+    const estaSeguro = confirm('¿Está seguro de querer marcar este contrato como finalizado?');
+    if(estaSeguro) {
+      this.contratoService.updateContrato({
+        id: id,
+        fechaFinal: new Date(),
+        prioridad: 'Finalizado'
+      })
+    }
+  }
+
+  compareFunction(a, b) {
+    if(a.prioridad === 'Alta' && b.prioridad !== 'Alta')
+      return -1;
+    if(a.prioridad !== 'Alta' && b.prioridad === 'Alta')
+      return 1;
+    if(a.prioridad === 'Alta' && b.prioridad === 'Alta')
+      return 0;
+    if(a.prioridad === 'Media' && b.prioridad !== 'Media')
+      return -1;
+    if(a.prioridad !== 'Media' && b.prioridad === 'Media')
+      return 1;
+    if(a.prioridad === 'Media' && b.prioridad === 'Media')
+      return 0;
+    if(a.prioridad === 'Baja' && b.prioridad !== 'Baja')
+      return -1;
+    if(a.prioridad !== 'Baja' && b.prioridad === 'Baja')
+      return 1;
+    if(a.prioridad === 'Baja' && b.prioridad === 'Baja')
+      return 0;   
+  }
 }

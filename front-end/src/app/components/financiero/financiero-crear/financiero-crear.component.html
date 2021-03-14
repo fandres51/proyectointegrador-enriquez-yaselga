@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutAlign=" center">
     <div class="add-title" fxLayout="row">
-        <button routerLink="/financiero" class="button-white" mat-button>
+        <button (click)="volver()" class="button-white" mat-button>
             <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_back</mat-icon>
         </button>
         <h1>Nueva Transacción</h1>
@@ -24,6 +24,7 @@
                     Error, campo requerido
                 </div>
             </div>
+            
             <div fxLayout="column" fxFlex=100 class="form-item">
                 <label for="addIngreso">Ingreso / Egreso: </label>
                 <select 

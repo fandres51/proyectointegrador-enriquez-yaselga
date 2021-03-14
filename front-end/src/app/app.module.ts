@@ -6,8 +6,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/Auth/login/login.component';
-import { HeaderComponent } from './components/layouts/header/header.component';
-import { MainScreenComponent } from './components/layouts/main-screen/main-screen.component';
+import { HeaderComponent } from './components/templates/header/header.component';
+import { MainScreenComponent } from './components/templates/main-screen/main-screen.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire';
@@ -19,18 +19,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-import { PageNotFoundComponent } from './components/layouts/page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './components/templates/page-not-found/page-not-found.component';
 import { EventosMainComponent } from './components/eventos/eventos-main/eventos-main.component';
 import { EventosCrearComponent } from './components/eventos/eventos-crear/eventos-crear.component';
 import { AutoridadesDetalleComponent } from './components/autoridades/autoridades-detalle/autoridades-detalle.component';
 import { AutoridadesMainComponent } from './components/autoridades/autoridades-main/autoridades-main.component';
 import { AutoridadesListarComponent } from './components/autoridades/autoridades-listar/autoridades-listar.component';
 import { EventosEditarComponent } from './components/eventos/eventos-editar/eventos-editar.component';
-import { TitlesComponent } from './components/layouts/titles/titles.component';
-import { ListComponent } from './components/layouts/list/list.component';
+import { TitlesComponent } from './components/templates/titles/titles.component';
+import { ListComponent } from './components/templates/list/list.component';
 import { EleccionesMainComponent } from './components/elecciones/elecciones-main/elecciones-main.component';
-import { BasicCrudComponent } from './components/layouts/basic-crud/basic-crud.component';
-import { SearchComponent } from './components/layouts/search/search.component';
+import { BasicCrudComponent } from './components/templates/basic-crud/basic-crud.component';
+import { SearchComponent } from './components/templates/search/search.component';
 import { EleccionesDetalleComponent } from './components/elecciones/elecciones-detalle/elecciones-detalle.component';
 import { EleccionesListaComponent } from './components/elecciones/elecciones-lista/elecciones-lista.component';
 import { AutoridadFormComponent } from './components/elecciones/autoridad-form/autoridad-form.component';
@@ -73,7 +73,7 @@ import { CrearPermisoComponent } from './components/ajustes/crear-permiso/crear-
 import { ContratoService } from './services/contrato.service';
 import { IncidenteService } from './services/incidente.service';
 import { NotificacionService } from './services/notificacion.service';
-import { IconBoxComponent } from './components/layouts/icon-box/icon-box.component';
+import { IconBoxComponent } from './components/templates/icon-box/icon-box.component';
 import { EstudiantesMainComponent } from './components/estudiantes/estudiantes-main/estudiantes-main.component';
 import { EstudiantesFiltrosComponent } from './components/estudiantes/estudiantes-filtros/estudiantes-filtros.component';
 import { EstudiantesDialogInfoComponent } from './components/estudiantes/estudiantes-dialog-info/estudiantes-dialog-info.component';
@@ -85,12 +85,33 @@ import { FinancieroCrearComponent } from './components/financiero/financiero-cre
 import { FinancieroDialogComponent } from './components/financiero/financiero-dialog/financiero-dialog.component';
 import { EstudiantesListarComponent } from './components/estudiantes/estudiantes-listar/estudiantes-listar.component';
 import { EstudiantesAfiliacionComponent } from './components/estudiantes/estudiantes-afiliacion/estudiantes-afiliacion.component';
-import { RecursosModule } from './components/recursos/recurso.module'
-//import { FilialesModule } from './components/filiales/filiales.module'
 import { FilialesMainComponent } from './components/filiales/filiales-main/filiales-main.component';
 import { FilialesCrearComponent } from './components/filiales/filiales-crear/filiales-crear.component';
 import { FilialesEditarComponent } from './components/filiales/filiales-editar/filiales-editar.component';
 import { FilialComponent } from './components/filiales/filial/filial.component';
+import { ProductosCrearComponent } from './components/productos/productos-crear/productos-crear.component';
+import { ProductosEditarComponent } from './components/productos/productos-editar/productos-editar.component';
+import { ProductosMainComponent } from './components/productos/productos-main/productos-main.component';
+import { ProductosListarComponent } from './components/productos/productos-listar/productos-listar.component';
+import { ProductosDialogInfoComponent } from './components/productos/productos-dialog-info/productos-dialog-info.component';
+import { ProductosFiltrosComponent } from './components/productos/productos-filtros/productos-filtros.component';
+import { RecursosMainComponent } from './components/recursos/recursos-main/recursos-main.component';
+import { RecursosListarComponent } from './components/recursos/recursos-listar/recursos-listar.component'
+import { RecursosDialogInfoComponent } from './components/recursos/recursos-dialog-info/recursos-dialog-info.component';
+import { RecursosFiltrosComponent } from './components/recursos/recursos-filtros/recursos-filtros.component';
+import { RecursosActualizacionComponent } from './components/recursos/recursos-actualizacion/recursos-actualizacion.component';
+import { RecursoNuevoComponent } from './components/recursos/recurso-nuevo/recurso-nuevo.component';
+import { ProveedoresMainComponent } from './components/proveedores/proveedores-main/proveedores-main.component';
+import { ProveedoresCrearComponent } from './components/proveedores/proveedores-crear/proveedores-crear.component';
+import { ProveedoresEditarComponent } from './components/proveedores/proveedores-editar/proveedores-editar.component';
+import { ProveedoresDialogInfoComponent } from './components/proveedores/proveedores-dialog-info/proveedores-dialog-info.component';
+import { ProveedoresFiltrosComponent } from './components/proveedores/proveedores-filtros/proveedores-filtros.component';
+import { ProveedoresListarComponent } from './components/proveedores/proveedores-listar/proveedores-listar.component';
+import { AjustesTerminarPeriodoComponent } from './components/ajustes/ajustes-terminar-periodo/ajustes-terminar-periodo.component';
+import { AlquileresMainComponent } from './components/alquileres/alquileres-main/alquileres-main.component';
+import { AlquileresCrearComponent } from './components/alquileres/alquileres-crear/alquileres-crear.component';
+import { AlquileresEditarComponent } from './components/alquileres/alquileres-editar/alquileres-editar.component';
+import { RecursosAlquilerComponent } from './components/recursos/recursos-alquiler/recursos-alquiler.component';
 
 
 
@@ -153,10 +174,13 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FinancieroCrearComponent,
     FinancieroDialogComponent,
     FilialesMainComponent, FilialesCrearComponent, FilialesEditarComponent, FilialComponent,
-    
+    ProductosCrearComponent, ProductosEditarComponent, ProductosMainComponent, ProductosListarComponent, ProductosDialogInfoComponent, ProductosFiltrosComponent,
+    RecursosMainComponent, RecursosListarComponent, RecursosDialogInfoComponent, RecursosFiltrosComponent, RecursosActualizacionComponent, RecursoNuevoComponent,
+    ProveedoresMainComponent, ProveedoresCrearComponent, ProveedoresEditarComponent, ProveedoresDialogInfoComponent, ProveedoresFiltrosComponent, ProveedoresListarComponent, AjustesTerminarPeriodoComponent,
+    AlquileresMainComponent, AlquileresCrearComponent, AlquileresEditarComponent, RecursosAlquilerComponent, 
   ],
   imports: [
-    AngularFireModule.initializeApp(environment.firabase),
+    AngularFireModule.initializeApp(environment.firebase),
     FlatpickrModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
@@ -170,7 +194,6 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FormsModule,
     NgbModalModule,
     FullCalendarModule,
-    RecursosModule,
   ],
   providers: [
     AsociacionService,

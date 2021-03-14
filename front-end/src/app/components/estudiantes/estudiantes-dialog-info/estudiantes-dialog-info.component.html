@@ -51,7 +51,7 @@
 
     <div *ngIf="estudiante.FechaNacimiento" class="dato">
         <div class="titulo">Fecha de Nacimiento </div>
-        <div>{{estudiante.FechaNacimiento}}</div>
+        <div>{{estudiante.FechaNacimiento.getDate() + '/' + estudiante.FechaNacimiento.getMonth() + '/' + estudiante.FechaNacimiento.getFullYear()}}</div>
     </div>
 
 </div>
@@ -105,13 +105,16 @@
     <button class="button" [routerLink]="['/estudiantes/actualizar', estudiante.NoUnico]" (click)="cerrarDialog()" mat-button>
         <mat-icon aria-hidden=" false" aria-label="Example home icon">edit</mat-icon>
     </button>
-    <button class="button red" mat-button (click)="graduar()">
+    <button class="button red" mat-button (click)="graduar()"
+        [disabled]="estudiante.SemestreReferencial === 'Graduado' || estudiante.SemestreReferencial === 'Retirado'">
         Graduar
     </button>
-    <button class="button red" mat-button (click)="darDeBaja()">
+    <button class="button red" mat-button (click)="darDeBaja()"
+        [disabled]="estudiante.SemestreReferencial === 'Graduado' || estudiante.SemestreReferencial === 'Retirado'">
         Dar de baja
     </button>
-    <button class="button red" mat-button (click)="desafiliar()">
+    <button class="button red" mat-button (click)="desafiliar()"
+        [disabled]="estudiante.SemestreReferencial === 'Graduado' || estudiante.SemestreReferencial === 'Retirado'">
         Desafiliar
     </button>
 </div>

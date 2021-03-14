@@ -52,10 +52,16 @@ export class AutoridadFormComponent implements OnInit {
       existe => {
         if (existe) {
           //2) agregar autoridad a lista
-          this.eleccionService.createDignidad(this.autoridad, this.lista, this.eleccion);
-          //3) regresar
-          this.router.navigate(['/elecciones', this.eleccion, this.lista]);
-
+          this.estudianteService.getEstudiante(noUnico).subscribe(
+            estudiante => {
+              this.autoridad.Nombre = estudiante.Nombre + ' ' + estudiante.Apellido;
+              this.autoridad.Telefono = estudiante.Telefono;
+              this.autoridad.CorreoPersonal = estudiante.CorreoPersonal;
+              this.eleccionService.createDignidad(this.autoridad, this.lista, this.eleccion);
+              //3) regresar
+              this.router.navigate(['/elecciones', this.eleccion, this.lista]);
+            }
+          )
         } else {
           alert('No existe estudiante con numero unico indicado');
         }

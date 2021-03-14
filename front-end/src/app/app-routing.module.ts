@@ -1,7 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MainScreenComponent } from './components/layouts/main-screen/main-screen.component';
-import { PageNotFoundComponent } from './components/layouts/page-not-found/page-not-found.component';
+import { MainScreenComponent } from './components/templates/main-screen/main-screen.component';
+import { PageNotFoundComponent } from './components/templates/page-not-found/page-not-found.component';
 import { EstudiantesMainComponent } from './components/estudiantes/estudiantes-main/estudiantes-main.component';
 import { EstudiantesActualizacionComponent } from './components/estudiantes/estudiantes-actualizacion/estudiantes-actualizacion.component';
 import { EstudiantesAfiliacionComponent } from './components/estudiantes/estudiantes-afiliacion/estudiantes-afiliacion.component';
@@ -55,6 +55,8 @@ import { ProductosEditarComponent } from './components/productos/productos-edita
 import { ProveedoresMainComponent } from './components/proveedores/proveedores-main/proveedores-main.component';
 import { ProveedoresCrearComponent } from './components/proveedores/proveedores-crear/proveedores-crear.component';
 import { ProveedoresEditarComponent } from './components/proveedores/proveedores-editar/proveedores-editar.component';
+import { AjustesTerminarPeriodoComponent } from './components/ajustes/ajustes-terminar-periodo/ajustes-terminar-periodo.component';
+import { AlquileresMainComponent } from './components/alquileres/alquileres-main/alquileres-main.component';
 
 const routes: Routes = [
   { path: '', component: MainScreenComponent },
@@ -93,6 +95,9 @@ const routes: Routes = [
   { path: 'filiales/filial/:id/productos', component: ProductosMainComponent, canActivate: [FilialesGuard] },
   { path: 'filiales/filial/:id/productos/nuevo', component: ProductosCrearComponent, canActivate: [FilialesGuard] },
   { path: 'filiales/filial/:id/productos/actualizar/:idproducto', component: ProductosEditarComponent, canActivate: [FilialesGuard] },
+  { path: 'filiales/filial/:id/financiero', component: FinancieroMainComponent, canActivate: [FilialesGuard]},
+  { path: 'filiales/filial/:id/financiero/nuevo', component: FinancieroCrearComponent, canActivate: [FilialesGuard]},
+  { path: 'filiales/filial/:id/recursos', component: RecursosMainComponent, canActivate: [FilialesGuard]},
   
   { path: 'ajustes', component: AjustesMainComponent, children: [
     { path: 'nuevo-semestre', component: AjustesNuevoSemestreComponent },
@@ -100,6 +105,7 @@ const routes: Routes = [
     { path: 'definir-aporte', component: AjustesDefinirAporteComponent },
     { path: 'editar-autoridades', component: EditarAutoridadesComponent },
     { path: 'crear-permiso', component: CrearPermisoComponent },
+    { path: 'terminar-periodo', component: AjustesTerminarPeriodoComponent },
     { path: ':cargo', component: EditarAutoridadFormComponent }
   ], canActivate: [AjustesGuard] },
   { path: '**', component: PageNotFoundComponent }

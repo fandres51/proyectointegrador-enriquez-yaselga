@@ -2,3 +2,33 @@
     width: 75%;
     margin: 50px auto;
 }
+@import "../../../../assets/css/colors.scss";
+
+.top-bar {
+    margin-bottom: 40px;
+}
+
+
+.new-button {
+    button {
+       background-color: $MainColor;
+       color: white;
+    }
+}
+.button {
+    background-color: white;
+    padding: 15px;
+    width: 100%;
+    border: none;
+    border-bottom: solid 1px #e2e2e2;
+    border-radius: 0;
+    font-size: 120%;
+}
+
+.apellido {
+    margin-left: 5px;
+}
+
+.button:focus {
+    outline: none;
+}

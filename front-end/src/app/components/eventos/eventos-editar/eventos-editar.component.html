@@ -93,16 +93,16 @@
                 </div>
             </div>
             <div fxLayout="column" fxFlex="48">
-                <label class="label" for="presupuesto">Presupuesto (genera una transacción)</label>
+                <label class="label" for="presupuesto">Presupuesto</label>
                 <input 
                     class="input" 
-                    [disabled]="!editable"
                     id="presupuesto" 
                     name="presupuesto" 
                     type="number" 
                     min="0" 
                     step=".01" 
                     [(ngModel)]="evento.presupuesto"
+                    disabled
                 >
             </div>
         </div>
@@ -110,45 +110,55 @@
         <div fxLayout="column">
             <label class="label" for="responsables">Responsable 1: </label>
             <select 
+                (change)="comprobarValor()"
                 name="responsables" 
-                [disabled]="!editable"
                 id="responsables" 
                 [(ngModel)]="responsables.resp1"
+                [disabled]="!editable"
+                #resp1
             >
+                <option value=""></option>
                 <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
             </select>
         </div>
-        <div fxLayout="column">
-            <label class="label" for="responsables">Responsable 2: </label>
-            <select 
-                name="responsables" 
-                [disabled]="!editable"
-                id="responsables" 
-                [(ngModel)]="responsables.resp2"
-            >
-                <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
-            </select>
-        </div>
-        <div fxLayout="column">
-            <label class="label" for="responsables">Responsable 3: </label>
-            <select 
-                [disabled]="!editable"
-                name="responsables" 
-                id="responsables" 
-                [(ngModel)]="responsables.resp3"
-            >
-                <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
-            </select>
+        <div *ngIf="resp1.value !== ''">
+            <div fxLayout="column">
+                <label class="label" for="responsables2">Responsable 2: </label>
+                <select 
+                    (change)="comprobarValor()"
+                    name="responsables2" 
+                    id="responsables2" 
+                    [(ngModel)]="responsables.resp2"
+                    [disabled]="!editable"
+                    #resp2
+                >
+                    <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
+                    <option value=""> </option>
+                </select>
+            </div>
+            <div fxLayout="column" *ngIf="resp2.value !== ''">
+                <label class="label" for="responsables3">Responsable 3: </label>
+                <select 
+                    
+                    name="responsables3" 
+                    id="responsables3" 
+                    [(ngModel)]="responsables.resp3"
+                    [disabled]="!editable"
+                >
+                    <option *ngFor="let autoridad of autoridades" value="{{autoridad}}">{{autoridad}}</option>
+                    <option value=""> </option>
+                </select>
+            </div>
         </div>
 
         <h2 class="tit1 margin-top">Horarios: </h2>
         <div fxLayout="column">
-            <label class="label" for="responsables">Tipo: </label>
+            <label class="label" for="tipo">Tipo: </label>
             <select 
                 [disabled]="!editable"
-                name="responsables" 
-                id="responsables" 
-                #responsable 
+                name="tipo" 
+                id="tipo" 
+                #tipo
                 [(ngModel)]="evento.tipo"
             >
                 <option value="Evento">Evento único</option>
@@ -344,7 +354,7 @@
         <div fxLayout="row" fxLayoutAlign="end ">
             <div *ngIf="editable" fxFlex="50">
                 <button mat-button type="submit" class="button" [disabled]="!form.form.valid">
-                    Editar evento
+                    Confirmar
                 </button>
             </div>
             <div>

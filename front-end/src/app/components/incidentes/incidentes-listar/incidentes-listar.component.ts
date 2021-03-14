@@ -41,4 +41,24 @@ export class IncidentesListarComponent implements OnInit {
     if(estaSeguro)
       this.incidenteService.deleteIncidente(id);
   }
+
+  resolver(id) {
+    const estaSeguro = confirm('¿Está seguro que desea marcar este incidente como resuelto?');
+    if(estaSeguro)
+      this.incidenteService.updateIncidente({
+        id: id,
+        resuelto: true
+    });
+  }
+
+  noResuelto(id) {
+    const estaSeguro = confirm('¿Está seguro que desea marcar este incidente como no resuelto?');
+    if(estaSeguro)
+      this.incidenteService.updateIncidente({
+        id: id,
+        resuelto: false
+    });
+  }
+
+
 }

@@ -4,6 +4,7 @@ import { Evento } from 'src/app/models/evento';
 import { AsociacionService } from 'src/app/services/asociacion.service';
 import { AutoridadesService } from 'src/app/services/autoridades.service';
 import { EventosService } from 'src/app/services/eventos.service';
+import { TransaccionesService } from 'src/app/services/transacciones.service';
 
 @Component({
   selector: 'app-eventos-crear',
@@ -40,9 +41,10 @@ export class EventosCrearComponent implements OnInit {
     resp3: ""
   }
 
-  constructor (
+  constructor(
     private autoridadService: AutoridadesService,
     private asociacionService: AsociacionService,
+    private _transacciónService: TransaccionesService,
     private eventoService: EventosService,
     private router: Router
   ) { }
@@ -52,7 +54,7 @@ export class EventosCrearComponent implements OnInit {
       asociacion => {
         this.autoridadService.getAutoridadesActuales(asociacion.AsociacionActual).subscribe(
           autoridades => {
-            this.autoridades = autoridades.map(n=>n.Nombre);
+            this.autoridades = autoridades.map(n => n.Nombre);
           },
           error => {
             console.error(error);
@@ -83,7 +85,7 @@ export class EventosCrearComponent implements OnInit {
       arregloDias.push(6);
     return arregloDias;
   }
-  
+
   crearArregoResp(): string[] {
     const arregloResp: string[] = [];
     if (this.responsables.resp1)
@@ -92,8 +94,8 @@ export class EventosCrearComponent implements OnInit {
       arregloResp.push(this.responsables.resp2);
     if (this.responsables.resp3)
       arregloResp.push(this.responsables.resp3);
-    return arregloResp.filter( (n, i) => {
-      if(arregloResp.indexOf(n) === i)
+    return arregloResp.filter((n, i) => {
+      if (arregloResp.indexOf(n) === i)
         return n
     })
   }
@@ -101,26 +103,38 @@ export class EventosCrearComponent implements OnInit {
   crearEvento() {
     let validado = true;
     this.nuevoEvento.responsables = this.crearArregoResp();
-    if(this.nuevoEvento.tipo !== 'Evento') {
+
+    if (this.nuevoEvento.tipo !== 'Evento') {
       this.nuevoEvento.daysOfWeek = this.crearArregoDias();
-      if(this.nuevoEvento.daysOfWeek.length < 1) {
+      if (this.nuevoEvento.daysOfWeek.length < 1) {
         alert('Debe ingresar al menos un día de la semana');
         validado = false;
       }
-      if(this.nuevoEvento.startTime > this.nuevoEvento.endTime) {
+      if (this.nuevoEvento.startTime > this.nuevoEvento.endTime) {
         alert('Error: hora de inicio debe ser anterior a hora de finalización');
         validado = false;
       }
     }
 
-    if(this.nuevoEvento.tipo === 'Evento') {
-      if(this.nuevoEvento.start > this.nuevoEvento.end) {
+    if (this.nuevoEvento.tipo === 'Evento') {
+      if (this.nuevoEvento.start > this.nuevoEvento.end) {
         alert('Error: hora de inicio debe ser anterior a hora de finalización');
         validado = false;
       }
     }
 
-    if(validado) {
+    if (validado) {
+      if (this.nuevoEvento.presupuesto) {
+        this._transacciónService.addTransaccion({
+          Fecha: new Date(),
+          Ingreso: false,
+          Monto: this.nuevoEvento.presupuesto,
+          Descripcion: "Dinero usado en el evento: " + this.nuevoEvento.title,
+          Tipo: "Evento",
+          Activa: true,
+          FechaIngreso: new Date()
+        })
+      }
       this.eventoService.addEvento(this.nuevoEvento);
       alert('Evento creado');
       this.router.navigate(['/eventos']);
@@ -129,5 +143,15 @@ export class EventosCrearComponent implements OnInit {
 
   regresar() {
     this.router.navigateByUrl('/eventos');
+  }
+
+  comprobarValor() {
+    if (!this.responsables.resp1) {
+      this.responsables.resp2 = '';
+      this.responsables.resp3 = '';
+    }
+    if (!this.responsables.resp2) {
+      this.responsables.resp3 = '';
+    }
   }
 }

@@ -19,7 +19,29 @@
         margin: 25px;
         color: white;
     }
+    h2 {
+        margin: 10px;
+        color: white;
+    }
     .button-white {
         color: white;
     }
+}
+
+@import "../../../../assets/css/colors.scss";
+
+.icon-box {
+    height: 200px;
+    width: 200px;
+    background-color: $MainDarkColor;
+    color: white;
+}
+
+.text {
+    font-size: 120%;
+}
+
+.icon {
+    font-size: 250%;
+    margin: 20px 0;
 }

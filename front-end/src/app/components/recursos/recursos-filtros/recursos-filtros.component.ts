@@ -1,6 +1,9 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { Recurso } from 'src/app/models/recurso'
-import { RecursosService } from 'src/app/services/recursos.service'
+import { Recurso } from 'src/app/models/recurso';
+import { RecursosService } from 'src/app/services/recursos.service';
+import { ActivatedRoute } from '@angular/router';
+import { Filial } from 'src/app/models/filial';
+import { FilialService } from 'src/app/services/filial.service';
 
 @Component({
   selector: 'app-recursos-filtros',
@@ -16,23 +19,47 @@ export class RecursosFiltrosComponent implements OnInit {
   public filtroEstado: 'Libre'|'Ocupado'|'Alquilado'|'Reservado'|'Baja'|'Reparacion'|'' = '';
   public filtroCondicion: 'Nuevo'|'Usado'|'Averiado'|'Perdido'|'' = '';
 
-
+  idFilial: string;
+  filial: Filial = {
+    id: "0",
+    nombre: ""
+  };
 
   constructor(
-    private recursosService: RecursosService
+    private recursosService: RecursosService,
+    private route: ActivatedRoute,
+    private filialService: FilialService,
   ) { }
 
   ngOnInit(): void {
-    this.recursosService.getRecursos().subscribe(recursos=>{
+    if(this.route.snapshot.params['id']) {
+      this.idFilial = this.route.snapshot.params['id'];
+      this.filialService.getFilial(this.idFilial).subscribe(item => { this.filial = item })
+      this.recursosService.getRecursosPorFilial(this.idFilial).subscribe(
+        recursos => {
+          this.recursos = recursos;
+          this.enviarRecursos(this.recursos)
+        },
+        error => {
+          console.error(error);
+        }
+      )
+    }
+    else {
+    this.recursosService.getRecursos().subscribe(
+      recursos=>{
         this.recursos = recursos;
         this.enviarRecursos(this.recursos);
-      })
+      },
+      error => {
+        console.error(error);
+      })}
   }
   /***Filtros***********************************************/
   public buscarPorNombre(input: string) {
     const recursosAMostrar = this.recursos.filter(recurso => {
       console.error("valor encontrado nombre= ", recurso.nombre.search(input));
-      return recurso.nombre.search(input) != -1 || recurso.descripcion.search(input) != -1;
+      return recurso.nombre.toUpperCase().search(input.toUpperCase()) != -1 || recurso.descripcion.toUpperCase().search(input.toUpperCase()) != -1;
     })
     this.enviarRecursos(recursosAMostrar);
   }
@@ -53,9 +80,15 @@ export class RecursosFiltrosComponent implements OnInit {
 
   public buscarPorTipo(input: string) {
     const recursosAMostrar = this.recursos.filter(recurso => {
-      return recurso.tipo.search(input) != -1;
+      return recurso.tipo.toUpperCase().search(input.toUpperCase()) != -1;
     })
     this.enviarRecursos(recursosAMostrar);
+  }
+
+  clnSrch(val1, val2) {
+    val1.value = '';
+    val2.value = '';
+    this.enviarRecursos(this.recursos);
   }
 
   public buscarPorUbicacion(input: string) {
@@ -118,10 +151,10 @@ export class RecursosFiltrosComponent implements OnInit {
 
   compararPorid(a, b) {
     if (a.id < b.id) {
-      return -1;
+      return 1;
     }
     if (a.id > b.id) {
-      return 1;
+      return -1;
     }
     return 0;
   }

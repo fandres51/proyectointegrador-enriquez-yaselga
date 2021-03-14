@@ -1,1 +1,51 @@
-<p>filiales-editar works!</p>
+<div>
+    <app-titles text="Actualizar filial" regresarA="/filiales"></app-titles>
+</div>
+<div class="form">
+    <form #form="ngForm" (ngSubmit)="guardar()">
+        <div fxLayout="column">
+            <label for="id">Nombre:</label>
+            <input 
+                type="text" 
+                id="id" 
+                name="id" 
+                maxlength="50" 
+                required
+                [(ngModel)]="filial.nombre"
+                #nomb="ngModel"
+            >
+            <div class="err" *ngIf="nomb.touched && nomb.errors">
+                Error, campo requerido
+            </div>
+        </div>
+        <div fxLayout="column">
+            <label for="descripcion">Descripción:</label>
+            <input 
+                type="text" 
+                id="descripcion" 
+                name="descripcion" 
+                required
+                [(ngModel)]="filial.descripcion"
+                #desc="ngModel"
+            >
+        </div>
+        <div fxLayout="column">
+            <label for="Ubicacion">Ubicacion:</label>
+            <input 
+                type="text" 
+                id="Ubicacion" 
+                name="Ubicacion" 
+                [(ngModel)]="filial.ubicacion"
+                required
+                #inter="ngModel"
+            >
+        </div>
+        
+        <div class="butt-box">
+            <button mat-button type="submit" [disabled]="!form.form.valid">
+                Guardar
+                <mat-icon aria-hidden="false" aria-label="Edit">new</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>

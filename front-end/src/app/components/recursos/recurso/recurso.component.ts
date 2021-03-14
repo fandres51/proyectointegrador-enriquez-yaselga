@@ -9,12 +9,16 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./recurso.component.scss']
 })
 export class RecursoComponent implements OnInit {
+  
 
   @Input() public recursos: Recurso[] = [];
 
-  constructor(public dialog: MatDialog) { }
+  constructor(
+    public dialog: MatDialog,
+    ) { }
 
   ngOnInit(): void {
+    
   }
   /* public openDialog(index:number):void {
     const dialogRef = this.dialog.open(detalle-recurso, {
@@ -22,7 +26,7 @@ export class RecursoComponent implements OnInit {
       data: this.recursos[index]
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      //console.log('The dialog was closed');
     })
   }  */
 }

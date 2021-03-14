@@ -13,6 +13,7 @@ export class EleccionesMainComponent implements OnInit {
   public elecciones: string[] = [];
   public rutaDeRegreso: string = "/";
   public texto: string = "Elecciones";
+  public eleccionesJSON: Eleccion[] = [];
 
   constructor(
     private eleccionService: EleccionService,
@@ -22,7 +23,8 @@ export class EleccionesMainComponent implements OnInit {
   ngOnInit(): void {
     this.eleccionService.getElecciones().subscribe(
       elecciones => {
-        this.elecciones = elecciones.map( n => n.fecha.getMonth() + '-' + n.fecha.getDate() + '-' + n.fecha.getFullYear());
+        this.eleccionesJSON = elecciones;
+        this.elecciones = elecciones.map( n => n.titulo );
       },
       error => {
         console.error(error);
@@ -31,17 +33,19 @@ export class EleccionesMainComponent implements OnInit {
   }
 
   crearEleccion(nueva) {
-    const conf = confirm('Está por crear una nueva elección con la fecha actual, ¿está seguro que desea continuar?');
-    if(conf) {
+    const nombreEleccion = prompt("Está por crear una elección, ingrese un identificador de la misma para continuar","");
+    if(nombreEleccion) {
       this.eleccionService.createEleccion({
         fecha: new Date(),
-        listaGanadora: ''
+        listaGanadora: '',
+        titulo: nombreEleccion
       })
     }
   }
 
-  irAEleccion(eleccion: string) {
-    this.router.navigate(['/elecciones', eleccion])
+  irAEleccion(titEleccion: string) {
+    const id = this.eleccionesJSON.find( eleccion => eleccion.titulo === titEleccion ).id;
+    this.router.navigate(['/elecciones', id]);
   }
 
 

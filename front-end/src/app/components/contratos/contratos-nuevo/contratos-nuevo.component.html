@@ -11,7 +11,7 @@
                 name="id" 
                 maxlength="50" 
                 required
-                [(ngModel)]="contrato.id"
+                [(ngModel)]="contrato.nombre"
                 #nomb="ngModel"
             >
             <div class="err" *ngIf="nomb.touched && nomb.errors">
@@ -77,6 +77,19 @@
                     Error, campo requerido
                 </div>
             </div>
+        </div>
+        <div fxLayout="column">
+            <label for="prioridad">Prioridad:</label>
+            <select 
+                name="prioridad" 
+                id="prioridad"
+                [(ngModel)]="contrato.prioridad"
+            >
+                <option value="Alta">Alta</option>
+                <option value="Media">Media</option>
+                <option value="Baja">Baja</option>
+                <option value="Finalizado">Finalizado</option>
+            </select>
         </div>
         
         <div class="butt-box">

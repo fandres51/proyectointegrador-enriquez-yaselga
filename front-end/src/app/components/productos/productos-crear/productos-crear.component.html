@@ -1,1 +1,86 @@
-<p>productos-crear works!</p>
+<div>
+    <app-titles text="Nuevo Producto" regresarA="/filiales/filial/{{idFilial}}/productos"></app-titles>
+</div>
+<div class="form">
+    <form #form="ngForm" (ngSubmit)="nuevo()">
+        <div fxLayout="column">
+            <label for="nombre">Nombre:</label>
+            <input 
+                type="text" 
+                nombre="nombre" 
+                name="nombre" 
+                maxlength="50" 
+                required
+                [(ngModel)]="producto.nombre"
+                #nomb="ngModel"
+            >
+            <div class="err" *ngIf="nomb.touched && nomb.errors">
+                Error, campo requerido
+            </div>
+        </div>
+        <div fxLayout="column">
+            <label for="descripcion">Descripción:</label>
+            <input 
+                type="text" 
+                id="descripcion" 
+                name="descripcion" 
+                
+                [(ngModel)]="producto.descripcion"
+                #desc="ngModel"
+            >
+        </div>
+      
+            <div fxLayout="column">
+                <label for="addFilial">Proveedor: </label>
+                <select 
+                    name="addFilial" 
+                    id="addFilial" 
+                    [(ngModel)]="producto.idproveedor"
+                    value={{producto.idproveedor}}
+                >
+                    
+                    <option value="">ninguno</option>
+                    <option *ngFor="let proveedor of proveedores;" value={{proveedor.id}} >{{proveedor.nombre}}</option>
+                </select>
+            </div>
+        <div fxLayout="column">
+            <label for="categoria">Categoria:</label>
+            <input 
+                type="text" 
+                id="categoria" 
+                name="categoria" 
+                [(ngModel)]="producto.categoria"
+                required
+                #inter="ngModel"
+            >
+            <div class="err" *ngIf="inter.touched && inter.errors">
+                Error, campo requerido
+            </div>
+        </div>
+        <div fxLayout="column">
+            <label for="precio">Precio:</label>
+            <input 
+                type="number" 
+                id="precio" 
+                name="precio" 
+                [(ngModel)]="producto.precio"
+                required
+                #inter="ngModel"
+                step=".01"
+            >
+        </div>
+        <div class="active-box" fxLayout="row" fxJustifyItems="center">
+            <label for="activo">Activo: </label>
+            <input type="radio" id="activo" name="gender" value="true" [(ngModel)]="producto.estado" #inter="ngModel" required>
+            <label for="inactivo">Inactivo: </label>
+            <input type="radio" id="inactivo" name="gender" value="false" [(ngModel)]="producto.estado" #inter="ngModel" required>
+        </div>
+                
+        <div class="butt-box">
+            <button mat-button type="submit" [disabled]="!form.form.valid">
+                Nuevo
+                <mat-icon aria-hidden="false" aria-label="Edit">new</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>

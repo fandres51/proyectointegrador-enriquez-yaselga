@@ -3,7 +3,8 @@
         <button routerLink="/recursos" class="button-white" mat-button>
             <mat-icon aria-hidden="false" aria-label="Example home icon">arrow_back</mat-icon>
         </button>
-        <h1>Actualizar informacion de Recurso</h1>
+        <h1 fxFlex=50>Actualizar informacion de Recurso: {{recurso.id}}</h1>
+        
     </div>
 
     <div>
@@ -22,7 +23,7 @@
                     minlength="2"
                     value={{recurso.nombre}}
                 >
-                <div class="err" *ngIf="desc.touched && desc.errors">
+                <div class="err" *ngIf="nombre.touched && nombre.errors">
                     Error, campo requerido
                 </div>
             </div>
@@ -34,14 +35,10 @@
                     type="text" 
                     name="addDescripcion" 
                     id="addDescripcion" 
-                    required
                     [(ngModel)]="recurso.descripcion"
                     #desc="ngModel"
                     value={{recurso.descripcion}}
                 >
-                <div class="err" *ngIf="desc.touched && desc.errors">
-                    Error, campo requerido
-                </div>
             </div>
             </div>
             <div fxLayout="column" fxFlex=100 class="form-row">
@@ -65,7 +62,6 @@
                     type="text" 
                     name="addTipo" 
                     id="addTipo" 
-                    required
                     [(ngModel)]="recurso.tipo"
                     #tipo="ngModel"
                     value={{recurso.tipo}}
@@ -106,8 +102,23 @@
                 </select>
             </div>
             </div>
-            <div fxLayout="column" fx
-            Flex=100 class="form-row">
+        <div fxLayout="column" fxFlex=100 class="form-row">
+            <div fxLayout="column" fxFlex=100 class="form-item">
+                <label for="addFilial">Filial: </label>
+                <select 
+                    name="addFilial" 
+                    id="addFilial" 
+                    [(ngModel)]="recurso.idfilial"
+                    value={{recurso.idfilial}}
+                >
+                    
+                    <option value="">ninguna</option>
+                    <option *ngFor="let filial of filiales;" value={{filial.id}} >{{filial.nombre}}</option>
+                </select>
+            </div>
+        </div>
+        <div fxLayout="column" fxFlex=100 class="form-row">
+            <div fxLayout="column" fxFlex=100 class="form-item">
                 <label for="addValor">Valor: </label>
                 <input 
                     type="number" 
@@ -121,6 +132,8 @@
                     value={{recurso.valor}}
                 >
             </div>
+        </div>
+            
             
             <!--div fxLayout="column" fxFlex=100 class="form-row">
                 <div fxLayout="column" fxFlex=100 class="form-item">
@@ -151,12 +164,19 @@
                 </div>
             </div-->
             
-            <div fxLayout="column" fxFlex=100 class="form-row">
-                <div fxLayout="column" fxFlex=100 class="form-item">
-                <button mat-button [disabled]="!form.form.valid" #btn>
-                    Actualizar
-                </button>
+            
+
+            
+            
+            <div fxLayout="row" fxFlex=100 class="form-row">
+                <div fxLayout="column" fxFlex=75 class="form-item">
+                    <button mat-button [disabled]="!form.form.valid" #btn>Actualizar</button>
                 </div>
+                <div fxLayout="column" fxFlex=25 class="btn-delete">
+                    <button mat-flat-button color="warn" fxFlex=15 type="button" (click)="eliminar()">Eliminar</button>
+                </div>
+                
+                
             </div>
         </form>
     </div>

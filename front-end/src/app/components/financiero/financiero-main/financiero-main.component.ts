@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Transaccion } from 'src/app/models/transaccion';
 import { TransaccionesService } from 'src/app/services/transacciones.service';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Filial } from 'src/app/models/filial';
+import { FilialService } from 'src/app/services/filial.service';
 
 @Component({
   selector: 'app-financiero-main',
@@ -9,16 +13,32 @@ import { TransaccionesService } from 'src/app/services/transacciones.service';
 })
 export class FinancieroMainComponent implements OnInit {
 
+  idFilial:string='';
+  filial:Filial={
+    id:"0",
+    nombre:""
+  };
+  rutaNuevo="";
   public transacciones: Transaccion[] = [];
 
   public ingresos: number = 0;
   public egresos: number = 0;
 
   constructor(
-    public transaccionService:TransaccionesService
+    public transaccionService:TransaccionesService,
+    private readonly router: Router,
+    private route:ActivatedRoute,
+    private filialService:FilialService,
+    private transaccionesService: TransaccionesService,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    if(this.route.snapshot.params['id']){
+      this.idFilial = this.route.snapshot.params['id'];
+      this.filialService.getFilial(this.idFilial).subscribe(item=>{this.filial=item})
+      this.rutaNuevo="/filiales/filial/"+this.idFilial+"/financiero/nuevo";
+    }
+  }
 
   crearIngresosYEgresos(transacciones: Transaccion[]) {
     
@@ -44,7 +64,12 @@ export class FinancieroMainComponent implements OnInit {
     if (file.type.split('/')[1] !== 'csv') {
       console.error('Unsupported file type!!');
     }
-    this.transaccionService.cargaMasivaTransaccion(file).then(
+   
+    let tipo = prompt('Ingrese un tipo \n(se puede dejar vacío)');
+    if(!tipo) {
+      tipo = 'n/a';
+    }
+    this.transaccionService.cargaMasivaTransaccion(file, tipo, this.idFilial).then(
       noingresados => {
         if(noingresados.length > 0) {
           let registros: string = '';

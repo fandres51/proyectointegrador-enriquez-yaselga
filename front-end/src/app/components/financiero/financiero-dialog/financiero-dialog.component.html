@@ -3,6 +3,21 @@
     {{transaccion.Descripcion}}
 </div>
 <hr>
+<div>
+    <h3>
+        Fecha de ingreso: 
+    </h3>
+    {{transaccion.FechaIngreso.getDate()}}/{{transaccion.FechaIngreso.getMonth()+1}}/{{transaccion.FechaIngreso.getFullYear()}} 
+    <span style="margin-left: 10px;">{{transaccion.FechaIngreso.getHours()}}:{{transaccion.FechaIngreso.getMinutes()}}</span>
+</div>
+<br>
+<div>
+    <h3>
+        Persona que ingresó la transacción: 
+    </h3>
+    {{transaccion.PersonaIngreso}}
+</div>
+<br>
 <div *ngIf="transaccion.PersonaID">
     <h3>
         No único de estudainte afiliado: {{transaccion.PersonaID}}
