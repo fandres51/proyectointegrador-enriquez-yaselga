@@ -84,6 +84,21 @@
                     <option value="Perdido">Perdido</option>
                 </select>
             </div>
+            <div fxLayout="column" fxFlex=100 class="form-row">
+                <div fxLayout="column" fxFlex=100 class="form-item">
+                    <label for="addFilial">Filial: </label>
+                    <select 
+                        name="addFilial" 
+                        id="addFilial" 
+                        [(ngModel)]="recurso.idfilial"
+                        value={{recurso.idfilial}}
+                    >
+                        
+                        <option value="">ninguna</option>
+                        <option *ngFor="let filial of filiales;" value={{filial.id}} >{{filial.nombre}}</option>
+                    </select>
+                </div>
+            </div>
             <div fxLayout="column" fxFlex=100 class="form-item">
                 <label for="addValor">Valor: </label>
                 <input 

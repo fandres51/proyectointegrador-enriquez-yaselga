@@ -97,7 +97,7 @@ const routes: Routes = [
   { path: 'filiales/filial/:id/productos/actualizar/:idproducto', component: ProductosEditarComponent, canActivate: [FilialesGuard] },
   { path: 'filiales/filial/:id/financiero', component: FinancieroMainComponent, canActivate: [FilialesGuard]},
   { path: 'filiales/filial/:id/financiero/nuevo', component: FinancieroCrearComponent, canActivate: [FilialesGuard]},
-  { path: 'filiales/filial/:id/alquiler', component: AlquileresMainComponent, canActivate: [FilialesGuard]},
+  { path: 'filiales/filial/:id/recursos', component: RecursosMainComponent, canActivate: [FilialesGuard]},
   
   { path: 'ajustes', component: AjustesMainComponent, children: [
     { path: 'nuevo-semestre', component: AjustesNuevoSemestreComponent },

@@ -16,6 +16,7 @@ export class RecursosActualizacionComponent implements OnInit {
   Condiciones: ['Nuevo','Usado','Averiado','Perdido'];
   filiales: Filial[];
   filialesNombres: string[]; 
+  
 
   public recurso: Recurso;
 
@@ -54,6 +55,9 @@ export class RecursosActualizacionComponent implements OnInit {
         console.error(error);
       }
     )
+    
+    
+    
   }
 
   editRecurso(recurso: Recurso) {

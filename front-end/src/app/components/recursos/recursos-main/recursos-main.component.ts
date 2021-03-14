@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Recurso } from 'src/app/models/recurso';
 import { RecursosService } from 'src/app/services/recursos.service';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Filial } from 'src/app/models/filial';
+import { FilialService } from 'src/app/services/filial.service';
 
 @Component({
   selector: 'app-recursos-main',
@@ -11,13 +15,27 @@ export class RecursosMainComponent implements OnInit {
   
   public recursos:Recurso[]=[];
   public recursosMostrados:Recurso[]=[];
-
-  constructor(public RecursosService:RecursosService) { }
+  idFilial:string='';
+  filial:Filial={
+    id:"0",
+    nombre:""
+  };
+  rutaNuevo="";
+  constructor(
+    public RecursosService:RecursosService,
+    private route:ActivatedRoute,
+    private filialService:FilialService,
+    ) { }
 
   ngOnInit(): void {
     this.RecursosService.getRecursos().subscribe(recurso =>{
       this.recursos = recurso;
       this.recursosMostrados = recurso;
+      if(this.route.snapshot.params['id']){
+        this.idFilial = this.route.snapshot.params['id'];
+        this.filialService.getFilial(this.idFilial).subscribe(item=>{this.filial=item})
+        //this.rutaNuevo="/filiales/filial/"+this.idFilial+"/recurso/nuevo";
+      }
       //console.log(this.recursos);
     });
   }

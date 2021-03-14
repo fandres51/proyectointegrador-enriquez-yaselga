@@ -29,17 +29,20 @@
                 #desc="ngModel"
             >
         </div>
-        <div fxLayout="column">
-            <label for="idproveedor">Proveedor:</label>
-            <input 
-                type="text" 
-                id="idproveedor" 
-                name="idproveedor" 
-                [(ngModel)]="producto.idproveedor"
-                
-                #inter="ngModel"
-            >
-        </div>
+      
+            <div fxLayout="column">
+                <label for="addFilial">Proveedor: </label>
+                <select 
+                    name="addFilial" 
+                    id="addFilial" 
+                    [(ngModel)]="producto.idproveedor"
+                    value={{producto.idproveedor}}
+                >
+                    
+                    <option value="">ninguno</option>
+                    <option *ngFor="let proveedor of proveedores;" value={{proveedor.id}} >{{proveedor.nombre}}</option>
+                </select>
+            </div>
         <div fxLayout="column">
             <label for="categoria">Categoria:</label>
             <input 
