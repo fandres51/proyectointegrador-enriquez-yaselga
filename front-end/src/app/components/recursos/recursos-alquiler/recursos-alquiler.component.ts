@@ -40,8 +40,9 @@ export class RecursosAlquilerComponent implements OnInit {
   };
   public recursos: Recurso[]=[];
 
-  @Input() set _recursos(recursos: Recurso[]){    
-    this.recursos = recursos;
+  @Input() set _recursos(data){    
+    this.recursos = data.recursos;
+    this.idFilial= data.idfilial;
   }
 
   @Output() public recursosAEditarEmitter = new EventEmitter();
@@ -57,7 +58,8 @@ export class RecursosAlquilerComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<RecursosAlquilerComponent>,
     public recursosService: RecursosService,
-    @Inject(MAT_DIALOG_DATA) public recurso: Recurso,
+    @Inject(MAT_DIALOG_DATA) public data ,
+    
     private filialService: FilialService,
     public dialog: MatDialog,
     public transaccionService: TransaccionesService,
@@ -67,12 +69,24 @@ export class RecursosAlquilerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log("data: ",this.data);
+    
+    this.idFilial= this.data.idfilial
+    if (this.data.idfilial!=undefined) {
+      this.transaccion.FilialID = this.idFilial;
+      this.filialService.getFilial(this.idFilial).subscribe(item => { this.filial = item })
+      this.rutaNuevo = "/filiales/filial/" + this.idFilial;
+      console.log("Entra IF: ",this.idFilial);
+    }
+    else{
+      console.log("No Entra IF: ",this.idFilial);
+    }
     
     this.filialService.getFiliales().subscribe(
       filiales => {
         this.filiales = filiales;
         filiales.forEach(element => {
-          if(this.recurso.idfilial.localeCompare(element.id)==0){
+          if(this.data.recursos.idfilial.localeCompare(element.id)==0){
             this.filialRecurso = element.nombre;
           }
         });
@@ -81,11 +95,7 @@ export class RecursosAlquilerComponent implements OnInit {
         console.error(error);
       } 
     )
-    if (this.route.snapshot.params['id']) {
-      this.transaccion.FilialID = this.idFilial = this.route.snapshot.params['id'];
-      this.filialService.getFilial(this.idFilial).subscribe(item => { this.filial = item })
-      this.rutaNuevo = "/filiales/filial/" + this.idFilial;
-    }
+    
     this.authService.auth.user.subscribe(
       user => {
         this.transaccion.PersonaIngreso = user.displayName;
@@ -96,21 +106,23 @@ export class RecursosAlquilerComponent implements OnInit {
     )
   }
 
-  private getTomorrowDate(date:Date): Date {
-    const tomorrow = new Date(date)
-    tomorrow.setDate(tomorrow.getDate() + 1)
-    return tomorrow;
-  }
-
   addTransaccion(transaccion) {
-    let newDate = this.getTomorrowDate(new Date(this.fecha));
-    this.transaccion.Fecha = newDate;
+    this.transaccion.Fecha = new Date(this.fecha);
+    if(this.idFilial){
+      this.transaccion.FilialID=this.idFilial;
+    }
     this.transaccionService.addTransaccion(transaccion);
-    //this.router.navigateByUrl(this.rutaNuevo + '/financiero')
+    console.log("Entra IF: ",this.idFilial);
+    this.cerrarDialog();
+    //console.log("regresa");
   }
 
   volver() {
-    //this.router.navigateByUrl(this.rutaNuevo + '/financiero')
+    this.router.navigateByUrl(this.rutaNuevo + '/recursos')
+    this.cerrarDialog();
+  }
+  cerrarDialog() {
+    this.dialogRef.close();
   }
 
 }

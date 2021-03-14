@@ -62,6 +62,24 @@ export class RecursosService {
       })
     );
   }
+  getRecursosPorFilial(filialID:string): Observable<Recurso[]> {
+    return this.afs.collection(
+      'Asociacion/AEIS/Recurso',
+      ref => ref.where('idfilial', '==', filialID)
+    ).snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Recurso;
+        Object.keys(data).filter(
+          key => data[key] instanceof firebase.firestore.Timestamp
+        ).forEach(
+          key => data[key] = data[key].toDate()
+        ) //convierte todos los objetos Timestamp a Date
+
+        data.id = a.payload.doc.id;
+        return data;
+      }))
+    )
+  }
 
   crearRecurso(nuevoRecurso: Recurso) {
     let bool = true; //eveita un bucle infinito X((

@@ -1,7 +1,7 @@
 <h1>
 <div fxLayout="row">
     <div fxFlex="100" class="dato">
-        <div class="titulo">Alquilar: {{recurso.nombre}}</div>
+        <div class="titulo">Alquilar: {{data.recursos.nombre}}</div>
     </div>
 </div>
 </h1> 
@@ -13,7 +13,7 @@
                 <input 
                     type="number" 
                     min="0.05" 
-                    step=".01" 
+                    step=".05" 
                     name="addMonto" 
                     id="addMonto" 
                     required

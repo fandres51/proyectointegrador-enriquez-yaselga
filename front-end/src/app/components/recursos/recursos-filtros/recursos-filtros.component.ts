@@ -1,6 +1,9 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { Recurso } from 'src/app/models/recurso'
-import { RecursosService } from 'src/app/services/recursos.service'
+import { Recurso } from 'src/app/models/recurso';
+import { RecursosService } from 'src/app/services/recursos.service';
+import { ActivatedRoute } from '@angular/router';
+import { Filial } from 'src/app/models/filial';
+import { FilialService } from 'src/app/services/filial.service';
 
 @Component({
   selector: 'app-recursos-filtros',
@@ -16,17 +19,41 @@ export class RecursosFiltrosComponent implements OnInit {
   public filtroEstado: 'Libre'|'Ocupado'|'Alquilado'|'Reservado'|'Baja'|'Reparacion'|'' = '';
   public filtroCondicion: 'Nuevo'|'Usado'|'Averiado'|'Perdido'|'' = '';
 
-
+  idFilial: string;
+  filial: Filial = {
+    id: "0",
+    nombre: ""
+  };
 
   constructor(
-    private recursosService: RecursosService
+    private recursosService: RecursosService,
+    private route: ActivatedRoute,
+    private filialService: FilialService,
   ) { }
 
   ngOnInit(): void {
-    this.recursosService.getRecursos().subscribe(recursos=>{
+    if(this.route.snapshot.params['id']) {
+      this.idFilial = this.route.snapshot.params['id'];
+      this.filialService.getFilial(this.idFilial).subscribe(item => { this.filial = item })
+      this.recursosService.getRecursosPorFilial(this.idFilial).subscribe(
+        recursos => {
+          this.recursos = recursos;
+          this.enviarRecursos(this.recursos)
+        },
+        error => {
+          console.error(error);
+        }
+      )
+    }
+    else {
+    this.recursosService.getRecursos().subscribe(
+      recursos=>{
         this.recursos = recursos;
         this.enviarRecursos(this.recursos);
-      })
+      },
+      error => {
+        console.error(error);
+      })}
   }
   /***Filtros***********************************************/
   public buscarPorNombre(input: string) {
