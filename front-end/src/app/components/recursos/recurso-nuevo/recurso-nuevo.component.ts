@@ -14,7 +14,6 @@ export class RecursoNuevoComponent implements OnInit {
   Estados: string[] = ['Libre','Ocupado','Alquilado','Reservado','Baja','Reparacion'];
   Condiciones: ['Nuevo','Usado','Averiado','Perdido'];
   filiales: Filial[];
-  filialesNombres: string[]; 
 
   public recurso: Recurso = {
     id : "",
@@ -41,8 +40,6 @@ export class RecursoNuevoComponent implements OnInit {
         
         this.filiales = filiales;
         ////console.log(">>>>Filiales: ",filiales);
-        this.filialesNombres = filiales.map(n=>n.nombre);
-        //this.filialesNombres = filiales.map(n=>n.id);
         
       },
       error => {
