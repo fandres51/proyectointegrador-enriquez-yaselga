@@ -1,7 +1,11 @@
 <div fxLayout="column">
     <div fxLayout="row" fxLayoutAlign=" center" class="top-bar">
         <div fxFlex="50" fxLayout="row" fxLayoutAlign=" center" fxHide.lt-md>
-            
+            <div *ngIf="idFilial">
+                <button mat-button (click)="return()">
+                    <mat-icon aria-hidden="false">arrow_back</mat-icon>
+                </button>
+            </div>
             <div class="ingresos">
                 Datos mostrados de la filial {{filial.nombre}}:
             </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Filial } from 'src/app/models/filial';
 import { Proveedor } from 'src/app/models/proveedor';
 import { FilialService } from 'src/app/services/filial.service';
@@ -24,6 +24,7 @@ export class ProveedoresMainComponent implements OnInit {
     private route:ActivatedRoute,
     private proveedoresService:ProveedoresService,
     private filialService:FilialService,
+    private readonly router: Router
   ) { }
 
   ngOnInit(): void {
@@ -36,6 +37,10 @@ export class ProveedoresMainComponent implements OnInit {
     });
   }
   
+  return() {
+    this.router.navigate(['/filiales','filial',this.idFilial]);
+  }
+
    cargaMasiva(event: FileList) {
     const file = event.item(0);
     if (file.type.split('/')[1] !== 'csv') {

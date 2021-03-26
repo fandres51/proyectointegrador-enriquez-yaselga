@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Filial } from 'src/app/models/filial';
 import { Producto } from 'src/app/models/producto';
 import { FilialService } from 'src/app/services/filial.service';
@@ -23,6 +23,7 @@ export class ProductosMainComponent implements OnInit {
     private route:ActivatedRoute,
     private productosService:ProductosService,
     private filialService:FilialService,
+    private readonly router: Router
   ) { }
 
   ngOnInit(){
@@ -52,6 +53,10 @@ export class ProductosMainComponent implements OnInit {
         }
       }
     ); 
+  }
+
+  return() {
+    this.router.navigate(['/filiales','filial',this.idFilial]);
   }
   
   refrescar(event){

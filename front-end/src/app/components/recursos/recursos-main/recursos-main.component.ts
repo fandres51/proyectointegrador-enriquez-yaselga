@@ -25,6 +25,7 @@ export class RecursosMainComponent implements OnInit {
     public RecursosService:RecursosService,
     private route:ActivatedRoute,
     private filialService:FilialService,
+    private readonly router: Router
     ) { }
 
   ngOnInit(): void {
@@ -38,6 +39,10 @@ export class RecursosMainComponent implements OnInit {
       }
       //console.log(this.recursos);
     });
+  }
+
+  return() {
+    this.router.navigate(['/filiales','filial',this.idFilial]);
   }
   
    cargaMasiva(event: FileList) {

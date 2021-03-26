@@ -1,5 +1,5 @@
 <div>
-    <app-titles text="Actualizar filial" regresarA="/filiales"></app-titles>
+    <app-titles text="Actualizar filial" [regresarA]="'/filiales/filial/'+filial.id"></app-titles>
 </div>
 <div class="form">
     <form #form="ngForm" (ngSubmit)="guardar()">
