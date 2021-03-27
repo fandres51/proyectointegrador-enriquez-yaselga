@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Recurso } from 'src/app/models/recurso'
 import { RecursosService } from 'src/app/services/recursos.service'
 import { Filial } from 'src/app/models/filial';
@@ -15,6 +15,15 @@ export class RecursoNuevoComponent implements OnInit {
   Condiciones: ['Nuevo','Usado','Averiado','Perdido'];
   filiales: Filial[];
 
+  idFilial: string;
+  filial: Filial = {
+    id: "0",
+    nombre: ""
+  };
+  rutaNuevo = "/recursos";
+  public fecha;
+
+
   public recurso: Recurso = {
     id : "",
     descripcion : "",
@@ -24,7 +33,8 @@ export class RecursoNuevoComponent implements OnInit {
     tipo : "",
     ubicacion : "",
     valor : 0,
-    condicion : 'Nuevo'
+    condicion : 'Nuevo',
+    idfilial: ''
     
   };
 
@@ -32,6 +42,7 @@ export class RecursoNuevoComponent implements OnInit {
     public recursosService:RecursosService,
     private router: Router,
     private filialService: FilialService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
@@ -46,11 +57,16 @@ export class RecursoNuevoComponent implements OnInit {
         console.error(error);
       }
     )
+    if (this.route.snapshot.params['id']) {
+      this.recurso.idfilial = this.idFilial = this.route.snapshot.params['id'];
+      this.filialService.getFilial(this.idFilial).subscribe(item => { this.filial = item })
+      this.rutaNuevo = "/filiales/filial/" + this.idFilial + '/recursos';
+    }
   }
 
     addRecurso(recurso){
       this.recursosService.crearRecurso(recurso);
-      this.router.navigateByUrl('/recursos')
+      this.router.navigateByUrl(this.rutaNuevo);
     }
 
     

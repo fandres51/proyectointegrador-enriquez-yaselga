@@ -59,7 +59,7 @@ export class RecursosDialogInfoComponent implements OnInit {
 
   darDeBaja(){
     if(window.confirm('¿Está seguro que desea dar de baja este recurso?')) {
-      this.recursosService.darDeBaja(this.recurso.id);
+      this.recursosService.delete(this.recurso.id);
       this.dialogRef.close();
     }
   }

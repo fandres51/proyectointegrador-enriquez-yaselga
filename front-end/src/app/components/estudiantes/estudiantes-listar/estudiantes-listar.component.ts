@@ -14,7 +14,7 @@ export class EstudiantesListarComponent implements OnInit {
   public estudiantes: Estudiante[] = [];
 
   @Input() set _estudiantes(estudiantes: Estudiante[]) {
-    this.estudiantes = estudiantes;
+    this.estudiantes = estudiantes.sort(this.compararPorApellido);
     this.changePagination();
   }
   private pageIndex: number = 0;
@@ -26,6 +26,16 @@ export class EstudiantesListarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void { }
+
+  compararPorApellido(a, b) {
+    if (a.Apellido < b.Apellido) {
+      return -1;
+    }
+    if (a.Apellido > b.Apellido) {
+      return 1;
+    }
+    return 0;
+  }
 
   public openDialog(index:number):void {
     const dialogRef = this.dialog.open( EstudiantesDialogInfoComponent, {

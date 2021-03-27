@@ -50,7 +50,7 @@ export class RecursosMainComponent implements OnInit {
     if (file.type.split('/')[1] !== 'csv') {
       console.error('¡Formato de archivo no soportado!');
     }
-    this.RecursosService.cargaMasivaRecursos(file).then(
+    this.RecursosService.cargaMasivaRecursos(file, this.idFilial).then(
       eni => {
         if(eni.length > 0) {
           let registros: string = '';

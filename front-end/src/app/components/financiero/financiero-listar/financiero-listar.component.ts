@@ -13,7 +13,7 @@ export class FinancieroListarComponent implements OnInit {
 
   @Input() set _transacciones(transacciones: Transaccion[]) {
     //console.log(">>>>recibe:",transacciones);
-    this.transacciones = transacciones;
+    this.transacciones = transacciones.sort(this.compararPorFechaIngreso);
     this.changePagination();
   }
 
@@ -27,6 +27,16 @@ export class FinancieroListarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void { }
+
+  compararPorFechaIngreso(a, b) {
+    if (a.FechaIngreso > b.FechaIngreso) {
+      return -1;
+    }
+    if (a.FechaIngreso < b.FechaIngreso) {
+      return 1;
+    }
+    return 0;
+  }
 
   public openDialog(index:number):void {
     const dialogRef = this.dialog.open( FinancieroDialogComponent, {
