@@ -137,7 +137,7 @@ export class TransaccionesService {
           transaccionesNoIngresadas.push(
             'Fecha: ' + 
             transaccion.Fecha.getDay() + '/' + 
-            transaccion.Fecha.getMonth() + '/' + 
+            (transaccion.Fecha.getMonth()+1) + '/' + 
             transaccion.Fecha.getFullYear() + ' ' + 
             'Monto: ' + 
             transaccion.Monto + ' ' + 

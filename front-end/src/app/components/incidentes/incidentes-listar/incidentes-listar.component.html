@@ -12,7 +12,7 @@
                 <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between " style="width: 100%;">
                     <div fxLayout="column" fxLayoutAlign=" start">
                         <div class="ly">Fecha: </div>
-                        <div class="txt">{{incidente.fecha.getDate() + '/' + incidente.fecha.getMonth() + '/' + incidente.fecha.getFullYear()}}</div>
+                        <div class="txt">{{incidente.fecha.getDate() + '/' + (incidente.fecha.getMonth()+1) + '/' + incidente.fecha.getFullYear()}}</div>
                     </div>
                     <div fxLayout="column" fxLayoutAlign=" start">
                         <div class="ly">NoÚnico estudiante: </div>

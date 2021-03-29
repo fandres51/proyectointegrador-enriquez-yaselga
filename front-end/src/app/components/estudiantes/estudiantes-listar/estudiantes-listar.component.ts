@@ -14,7 +14,7 @@ export class EstudiantesListarComponent implements OnInit {
   public estudiantes: Estudiante[] = [];
 
   @Input() set _estudiantes(estudiantes: Estudiante[]) {
-    this.estudiantes = estudiantes.sort(this.compararPorApellido);
+    this.estudiantes = estudiantes;
     this.changePagination();
   }
   private pageIndex: number = 0;

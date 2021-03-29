@@ -13,7 +13,7 @@ export class FinancieroListarComponent implements OnInit {
 
   @Input() set _transacciones(transacciones: Transaccion[]) {
     //console.log(">>>>recibe:",transacciones);
-    this.transacciones = transacciones.sort(this.compararPorFechaIngreso);
+    this.transacciones = transacciones;
     this.changePagination();
   }
 

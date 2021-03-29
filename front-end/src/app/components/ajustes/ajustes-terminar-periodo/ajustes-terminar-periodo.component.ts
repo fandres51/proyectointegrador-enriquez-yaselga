@@ -11,7 +11,7 @@ import { EleccionService } from 'src/app/services/eleccion.service';
 })
 export class AjustesTerminarPeriodoComponent implements OnInit {
 
-  public elecciones: string[] = [];
+  public elecciones: Eleccion[] = [];
   public listas: string[] = [];
   public mostrarListasBool: boolean = false;
   public eleccionSeleccinada: string;
@@ -25,15 +25,14 @@ export class AjustesTerminarPeriodoComponent implements OnInit {
   ngOnInit(): void { 
     this.eleccionService.getElecciones().subscribe(
       elecciones => {
-        this.elecciones = elecciones.filter(n => n.listaGanadora === '').map( n => {
-          return n.fecha.getMonth() + '-' + n.fecha.getDate() + '-' + n.fecha.getFullYear();
-        });
-        console.log(this.elecciones);
+        this.elecciones = elecciones.filter(n => n.listaGanadora === '');
       }
     )
   }
 
-  mostrarListas(eleccion: string) {
+  mostrarListas(eleccionTitulo: string) {
+    const eleccion = this.elecciones.find((elec)=>elec.titulo===eleccionTitulo).id;
+    
     this.eleccionService.getListas(eleccion).subscribe(
       listas => {
         this.listas = listas.map( n => n.nombre );
