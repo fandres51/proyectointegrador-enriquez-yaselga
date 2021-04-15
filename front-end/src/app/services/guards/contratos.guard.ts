@@ -20,8 +20,10 @@ export class ContratosGuard implements CanActivate {
                             permisos => {
                                 if(permisos.length>0)
                                     res(true);
-                                else
+                                else {
+                                    alert('Usted no tiene permisos para acceder a este módulo');
                                     res(false)
+                                }
                             },
                             error => {
                               console.error(error);
