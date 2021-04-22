@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Eleccion } from 'src/app/models/eleccion';
 import { AsociacionService } from 'src/app/services/asociacion.service';
 import { AutoridadesService } from 'src/app/services/autoridades.service';
@@ -11,7 +12,8 @@ import { EleccionService } from 'src/app/services/eleccion.service';
 })
 export class AjustesTerminarPeriodoComponent implements OnInit {
 
-  public elecciones: string[] = [];
+  public elecciones: Eleccion[] = [];
+  public eleccionesTit: string[] = [];
   public listas: string[] = [];
   public mostrarListasBool: boolean = false;
   public eleccionSeleccinada: string;
@@ -19,21 +21,22 @@ export class AjustesTerminarPeriodoComponent implements OnInit {
   constructor(
     private readonly asociacionService: AsociacionService,
     private readonly eleccionService: EleccionService,
-    private readonly autoridadService: AutoridadesService
+    private readonly autoridadService: AutoridadesService,
+    private readonly router: Router
   ) { }
 
   ngOnInit(): void { 
     this.eleccionService.getElecciones().subscribe(
       elecciones => {
-        this.elecciones = elecciones.filter(n => n.listaGanadora === '').map( n => {
-          return n.fecha.getMonth() + '-' + n.fecha.getDate() + '-' + n.fecha.getFullYear();
-        });
-        console.log(this.elecciones);
+        this.elecciones = elecciones.filter(n => n.listaGanadora === '');
+        this.eleccionesTit = this.elecciones.map(e => e.titulo);
       }
     )
   }
 
-  mostrarListas(eleccion: string) {
+  mostrarListas(eleccionTitulo: string) {
+    const eleccion = this.elecciones.find((elec)=>elec.titulo===eleccionTitulo).id;
+    
     this.eleccionService.getListas(eleccion).subscribe(
       listas => {
         this.listas = listas.map( n => n.nombre );
@@ -53,6 +56,7 @@ export class AjustesTerminarPeriodoComponent implements OnInit {
         this.eleccionService.getDignidadesDeLista(lista, this.eleccionSeleccinada).subscribe(
           dignidades => {
             this.autoridadService.cambiarAsociacion(dignidades);
+            this.router.navigate(['/']);
           },
           error => {
             console.error(error);

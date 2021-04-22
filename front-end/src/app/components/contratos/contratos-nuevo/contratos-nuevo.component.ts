@@ -31,11 +31,22 @@ export class ContratosNuevoComponent implements OnInit {
     }
   }
 
+  private getTomorrowDate(date:Date): Date {
+    const tomorrow = new Date(date)
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    return tomorrow;
+  }
+
   nuevo() {
     let estaSeguro = confirm('¿Está seguro de querer crear un nuevo contrato con estos datos?');
     if(estaSeguro) {
-      this.contrato.fechaInicial = new Date(this.fechaInicial);
-      this.contrato.fechaFinal = new Date(this.fechaFinal);
+      // this.contrato.fechaInicial = new Date(this.fechaInicial);
+      // this.contrato.fechaFinal = new Date(this.fechaFinal);
+
+      this.contrato.fechaInicial = this.getTomorrowDate(new Date(this.fechaInicial));
+      this.contrato.fechaFinal = this.getTomorrowDate(new Date(this.fechaFinal));
+      console.log('F', this.contrato.fechaFinal, this.fechaFinal, '\n');
+
       this.contratoService.addContrato(this.contrato);
       alert('Contrato creado');
       this.router.navigate(['/contratos']);

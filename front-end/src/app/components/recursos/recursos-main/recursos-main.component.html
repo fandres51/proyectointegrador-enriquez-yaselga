@@ -1,9 +1,19 @@
 <div fxLayout="column">
   <div fxFlex="10" fxLayout="row" fxLayoutAlign="space-between center" class="top-bar" fxHide.lt-md>
-      <div class="registros-mostrados">Registros mostrados: {{recursos.length}}</div>
+    
+    
+    
+    <div class="registros-mostrados" fxLayout="row" fxLayoutAlign=" center">
+        <div *ngIf="idFilial">
+            <button mat-button (click)="return()">
+                <mat-icon aria-hidden="false">arrow_back</mat-icon>
+            </button>
+        </div>
+        Registros mostrados: {{recursos.length}}
+    </div>
       
       <div fxFlex="50" fxLayoutAlign="end center">
-        <button routerLink="/recursos/nuevo" class="but-cargar-recurso" mat-button fxLayoutAlign="center center">
+        <button routerLink="nuevo" class="but-cargar-recurso" mat-button fxLayoutAlign="center center">
             Nuevo Recurso
         </button>
         <div fxLayoutAlign="center center">

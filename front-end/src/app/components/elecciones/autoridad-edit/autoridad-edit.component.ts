@@ -61,8 +61,10 @@ export class AutoridadEditComponent implements OnInit {
 
   eliminar() {
     const estaSeguro = confirm('¿Está seguro que desea elliminar esta dignidad?');
-    if(estaSeguro)
+    if(estaSeguro) {
       this.eleccionService.deleteDignidad(this.autoridad, this.lista, this.eleccion);
+      this.router.navigate(['/elecciones'])
+    }
   }
 
 }

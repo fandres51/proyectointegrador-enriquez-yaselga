@@ -27,6 +27,16 @@ export class EstudiantesListarComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  compararPorApellido(a, b) {
+    if (a.Apellido < b.Apellido) {
+      return -1;
+    }
+    if (a.Apellido > b.Apellido) {
+      return 1;
+    }
+    return 0;
+  }
+
   public openDialog(index:number):void {
     const dialogRef = this.dialog.open( EstudiantesDialogInfoComponent, {
       width: '500px',

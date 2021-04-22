@@ -40,6 +40,10 @@ export class FinancieroMainComponent implements OnInit {
     }
   }
 
+  return() {
+    this.router.navigate(['/filiales','filial',this.idFilial]);
+  }
+
   crearIngresosYEgresos(transacciones: Transaccion[]) {
     
     this.transacciones = transacciones;

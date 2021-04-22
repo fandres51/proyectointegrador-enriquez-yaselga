@@ -180,12 +180,12 @@ export class RecursosService {
     return this.getCollection().doc(idrecurso).delete();
   }
 
-  cargaMasivaRecursos(file): Promise<string[]> {
+  cargaMasivaRecursos(file, filialId=''): Promise<string[]> {
     return new Promise(
       (resF) => {
         Papa.parse(file, {
           complete: res => {
-            this.firethisRecurso(res['data']).then(
+            this.firethisRecurso(res['data'], filialId).then(
               recursosNoIngresadas => resF(recursosNoIngresadas)
             ).catch(
               e => console.error('Archivo no admitido')
@@ -197,7 +197,7 @@ export class RecursosService {
     )
   }
 
-  private firethisRecurso(recursos: Recurso[]): Promise<string[]> {
+  private firethisRecurso(recursos: Recurso[], filialId=''): Promise<string[]> {
     const recursosNoIngresadas: string[] = [];
     return new Promise((resolve) => {
       recursos.forEach((recurso, i) => {
@@ -206,6 +206,7 @@ export class RecursosService {
         recurso.espacio = true;
         recurso.condicion = 'Nuevo';
         recurso.estado= 'Libre';
+        recurso.idfilial = filialId;
 
         if (recurso.nombre && recurso.valor) {
           const x = this;

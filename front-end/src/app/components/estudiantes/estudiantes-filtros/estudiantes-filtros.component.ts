@@ -23,7 +23,7 @@ export class EstudiantesFiltrosComponent implements OnInit {
 
   ngOnInit() {
     this.estudiantesService.getEstudiantes().subscribe(estudiantes => {
-      this.estudiantes = estudiantes;
+      this.estudiantes = estudiantes.sort(this.compararPorApellido);
       this.enviarEstudiantes(this.estudiantes);
     },
     error => {

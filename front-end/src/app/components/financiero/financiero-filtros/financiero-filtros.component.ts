@@ -43,7 +43,7 @@ export class FinancieroFiltrosComponent implements OnInit {
       this.filialService.getFilial(this.idFilial).subscribe(item => { this.filial = item })
       this.transaccionesService.getTransaccionesPorFilial(this.idFilial).subscribe(
         transacciones => {
-          this.transacciones = transacciones;
+          this.transacciones = transacciones.sort(this.compararPorFechaIngreso);
           this.enviarTransacciones(this.transacciones)
         },
         error => {
@@ -54,7 +54,7 @@ export class FinancieroFiltrosComponent implements OnInit {
     else {
       this.transaccionesService.getTransacciones().subscribe(
         transacciones => {
-          this.transacciones = transacciones.reverse();
+          this.transacciones = transacciones.sort(this.compararPorFechaIngreso);
           this.enviarTransacciones(this.transacciones)
         },
         error => {

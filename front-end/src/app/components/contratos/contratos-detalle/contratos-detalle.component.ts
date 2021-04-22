@@ -36,8 +36,9 @@ export class ContratosDetalleComponent implements OnInit {
         this.contratoService.getContrato(contrato.get('contrato')).subscribe(
           contrato => {
             this.contrato = contrato;
-            this.fechaInicial = contrato.fechaInicial.getFullYear() + '-' + ('0' + contrato.fechaInicial.getMonth()).slice(-2) + '-' + ('0' + contrato.fechaInicial.getDate()).slice(-2);
-            this.fechaFinal = contrato.fechaFinal.getFullYear() + '-' + ('0' + contrato.fechaFinal.getMonth()).slice(-2) + '-' + ('0' + contrato.fechaFinal.getDate()).slice(-2);
+            console.log('contrato', contrato.fechaInicial.getMonth());
+            this.fechaInicial = contrato.fechaInicial.getFullYear() + '-' + ('0' + (contrato.fechaInicial.getMonth()+1)).slice(-2) + '-' + ('0' + contrato.fechaInicial.getDate()).slice(-2);
+            this.fechaFinal = contrato.fechaFinal.getFullYear() + '-' + ('0' + (contrato.fechaFinal.getMonth()+1)).slice(-2) + '-' + ('0' + contrato.fechaFinal.getDate()).slice(-2);
           },
           error => {
             console.error(error);

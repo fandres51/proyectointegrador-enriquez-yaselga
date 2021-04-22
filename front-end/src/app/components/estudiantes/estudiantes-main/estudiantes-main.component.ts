@@ -30,6 +30,8 @@ export class EstudiantesMainComponent implements OnInit {
             registros = registros + n + '\n';
           })
           alert('Registros no ingresados: \n' + registros);
+        } else {
+          alert('Archivos cargados con éxito');
         }
       }
     );

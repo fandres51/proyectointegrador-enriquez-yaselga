@@ -28,6 +28,16 @@ export class FinancieroListarComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  compararPorFechaIngreso(a, b) {
+    if (a.FechaIngreso > b.FechaIngreso) {
+      return -1;
+    }
+    if (a.FechaIngreso < b.FechaIngreso) {
+      return 1;
+    }
+    return 0;
+  }
+
   public openDialog(index:number):void {
     const dialogRef = this.dialog.open( FinancieroDialogComponent, {
       width: '500px',

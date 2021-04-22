@@ -25,6 +25,7 @@ export class RecursosMainComponent implements OnInit {
     public RecursosService:RecursosService,
     private route:ActivatedRoute,
     private filialService:FilialService,
+    private readonly router: Router
     ) { }
 
   ngOnInit(): void {
@@ -39,13 +40,17 @@ export class RecursosMainComponent implements OnInit {
       //console.log(this.recursos);
     });
   }
+
+  return() {
+    this.router.navigate(['/filiales','filial',this.idFilial]);
+  }
   
    cargaMasiva(event: FileList) {
     const file = event.item(0);
     if (file.type.split('/')[1] !== 'csv') {
       console.error('¡Formato de archivo no soportado!');
     }
-    this.RecursosService.cargaMasivaRecursos(file).then(
+    this.RecursosService.cargaMasivaRecursos(file, this.idFilial).then(
       eni => {
         if(eni.length > 0) {
           let registros: string = '';
