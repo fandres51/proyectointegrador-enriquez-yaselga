@@ -39,14 +39,14 @@
     "moment": "^2.27.0",
     "papaparse": "^5.2.0",
     "rxjs": "~6.5.4",
-    "saucelabs": "^4.5.0",
+    "saucelabs": "^7.2.1",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.900",
     "@angular-devkit/build-angular": "^0.901.9",
-    "@angular/cli": "~9.1.7",
+    "@angular/cli": "~16.0.0",
     "@angular/compiler-cli": "~9.1.9",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
